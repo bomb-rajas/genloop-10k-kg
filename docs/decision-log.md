@@ -6,7 +6,7 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 
 | ID | Stage | Decision | Chosen | One-line why |
 |---|---|---|---|---|
-| D-001 | M0 | Filing type | Latest 10-K (FY2025) | 10-Qs have 3- and 9-month columns, misaligned quarters, fewer facts |
+| D-001 | M0 | Filing type | Latest 10-K (FY2025 label; see D-043) | 10-Qs have 3- and 9-month columns, misaligned quarters, fewer facts |
 | D-002 | M0 | Company universe | 40 companies, 10 per sector (Tech, Banks & Payments, Consumer & Retail, Healthcare) | Banks included for sector-specific metrics |
 | D-003 | M0 | Company swap | WFC replaced by COF | WFC financials sit in Exhibit 13 |
 | D-004 | M0 | Document source | EDGAR HTML converted to PDF with headless Chrome | Consistent page numbers for citations |
@@ -41,6 +41,14 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-033 | M1 | requirements.txt | requests, python-dotenv, pyyaml, pdfplumber, networkx, pytest; unpinned | Smallest set the milestones need; pinning deferred until a reproducibility need appears |
 | D-034 | M1 | .gitignore PDF rule | Ignore *.pdf except report/*.pdf | Raw SEC PDFs are large and reproducible; the report PDF is a deliverable |
 | D-035 | M1 | Committed LLM cache | data/llm_cache/ is committed, not ignored | Evaluation reruns need no API key (see D-030) |
+| D-036 | M2 | Latest 10-K selection | Max filingDate among form == "10-K"; 10-K/A and 10-Q excluded | Amendments are partial; the original 10-K is the filing the spec names (see D-001) |
+| D-037 | M2 | SEC throttle and retries | Min 0.2 s between requests (<=5 req/s); retry 429/500/502/503/504 with backoff 2/4/8 s; 120 s timeout | Stays under the 5 req/s cap; same retry values as D-031 |
+| D-038 | M2 | Chrome HTML-to-PDF flags | --headless=new --disable-gpu --no-pdf-header-footer --no-first-run --no-default-browser-check --virtual-time-budget=30000; fresh temp profile per file; 180 s timeout | Same conversion every run keeps page numbers stable; cover text verified clean |
+| D-039 | M2 | Financials presence check | Superseded by D-042 | Phrase rule hit index pages and missed V, TGT, MRK |
+| D-040 | M2 | XBRL committed or ignored | data/xbrl/*.json gitignored; .gitkeep stays tracked | Measured ~175 MB for 40 companies, above the 50 MB limit |
+| D-041 | M2 | filings.json schema | Single file: {ticker: {accession, filing_date, report_date, url, form, pdf, status, financials_page}}; status ok, no_financials, or "error: msg"; written after each company | One index file as the spec asks; status feeds the M3 skip logic |
+| D-042 | M2 | Financials presence check (revised) | First page after the first 15% with "total assets" AND ("total liabilities" or "total equity" or "shareholders" or "stockholders"); else no_financials | Phrase rule missed V, TGT, MRK. Current rule still has false hits (see entry) |
+| D-043 | M2 | Fiscal-year label | FY = fiscal year of report_date; fact IDs use period-end FY | Filings are the latest 10-K as of run date, not FY2025 |
 
 ## Full entries
 
@@ -452,4 +460,100 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Rejected: Ignoring the cache: every evaluation rerun would need live keys and quota.
 - Evidence: Cache-hit test in tests/test_config.py runs with no key.
 - Outcome: TBD (M8).
+- Status: active
+
+### D-036
+- Time: 2026-11-23 03:20 IST
+- Stage: M2
+- Trigger: planned
+- Decision: Which 10-K filing is downloaded for each company?
+- Chosen: Among submissions entries with form == "10-K", the one with the max filingDate. 10-K/A and 10-Q are excluded.
+- Why: Amendments are partial documents and lack the full financial statements. Filing dates are used as the "latest" test, not reportDate.
+- Rejected: Including 10-K/A (partial). Choosing by reportDate (ambiguous across amendments).
+- Evidence: tests/test_download.py latest_10k tests skip amendments and 10-Q. Full run: 40 companies, all found a 10-K. Most filing dates fall in 2026 (AAPL 2026-11-03, MSFT 2026-07-29), so "latest" is as of the run date, not FY2025.
+- Outcome: Refines D-001's fiscal-year label to "latest as of run date". Review D-001 if the label matters in M8.
+- Status: active
+
+### D-037
+- Time: 2026-11-23 03:20 IST
+- Stage: M2
+- Trigger: planned
+- Decision: How are SEC requests paced and retried?
+- Chosen: Minimum 0.2 s between requests (<=5 req/s, a shared Throttle in src/download.py). Retries on 429/500/502/503/504 with backoff 2/4/8 s; 120 s timeout.
+- Why: The task asked for at most 5 req/s. Retry values match the LLM policy (D-031) so the project has one retry shape.
+- Rejected: Parallel downloads: no need at this volume, and it risks the SEC rate limit.
+- Evidence: Slice run (5 companies) and full 40-company run completed with 0 network failures.
+- Outcome: n/a
+- Status: active
+
+### D-038
+- Time: 2026-11-23 03:20 IST
+- Stage: M2
+- Trigger: planned
+- Decision: How is the HTML converted to PDF?
+- Chosen: Headless Chrome with --headless=new --disable-gpu --no-pdf-header-footer --no-first-run --no-default-browser-check --virtual-time-budget=30000 --print-to-pdf. Each conversion uses a fresh temp --user-data-dir. Timeout 180 s. Output is written to a temp file then replaced.
+- Why: The same flags on every run give stable page numbers, which M3 and the answer citations depend on. The virtual time budget lets the inline-XBRL page finish rendering.
+- Rejected: Default header/footer: adds page-number text that pollutes the parse. Shared profile: state leaks between runs.
+- Evidence: Page 1 of AAPL, MSFT, JPM, WMT, JNJ reads as the 10-K cover ("UNITED STATES / SEC / FORM 10-K"); no XML text. pdfplumber prints FontBBox warnings, which are noise.
+- Outcome: n/a
+- Status: active
+
+### D-039
+- Time: 2026-11-23 03:20 IST
+- Stage: M2
+- Trigger: "consolidated balance sheet" check hit index pages (AAPL p48, JPM p77, WMT p70, JNJ p50, MSFT p78) and missed MSFT's "BALANCE SHEETS" title (p75).
+- Decision: How is the financial statements page detected, and what happens when none is found?
+- Chosen: A page counts when it contains "balance sheet" AND "total assets" (case-insensitive). The first match is stored as financials_page. No match sets status "no_financials". No company is substituted.
+- Why: Requiring the table line (total assets) skips cross-reference and index pages. Substituting another filing would change the company set the spec fixes.
+- Rejected: Phrase alone (wrong pages). Substituting companies: the spec fixes the 40 names; the user asked for flags, not swaps.
+- Evidence: Corrected results for the 5 slice companies: AAPL p51, MSFT p75, JPM p79, WMT p54, JNJ p51. Full run flagged V, TGT and MRK as no_financials (Exhibit 13 or a non-standard layout is likely; not verified). AXP (p20) and C (p16) have early hits that may be summary tables; not verified.
+- Outcome: Open: V, TGT, MRK need a manual look before M3 (see PROGRESS.md). The check is a presence test, not a proof that the page is the statement.
+- Status: active
+
+### D-040
+- Time: 2026-11-23 03:20 IST
+- Stage: M2
+- Trigger: planned
+- Decision: Is data/xbrl/ committed to git?
+- Chosen: data/xbrl/*.json is in .gitignore. data/xbrl/.gitkeep is still tracked. Files regenerate with python -m src.download.
+- Why: Measured sizes: JPM 8.15 MB, MSFT 4.94 MB, JNJ 4.22 MB, AAPL 3.86 MB, WMT 3.77 MB (5 files, 24 MB). Full 40-company total is 175 MB, above the 50 MB limit set in the task.
+- Rejected: Committing (repo bloat beyond the 50 MB rule). Trimming the JSON: changes source data.
+- Evidence: du -ch data/xbrl/*.json = 175M after the full run.
+- Outcome: n/a
+- Status: active
+
+### D-041
+- Time: 2026-11-23 03:20 IST
+- Stage: M2
+- Trigger: planned
+- Decision: What is the data/filings.json schema?
+- Chosen: One file, {ticker: {accession, filing_date, report_date, url, form, pdf, status, financials_page}}. status is ok, no_financials, or "error: <msg>". The file is written after each company. A company is skipped when its status is ok or no_financials and its PDF exists.
+- Why: The task asked for a single index file. Writing after each company keeps progress if a run is interrupted.
+- Rejected: One JSON per ticker: the task said single file. Skipping on error status: a failed company must be retried.
+- Evidence: Full run: ok=37, no_financials=3 (V, TGT, MRK), failed=0. 40 PDFs in data/pdfs. Total PDFs 242 MB, raw HTML 176 MB, both gitignored.
+- Outcome: n/a
+- Status: active
+
+### D-042
+- Time: 2026-11-23 03:45 IST
+- Stage: M2
+- Trigger: Failure: D-039 rule (page has "balance sheet" AND "total assets") gave no hit for V, TGT and MRK. Those 10-Ks have statements under "Statements of Financial Position" or no "balance sheet" heading on the page.
+- Decision: Change the financials check to: first page after the first 15% of pages (int(n*0.15) skipped; covers selected-data and MD&A summaries) containing "total assets" AND one of "total liabilities", "total equity", "shareholders", "stockholders".
+- Chosen: is_balance_sheet in src/download.py as above; FIN_SKIP_FRAC = 0.15; financials_page and find_financials_page share the skip rule. Test: tests/test_download.py test_financials_page_needs_total_assets_with_equity_line_and_skips_first_15_percent.
+- Why: The title is not a reliable marker; the table lines are. Skipping the first 15% removes most summary tables.
+- Rejected: "total liabilities and" as the only line (not yet tested across all 40; a scan was stopped before it finished). Heading-based rules (titles vary: BALANCE SHEETS, Statements of Financial Position).
+- Evidence: Re-evaluated all 40 from existing PDFs (no redownload). Changed: AMGN 144 to 111, AXP 20 to 96, C 16 to 190, GS 169 to 130, MCD 55 to 31, MRK none to 150, TGT none to 49, V none to 95, WMT 54 to 77. Hit-page check: V p95 and TGT p49 are real statements (Assets block, Statements of Financial Position). WMT p77 is the Consolidated Balance Sheets. FAILURE: AXP p96 is regulatory capital ratios (not a balance sheet); C p190 is a discontinued-operations note; MRK p150 is a fair-value note; MCD p31 is MD&A text. The new rule matches these pages because they contain "total assets" and an equity/liabilities word.
+- Outcome: Open. 4 of 40 hits are not the balance sheet (AXP, C, MRK, MCD, plus any other changed entry not checked). data/filings.json currently shows all 40 ok with these pages. Next: tighten the rule (for example require "total liabilities and" on the same page, or a statement title in the first 300 characters) and re-check. Not fixed in this change per coordinator instruction.
+- Status: active
+
+### D-043
+- Time: 2026-11-23 03:45 IST
+- Stage: M2
+- Trigger: Coordinator note: the D-001 "FY2025" label does not match the data downloaded.
+- Decision: The fiscal-year label is the fiscal year of report_date. Fact IDs use the fiscal year of the period end.
+- Chosen: FY label = year of report_date. Examples: V report_date 2026-09-30 gives FY2026; AAPL 2026-09-26 gives FY2026; MRK, AXP, C 2025-12-31 give FY2025; TGT 2026-01-31 gives FY2026 by this rule.
+- Why: The download takes the latest 10-K as of the run date (2026-11-23), so most filings are FY2026 (see D-036). The label must follow the data.
+- Rejected: Keeping "FY2025" from D-001 (wrong for most companies).
+- Evidence: filings.json report_date values for AAPL, V, TGT, MRK, AXP, C.
+- Outcome: Caveat: TGT's year ended 2026-01-31 is called fiscal 2025 by Target. The rule gives FY2026. Confirm the label convention before M4 fact IDs are fixed.
 - Status: active

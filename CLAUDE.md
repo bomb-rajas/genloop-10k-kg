@@ -18,10 +18,11 @@
 | Metric list and synonyms | config/metrics.yaml | M1 done |
 | Paths, load_env, config loaders | src/config.py | M1 done |
 | LLM call (Groq, Gemini, cache, retries) | src/llm.py: complete(prompt, system, json_mode) | M1 done |
-| EDGAR download, HTML to PDF | src/download.py | M2 planned |
-| Raw HTML (gitignored) | data/raw_html/ | M2 planned |
-| 10-K PDFs (gitignored, except report/) | data/pdfs/ | M2 planned |
-| XBRL companyfacts | data/xbrl/ | M2 planned |
+| EDGAR download, HTML to PDF, XBRL fetch | src/download.py: python -m src.download [--tickers] | M2 done |
+| Filing index (accession, dates, status, financials_page) | data/filings.json | M2 done |
+| Raw HTML (gitignored) | data/raw_html/ | M2 done |
+| 10-K PDFs (gitignored, except report/) | data/pdfs/ | M2 done (40) |
+| XBRL companyfacts (gitignored, ~175 MB, D-040) | data/xbrl/ | M2 done |
 | pdfplumber text and tables per page | src/parse.py, output data/parsed/ | M3 planned |
 | Fact extraction (LLM on narrative pages) | src/extract.py, output data/facts/ | M4 planned |
 | XBRL validation gate | src/validate.py | M4 planned |
@@ -38,6 +39,8 @@
 ## 3. Failure log
 - Never git-add .env or *.pdf outside report/.
 - Quote SEC_USER_AGENT in .env (contains spaces).
+- M2: matching "consolidated balance sheet" alone hit index pages and missed MSFT "BALANCE SHEETS"; now "balance sheet" AND "total assets" (D-039).
+- M2: first financials rule (D-039) missed V, TGT, MRK. D-042 rule now marks all 40 ok but AXP p96, C p190, MRK p150, MCD p31 are not statements. Fix before M3.
 
 ## 4. Decision-log rule
 Every meaningful design or build choice gets an entry in docs/decision-log.md in the same change, before moving on. That covers architecture, schema, fact-ID format, metric mapping, libraries, parsing rules, extraction approach, LLM prompts and output schemas, validation thresholds, benchmark design, scoring rules, and company swaps. Failures are logged only when they forced a decision. If you chose between options, log it, including choices made by subagents.

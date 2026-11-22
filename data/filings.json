@@ -1,0 +1,402 @@
+{
+  "AAPL": {
+    "accession": "0000320193-26-000026",
+    "filing_date": "2026-11-03",
+    "report_date": "2026-09-26",
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/AAPL.pdf",
+    "status": "ok",
+    "financials_page": 51
+  },
+  "MSFT": {
+    "accession": "0001193125-26-323660",
+    "filing_date": "2026-07-29",
+    "report_date": "2026-06-30",
+    "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/MSFT.pdf",
+    "status": "ok",
+    "financials_page": 75
+  },
+  "JPM": {
+    "accession": "0001628280-26-008131",
+    "filing_date": "2026-02-13",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/JPM.pdf",
+    "status": "ok",
+    "financials_page": 79
+  },
+  "WMT": {
+    "accession": "0000104169-26-000055",
+    "filing_date": "2026-03-13",
+    "report_date": "2026-01-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/wmt-20260131.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/WMT.pdf",
+    "status": "ok",
+    "financials_page": 77
+  },
+  "JNJ": {
+    "accession": "0000200406-26-000016",
+    "filing_date": "2026-02-11",
+    "report_date": "2025-12-28",
+    "url": "https://www.sec.gov/Archives/edgar/data/200406/000020040626000016/jnj-20251228.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/JNJ.pdf",
+    "status": "ok",
+    "financials_page": 51
+  },
+  "GOOGL": {
+    "accession": "0001652044-26-000018",
+    "filing_date": "2026-02-05",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/GOOGL.pdf",
+    "status": "ok",
+    "financials_page": 83
+  },
+  "AMZN": {
+    "accession": "0001018724-26-000004",
+    "filing_date": "2026-02-06",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/AMZN.pdf",
+    "status": "ok",
+    "financials_page": 60
+  },
+  "META": {
+    "accession": "0001628280-26-003942",
+    "filing_date": "2026-01-29",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/META.pdf",
+    "status": "ok",
+    "financials_page": 143
+  },
+  "NVDA": {
+    "accession": "0001045810-26-000021",
+    "filing_date": "2026-02-25",
+    "report_date": "2026-01-25",
+    "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/NVDA.pdf",
+    "status": "ok",
+    "financials_page": 73
+  },
+  "ORCL": {
+    "accession": "0001193125-26-277521",
+    "filing_date": "2026-06-22",
+    "report_date": "2026-05-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/ORCL.pdf",
+    "status": "ok",
+    "financials_page": 100
+  },
+  "CRM": {
+    "accession": "0001108524-26-000060",
+    "filing_date": "2026-03-02",
+    "report_date": "2026-01-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1108524/000110852426000060/crm-20260131.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/CRM.pdf",
+    "status": "ok",
+    "financials_page": 81
+  },
+  "ADBE": {
+    "accession": "0000796343-26-000003",
+    "filing_date": "2026-01-15",
+    "report_date": "2025-11-28",
+    "url": "https://www.sec.gov/Archives/edgar/data/796343/000079634326000003/adbe-20251128.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/ADBE.pdf",
+    "status": "ok",
+    "financials_page": 78
+  },
+  "INTC": {
+    "accession": "0000050863-26-000011",
+    "filing_date": "2026-01-23",
+    "report_date": "2025-12-27",
+    "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/INTC.pdf",
+    "status": "ok",
+    "financials_page": 102
+  },
+  "BAC": {
+    "accession": "0000070858-26-000157",
+    "filing_date": "2026-02-25",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/bac-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/BAC.pdf",
+    "status": "ok",
+    "financials_page": 62
+  },
+  "C": {
+    "accession": "0000831001-26-000011",
+    "filing_date": "2026-02-20",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/831001/000083100126000011/c-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/C.pdf",
+    "status": "ok",
+    "financials_page": 190
+  },
+  "COF": {
+    "accession": "0000927628-26-000024",
+    "filing_date": "2026-02-19",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/927628/000092762826000024/cof-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/COF.pdf",
+    "status": "ok",
+    "financials_page": 62
+  },
+  "GS": {
+    "accession": "0000886982-26-000091",
+    "filing_date": "2026-02-25",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000091/gs-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/GS.pdf",
+    "status": "ok",
+    "financials_page": 130
+  },
+  "MS": {
+    "accession": "0000895421-26-000086",
+    "filing_date": "2026-02-19",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/895421/000089542126000086/ms-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/MS.pdf",
+    "status": "ok",
+    "financials_page": 68
+  },
+  "V": {
+    "accession": "0001403161-26-000134",
+    "filing_date": "2026-11-05",
+    "report_date": "2026-09-30",
+    "url": "https://www.sec.gov/Archives/edgar/data/1403161/000140316126000134/v-20260930.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/V.pdf",
+    "status": "ok",
+    "financials_page": 95
+  },
+  "MA": {
+    "accession": "0001141391-26-000013",
+    "filing_date": "2026-02-11",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000013/ma-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/MA.pdf",
+    "status": "ok",
+    "financials_page": 83
+  },
+  "AXP": {
+    "accession": "0000004962-26-000080",
+    "filing_date": "2026-02-06",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/4962/000000496226000080/axp-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/AXP.pdf",
+    "status": "ok",
+    "financials_page": 96
+  },
+  "PYPL": {
+    "accession": "0001633917-26-000024",
+    "filing_date": "2026-02-03",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1633917/000163391726000024/pypl-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/PYPL.pdf",
+    "status": "ok",
+    "financials_page": 99
+  },
+  "COST": {
+    "accession": "0000909832-26-000093",
+    "filing_date": "2026-10-07",
+    "report_date": "2026-08-30",
+    "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/COST.pdf",
+    "status": "ok",
+    "financials_page": 47
+  },
+  "TGT": {
+    "accession": "0000027419-26-000016",
+    "filing_date": "2026-03-11",
+    "report_date": "2026-01-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/tgt-20260131.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/TGT.pdf",
+    "status": "ok",
+    "financials_page": 49
+  },
+  "HD": {
+    "accession": "0001628280-26-019436",
+    "filing_date": "2026-03-18",
+    "report_date": "2026-02-01",
+    "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/hd-20260201.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/HD.pdf",
+    "status": "ok",
+    "financials_page": 67
+  },
+  "PG": {
+    "accession": "0000080424-26-000103",
+    "filing_date": "2026-08-04",
+    "report_date": "2026-06-30",
+    "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/PG.pdf",
+    "status": "ok",
+    "financials_page": 70
+  },
+  "KO": {
+    "accession": "0001628280-26-010047",
+    "filing_date": "2026-02-20",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/KO.pdf",
+    "status": "ok",
+    "financials_page": 110
+  },
+  "PEP": {
+    "accession": "0000077476-26-000007",
+    "filing_date": "2026-02-03",
+    "report_date": "2025-12-27",
+    "url": "https://www.sec.gov/Archives/edgar/data/77476/000007747626000007/pep-20251227.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/PEP.pdf",
+    "status": "ok",
+    "financials_page": 110
+  },
+  "MCD": {
+    "accession": "0000063908-26-000035",
+    "filing_date": "2026-02-24",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/63908/000006390826000035/mcd-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/MCD.pdf",
+    "status": "ok",
+    "financials_page": 31
+  },
+  "NKE": {
+    "accession": "0000320187-26-000088",
+    "filing_date": "2026-07-15",
+    "report_date": "2026-05-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018726000088/nke-20260531.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/NKE.pdf",
+    "status": "ok",
+    "financials_page": 81
+  },
+  "SBUX": {
+    "accession": "0000829224-26-000162",
+    "filing_date": "2026-11-12",
+    "report_date": "2026-09-27",
+    "url": "https://www.sec.gov/Archives/edgar/data/829224/000082922426000162/sbux-20260927.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/SBUX.pdf",
+    "status": "ok",
+    "financials_page": 73
+  },
+  "PFE": {
+    "accession": "0000078003-26-000026",
+    "filing_date": "2026-02-26",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/78003/000007800326000026/pfe-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/PFE.pdf",
+    "status": "ok",
+    "financials_page": 112
+  },
+  "MRK": {
+    "accession": "0000310158-26-000063",
+    "filing_date": "2026-02-24",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/310158/000031015826000063/mrk-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/MRK.pdf",
+    "status": "ok",
+    "financials_page": 150
+  },
+  "ABBV": {
+    "accession": "0001551152-26-000008",
+    "filing_date": "2026-02-20",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1551152/000155115226000008/abbv-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/ABBV.pdf",
+    "status": "ok",
+    "financials_page": 97
+  },
+  "LLY": {
+    "accession": "0000059478-26-000013",
+    "filing_date": "2026-02-12",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/LLY.pdf",
+    "status": "ok",
+    "financials_page": 77
+  },
+  "UNH": {
+    "accession": "0000731766-26-000062",
+    "filing_date": "2026-03-02",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/unh-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/UNH.pdf",
+    "status": "ok",
+    "financials_page": 69
+  },
+  "AMGN": {
+    "accession": "0000318154-26-000010",
+    "filing_date": "2026-02-13",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/318154/000031815426000010/amgn-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/AMGN.pdf",
+    "status": "ok",
+    "financials_page": 111
+  },
+  "BMY": {
+    "accession": "0000014272-26-000004",
+    "filing_date": "2026-02-11",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/14272/000001427226000004/bmy-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/BMY.pdf",
+    "status": "ok",
+    "financials_page": 123
+  },
+  "ABT": {
+    "accession": "0001628280-26-010185",
+    "filing_date": "2026-02-20",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1800/000162828026010185/abt-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/ABT.pdf",
+    "status": "ok",
+    "financials_page": 82
+  },
+  "CVS": {
+    "accession": "0000064803-26-000010",
+    "filing_date": "2026-02-10",
+    "report_date": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/64803/000006480326000010/cvs-20251231.htm",
+    "form": "10-K",
+    "pdf": "data/pdfs/CVS.pdf",
+    "status": "ok",
+    "financials_page": 174
+  }
+}

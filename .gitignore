@@ -5,3 +5,5 @@ __pycache__/
 .venv/
 *.pdf
 !report/*.pdf
+data/xbrl/*.json
+.DS_Store
