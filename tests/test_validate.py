@@ -87,3 +87,44 @@ def test_gate_fact_reports_the_matched_candidate():
     f = validate.gate_fact(fact(706413e6, REVENUE, fy=2026), xbrl, REVENUE, "A-1", "2026-01-31")
     assert f["xbrl_status"] == "match" and f["validated"] is True
     assert f["xbrl_value"] == 706413e6
+
+
+def test_gate_rejects_insane_value_and_counts_it():
+    f = fact(-5, REVENUE)  # negative revenue fails sanity_ok
+    admitted, rejected, stats = validate.gate([f], {"facts": {"us-gaap": {}}}, FILING, {"Revenue": REVENUE})
+    assert admitted == [] and len(rejected) == 1 and stats["rejected"] == 1
+    assert rejected[0]["reason"].startswith("sanity:")
+
+
+def test_gate_all_mismatch_leaves_nothing_admitted():
+    facts = [fact(v, REVENUE, fy=fy) for v, fy in [(1e8, 2025), (2e8, 2024)]]
+    x = {"facts": {"us-gaap": {"Revenues": {"units": {"USD": [
+        {"val": 9e8, "end": "2025-09-27", "accn": "A-1", "form": "10-K", "fp": "FY", "filed": "2025-10-31", "start": "2024-09-29"},
+        {"val": 9e8, "end": "2024-09-28", "accn": "A-1", "form": "10-K", "fp": "FY", "filed": "2025-10-31", "start": "2023-09-30"}]}}}}}
+    admitted, rejected, stats = validate.gate(facts, x, FILING, {"Revenue": REVENUE})
+    assert admitted == [] and len(rejected) == 2 and stats["mismatch"] == 2
+
+
+def test_anchor_date_feb29_maps_to_feb28():
+    assert validate.anchor_date("2024-02-29", 2025).isoformat() == "2025-02-28"
+    assert validate.anchor_date("2024-02-29", 2028).isoformat() == "2028-02-29"
+
+
+def test_flow_span_edges_350_and_380_days():
+    def entries(days):
+        from datetime import date, timedelta
+        end = date(2025, 9, 27)
+        start = (end - timedelta(days=days)).isoformat()
+        return validate.xbrl_entries(xb("Revenues", "USD", 1, end.isoformat(), start=start), ["Revenues"], "USD",
+                                     True, end, "A-1")
+    assert len(entries(350)) == 1 and len(entries(380)) == 1
+    assert entries(349) == [] and entries(381) == []
+
+
+def test_identity_check_skips_identity_derived_total_assets():
+    ta = fact(500, TA)
+    ta["method"] = "identity"
+    tl = fact(300, {"name": "TotalLiabilities"})
+    eq = fact(100, {"name": "Equity"})
+    ta["metric"], tl["metric"], eq["metric"] = "TotalAssets", "TotalLiabilities", "Equity"
+    assert validate.identity_check([ta, tl, eq]) == (0, 0)

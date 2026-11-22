@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 3727000000.0,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 2891000000.0,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 4806000000.0,
   "sanity_ok": true
  },
@@ -78,9 +81,10 @@
   "page": 49,
   "snippet": "Cash and cash equivalents 5,488 4,762",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 5488000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -93,15 +97,16 @@
   "as_reported_label": "Cash and cash equivalents",
   "period": {
    "fiscal_year": 2025,
-   "period_end": "2025-02-01"
+   "period_end": null
   },
   "doc": "data/pdfs/TGT.pdf",
   "page": 49,
   "snippet": "Cash and cash equivalents 5,488 4,762",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 4762000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -122,6 +127,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 8.13,
   "sanity_ok": true
  },
@@ -143,6 +149,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 8.86,
   "sanity_ok": true
  },
@@ -164,6 +171,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 8.94,
   "sanity_ok": true
  },
@@ -185,6 +193,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 16165000000.0,
   "sanity_ok": true
  },
@@ -206,6 +215,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 14666000000.0,
   "sanity_ok": true
  },
@@ -227,6 +237,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 3705000000.0,
   "sanity_ok": true
  },
@@ -248,6 +259,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 4091000000.0,
   "sanity_ok": true
  },
@@ -269,6 +281,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 4138000000.0,
   "sanity_ok": true
  },
@@ -290,6 +303,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 6562000000.0,
   "sanity_ok": true
  },
@@ -311,6 +325,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 7367000000.0,
   "sanity_ok": true
  },
@@ -332,6 +347,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 8621000000.0,
   "sanity_ok": true
  },
@@ -353,6 +369,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 5117000000.0,
   "sanity_ok": true
  },
@@ -374,6 +391,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 5566000000.0,
   "sanity_ok": true
  },
@@ -395,6 +413,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 5707000000.0,
   "sanity_ok": true
  },
@@ -416,6 +435,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 104780000000.0,
   "sanity_ok": true
  },
@@ -437,6 +457,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 106566000000.0,
   "sanity_ok": true
  },
@@ -458,6 +479,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 107412000000.0,
   "sanity_ok": true
  },
@@ -479,6 +501,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 59490000000.0,
   "sanity_ok": true
  },
@@ -500,6 +523,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 57769000000.0,
   "sanity_ok": true
  },
@@ -507,7 +531,7 @@
   "id": "TGT|TotalLiabilities|FY2026",
   "ticker": "TGT",
   "metric": "TotalLiabilities",
-  "value": 43325000000.0,
+  "value": 43325000000,
   "unit": "USD",
   "scale": 1000000,
   "as_reported_label": "Total liabilities and shareholders' investment - Total shareholders' investment",
@@ -521,6 +545,7 @@
   "method": "identity",
   "validated": false,
   "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
   "xbrl_value": null,
   "sanity_ok": true
  },
@@ -528,7 +553,7 @@
   "id": "TGT|TotalLiabilities|FY2025",
   "ticker": "TGT",
   "metric": "TotalLiabilities",
-  "value": 43103000000.0,
+  "value": 43103000000,
   "unit": "USD",
   "scale": 1000000,
   "as_reported_label": "Total liabilities and shareholders' investment - Total shareholders' investment",
@@ -542,6 +567,7 @@
   "method": "identity",
   "validated": false,
   "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
   "xbrl_value": null,
   "sanity_ok": true
  }

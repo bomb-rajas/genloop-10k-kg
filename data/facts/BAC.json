@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 3.81,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 3.19,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 3.05,
   "sanity_ok": true
  },
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 303243000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -102,6 +106,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 293963000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -124,6 +129,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 30509000000.0,
   "sanity_ok": true
  },
@@ -145,6 +151,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 26973000000.0,
   "sanity_ok": true
  },
@@ -166,6 +173,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 26305000000.0,
   "sanity_ok": true
  },
@@ -187,6 +195,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 113097000000.0,
   "sanity_ok": true
  },
@@ -208,6 +217,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 105856000000.0,
   "sanity_ok": true
  },
@@ -229,6 +239,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 102769000000.0,
   "sanity_ok": true
  },
@@ -250,6 +261,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 3411738000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -272,6 +284,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 3261299000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -294,6 +307,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 3108495000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -316,6 +330,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 2967336000000.0,
   "sanity_ok": true,
   "identity_ok": true

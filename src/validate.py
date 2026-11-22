@@ -61,14 +61,16 @@ def gate_fact(fact, xbrl, metric, accession, report_date):
     unit = XBRL_UNIT[fact["unit"]]
     year = fact["period"]["fiscal_year"]
     anchor = anchor_date(report_date, year)
-    entries = xbrl_entries(xbrl, metric["xbrl_tags"], unit, metric["category"] != "balance", anchor, accession)
+    tags = fact.pop("xbrl_tags", None) or metric["xbrl_tags"]  # extract may pick a row-specific tag (EPS basic)
+    entries = xbrl_entries(xbrl, tags, unit, metric["category"] != "balance", anchor, accession)
     fact["validated"] = False
+    fact["xbrl_tag"] = fact["xbrl_value"] = None
     if not entries:
-        fact["xbrl_status"], fact["xbrl_value"] = "no_xbrl", None
+        fact["xbrl_status"] = "no_xbrl"
         return fact
     hit = next((e for e in entries if within(fact["value"], e["val"], fact["unit"])), None)
     shown = hit or entries[0]
-    fact["xbrl_value"] = shown["val"]
+    fact["xbrl_tag"], fact["xbrl_value"] = shown["tag"], shown["val"]
     fact["period"]["period_end"] = shown["end"]
     fact["xbrl_status"] = "match" if hit else "mismatch"
     fact["validated"] = hit is not None
@@ -85,8 +87,8 @@ def identity_check(facts):
     checked = failed = 0
     for year, m in by_year.items():
         ta, tl, eq = m.get("TotalAssets"), m.get("TotalLiabilities"), m.get("Equity")
-        if not (ta and tl and eq) or tl["method"] == "identity":
-            continue
+        if not (ta and tl and eq) or "identity" in (ta["method"], tl["method"]):
+            continue  # derived inputs are circular; Equity is parent-only, so NCI makes the check fail by design
         ok = abs(ta["value"] - (tl["value"] + eq["value"])) <= IDENTITY_TOLERANCE * abs(ta["value"])
         for f in (ta, tl, eq):
             f["identity_ok"] = ok
@@ -105,21 +107,25 @@ def sanity_ok(fact):
 
 
 def gate(facts, xbrl, filing, metrics_by_name):
-    """Runs the gate on candidate facts. Returns (admitted, rejected, stats)."""
+    """Runs the gate on candidate facts. Returns (admitted, rejected, stats). Rejected = XBRL mismatch or failed sanity."""
     accession, report_date = filing["accession"], filing["report_date"]
     for f in facts:
         gate_fact(f, xbrl, metrics_by_name[f["metric"]], accession, report_date)
         f["sanity_ok"] = sanity_ok(f)
     checked, id_failed = identity_check(facts)
-    admitted = [f for f in facts if f["xbrl_status"] != "mismatch"]
-    rejected = []
+    admitted, rejected = [], []
     for f in facts:
         if f["xbrl_status"] == "mismatch":
             rejected.append({**f, "reason": f"xbrl_mismatch: pdf {f['value']} vs xbrl {f['xbrl_value']}"})
+        elif not f["sanity_ok"]:
+            rejected.append({**f, "reason": f"sanity: value {f['value']} unit {f['unit']}"})
+        else:
+            admitted.append(f)
     stats = {
         "candidates": len(facts),
         "matched": sum(f["xbrl_status"] == "match" for f in facts),
         "mismatch": sum(f["xbrl_status"] == "mismatch" for f in facts),
+        "rejected": len(rejected),
         "no_xbrl": sum(f["xbrl_status"] == "no_xbrl" for f in facts),
         "identity_checked": checked, "identity_failed": id_failed,
         "sanity_failed": sum(not f["sanity_ok"] for f in facts),

@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 6435000000.0,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 5498000000.0,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 4710000000.0,
   "sanity_ok": true
  },
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 20207000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 14161000000.0,
   "sanity_ok": true
  },
@@ -122,6 +127,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 20.76,
   "sanity_ok": true
  },
@@ -143,6 +149,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 18.21,
   "sanity_ok": true
  },
@@ -164,6 +171,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 16.56,
   "sanity_ok": true
  },
@@ -185,6 +193,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 35803000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -207,6 +216,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 29164000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -229,6 +239,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 9226000000.0,
   "sanity_ok": true
  },
@@ -250,6 +261,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 8099000000.0,
   "sanity_ok": true
  },
@@ -271,6 +283,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 7367000000.0,
   "sanity_ok": true
  },
@@ -292,6 +305,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 15817000000.0,
   "sanity_ok": true
  },
@@ -313,6 +327,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 13335000000.0,
   "sanity_ok": true
  },
@@ -334,6 +349,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 11339000000.0,
   "sanity_ok": true
  },
@@ -355,6 +371,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 11685000000.0,
   "sanity_ok": true
  },
@@ -376,6 +393,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 10383000000.0,
   "sanity_ok": true
  },
@@ -397,6 +415,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 9285000000.0,
   "sanity_ok": true
  },
@@ -418,6 +437,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 303154000000.0,
   "sanity_ok": true
  },
@@ -439,6 +459,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 275235000000.0,
   "sanity_ok": true
  },
@@ -460,6 +481,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 254453000000.0,
   "sanity_ok": true
  },
@@ -481,6 +503,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 89045000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -503,6 +526,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 77099000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -525,6 +549,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 53242000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -547,6 +572,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 47935000000.0,
   "sanity_ok": true,
   "identity_ok": true

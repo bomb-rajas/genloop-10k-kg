@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 1311000000.0,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 1248000000.0,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 1209000000.0,
   "sanity_ok": true
  },
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 10209000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 10346000000.0,
   "sanity_ok": true
  },
@@ -122,6 +127,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 3.46,
   "sanity_ok": true
  },
@@ -143,6 +149,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": -4.41,
   "sanity_ok": true
  },
@@ -164,6 +171,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 3.86,
   "sanity_ok": true
  },
@@ -171,20 +179,21 @@
   "id": "BMY|Equity|FY2025",
   "ticker": "BMY",
   "metric": "Equity",
-  "value": 18506000000,
+  "value": 18473000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total Equity",
+  "as_reported_label": "Total BMS Shareholders\u2019 Equity",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-12-31"
   },
   "doc": "data/pdfs/BMY.pdf",
   "page": 123,
-  "snippet": "Total Equity 18,506 16,388",
+  "snippet": "Total BMS Shareholders\u2019 Equity 18,473 16,335",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 18473000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -193,20 +202,21 @@
   "id": "BMY|Equity|FY2024",
   "ticker": "BMY",
   "metric": "Equity",
-  "value": 16388000000,
+  "value": 16335000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total Equity",
+  "as_reported_label": "Total BMS Shareholders\u2019 Equity",
   "period": {
    "fiscal_year": 2024,
    "period_end": "2024-12-31"
   },
   "doc": "data/pdfs/BMY.pdf",
   "page": 123,
-  "snippet": "Total Equity 18,506 16,388",
+  "snippet": "Total BMS Shareholders\u2019 Equity 18,473 16,335",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 16335000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -229,6 +239,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 7054000000.0,
   "sanity_ok": true
  },
@@ -250,6 +261,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": -8948000000.0,
   "sanity_ok": true
  },
@@ -271,6 +283,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 8025000000.0,
   "sanity_ok": true
  },
@@ -292,6 +305,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 14156000000.0,
   "sanity_ok": true
  },
@@ -313,6 +327,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 15190000000.0,
   "sanity_ok": true
  },
@@ -334,6 +349,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 13860000000.0,
   "sanity_ok": true
  },
@@ -355,6 +371,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 9951000000.0,
   "sanity_ok": true
  },
@@ -376,6 +393,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 11159000000.0,
   "sanity_ok": true
  },
@@ -397,6 +415,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 9299000000.0,
   "sanity_ok": true
  },
@@ -418,6 +437,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 48194000000.0,
   "sanity_ok": true
  },
@@ -439,6 +459,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 48300000000.0,
   "sanity_ok": true
  },
@@ -460,6 +481,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 45006000000.0,
   "sanity_ok": true
  },
@@ -481,6 +503,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 90038000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -503,6 +526,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 92603000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -525,6 +549,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 71533000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -547,6 +572,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 76215000000.0,
   "sanity_ok": true,
   "identity_ok": true

@@ -15,9 +15,10 @@
   "page": 103,
   "snippet": "Purchases of property, equipment and technology -1,671 -1,482 -1,257",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 1671000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -30,15 +31,16 @@
   "as_reported_label": "Purchases of property, equipment and technology",
   "period": {
    "fiscal_year": 2025,
-   "period_end": "2025-09-30"
+   "period_end": null
   },
   "doc": "data/pdfs/V.pdf",
   "page": 103,
   "snippet": "Purchases of property, equipment and technology -1,671 -1,482 -1,257",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 1482000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -51,15 +53,16 @@
   "as_reported_label": "Purchases of property, equipment and technology",
   "period": {
    "fiscal_year": 2024,
-   "period_end": "2024-09-30"
+   "period_end": null
   },
   "doc": "data/pdfs/V.pdf",
   "page": 103,
   "snippet": "Purchases of property, equipment and technology -1,671 -1,482 -1,257",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 1257000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 12938000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 17164000000.0,
   "sanity_ok": true
  },
@@ -120,9 +125,10 @@
   "page": 95,
   "snippet": "Total equity 36,111 37,909",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 36111000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true,
   "identity_ok": true
  },
@@ -136,15 +142,16 @@
   "as_reported_label": "Total equity",
   "period": {
    "fiscal_year": 2025,
-   "period_end": "2025-09-30"
+   "period_end": null
   },
   "doc": "data/pdfs/V.pdf",
   "page": 95,
   "snippet": "Total equity 36,111 37,909",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 37909000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true,
   "identity_ok": true
  },
@@ -166,6 +173,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 23504000000.0,
   "sanity_ok": true
  },
@@ -187,6 +195,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 20058000000.0,
   "sanity_ok": true
  },
@@ -208,6 +217,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 19743000000.0,
   "sanity_ok": true
  },
@@ -229,6 +239,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 23728000000.0,
   "sanity_ok": true
  },
@@ -250,6 +261,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 23059000000.0,
   "sanity_ok": true
  },
@@ -271,6 +283,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 19950000000.0,
   "sanity_ok": true
  },
@@ -292,6 +305,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 28110000000.0,
   "sanity_ok": true
  },
@@ -313,6 +327,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 23994000000.0,
   "sanity_ok": true
  },
@@ -334,6 +349,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 23595000000.0,
   "sanity_ok": true
  },
@@ -355,6 +371,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 45903000000.0,
   "sanity_ok": true
  },
@@ -376,6 +393,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 40000000000.0,
   "sanity_ok": true
  },
@@ -397,6 +415,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 35926000000.0,
   "sanity_ok": true
  },
@@ -418,6 +437,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 94360000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -440,6 +460,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 99627000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -462,6 +483,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 58249000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -484,6 +506,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 61718000000.0,
   "sanity_ok": true,
   "identity_ok": true

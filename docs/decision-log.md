@@ -69,6 +69,11 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-061 | M4 | Revenue exclude 'non' | Revenue exclude list adds 'non' | 'Total non-interest revenues' is a sub-total and was taken as total revenue; rejects 9 to 6 (AXP still wrong; fixed by D-063) |
 | D-062 | M3 | Statement page selection (audited statements) | A title counts only as a heading (short company-name prefix, no MD&A word such as overview, analysis, summary, expressed, information); a page is a statement only if is_statement_layout: fewer than 3 percent-value lines, no %/percent/change/increase/decrease in the header, fewer than 3 rows with 5+ values; '(Continued)' bank pages are continuations even when the title repeats; EPS label '^diluted earnings$' and NetIncome 'Citigroup s net income' style label added to metrics.yaml | NVDA MD&A percent table, C segment and overview pages, JPM/BAC/COF/MS/AXP MD&A pages won selection; the rules are generic (no ticker special case), and the label additions cover BAC 'Diluted earnings' and C 'Citigroup's net income' rows |
 | D-063 | M4 | XBRL tag and label fixes | Revenue xbrl_tags adds RevenuesNetOfInterestExpense (AXP); Equity and TotalLiabilitiesAndEquity regex accept 'deficit' and 'investment' (SBUX, TGT) | AXP PDF 72229 equals the RevenuesNetOfInterestExpense FY2025 value in data/xbrl/AXP.json, so the PDF was right and the gate lacked the tag; 0 rejects, 1004 admitted, match 976/976 |
+| D-064 | M4 | Concept-matching XBRL tags | Each metric validates only against XBRL concepts that measure the same thing: NetIncome NetIncomeLoss only (not ProfitLoss); Equity StockholdersEquity only; CapEx, R&D, Cash drop secondary tags; EPS diluted tag, basic rows validated against EarningsPerShareBasic (basic_xbrl_tags) | Wrong concepts passed as validated: MS NetIncome 17,025 (incl. NCI) matched ProfitLoss; INTC/KO/C/MS Equity matched total equity incl. NCI; 13 Equity, 3 NetIncome, 3 JNJ R&D matched only a secondary tag |
+| D-065 | M4 | Parent-attributable row preference | NetIncome prefers 'attributable to' rows, and 'applicable to' (not 'applicable to common', which sits after preferred dividends); Equity prefers 'Total <X> stockholders equity' and 'equity attributable to' rows; NCI-inclusive totals only as fallback_labels; TotalLiabilities identity uses TotalEquityInclNCI | Parent-row rules fix MS, INTC, KO, C; the NCI-inclusive fallback is validated against the parent-only tag and rejects or stays no_xbrl if it disagrees |
+| D-066 | M4 | Sanity blocks admission | validate.gate rejects a fact that fails sanity_ok (reason 'sanity: ...'); the count is in stats['rejected'] | A value that fails sanity is wrong by definition and should not reach the graph; logged-only would let it in |
+| D-067 | M4 | Identity fallback details | identity_check skips identity-derived TotalAssets as well as TotalLiabilities; identity values are rounded to int like direct facts; identity TotalLiabilities is gated against the XBRL Liabilities tag like any fact (no_xbrl when absent) | Identity inputs are circular and cannot validate each other; rounding keeps the value type consistent |
+| D-068 | M4 | JNJ R&D concept | R&D xbrl_tags adds ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost (JNJ prints R&D excluding IPR&D impairments) | Same concept for JNJ's presentation; primary ResearchAndDevelopmentExpense holds a different value (109 for FY2025) |
 
 ## Full entries
 
@@ -732,6 +737,7 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Why: The identity is exact accounting, so a derived value is still PDF-only (no XBRL value used).
 - Rejected: Taking the XBRL Assets value as a fallback (forbidden: XBRL is validator only).
 - Evidence: tests/test_extract.py::test_identity_fallback_total_liabilities. Identity check (TA vs TL + Eq) runs on 54 balance pairs at 04:16 IST: 2 fail (UNH, logged only; likely redeemable NCI, not an extraction error).
+- Supersedes: D-062 outcome line 'Identity fallback covers ABT now' was wrong. ABT and MRK totals are not identity-derivable from the parsed rows (the parser returns no total-assets row and no TLAE row for ABT).
 - Outcome (04:16 IST): 22 identity facts, all TotalLiabilities, ALL 22 xbrl_status no_xbrl (admitted unvalidated, since the filer has no XBRL Liabilities tag). The 976/976 match count does not include them. TGT is one of them (TLAE regex fix, D-063). TotalAssets has no identity facts. MRK and ABT stay unresolved: MRK TotalAssets/TotalLiabilities and ABT TotalAssets/TotalLiabilities are still missing (the parser does not return their balance-sheet totals, so the identity inputs are absent; not fixed here, parser-owned). TotalLiabilities XBRL: 54/54 matched, 22 no_xbrl.
 - Status: active
 ### D-057
@@ -802,7 +808,7 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Why: The audited statements carry the title as a heading, have a few year columns and no percent rows; MD&A pages repeat the title inside sentences or tables. A short company-name prefix (JNJ 'Johnson & Johnson and subsidiaries consolidated balance sheets') must still pass, so the rule is word-based, not capitalisation-based (a capitalisation rule dropped JNJ statements in a test run).
 - Rejected: Ticker-specific page overrides (not needed for the banks; the generic rules picked the right pages for all 8 banks). Merging all pages with a title (would pull in MD&A pages). Changing the XBRL gate for AXP revenue (gate working as designed; see Outcome).
 - Evidence: After the rules, data/parsed reuse run: 0 of 40 lacking statement or scale. NVDA IS p71 Revenue 215,938 (income statement) and BS p73 Total assets 206,803. JPM IS p243 Total net revenue 182,447 and NI 57,048; BS p245 Total assets 4,424,900. C IS p159-160, BS p161-162, CF p165-166, Citigroup's net income 14,306 admitted by the gate. BAC EPS admitted (3.81). Pytest 117 passed.
-- Outcome: Extract run: XBRL match 965/968 (99.7%), rejected 3 (all AXP Revenue: 'Total revenues net of interest expense' 72,229 vs XBRL 41,304, a gate/tag mismatch not a parse error). Still missing for core metrics: COF Revenue (no total-revenue row; COF prints net interest income plus non-interest income), C EPS (EPS values not on the label line in the PDF text), V EPS, PFE EPS, SBUX Equity, TGT TotalLiabilities, MRK TotalAssets and TotalLiabilities (MRK balance sheet column layout unresolved; MRK IS header parsed as 2025,2024,2026,2023). Identity fallback (D-056) covers ABT now. Status: active
+- Outcome: Extract run: XBRL match 965/968 (99.7%), rejected 3 (all AXP Revenue: 'Total revenues net of interest expense' 72,229 vs XBRL 41,304, a gate/tag mismatch not a parse error). Still missing for core metrics: COF Revenue (no total-revenue row; COF prints net interest income plus non-interest income), C EPS (EPS values not on the label line in the PDF text), V EPS, PFE EPS, SBUX Equity, TGT TotalLiabilities, MRK TotalAssets and TotalLiabilities (MRK balance sheet column layout unresolved; MRK IS header parsed as 2025,2024,2026,2023). [Superseded by D-056 outcome: the identity fallback does NOT cover ABT; ABT TotalAssets/TotalLiabilities/Equity stay missing.] Status: active
 
 ### D-063
 - Time: 2026-11-23 04:16 IST
@@ -816,4 +822,64 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Gate fix (same date): gate_fact took xbrl_value and period_end from the first candidate even when a later one matched; now from the matched candidate. Before: 19 matched facts had xbrl_value != value; after: 0. Match counts unchanged.
 - period_end None (15): all prior-year, no_xbrl facts; the filing's report_date covers only the newest year, so they stay None.
 - Outcome: 976/976 matched; 0 rejected; COF Revenue, C EPS, PFE EPS, V EPS, MRK and ABT totals remain missing (see D-062 and D-056 outcome lines).
+- Status: active
+
+### D-064
+- Time: 2026-11-23 04:25 IST
+- Stage: M4
+- Trigger: Coordinator m00408: the gate accepted a match on any tag, so wrong concepts counted as validated (MS NetIncome 17,025 incl. NCI vs parent 16,861 on p187; INTC/KO/C/MS Equity took total equity incl. NCI, e.g. INTC 126,360 vs parent 114,281; 13 Equity, 3 NetIncome, 3 JNJ R&D matched only a secondary tag).
+- Decision: metrics.yaml xbrl_tags lists only concepts for the same measure. NetIncome: NetIncomeLoss. Equity: StockholdersEquity. CapEx: PaymentsToAcquirePropertyPlantAndEquipment. R&D: ResearchAndDevelopmentExpense (+ ExcludingAcquiredInProcessCost, D-068). Cash: CashAndCashEquivalentsAtCarryingValue. EPS: EarningsPerShareDiluted; basic_xbrl_tags EarningsPerShareBasic applies only to rows labelled 'Basic' (extract sets fact xbrl_tags, the gate uses it and drops the override).
+- Chosen: Narrow tag list over a looser list plus tolerance. Each fact records xbrl_tag of the candidate that matched.
+- Why: A tag is only a validator if it names the same concept; a broader concept can match by coincidence (NCI-inclusive totals).
+- Rejected: Keeping ProfitLoss and total-equity tags as alternates (they let wrong facts pass); loosening the tolerance.
+- Evidence: After the change, MS NetIncome 16861000000 (NetIncomeLoss), MS Equity 111632000000 and INTC Equity 114281000000 (StockholdersEquity) match with the parent value.
+- Outcome (04:25 IST, final run): 947/947 matched, 0 rejected, 57 no_xbrl (was 933 matched of 955 compared with 2-tag matching and 6 rejects). Each fact records xbrl_tag.
+- Status: active
+
+### D-065
+- Time: 2026-11-23 04:25 IST
+- Stage: M4
+- Trigger: Same as D-064: the extracted row was the NCI-inclusive total when a parent row existed.
+- Decision: NetIncome label regex adds '^net income applicable to (?!.*(non ?controlling|common))' and the exclusion for 'applicable to common' is in the regex (not in exclude, so 'Net earnings attributable to ... common shareholders' still matches the attributable regex for UNH). Equity regex: '^total (?!liabilities)[a-z]+( [a-z]+)* (stockholders|shareholders) (equity|investment|deficit)$' requires a name word before 'stockholders' (bare 'Total stockholders equity' is NCI-inclusive); '^(total )?equity attributable to (?!.*non ?controlling)'. Equity fallback_labels adds the NCI-inclusive totals, used only when no parent row exists. Equity exclude: noncontrolling, non controlling.
+- Chosen: Parent-row regex first, NCI-inclusive total as fallback only, and the gate decides whether the fallback is valid.
+- Why: The 'total' row in banks and in Intel includes NCI; the parent-attributable row is what XBRL StockholdersEquity and NetIncomeLoss measure.
+- Rejected: Exclude 'common' from NetIncome globally (broke UNH 'Net earnings attributable to UnitedHealth Group common shareholders', 3 facts rejected in an earlier run).
+- Evidence: Run 04:25 IST: MS NetIncome 16861000000 and Equity 111632000000, INTC Equity 114281000000, KO Equity 32169000000, C Equity 212291000000 are the parent values. JPM and BAC 'applicable to common stockholders' rows (after preferred dividends) were rejected in an intermediate run and are excluded by the 'common' lookahead.
+- Outcome: NetIncome 117/117 matched, 3 no_xbrl; Equity 70/70 matched, 8 no_xbrl.
+- Status: active
+
+### D-066
+- Time: 2026-11-23 04:25 IST
+- Stage: M4
+- Trigger: Coordinator m00408: sanity_ok was logged only.
+- Decision: validate.gate rejects a fact that fails sanity_ok (reason 'sanity: value U unit X'). Rejected facts go to data/facts/{T}.rejected.json and the count is stats['rejected'].
+- Chosen: Reject (blocks admission), not flag.
+- Why: A value that fails sanity (negative revenue or TotalAssets, |USD| > 1e13, |EPS| > 1000) is wrong; flagging would let it into the graph.
+- Rejected: Log-only (the previous behaviour).
+- Evidence: tests/test_validate.py::test_gate_rejects_insane_value_and_counts_it.
+- Outcome: 0 sanity rejects in the final run.
+- Status: active
+
+### D-067
+- Time: 2026-11-23 04:25 IST
+- Stage: M4
+- Trigger: Coordinator m00408 items 3, 5, 7: identity check, rounding, TotalLiabilities identity gate.
+- Decision: identity_check skips any identity-derived input (TotalAssets or TotalLiabilities). Identity values are rounded to int like direct facts. Identity TotalLiabilities is gated against the XBRL Liabilities tag like any fact; no_xbrl when the tag is absent (it is, for all 22 cases). Also: find_metric_row lost its unused metric_name parameter.
+- Chosen: Gate reuse, no new code path.
+- Why: Identity inputs cannot validate each other; the XBRL tag is the independent check when it exists.
+- Rejected: Using XBRL Assets or Liabilities as the value (XBRL is validator only).
+- Evidence: Final run 04:25: TotalLiabilities 54/54 matched, 22 no_xbrl; identity check 54 pairs, 2 failed (UNH, logged).
+- Outcome (04:25 IST): 22 identity TotalLiabilities facts, all no_xbrl (admitted unvalidated, no XBRL Liabilities tag for those filers); TotalLiabilities 54/54 matched overall. The 947/947 figure covers compared facts; no_xbrl facts are not in it.
+- Status: active
+
+### D-068
+- Time: 2026-11-23 04:25 IST
+- Stage: M4
+- Trigger: JNJ R&D (3 facts) matched only the secondary tag before D-064; after restriction they were rejected (ResearchAndDevelopmentExpense = 109 for FY2025).
+- Decision: R&D xbrl_tags adds ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost. JNJ prints 'Research and development expense' excluding IPR&D impairments (a separate line), so this is the same measure for JNJ.
+- Chosen: Add the concept for this measure, not a per-ticker override.
+- Why: The XBRL concept name and value (14665 for FY2025) match the printed line.
+- Rejected: Keeping the rejects; per-ticker tag.
+- Evidence: JNJ R&D FY2025 14665000000, FY2024 17232000000, FY2023 15085000000 all match the ExcludingAcquiredInProcessCost concept.
+- Outcome: R&D 48/48 matched, 3 no_xbrl (04:25 run).
 - Status: active

@@ -15,9 +15,10 @@
   "page": 107,
   "snippet": "Capital spending -4,415 -5,318 -5,518",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 4415000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -30,15 +31,16 @@
   "as_reported_label": "Capital spending",
   "period": {
    "fiscal_year": 2024,
-   "period_end": "2024-12-28"
+   "period_end": null
   },
   "doc": "data/pdfs/PEP.pdf",
   "page": 107,
   "snippet": "Capital spending -4,415 -5,318 -5,518",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 5318000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -51,15 +53,16 @@
   "as_reported_label": "Capital spending",
   "period": {
    "fiscal_year": 2023,
-   "period_end": "2023-12-30"
+   "period_end": null
   },
   "doc": "data/pdfs/PEP.pdf",
   "page": 107,
   "snippet": "Capital spending -4,415 -5,318 -5,518",
   "method": "pdf_table",
-  "validated": true,
-  "xbrl_status": "match",
-  "xbrl_value": 5518000000.0,
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  },
  {
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 9159000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 8505000000.0,
   "sanity_ok": true
  },
@@ -122,6 +127,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 6.0,
   "sanity_ok": true
  },
@@ -143,6 +149,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 6.95,
   "sanity_ok": true
  },
@@ -164,6 +171,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 6.56,
   "sanity_ok": true
  },
@@ -171,21 +179,22 @@
   "id": "PEP|Equity|FY2025",
   "ticker": "PEP",
   "metric": "Equity",
-  "value": 20547000000,
+  "value": 20406000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total Equity",
+  "as_reported_label": "Total PepsiCo Common Shareholders\u2019 Equity",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-12-27"
   },
   "doc": "data/pdfs/PEP.pdf",
   "page": 110,
-  "snippet": "Total Equity 20,547 18,171",
+  "snippet": "Total PepsiCo Common Shareholders\u2019 Equity 20,406 18,041",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
-  "xbrl_value": 20547000000.0,
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 20406000000.0,
   "sanity_ok": true,
   "identity_ok": true
  },
@@ -193,21 +202,22 @@
   "id": "PEP|Equity|FY2024",
   "ticker": "PEP",
   "metric": "Equity",
-  "value": 18171000000,
+  "value": 18041000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total Equity",
+  "as_reported_label": "Total PepsiCo Common Shareholders\u2019 Equity",
   "period": {
    "fiscal_year": 2024,
    "period_end": "2024-12-28"
   },
   "doc": "data/pdfs/PEP.pdf",
   "page": 110,
-  "snippet": "Total Equity 20,547 18,171",
+  "snippet": "Total PepsiCo Common Shareholders\u2019 Equity 20,406 18,041",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
-  "xbrl_value": 18171000000.0,
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 18041000000.0,
   "sanity_ok": true,
   "identity_ok": true
  },
@@ -229,6 +239,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "GrossProfit",
   "xbrl_value": 50859000000.0,
   "sanity_ok": true
  },
@@ -250,6 +261,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "GrossProfit",
   "xbrl_value": 50110000000.0,
   "sanity_ok": true
  },
@@ -271,6 +283,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "GrossProfit",
   "xbrl_value": 49590000000.0,
   "sanity_ok": true
  },
@@ -292,6 +305,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 8240000000.0,
   "sanity_ok": true
  },
@@ -313,6 +327,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 9578000000.0,
   "sanity_ok": true
  },
@@ -334,6 +349,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 9074000000.0,
   "sanity_ok": true
  },
@@ -355,6 +371,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 12087000000.0,
   "sanity_ok": true
  },
@@ -376,6 +393,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 12507000000.0,
   "sanity_ok": true
  },
@@ -397,6 +415,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 13442000000.0,
   "sanity_ok": true
  },
@@ -418,6 +437,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 11498000000.0,
   "sanity_ok": true
  },
@@ -439,6 +459,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 12887000000.0,
   "sanity_ok": true
  },
@@ -460,6 +481,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 11986000000.0,
   "sanity_ok": true
  },
@@ -481,6 +503,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 93925000000.0,
   "sanity_ok": true
  },
@@ -502,6 +525,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 91854000000.0,
   "sanity_ok": true
  },
@@ -523,6 +547,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 91471000000.0,
   "sanity_ok": true
  },
@@ -544,6 +569,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 107399000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -566,6 +592,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 99467000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -588,6 +615,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 86852000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -610,6 +638,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 81296000000.0,
   "sanity_ok": true,
   "identity_ok": true

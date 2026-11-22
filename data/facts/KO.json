@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 2112000000.0,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 2064000000.0,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 1852000000.0,
   "sanity_ok": true
  },
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 10270000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 10828000000.0,
   "sanity_ok": true
  },
@@ -122,6 +127,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 3.04,
   "sanity_ok": true
  },
@@ -143,6 +149,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 2.46,
   "sanity_ok": true
  },
@@ -164,6 +171,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 2.47,
   "sanity_ok": true
  },
@@ -171,42 +179,44 @@
   "id": "KO|Equity|FY2025",
   "ticker": "KO",
   "metric": "Equity",
-  "value": 34275000000,
+  "value": 32169000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total Equity",
+  "as_reported_label": "Equity Attributable to Shareowners of The Coca-Cola Company",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-12-31"
   },
   "doc": "data/pdfs/KO.pdf",
   "page": 110,
-  "snippet": "Total Equity 34,275 26,372",
+  "snippet": "Equity Attributable to Shareowners of The Coca-Cola Company 32,169 24,856",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
-  "xbrl_value": 34275000000.0,
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 32169000000.0,
   "sanity_ok": true
  },
  {
   "id": "KO|Equity|FY2024",
   "ticker": "KO",
   "metric": "Equity",
-  "value": 26372000000,
+  "value": 24856000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total Equity",
+  "as_reported_label": "Equity Attributable to Shareowners of The Coca-Cola Company",
   "period": {
    "fiscal_year": 2024,
    "period_end": "2024-12-31"
   },
   "doc": "data/pdfs/KO.pdf",
   "page": 110,
-  "snippet": "Total Equity 34,275 26,372",
+  "snippet": "Equity Attributable to Shareowners of The Coca-Cola Company 32,169 24,856",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
-  "xbrl_value": 26372000000.0,
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 24856000000.0,
   "sanity_ok": true
  },
  {
@@ -227,6 +237,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "GrossProfit",
   "xbrl_value": 29544000000.0,
   "sanity_ok": true
  },
@@ -248,6 +259,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "GrossProfit",
   "xbrl_value": 28737000000.0,
   "sanity_ok": true
  },
@@ -269,6 +281,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "GrossProfit",
   "xbrl_value": 27234000000.0,
   "sanity_ok": true
  },
@@ -290,6 +303,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 13107000000.0,
   "sanity_ok": true
  },
@@ -311,6 +325,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 10631000000.0,
   "sanity_ok": true
  },
@@ -332,6 +347,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 10714000000.0,
   "sanity_ok": true
  },
@@ -353,6 +369,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 7408000000.0,
   "sanity_ok": true
  },
@@ -374,6 +391,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 6805000000.0,
   "sanity_ok": true
  },
@@ -395,6 +413,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 11599000000.0,
   "sanity_ok": true
  },
@@ -416,6 +435,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 13762000000.0,
   "sanity_ok": true
  },
@@ -437,6 +457,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 9992000000.0,
   "sanity_ok": true
  },
@@ -458,6 +479,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 11311000000.0,
   "sanity_ok": true
  },
@@ -479,6 +501,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 47941000000.0,
   "sanity_ok": true
  },
@@ -500,6 +523,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 47061000000.0,
   "sanity_ok": true
  },
@@ -521,6 +545,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 45754000000.0,
   "sanity_ok": true
  },
@@ -542,6 +567,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 104816000000.0,
   "sanity_ok": true
  },
@@ -563,6 +589,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 100549000000.0,
   "sanity_ok": true
  },
@@ -570,7 +597,7 @@
   "id": "KO|TotalLiabilities|FY2025",
   "ticker": "KO",
   "metric": "TotalLiabilities",
-  "value": 70541000000.0,
+  "value": 70541000000,
   "unit": "USD",
   "scale": 1000000,
   "as_reported_label": "Total Liabilities and Equity - Total Equity",
@@ -584,6 +611,7 @@
   "method": "identity",
   "validated": false,
   "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
   "xbrl_value": null,
   "sanity_ok": true
  },
@@ -591,7 +619,7 @@
   "id": "KO|TotalLiabilities|FY2024",
   "ticker": "KO",
   "metric": "TotalLiabilities",
-  "value": 74177000000.0,
+  "value": 74177000000,
   "unit": "USD",
   "scale": 1000000,
   "as_reported_label": "Total Liabilities and Equity - Total Equity",
@@ -605,6 +633,7 @@
   "method": "identity",
   "validated": false,
   "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
   "xbrl_value": null,
   "sanity_ok": true
  }

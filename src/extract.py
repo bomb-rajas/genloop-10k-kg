@@ -61,7 +61,7 @@ def match_row(cand, spec):
     return exact(syns) or regex() or prefix(syns) or exact(fbs) or prefix(fbs)
 
 
-def find_metric_row(stmt, spec, metric_name):
+def find_metric_row(stmt, spec):
     """Row (dict) for one metric in one statement, or None. Only full-width rows are candidates."""
     ncols = len(stmt["columns"])
     cand = [(i, norm(r["label"])) for i, r in enumerate(stmt["rows"])
@@ -118,7 +118,7 @@ def extract_company(company, filing, metrics, helpers):
         if stmt.get("scale") is None and m["unit"] == "USD":
             missing[m["name"]] = "statement has no scale"
             continue
-        row, tier = find_metric_row(stmt, m, m["name"])
+        row, tier = find_metric_row(stmt, m)
         if row is None:
             missing[m["name"]] = "no matching row"
             continue
@@ -133,7 +133,7 @@ def extract_company(company, filing, metrics, helpers):
         for name in ident.get("plus", []) + ident.get("minus", []):
             spec = helpers.get(name) or next(x for x in metrics if x["name"] == name)
             stmt = stmts.get(spec["statement"])
-            hit = find_metric_row(stmt, spec, name) if stmt else (None, None)
+            hit = find_metric_row(stmt, spec) if stmt else (None, None)
             parts.append((name, hit, ident.get("minus", [])))
         stmt = stmts.get(m["statement"])
         scale_ok = stmt is not None and (m["unit"] != "USD" or stmt.get("scale") is not None)
@@ -155,7 +155,7 @@ def extract_company(company, filing, metrics, helpers):
                 idx = col_index(stmt, y)
                 val = sum(r["values"][idx] for r in plus_rows) - sum(r["values"][idx] for r in minus_rows)
                 if m["unit"] == "USD":
-                    val *= stmt["scale"]
+                    val = int(round(val * stmt["scale"]))
                 if m.get("absolute"):
                     val = abs(val)
                 label = " + ".join(r["label"] for r in plus_rows) + "".join(f" - {r['label']}" for r in minus_rows)
@@ -172,9 +172,12 @@ def extract_company(company, filing, metrics, helpers):
                 val = abs(val)
             if m["unit"] == "USD":
                 val = int(round(val))
-            facts.append(_fact(t, filing, m, y + shift_of(stmt), val, row["label"], row["page"],
-                               f"{row['label']} " + " ".join(fmt(v) for v in row["values"]),
-                               "pdf_table", stmt["scale"] if m["unit"] == "USD" else 1, newest))
+            f = _fact(t, filing, m, y + shift_of(stmt), val, row["label"], row["page"],
+                      f"{row['label']} " + " ".join(fmt(v) for v in row["values"]),
+                      "pdf_table", stmt["scale"] if m["unit"] == "USD" else 1, newest)
+            if m.get("basic_xbrl_tags") and "basic" in norm(row["label"]).split():
+                f["xbrl_tags"] = m["basic_xbrl_tags"]  # basic EPS row: validate against the basic concept only
+            facts.append(f)
     return facts, missing
 
 
@@ -226,7 +229,9 @@ def _fact(t, filing, m, year, value, label, page, snippet, method, scale, newest
         "method": method,
         "validated": False,
         "xbrl_status": None,
+        "xbrl_tag": None,
         "xbrl_value": None,
+        "xbrl_tags": None,  # gate-only override, removed by validate.gate_fact
     }
 
 
@@ -274,13 +279,13 @@ def run(tickers=None, verbose=False):
 
     compared = tot["matched"] + tot["mismatch"]
     print(f"\nXBRL match rate: {tot['matched']}/{compared} = {100 * tot['matched'] / max(compared, 1):.1f}% "
-          f"(rejected {tot['mismatch']}, no_xbrl {tot['no_xbrl']}, candidates {tot['candidates']})")
+          f"(rejected {tot['rejected']}, no_xbrl {tot['no_xbrl']}, candidates {tot['candidates']})")
     print("Per metric (matched/compared, rejected, no_xbrl):")
     for name, pm in per_metric.items():
         cmp_ = pm["match"] + pm["mismatch"]
         print(f"  {name:<18} {pm['match']}/{cmp_} rejected {pm['mismatch']} no_xbrl {pm['no_xbrl']}")
     print(f"Identity check (TA = TL + Eq): checked {tot['identity_checked']}, failed {tot['identity_failed']} (logged only)")
-    print(f"Sanity failures (logged only): {tot['sanity_failed']}")
+    print(f"Sanity failures (rejected): {tot['sanity_failed']}")
     print("Missing metrics per company:")
     for t, miss in summary.items():
         if miss:

@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 55663000000.0,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 21215000000.0,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 6866000000.0,
   "sanity_ok": true
  },
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 31289000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 10786000000.0,
   "sanity_ok": true
  },
@@ -122,6 +127,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 5.83,
   "sanity_ok": true
  },
@@ -143,6 +149,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 4.34,
   "sanity_ok": true
  },
@@ -164,6 +171,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 3.71,
   "sanity_ok": true
  },
@@ -171,42 +179,44 @@
   "id": "ORCL|Equity|FY2026",
   "ticker": "ORCL",
   "metric": "Equity",
-  "value": 43056000000,
+  "value": 42508000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total stockholders\u2019 equity",
+  "as_reported_label": "Total Oracle Corporation stockholders\u2019 equity",
   "period": {
    "fiscal_year": 2026,
    "period_end": "2026-05-31"
   },
   "doc": "data/pdfs/ORCL.pdf",
   "page": 100,
-  "snippet": "Total stockholders\u2019 equity 43,056 20,969",
+  "snippet": "Total Oracle Corporation stockholders\u2019 equity 42,508 20,451",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
-  "xbrl_value": 43056000000.0,
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 42508000000.0,
   "sanity_ok": true
  },
  {
   "id": "ORCL|Equity|FY2025",
   "ticker": "ORCL",
   "metric": "Equity",
-  "value": 20969000000,
+  "value": 20451000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total stockholders\u2019 equity",
+  "as_reported_label": "Total Oracle Corporation stockholders\u2019 equity",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-05-31"
   },
   "doc": "data/pdfs/ORCL.pdf",
   "page": 100,
-  "snippet": "Total stockholders\u2019 equity 43,056 20,969",
+  "snippet": "Total Oracle Corporation stockholders\u2019 equity 42,508 20,451",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
-  "xbrl_value": 20969000000.0,
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 20451000000.0,
   "sanity_ok": true
  },
  {
@@ -227,6 +237,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 17087000000.0,
   "sanity_ok": true
  },
@@ -248,6 +259,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 12443000000.0,
   "sanity_ok": true
  },
@@ -269,6 +281,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 10467000000.0,
   "sanity_ok": true
  },
@@ -290,6 +303,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 31977000000.0,
   "sanity_ok": true
  },
@@ -311,6 +325,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 20821000000.0,
   "sanity_ok": true
  },
@@ -332,6 +347,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 18673000000.0,
   "sanity_ok": true
  },
@@ -353,6 +369,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 20606000000.0,
   "sanity_ok": true
  },
@@ -374,6 +391,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 17678000000.0,
   "sanity_ok": true
  },
@@ -395,6 +413,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "OperatingIncomeLoss",
   "xbrl_value": 15353000000.0,
   "sanity_ok": true
  },
@@ -416,6 +435,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 10272000000.0,
   "sanity_ok": true
  },
@@ -437,6 +457,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 9860000000.0,
   "sanity_ok": true
  },
@@ -458,6 +479,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 8915000000.0,
   "sanity_ok": true
  },
@@ -479,6 +501,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 67357000000.0,
   "sanity_ok": true
  },
@@ -500,6 +523,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 57399000000.0,
   "sanity_ok": true
  },
@@ -521,6 +545,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 52961000000.0,
   "sanity_ok": true
  },
@@ -542,6 +567,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 261759000000.0,
   "sanity_ok": true
  },
@@ -563,6 +589,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 168361000000.0,
   "sanity_ok": true
  },
@@ -570,7 +597,7 @@
   "id": "ORCL|TotalLiabilities|FY2026",
   "ticker": "ORCL",
   "metric": "TotalLiabilities",
-  "value": 218703000000.0,
+  "value": 218703000000,
   "unit": "USD",
   "scale": 1000000,
   "as_reported_label": "Total liabilities and stockholders\u2019 equity - Total stockholders\u2019 equity",
@@ -584,6 +611,7 @@
   "method": "identity",
   "validated": false,
   "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
   "xbrl_value": null,
   "sanity_ok": true
  },
@@ -591,7 +619,7 @@
   "id": "ORCL|TotalLiabilities|FY2025",
   "ticker": "ORCL",
   "metric": "TotalLiabilities",
-  "value": 147392000000.0,
+  "value": 147392000000,
   "unit": "USD",
   "scale": 1000000,
   "as_reported_label": "Total liabilities and stockholders\u2019 equity - Total stockholders\u2019 equity",
@@ -605,6 +633,7 @@
   "method": "identity",
   "validated": false,
   "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
   "xbrl_value": null,
   "sanity_ok": true
  }

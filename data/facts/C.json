@@ -3,21 +3,22 @@
   "id": "C|Equity|FY2025",
   "ticker": "C",
   "metric": "Equity",
-  "value": 213822000000,
+  "value": 212291000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total equity",
+  "as_reported_label": "Total Citigroup stockholders\u2019 equity",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-12-31"
   },
   "doc": "data/pdfs/C.pdf",
   "page": 162,
-  "snippet": "Total equity 213,822 209,366",
+  "snippet": "Total Citigroup stockholders\u2019 equity 212,291 208,598",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
-  "xbrl_value": 213822000000.0,
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 212291000000.0,
   "sanity_ok": true,
   "identity_ok": true
  },
@@ -25,20 +26,21 @@
   "id": "C|Equity|FY2024",
   "ticker": "C",
   "metric": "Equity",
-  "value": 209366000000,
+  "value": 208598000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total equity",
+  "as_reported_label": "Total Citigroup stockholders\u2019 equity",
   "period": {
    "fiscal_year": 2024,
    "period_end": "2024-12-31"
   },
   "doc": "data/pdfs/C.pdf",
   "page": 162,
-  "snippet": "Total equity 213,822 209,366",
+  "snippet": "Total Citigroup stockholders\u2019 equity 212,291 208,598",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 208598000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -61,6 +63,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 14306000000.0,
   "sanity_ok": true
  },
@@ -82,6 +85,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 12682000000.0,
   "sanity_ok": true
  },
@@ -103,6 +107,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 9228000000.0,
   "sanity_ok": true
  },
@@ -124,6 +129,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 85225000000.0,
   "sanity_ok": true
  },
@@ -145,6 +151,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 80722000000.0,
   "sanity_ok": true
  },
@@ -166,6 +173,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 78066000000.0,
   "sanity_ok": true
  },
@@ -187,6 +195,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 2657202000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -209,6 +218,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 2352945000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -231,6 +241,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 2443380000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -253,6 +264,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 2143579000000.0,
   "sanity_ok": true,
   "identity_ok": true

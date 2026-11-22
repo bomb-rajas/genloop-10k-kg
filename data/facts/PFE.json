@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 2629000000.0,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 2909000000.0,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 3907000000.0,
   "sanity_ok": true
  },
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 1142000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 1043000000.0,
   "sanity_ok": true
  },
@@ -108,20 +113,21 @@
   "id": "PFE|Equity|FY2025",
   "ticker": "PFE",
   "metric": "Equity",
-  "value": 86775000000,
+  "value": 86476000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total equity",
+  "as_reported_label": "Total Pfizer Inc. shareholders\u2019 equity",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-12-31"
   },
   "doc": "data/pdfs/PFE.pdf",
   "page": 112,
-  "snippet": "Total equity 86,775 88,497",
+  "snippet": "Total Pfizer Inc. shareholders\u2019 equity 86,476 88,203",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 86476000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -130,20 +136,21 @@
   "id": "PFE|Equity|FY2024",
   "ticker": "PFE",
   "metric": "Equity",
-  "value": 88497000000,
+  "value": 88203000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total equity",
+  "as_reported_label": "Total Pfizer Inc. shareholders\u2019 equity",
   "period": {
    "fiscal_year": 2024,
    "period_end": "2024-12-31"
   },
   "doc": "data/pdfs/PFE.pdf",
   "page": 112,
-  "snippet": "Total equity 86,775 88,497",
+  "snippet": "Total Pfizer Inc. shareholders\u2019 equity 86,476 88,203",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 88203000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -166,6 +173,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 7771000000.0,
   "sanity_ok": true
  },
@@ -187,6 +195,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 8031000000.0,
   "sanity_ok": true
  },
@@ -208,6 +217,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 2119000000.0,
   "sanity_ok": true
  },
@@ -229,6 +239,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 11704000000.0,
   "sanity_ok": true
  },
@@ -250,6 +261,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 12744000000.0,
   "sanity_ok": true
  },
@@ -271,6 +283,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 8700000000.0,
   "sanity_ok": true
  },
@@ -292,6 +305,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
   "xbrl_value": 10437000000.0,
   "sanity_ok": true
  },
@@ -313,6 +327,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
   "xbrl_value": 10822000000.0,
   "sanity_ok": true
  },
@@ -334,6 +349,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost",
   "xbrl_value": 10679000000.0,
   "sanity_ok": true
  },
@@ -355,6 +371,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 62579000000.0,
   "sanity_ok": true
  },
@@ -376,6 +393,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 63627000000.0,
   "sanity_ok": true
  },
@@ -397,6 +415,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 59553000000.0,
   "sanity_ok": true
  },
@@ -418,6 +437,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 208160000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -440,6 +460,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Assets",
   "xbrl_value": 213396000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -462,6 +483,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 121385000000.0,
   "sanity_ok": true,
   "identity_ok": true
@@ -484,6 +506,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Liabilities",
   "xbrl_value": 124899000000.0,
   "sanity_ok": true,
   "identity_ok": true

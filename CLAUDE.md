@@ -25,13 +25,13 @@
 | XBRL companyfacts (gitignored, ~175 MB, D-040) | data/xbrl/ | M2 done |
 | pdfplumber text and tables per page; statement rows | src/parse.py: python -m src.parse [--tickers] [--force]; src/tables.py (pure helpers); output data/parsed/{T}.json | M3 done, 40 of 40 have 3 statements and scale (D-050 to D-052) |
 | Numeric facts from statement rows (PDF only) | src/extract.py: python -m src.extract [--tickers]; output data/facts/{T}.json (admitted), {T}.rejected.json | M4a done (D-054 to D-063); 976 of 976 XBRL compared matched, 0 rejected |
-| XBRL validation gate (validator only, never a value source) | src/validate.py | M4a done (D-060, D-063); tests/test_extract.py, tests/test_validate.py (118 pytest total) |
+| XBRL validation gate (validator only, never a value source) | src/validate.py | M4a done (D-060, D-064, D-066, D-067); 947/947 compared matched, 0 rejected, 57 no_xbrl; tests/test_extract.py, tests/test_validate.py (126 pytest total) |
 | LLM disk cache (committed, read before key check) | data/llm_cache/ | M1 done |
 | Graph build | src/build_graph.py, output graph/kg.json | M5 planned |
 | Query planner, traversal, abstain | src/query.py | M6 planned |
 | Benchmark questions | benchmark/benchmark.json | M7 planned |
 | Scoring and metrics | src/evaluate.py, output results/metrics.json, results/predictions.jsonl | M8 planned |
-| Unit tests (pytest) | tests/ (test_config.py, test_download.py, test_tables.py, test_parse.py, test_extract.py, test_validate.py) | M3 done; M4a adds extract and validate (118 total) |
+| Unit tests (pytest) | tests/ (test_config.py, test_download.py, test_tables.py, test_parse.py, test_extract.py, test_validate.py) | M3 done; M4a adds extract and validate (126 total) |
 | README | README.md | M9 planned |
 | Results PDF | report/results.pdf | M9 planned |
 | Pipeline doc | docs/flow.md | M10 planned |
@@ -43,6 +43,7 @@
 - M3: first parse run missed JNJ (company-name title prefix), WMT net income ("Consolidated net income") and MSFT CF ("Net cash from operations"); fixed by D-045 rules.
 - M3: second run missed 13 companies (singular titles, title on the page before the data, Merck with no "Total assets" label, unit line on the next page, glued "$"); fixed by D-050 and D-051.
 - M4a: CapEx sign: cash-flow outflows are negative in the PDF while XBRL is positive, so CapEx uses absolute: true (D-057), not by loosening tolerance. HD and TGT fiscal labels shifted years: per-statement shift (D-058). EPS regex escaping ('\\b' in YAML single quotes) let share counts through; fixed by a single backslash in metrics.yaml (D-055).
+- M4a: XBRL gate accepted secondary concepts (MS NetIncome incl. NCI via ProfitLoss; Equity incl. NCI). Fixed by concept-matching tags and parent-row rules (D-064, D-065); the gate now only validates against the same measure.
 - M2: first financials rule (D-039) missed V, TGT, MRK. D-042 rule now marks all 40 ok but AXP p96, C p190, MRK p150, MCD p31 are not statements. M3 statement parser (D-045) does not select those pages; the D-042 download rule is unchanged.
 
 ## 4. Decision-log rule

@@ -21,11 +21,11 @@ metrics:
     statement: income_statement
     applies_to: all
     unit: USD
-    synonyms: [net income attributable to common stockholders, net income attributable to company, net income attributable to shareholders, net earnings attributable to, net income attributable to merck co inc]
-    label_regex: ['^net (income|earnings)( loss)? attributable to (?!.*non ?controlling)', '^consolidated net (income|earnings) attributable to (?!.*non ?controlling)', "^[a-z ]+s net income$"]
+    synonyms: [net income attributable to company, net income attributable to shareholders, net earnings attributable to, net income attributable to merck co inc]
+    label_regex: ['^net (income|earnings)( loss)? attributable to (?!.*non ?controlling)', '^consolidated net (income|earnings) attributable to (?!.*non ?controlling)', '^net income applicable to (?!.*(non ?controlling|common))', "^[a-z ]+s net income$"]  # 'applicable to common' sits after preferred dividends (JPM, BAC)
     exclude: [per share, per common share, noncontrolling, non controlling, discontinued, continuing]
     fallback_labels: [net income, net earnings, net income loss, consolidated net income]
-    xbrl_tags: [NetIncomeLoss, ProfitLoss]
+    xbrl_tags: [NetIncomeLoss]
 
   - name: EPS
     category: income
@@ -36,7 +36,8 @@ metrics:
     label_regex: ['^diluted earnings$', '\bper (common )?(diluted|dilution)|(diluted|dilution).*\bper (common )?share|\bper (common )?share.*(diluted|dilution)']
     exclude: [basic]
     fallback_labels: [diluted, basic]
-    xbrl_tags: [EarningsPerShareDiluted, EarningsPerShareBasic]
+    xbrl_tags: [EarningsPerShareDiluted]
+    basic_xbrl_tags: [EarningsPerShareBasic]  # rows labelled 'Basic' (fallback)
 
   - name: TotalAssets
     category: balance
@@ -54,7 +55,7 @@ metrics:
     applies_to: all
     unit: USD
     synonyms: [total liabilities]
-    identity: {plus: [TotalLiabilitiesAndEquity], minus: [Equity]}
+    identity: {plus: [TotalLiabilitiesAndEquity], minus: [TotalEquityInclNCI]}
     xbrl_tags: [Liabilities]
 
   - name: Equity
@@ -62,10 +63,11 @@ metrics:
     statement: balance_sheet
     applies_to: all
     unit: USD
-    synonyms: [total stockholders equity, total shareholders equity, total common stockholders equity, total equity, stockholders equity, shareholders equity]
-    label_regex: ['^total (?!liabilities)[a-z ]*(stockholders|shareholders) (equity|investment|deficit)$']
-    fallback_labels: [total equity]
-    xbrl_tags: [StockholdersEquity, StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest]
+    synonyms: [total common stockholders equity, stockholders equity, shareholders equity]
+    label_regex: ['^total (?!liabilities)[a-z]+( [a-z]+)* (stockholders|shareholders) (equity|investment|deficit)$', '^(total )?equity attributable to (?!.*non ?controlling)']  # one or more name words: 'Total Intel stockholders equity' is parent, bare 'Total stockholders equity' is NCI-inclusive
+    exclude: [noncontrolling, non controlling]
+    fallback_labels: [total stockholders equity, total shareholders equity, total shareholders investment, total shareholders deficit, total equity]  # NCI-inclusive totals only when no parent row
+    xbrl_tags: [StockholdersEquity]
 
   - name: GrossProfit
     category: income
@@ -99,7 +101,7 @@ metrics:
     absolute: true  # reported as a negative outflow; stored positive (D-057)
     synonyms: [payments for acquisition of property plant and equipment, payments for property and equipment, purchases of property and equipment, capital expenditures, additions to property and equipment, payments to acquire property plant and equipment, property and equipment additions, capital spending]
     label_regex: ['^(purchases?|payments?|additions?|expenditures|acquisitions) (of |for |to )?(property|capital)', '^capital (expenditures|spending)']
-    xbrl_tags: [PaymentsToAcquirePropertyPlantAndEquipment, PaymentsToAcquireProductiveAssets]
+    xbrl_tags: [PaymentsToAcquirePropertyPlantAndEquipment]
 
   - name: R&D
     category: income
@@ -107,7 +109,7 @@ metrics:
     applies_to: nonbank
     unit: USD
     synonyms: [research and development, research and development expense, research and development expenses, research and development costs, research development and engineering]
-    xbrl_tags: [ResearchAndDevelopmentExpense, ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost]
+    xbrl_tags: [ResearchAndDevelopmentExpense, ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost]  # JNJ prints R&D excluding IPR&D impairments (same concept)
 
   - name: Cash
     category: balance
@@ -115,7 +117,7 @@ metrics:
     applies_to: nonbank
     unit: USD
     synonyms: [cash and cash equivalents, cash and equivalents, cash and due from banks, cash and cash equivalents at end of period, cash and short-term investments]
-    xbrl_tags: [CashAndCashEquivalentsAtCarryingValue, CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents]
+    xbrl_tags: [CashAndCashEquivalentsAtCarryingValue]
 
 # Helper rows used only as identity inputs (not admitted as facts).
 helper_metrics:
@@ -123,6 +125,10 @@ helper_metrics:
     statement: balance_sheet
     synonyms: [total liabilities and equity, total liabilities and stockholders equity, total liabilities and shareholders equity]
     label_regex: ['^total liabilities (redeemable )?(non ?controlling interest )?and (stockholders|shareholders) (equity|investment|deficit)']
+
+  - name: TotalEquityInclNCI
+    statement: balance_sheet
+    synonyms: [total equity, total stockholders equity, total shareholders equity, total shareholders investment, total shareholders deficit]
 
 derived:
   - name: NetMargin

@@ -17,6 +17,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 4112000000.0,
   "sanity_ok": true
  },
@@ -38,6 +39,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 3372000000.0,
   "sanity_ok": true
  },
@@ -59,6 +61,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "PaymentsToAcquirePropertyPlantAndEquipment",
   "xbrl_value": 3863000000.0,
   "sanity_ok": true
  },
@@ -80,6 +83,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 14565000000.0,
   "sanity_ok": true
  },
@@ -101,6 +105,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "CashAndCashEquivalentsAtCarryingValue",
   "xbrl_value": 13242000000.0,
   "sanity_ok": true
  },
@@ -122,6 +127,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 7.28,
   "sanity_ok": true
  },
@@ -143,6 +149,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 6.74,
   "sanity_ok": true
  },
@@ -164,6 +171,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
   "xbrl_value": 0.14,
   "sanity_ok": true
  },
@@ -171,20 +179,21 @@
   "id": "MRK|Equity|FY2025",
   "ticker": "MRK",
   "metric": "Equity",
-  "value": 52662000000,
+  "value": 52606000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total equity",
+  "as_reported_label": "Total Merck & Co., Inc. stockholders\u2019 equity",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-12-31"
   },
   "doc": "data/pdfs/MRK.pdf",
   "page": 114,
-  "snippet": "Total equity 52,662 46,372",
+  "snippet": "Total Merck & Co., Inc. stockholders\u2019 equity 52,606 46,313",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 52606000000.0,
   "sanity_ok": true
  },
@@ -192,20 +201,21 @@
   "id": "MRK|Equity|FY2024",
   "ticker": "MRK",
   "metric": "Equity",
-  "value": 46372000000,
+  "value": 46313000000,
   "unit": "USD",
   "scale": 1000000,
-  "as_reported_label": "Total equity",
+  "as_reported_label": "Total Merck & Co., Inc. stockholders\u2019 equity",
   "period": {
    "fiscal_year": 2024,
    "period_end": "2024-12-31"
   },
   "doc": "data/pdfs/MRK.pdf",
   "page": 114,
-  "snippet": "Total equity 52,662 46,372",
+  "snippet": "Total Merck & Co., Inc. stockholders\u2019 equity 52,606 46,313",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
   "xbrl_value": 46313000000.0,
   "sanity_ok": true
  },
@@ -227,6 +237,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 18254000000.0,
   "sanity_ok": true
  },
@@ -248,6 +259,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 17117000000.0,
   "sanity_ok": true
  },
@@ -269,6 +281,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetIncomeLoss",
   "xbrl_value": 365000000.0,
   "sanity_ok": true
  },
@@ -290,6 +303,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 16472000000.0,
   "sanity_ok": true
  },
@@ -311,6 +325,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 21468000000.0,
   "sanity_ok": true
  },
@@ -332,6 +347,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
   "xbrl_value": 13006000000.0,
   "sanity_ok": true
  },
@@ -353,6 +369,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 15789000000.0,
   "sanity_ok": true
  },
@@ -374,6 +391,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 17938000000.0,
   "sanity_ok": true
  },
@@ -395,6 +413,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "ResearchAndDevelopmentExpense",
   "xbrl_value": 30531000000.0,
   "sanity_ok": true
  },
@@ -416,6 +435,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 65011000000.0,
   "sanity_ok": true
  },
@@ -437,6 +457,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 64168000000.0,
   "sanity_ok": true
  },
@@ -458,6 +479,7 @@
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
+  "xbrl_tag": "Revenues",
   "xbrl_value": 60115000000.0,
   "sanity_ok": true
  }
