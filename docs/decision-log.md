@@ -19,7 +19,7 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-011 | M0 | Graph store | NetworkX, saved as JSON | Kùzu/Cypher skipped for time |
 | D-012 | M0 | LLM provider | Gemini primary, Groq fallback | Superseded by D-013 |
 | D-013 | M0 | LLM provider | Groq primary (openai/gpt-oss-120b), Gemini secondary | Gemini returns 404/503; gpt-oss-120b works on Groq |
-| D-014 | M0 | Planner fallback | Rule-based fallback planner; Groq is the only LLM the planner calls | Free-tier quota limits |
+| D-014 | M0 | Planner fallback | Rule-based fallback planner; Groq-only with no further fallback, Gemini kept as optional second provider in the wrapper (Groq -> Gemini -> rules) | Free-tier quota limits |
 | D-015 | M0 | Cost and compute | Free LLMs only; no paid API, no GPU | Task constraints; reproducibility |
 | D-016 | M0 | XBRL role | Validation gate only, never an answer source | PDF-only answer rule |
 | D-017 | M0 | Fact IDs | IDs like AAPL\|Revenue\|FY2025 are the gold supporting facts | Exact set comparison for precision and recall |
@@ -27,6 +27,20 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-019 | M0 | Metric scope | 12 non-bank metrics, 6 bank metrics (lists below) | Bank revenue semantics differ |
 | D-020 | M0 | Rollout | 5-company slice (AAPL, JPM, WMT, JNJ, MSFT) before all 40 | Find failures cheaply before quota and time are spent |
 | D-021 | M0 | Git workflow | Commit after each milestone; user pushes | Reviewable history; user controls the remote |
+| D-022 | M1 | CIK source and fiscal year end | CIKs from SEC company_tickers.json; fiscal_year_end only for fixed calendar year-ends | Fixed-date FYs are exact; 52/53-week FYs cannot be stated as one date |
+| D-023 | M1 | Sector labels | Tech, Banks, Consumer, Healthcare (short names in companies.yaml) | Matches the sector enum in GOAL/handoff spec |
+| D-024 | M1 | Payments company treatment | V, MA, PYPL are is_bank: false (non-bank metrics) | Payments are not lenders; bank metric list does not fit them |
+| D-025 | M1 | Metric scope encoding | applies_to all|nonbank; bank list = applies_to all (6); derived section with formula and computed_from | Keeps 12 non-bank and 6 bank metrics in one file |
+| D-026 | M1 | Synonym policy | Lowercase, generous as-reported labels; generic labels (basic, diluted, research, gross margin) left out | Generic labels match ratios or other lines and would mis-map facts |
+| D-027 | M1 | LLM provider chain | Groq (openai/gpt-oss-120b) then Gemini; LLM_PROVIDER=groq|gemini forces one provider | Follows D-013; env override needed for tests and offline runs |
+| D-028 | M1 | Gemini model id | gemini-flash-latest, constant in src/llm.py | gemini-2.5-flash returned 404 (D-013 evidence) |
+| D-029 | M1 | LLM cache key | sha256 of JSON {system, prompt, json_mode}; provider-independent | Same prompt reuses cache across providers; json_mode on/off must not collide |
+| D-030 | M1 | LLM cache location and read order | data/llm_cache/<sha256>.json, committed; read before any key check | Evaluate re-runs from cache without an API key |
+| D-031 | M1 | Retry policy | 3 retries on 429/500/502/503/504, backoff 2/4/8 s, 120 s timeout; then next provider | Free-tier 429s are expected; values are implementer choices |
+| D-032 | M1 | Module layout | src/config.py (paths, load_env, loaders), src/llm.py, tests/test_config.py | Single source of paths and env; one wrapper for all LLM calls |
+| D-033 | M1 | requirements.txt | requests, python-dotenv, pyyaml, pdfplumber, networkx, pytest; unpinned | Smallest set the milestones need; pinning deferred until a reproducibility need appears |
+| D-034 | M1 | .gitignore PDF rule | Ignore *.pdf except report/*.pdf | Raw SEC PDFs are large and reproducible; the report PDF is a deliverable |
+| D-035 | M1 | Committed LLM cache | data/llm_cache/ is committed, not ignored | Evaluation reruns need no API key (see D-030) |
 
 ## Full entries
 
@@ -193,7 +207,7 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Decision: What does query planning do when the LLM is unavailable or over quota?
 - Chosen: Rule-based fallback planner. Groq is the only LLM the planner calls.
 - Why: Free-tier quota limits (handoff.md risk: cache, Groq fallback, rule-based question parser).
-- Rejected: Groq-only with no further fallback (Gemini kept as optional second provider in the LLM wrapper, chain Groq -> Gemini -> rules; clarified by orchestrator, no user input needed).
+- Rejected: Groq-only with no further fallback (Gemini kept as optional second provider in wrapper: Groq -> Gemini -> rules).
 - Evidence: none yet.
 - Outcome: TBD (M8)
 - Status: active
@@ -280,4 +294,162 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Rejected: One commit at the end: hard to review. Claude pushing: the user pushes.
 - Evidence: none.
 - Outcome: n/a
+- Status: active
+
+### D-022
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Where do CIKs come from and what goes in fiscal_year_end?
+- Chosen: CIKs from https://www.sec.gov/files/company_tickers.json (fetched 2026-11-23 with SEC_USER_AGENT). fiscal_year_end stored only for fixed calendar year-ends (MM-DD). Omitted for 52/53-week years: AAPL, NVDA, ADBE, INTC, COST, TGT, HD, SBUX, JNJ, PEP. Names are short display names.
+- Why: Fixed-date year-ends are exact; a 52/53-week year has no single date and would be wrong.
+- Rejected: Storing approximate dates (AAPL last Saturday of Sept as 09-30); fetching from EDGAR at build time (config must be static).
+- Evidence: All 40 tickers resolved to CIKs (no misses).
+- Outcome: n/a
+- Status: active
+### D-023
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Sector label values?
+- Chosen: Tech, Banks, Consumer, Healthcare.
+- Why: Matches the enum in GOAL.md; the long handoff headings (Banks & Payments) are only documentation.
+- Rejected: Long labels in YAML: more quoting, no gain.
+- Evidence: Test asserts 4 sectors x 10 companies.
+- Outcome: n/a
+- Status: active
+### D-024
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: evidence
+- Decision: How to treat payments companies (V, MA, PYPL)?
+- Chosen: is_bank: false, so they get the non-bank metric list.
+- Why: Payments companies report gross profit and operating income like other businesses; the bank list would drop those.
+- Rejected: is_bank: true: loses GrossProfit and OperatingIncome for three companies.
+- Evidence: Test asserts bank flags = JPM, BAC, C, COF, GS, MS, AXP.
+- Outcome: TBD (M8)
+- Status: active
+### D-025
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: How is metric scope encoded in metrics.yaml?
+- Chosen: Each metric has applies_to (all or nonbank). The bank list is the applies_to: all subset (6 metrics). Derived metrics sit in a separate derived list with computed_from and formula.
+- Why: One file holds both lists; the subset is computed, not duplicated.
+- Rejected: Two separate metric files: duplicated Revenue/NetIncome definitions.
+- Evidence: Test asserts 12 metrics, bank subset equals the 6 bank metrics, derived = NetMargin, GrossMargin.
+- Outcome: TBD (M8)
+- Status: active
+### D-026
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: How generous should synonyms be?
+- Chosen: Lowercase as-reported labels, many variants per metric. Generic labels (basic, diluted, research, gross margin, sales alone for EPS) are left out.
+- Why: Generic labels match ratios or other lines and would mis-map facts.
+- Rejected: Including every generic word: false matches.
+- Evidence: none yet; checked in M3/M4 extraction.
+- Outcome: TBD (M8)
+- Status: active
+### D-027
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: evidence
+- Decision: Provider order and override?
+- Chosen: Groq (openai/gpt-oss-120b) first, Gemini second. LLM_PROVIDER=groq or gemini forces one provider. A provider with no key is skipped.
+- Why: D-013 found Groq works and Gemini fails; Groq is primary.
+- Rejected: Gemini first: 404/503 per D-013.
+- Evidence: Smoke call (one prompt, Groq) returned 'pong'. Cache file written to data/llm_cache/.
+- Outcome: TBD (M8)
+- Status: active
+### D-028
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: evidence
+- Decision: Which Gemini model id?
+- Chosen: gemini-flash-latest, set as GEMINI_MODEL constant in src/llm.py.
+- Why: gemini-2.5-flash returns 404 for new users (D-013); flash-latest alias avoids a pinned id.
+- Rejected: gemini-2.5-flash: 404. Gemini 503 seen on gemini-flash-latest in D-013 test, so Gemini is secondary only.
+- Evidence: Not exercised (no Gemini key in .env).
+- Outcome: TBD (M8)
+- Status: active
+### D-029
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: What goes into the LLM cache key?
+- Chosen: sha256 of JSON {system, prompt, json_mode} with sort_keys. Same key for every provider.
+- Why: Cache hits should not depend on the provider. json_mode is in the key so a json and a plain reply for the same prompt do not collide (implementer choice, not from GOAL.md).
+- Rejected: Including provider or model in the key: a Gemini answer would not hit a Groq cache entry.
+- Evidence: test_cache_key_differs_by_system_and_json_mode in tests/test_config.py; pytest 6 passed.
+- Outcome: TBD (M8).
+- Status: active
+### D-030
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Where is the LLM cache and when is it read?
+- Chosen: data/llm_cache/<sha256>.json (not gitignored, so it is committed). Read before any key check.
+- Why: evaluate.py must rerun from cache with no key (GOAL.md Done when).
+- Rejected: Cache in data/ gitignored: evaluation would need a key.
+- Evidence: Test: cache hit with all keys unset and requests.post raising.
+- Outcome: TBD (M8)
+- Status: active
+### D-031
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Retry and timeout policy?
+- Chosen: Retries on 429, 500, 502, 503, 504: 3 retries, backoff 2, 4, 8 s, timeout 120 s. Then the next provider.
+- Why: Free-tier 429s and 503s are expected. The x3 retry was requested in the M1 brief; the backoff values are implementer choices.
+- Rejected: No retry: fails whole run on one 429. Unlimited retry: stalls.
+- Evidence: Not exercised beyond the smoke call.
+- Outcome: TBD (M8)
+- Status: active
+### D-032
+- Time: 2026-11-23 03:04 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Module layout for M1?
+- Chosen: src/config.py holds paths, load_env, load_companies, load_metrics. src/llm.py holds complete(). tests/test_config.py holds config and cache tests. src/__init__.py is empty.
+- Why: One place for paths and env; one wrapper for all LLM calls.
+- Rejected: Config in each module: duplicated paths.
+- Evidence: pytest: 6 passed.
+- Outcome: n/a
+- Status: active
+
+### D-033
+- Time: 2026-11-23 03:10 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Which libraries go in requirements.txt, and are they pinned?
+- Chosen: requests (HTTP for SEC and LLM calls), python-dotenv (.env loading), pyyaml (config files), pdfplumber, networkx, pytest. No version pins.
+- Why: Smallest set the milestones need. requests is used directly instead of an SDK; that avoids a dependency per provider.
+- Rejected: Groq or Google SDKs: extra dependencies for two REST calls. Pinned versions: deferred.
+- Evidence: .venv installed from requirements.txt; pytest 6 passed.
+- Outcome: TBD (M8). Revisit pins if a rerun breaks.
+- Status: active
+
+### D-034
+- Time: 2026-11-23 03:10 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Which PDFs are tracked by git?
+- Chosen: .gitignore ignores *.pdf, with !report/*.pdf so the report PDF is tracked. Also ignores .env, data/raw_html/, data/pdfs/, __pycache__/, .venv/.
+- Why: Source SEC PDFs are large and can be regenerated from EDGAR; the report PDF is a deliverable.
+- Rejected: Committing source PDFs: repo bloat, and they are reproducible.
+- Evidence: .gitignore content as written.
+- Outcome: n/a
+- Status: active
+
+### D-035
+- Time: 2026-11-23 03:10 IST
+- Stage: M1
+- Trigger: planned
+- Decision: Is the LLM cache committed?
+- Chosen: data/llm_cache/ is committed (not in .gitignore). Cache files are read before any API key check.
+- Why: Evaluation reruns complete from cache without GROQ_API_KEY or GEMINI_API_KEY.
+- Rejected: Ignoring the cache: every evaluation rerun would need live keys and quota.
+- Evidence: Cache-hit test in tests/test_config.py runs with no key.
+- Outcome: TBD (M8).
 - Status: active

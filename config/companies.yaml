@@ -1,0 +1,44 @@
+# 40 companies, 10 per sector (handoff.md). CIKs from SEC company_tickers.json (2026-11-23).
+# fiscal_year_end is omitted for 52/53-week fiscal years (AAPL, NVDA, ADBE, INTC, COST, TGT, HD, SBUX, JNJ, PEP).
+# Payments (V, MA, PYPL) are is_bank: false.
+companies:
+  - {ticker: AAPL, name: "Apple Inc.", sector: Tech, cik: "0000320193", is_bank: false}
+  - {ticker: MSFT, name: "Microsoft Corp", sector: Tech, cik: "0000789019", is_bank: false, fiscal_year_end: "06-30"}
+  - {ticker: GOOGL, name: "Alphabet Inc.", sector: Tech, cik: "0001652044", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: AMZN, name: "Amazon.com Inc.", sector: Tech, cik: "0001018724", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: META, name: "Meta Platforms Inc.", sector: Tech, cik: "0001326801", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: NVDA, name: "NVIDIA Corp", sector: Tech, cik: "0001045810", is_bank: false}
+  - {ticker: ORCL, name: "Oracle Corp", sector: Tech, cik: "0001341439", is_bank: false, fiscal_year_end: "05-31"}
+  - {ticker: CRM, name: "Salesforce Inc.", sector: Tech, cik: "0001108524", is_bank: false, fiscal_year_end: "01-31"}
+  - {ticker: ADBE, name: "Adobe Inc.", sector: Tech, cik: "0000796343", is_bank: false}
+  - {ticker: INTC, name: "Intel Corp", sector: Tech, cik: "0000050863", is_bank: false}
+  - {ticker: JPM, name: "JPMorgan Chase & Co.", sector: Banks, cik: "0000019617", is_bank: true, fiscal_year_end: "12-31"}
+  - {ticker: BAC, name: "Bank of America Corp", sector: Banks, cik: "0000070858", is_bank: true, fiscal_year_end: "12-31"}
+  - {ticker: C, name: "Citigroup Inc.", sector: Banks, cik: "0000831001", is_bank: true, fiscal_year_end: "12-31"}
+  - {ticker: COF, name: "Capital One Financial Corp", sector: Banks, cik: "0000927628", is_bank: true, fiscal_year_end: "12-31"}
+  - {ticker: GS, name: "Goldman Sachs Group Inc.", sector: Banks, cik: "0000886982", is_bank: true, fiscal_year_end: "12-31"}
+  - {ticker: MS, name: "Morgan Stanley", sector: Banks, cik: "0000895421", is_bank: true, fiscal_year_end: "12-31"}
+  - {ticker: V, name: "Visa Inc.", sector: Banks, cik: "0001403161", is_bank: false, fiscal_year_end: "09-30"}
+  - {ticker: MA, name: "Mastercard Inc.", sector: Banks, cik: "0001141391", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: AXP, name: "American Express Co.", sector: Banks, cik: "0000004962", is_bank: true, fiscal_year_end: "12-31"}
+  - {ticker: PYPL, name: "PayPal Holdings Inc.", sector: Banks, cik: "0001633917", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: WMT, name: "Walmart Inc.", sector: Consumer, cik: "0000104169", is_bank: false, fiscal_year_end: "01-31"}
+  - {ticker: COST, name: "Costco Wholesale Corp", sector: Consumer, cik: "0000909832", is_bank: false}
+  - {ticker: TGT, name: "Target Corp", sector: Consumer, cik: "0000027419", is_bank: false}
+  - {ticker: HD, name: "Home Depot Inc.", sector: Consumer, cik: "0000354950", is_bank: false}
+  - {ticker: PG, name: "Procter & Gamble Co", sector: Consumer, cik: "0000080424", is_bank: false, fiscal_year_end: "06-30"}
+  - {ticker: KO, name: "Coca-Cola Co", sector: Consumer, cik: "0000021344", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: PEP, name: "PepsiCo Inc.", sector: Consumer, cik: "0000077476", is_bank: false}
+  - {ticker: MCD, name: "McDonald's Corp", sector: Consumer, cik: "0000063908", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: NKE, name: "NIKE Inc.", sector: Consumer, cik: "0000320187", is_bank: false, fiscal_year_end: "05-31"}
+  - {ticker: SBUX, name: "Starbucks Corp", sector: Consumer, cik: "0000829224", is_bank: false}
+  - {ticker: JNJ, name: "Johnson & Johnson", sector: Healthcare, cik: "0000200406", is_bank: false}
+  - {ticker: PFE, name: "Pfizer Inc.", sector: Healthcare, cik: "0000078003", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: MRK, name: "Merck & Co. Inc.", sector: Healthcare, cik: "0000310158", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: ABBV, name: "AbbVie Inc.", sector: Healthcare, cik: "0001551152", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: LLY, name: "Eli Lilly and Co.", sector: Healthcare, cik: "0000059478", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: UNH, name: "UnitedHealth Group Inc.", sector: Healthcare, cik: "0000731766", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: AMGN, name: "Amgen Inc.", sector: Healthcare, cik: "0000318154", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: BMY, name: "Bristol-Myers Squibb Co.", sector: Healthcare, cik: "0000014272", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: ABT, name: "Abbott Laboratories", sector: Healthcare, cik: "0000001800", is_bank: false, fiscal_year_end: "12-31"}
+  - {ticker: CVS, name: "CVS Health Corp", sector: Healthcare, cik: "0000064803", is_bank: false, fiscal_year_end: "12-31"}

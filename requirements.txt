@@ -1,0 +1,6 @@
+pdfplumber
+networkx
+pyyaml
+requests
+python-dotenv
+pytest

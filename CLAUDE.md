@@ -14,8 +14,10 @@
 | Every design decision | docs/decision-log.md | M0 |
 | Milestone status and open issues | PROGRESS.md | M0 |
 | API keys, User-Agent (gitignored) | .env (template: .env.example) | exists |
-| Company list | config/companies.yaml | M1 planned |
-| Metric list and synonyms | config/metrics.yaml | M1 planned |
+| Company list | config/companies.yaml | M1 done |
+| Metric list and synonyms | config/metrics.yaml | M1 done |
+| Paths, load_env, config loaders | src/config.py | M1 done |
+| LLM call (Groq, Gemini, cache, retries) | src/llm.py: complete(prompt, system, json_mode) | M1 done |
 | EDGAR download, HTML to PDF | src/download.py | M2 planned |
 | Raw HTML (gitignored) | data/raw_html/ | M2 planned |
 | 10-K PDFs (gitignored, except report/) | data/pdfs/ | M2 planned |
@@ -23,12 +25,12 @@
 | pdfplumber text and tables per page | src/parse.py, output data/parsed/ | M3 planned |
 | Fact extraction (LLM on narrative pages) | src/extract.py, output data/facts/ | M4 planned |
 | XBRL validation gate | src/validate.py | M4 planned |
-| LLM disk cache | location not chosen yet (decide in M4, log it) | M4 |
+| LLM disk cache (committed, read before key check) | data/llm_cache/ | M1 done |
 | Graph build | src/build_graph.py, output graph/kg.json | M5 planned |
 | Query planner, traversal, abstain | src/query.py | M6 planned |
 | Benchmark questions | benchmark/benchmark.json | M7 planned |
 | Scoring and metrics | src/evaluate.py, output results/metrics.json, results/predictions.jsonl | M8 planned |
-| Unit tests (pytest) | tests/ | M3 planned |
+| Unit tests (pytest) | tests/ (test_config.py done; M3 adds parser tests) | M1 done |
 | README | README.md | M9 planned |
 | Results PDF | report/results.pdf | M9 planned |
 | Pipeline doc | docs/flow.md | M10 planned |
