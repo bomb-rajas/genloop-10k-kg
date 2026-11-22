@@ -67,7 +67,7 @@ Nodes: `Company`, `Sector`, `Filing`, **`Fact`** (value, unit, scale, as-reporte
 - **Validation gate:** check extracted numbers against SEC XBRL data (`companyfacts`) and accounting identities before marking them `validated`.
 - **Query path:** question → LLM JSON plan (intent: lookup / compare / rank / multi-hop; entities, metric, period; fixed lists of allowed tickers and metrics) → templated traversal → answer + fact IDs + pages. Abstain if a needed fact is missing.
 - **"Beyond the obvious" additions:** line-item hierarchy edges (Revenue → Gross Profit → Operating Income, plus "adds up to" links), which are cheap and help both checks and multi-hop questions. Company-to-company links taken from Item 1 (competitors, customers, suppliers) only if time allows.
-- **Extraction is targeted:** Item 8 tables parsed from HTML (no LLM), mapped to PDF pages by matching text. The LLM reads only the cover page, segments, HQ, employees, auditor report and the executive officers list.
+- **Extraction is targeted and parses PDFs only** (task requirement). Item 8 tables are parsed from the PDFs with pdfplumber (no LLM), so the page number comes free. EDGAR HTML is used only to *produce* the PDFs, never parsed. HTML parsing is a possible fallback, to be decided later by the user. The LLM reads only the cover page, segments, HQ, employees, auditor report and the executive officers list.
 
 ## Planned folder structure
 
@@ -80,7 +80,8 @@ GenLoop/
 ├── src/         download, parse, extract, validate, build_graph, query, evaluate
 ├── benchmark/   benchmark.json
 ├── results/     predictions.jsonl, metrics.json
-├── docs/        decision_log.md   (real failures and fixes, for the interview story)
+├── CLAUDE.md    intro map, "where things live", failure log
+├── docs/        decision-log.md (every major choice + rejections), flow.md (written at the end)
 └── report/      results.pdf
 ```
 
@@ -91,7 +92,7 @@ GenLoop/
 | 0 | Gemini API key; approve list and schema; SEC User-Agent contact string | **User** |
 | 1 | Scaffold repo + config | Claude |
 | 2 | EDGAR download → PDF; fetch XBRL | Claude |
-| 3 | Parse tables (HTML) → PDF pages → extract facts | Claude |
+| 3 | Parse PDFs (text + tables, per page) → extract facts | Claude |
 | 4 | Validation gate → build graph | Claude |
 | 5 | Query: question → plan → traversal → answer + sources | Claude |
 | 6 | Draft 28–30 benchmark Qs **from the PDFs** (not from the graph) with gold fact IDs | Claude |
@@ -100,13 +101,13 @@ GenLoop/
 | 9 | README, decision log, results PDF | Claude → user review |
 | 10 | GitHub repo, push, fresh-clone test (`gh` CLI not installed; plain git works) | User + Claude |
 
-**If time runs short, cut in this order:** LLM text extraction → 30 companies → fewer metrics. Never cut the evaluation or the write-up.
+**Timing:** build done by **08:00 IST**; then testing and the results PDF; submit before 11:00 meetings. **No scope cuts** (user decision).
 
 ## Main risks and backups
 
 - SEC blocks or throttles downloads → proper User-Agent, throttle to under 10 requests/sec.
 - Bank financials in Exhibit 13 → fetch the exhibit or swap the company.
-- Table parsing (parentheses, dashes, footnotes, year columns, scale) → parse from HTML; read the scale from the table header; XBRL gate.
+- PDF table parsing (parentheses, dashes, footnotes, year columns, scale, tables split across pages) → explicit rules + tests; read the scale from the table header; XBRL gate. HTML parsing only if the user approves it as a fallback.
 - Bank "revenue" semantics → separate bank metrics; mark not applicable.
 - Fiscal-year mismatch → store the period end date; state the FY rule.
 - Free-tier quota → cache, Groq fallback, rule-based question parser.
@@ -114,7 +115,7 @@ GenLoop/
 - Benchmark circularity → write gold answers from the PDFs, include facts the graph may miss.
 - Scoring tolerance → declare the rule up front (e.g. ±0.5%, same unit).
 - Repo hygiene → `.env` gitignored, graph committed, one-command demo.
-- **Interview story:** log real failures in `docs/decision_log.md` as they happen (what broke, numbers, cause, fix, before/after). Don't invent any.
+- **Decision log covers every major design choice, not only failures:** what was chosen, why, what was rejected and why, and the outcome. Failures appear only when they forced a decision. Log real failures in `docs/decision-log.md` as they happen (what broke, numbers, cause, fix, before/after). Don't invent any.
 
 ## Environment
 

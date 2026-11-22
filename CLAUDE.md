@@ -1,0 +1,41 @@
+# CLAUDE.md
+
+## 1. Intro map
+- Genloop SEC 10-K knowledge-graph QA: a fact graph built from the latest 10-K of 40 companies (4 sectors x 10), queried by graph traversal; every answer cites doc and page.
+- handoff.md is the spec (companies, schema, folders, risks). GOAL.md holds milestones and "Done when" and wins on any conflict.
+- Main folders: config/ (companies, metrics), src/ (pipeline), data/ (pdfs, parsed, facts, xbrl), graph/, benchmark/, results/, docs/, report/ (results PDF only).
+
+## 2. Where things live
+| You need | File or folder | Status |
+|---|---|---|
+| Milestones and Done-when | GOAL.md | exists |
+| Spec: companies, schema, risks | handoff.md | exists |
+| Project memory | CLAUDE.md | M0 |
+| Every design decision | docs/decision-log.md | M0 |
+| Milestone status and open issues | PROGRESS.md | M0 |
+| API keys, User-Agent (gitignored) | .env (template: .env.example) | exists |
+| Company list | config/companies.yaml | M1 planned |
+| Metric list and synonyms | config/metrics.yaml | M1 planned |
+| EDGAR download, HTML to PDF | src/download.py | M2 planned |
+| Raw HTML (gitignored) | data/raw_html/ | M2 planned |
+| 10-K PDFs (gitignored, except report/) | data/pdfs/ | M2 planned |
+| XBRL companyfacts | data/xbrl/ | M2 planned |
+| pdfplumber text and tables per page | src/parse.py, output data/parsed/ | M3 planned |
+| Fact extraction (LLM on narrative pages) | src/extract.py, output data/facts/ | M4 planned |
+| XBRL validation gate | src/validate.py | M4 planned |
+| LLM disk cache | location not chosen yet (decide in M4, log it) | M4 |
+| Graph build | src/build_graph.py, output graph/kg.json | M5 planned |
+| Query planner, traversal, abstain | src/query.py | M6 planned |
+| Benchmark questions | benchmark/benchmark.json | M7 planned |
+| Scoring and metrics | src/evaluate.py, output results/metrics.json, results/predictions.jsonl | M8 planned |
+| Unit tests (pytest) | tests/ | M3 planned |
+| README | README.md | M9 planned |
+| Results PDF | report/results.pdf | M9 planned |
+| Pipeline doc | docs/flow.md | M10 planned |
+
+## 3. Failure log
+- Never git-add .env or *.pdf outside report/.
+- Quote SEC_USER_AGENT in .env (contains spaces).
+
+## 4. Decision-log rule
+Every meaningful design or build choice gets an entry in docs/decision-log.md in the same change, before moving on. That covers architecture, schema, fact-ID format, metric mapping, libraries, parsing rules, extraction approach, LLM prompts and output schemas, validation thresholds, benchmark design, scoring rules, and company swaps. Failures are logged only when they forced a decision. If you chose between options, log it, including choices made by subagents.
