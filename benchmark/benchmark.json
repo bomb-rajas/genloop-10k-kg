@@ -1,0 +1,984 @@
+{
+  "version": "1.0",
+  "description": "M7 benchmark. Gold from PDF text only. Verified false until human review.",
+  "items": [
+    {
+      "id": "Q01",
+      "type": "single_fact",
+      "question": "What was Apple's total net sales in fiscal 2026?",
+      "gold_answer": "$478,834 million (Total net sales, FY2026)",
+      "gold_value": 478834000000,
+      "gold_fact_ids": [
+        "AAPL|Revenue|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/AAPL.pdf"
+      ],
+      "pages": [
+        49
+      ],
+      "evidence": [
+        {
+          "page": 49,
+          "key": "478,834",
+          "quote": "Total net sales 478,834 416,161 391,035"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Statement of operations, years ended Sep 26 2026 (first column)."
+    },
+    {
+      "id": "Q02",
+      "type": "single_fact",
+      "question": "What was Microsoft's net income in fiscal 2026?",
+      "gold_answer": "$133,749 million (Net income, FY2026, June 30 2026)",
+      "gold_value": 133749000000,
+      "gold_fact_ids": [
+        "MSFT|NetIncome|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/MSFT.pdf"
+      ],
+      "pages": [
+        73
+      ],
+      "evidence": [
+        {
+          "page": 73,
+          "key": "133,749",
+          "quote": "Net income $ 133,749 $ 101,832 $ 88,136"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Income statements, year ended June 30 2026."
+    },
+    {
+      "id": "Q03",
+      "type": "single_fact",
+      "question": "What was NVIDIA's revenue in fiscal 2026?",
+      "gold_answer": "$215,938 million (Revenue, FY2026, year ended Jan 25 2026)",
+      "gold_value": 215938000000,
+      "gold_fact_ids": [
+        "NVDA|Revenue|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/NVDA.pdf"
+      ],
+      "pages": [
+        71
+      ],
+      "evidence": [
+        {
+          "page": 71,
+          "key": "215,938",
+          "quote": "Revenue $ 215,938 $ 130,497 $ 60,922"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Consolidated Statements of Income, first column = FY2026."
+    },
+    {
+      "id": "Q04",
+      "type": "single_fact",
+      "question": "What were Walmart's total revenues in fiscal 2026?",
+      "gold_answer": "$713,163 million (Total revenues, FY2026, year ended Jan 31 2026)",
+      "gold_value": 713163000000,
+      "gold_fact_ids": [
+        "WMT|Revenue|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/WMT.pdf"
+      ],
+      "pages": [
+        75
+      ],
+      "evidence": [
+        {
+          "page": 75,
+          "key": "713,163",
+          "quote": "Total revenues 713,163 680,985 648,125"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Columns ordered 2026, 2025, 2024 (newest first)."
+    },
+    {
+      "id": "Q05",
+      "type": "single_fact",
+      "question": "What was Coca-Cola's net income attributable to shareowners in fiscal 2025?",
+      "gold_answer": "$13,107 million (Net Income Attributable to Shareowners, FY2025)",
+      "gold_value": 13107000000,
+      "gold_fact_ids": [
+        "KO|NetIncome|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/KO.pdf"
+      ],
+      "pages": [
+        108
+      ],
+      "evidence": [
+        {
+          "page": 108,
+          "key": "13,107",
+          "quote": "Net Income Attributable to Shareowners of The Coca-Cola Company $ 13,107 $ 10,631 $ 10,714"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Consolidated income statement; excludes consolidated NI 13,137 (includes NCI)."
+    },
+    {
+      "id": "Q06",
+      "type": "single_fact",
+      "question": "What was Bank of America's total assets in fiscal 2026?",
+      "gold_answer": "Not answerable from the filing: the latest BAC 10-K in the corpus is FY2025 (Dec 31 2025 total assets $3,411,738 million). No FY2026 figure exists.",
+      "gold_value": null,
+      "gold_fact_ids": [
+        "BAC|TotalAssets|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/BAC.pdf"
+      ],
+      "pages": [
+        65
+      ],
+      "evidence": [
+        {
+          "page": 65,
+          "key": "3,411,738",
+          "quote": "Total assets $ 3,411,738 $ 3,261,299 $ 150,439 5"
+        }
+      ],
+      "verified": false,
+      "answerable": false,
+      "expected_behaviour": "abstain",
+      "notes": "Honest-failure test: period outside the filing. Abstain expected. Page 65 is cited only as the FY2025 value the system may wrongly substitute.",
+      "answerable_by_graph": "unknown"
+    },
+    {
+      "id": "Q07",
+      "type": "single_fact",
+      "question": "What was JPMorgan Chase's total assets at the end of fiscal 2025?",
+      "gold_answer": "$4,424,900 million (Total assets, Dec 31 2025)",
+      "gold_value": 4424900000000,
+      "gold_fact_ids": [
+        "JPM|TotalAssets|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/JPM.pdf"
+      ],
+      "pages": [
+        79
+      ],
+      "evidence": [
+        {
+          "page": 79,
+          "key": "4,424,900",
+          "quote": "Total assets 4,424,900 4,002,814 3,875,393"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Three-year summary of consolidated financial highlights."
+    },
+    {
+      "id": "Q08",
+      "type": "single_fact",
+      "question": "What was Merck's total assets at December 31, 2025?",
+      "gold_answer": "$136,866 million (balance sheet total, Dec 31 2025)",
+      "gold_value": 136866000000,
+      "gold_fact_ids": [
+        "MRK|TotalAssets|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/MRK.pdf"
+      ],
+      "pages": [
+        114
+      ],
+      "evidence": [
+        {
+          "page": 114,
+          "key": "136,866",
+          "quote": "$ 136,866 $ 117,106"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "The 'Total assets' label is absent from the parsed text; the unlabeled closing total $136,866 is the balance-sheet total. Check: liabilities 28,327+46,750+1,439+7,688=84,204 + total equity 52,662 = 136,866. Hard case, not a system output check."
+    },
+    {
+      "id": "Q09",
+      "type": "single_fact",
+      "question": "What was Pfizer's diluted earnings per common share for fiscal 2025?",
+      "gold_answer": "$1.36 per diluted share (net income attributable to Pfizer common shareholders, 2025)",
+      "gold_value": 1.36,
+      "gold_fact_ids": [
+        "PFE|EPS|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/PFE.pdf"
+      ],
+      "pages": [
+        108
+      ],
+      "evidence": [
+        {
+          "page": 108,
+          "key": "1.36",
+          "quote": "Net income attributable to Pfizer Inc. common shareholders $ 1.36 $ 1.41 $ 0.37"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Diluted row under 'Earnings per common share--diluted'. Reported value, not Adjusted EPS ($3.22 on p70)."
+    },
+    {
+      "id": "Q10",
+      "type": "single_fact",
+      "question": "What was Visa's research and development expense in fiscal 2026?",
+      "gold_answer": "Not answerable: Visa's consolidated statement of operations has no research and development line in the filing.",
+      "gold_value": null,
+      "gold_fact_ids": [
+        "V|R&D|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/V.pdf"
+      ],
+      "pages": [
+        97
+      ],
+      "evidence": [
+        {
+          "page": 97,
+          "key": "45,903",
+          "quote": "Net revenue $ 45,903 $ 40,000 $ 35,926"
+        }
+      ],
+      "verified": false,
+      "answerable": false,
+      "expected_behaviour": "abstain",
+      "notes": "Honest-failure test: metric absent by design. Abstain expected. Page 97 is the consolidated statement of operations, which has no R&D row.",
+      "answerable_by_graph": "unknown"
+    },
+    {
+      "id": "Q11",
+      "type": "multi_hop",
+      "question": "What was Apple's net margin in fiscal 2026 (net income divided by total net sales)?",
+      "gold_answer": "27.60% = 132,175 / 478,834",
+      "gold_value": 0.276035,
+      "gold_fact_ids": [
+        "AAPL|NetIncome|FY2026",
+        "AAPL|Revenue|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/AAPL.pdf"
+      ],
+      "pages": [
+        49,
+        49
+      ],
+      "evidence": [
+        {
+          "page": 49,
+          "key": "132,175",
+          "quote": "Net income $ 132,175 $ 112,010 $ 93,736"
+        },
+        {
+          "page": 49,
+          "key": "478,834",
+          "quote": "Total net sales 478,834 416,161 391,035"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Derived ratio. gold_value is a fraction (0.2760), not a percent."
+    },
+    {
+      "id": "Q12",
+      "type": "multi_hop",
+      "question": "What was Microsoft's net margin in fiscal 2026 (net income divided by total revenue)?",
+      "gold_answer": "40.31% = 133,749 / 331,839",
+      "gold_value": 0.403054,
+      "gold_fact_ids": [
+        "MSFT|NetIncome|FY2026",
+        "MSFT|Revenue|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/MSFT.pdf"
+      ],
+      "pages": [
+        73,
+        73
+      ],
+      "evidence": [
+        {
+          "page": 73,
+          "key": "133,749",
+          "quote": "Net income $ 133,749 $ 101,832 $ 88,136"
+        },
+        {
+          "page": 73,
+          "key": "331,839",
+          "quote": "Total revenue 331,839 281,724 245,122"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Derived ratio, fraction in gold_value."
+    },
+    {
+      "id": "Q13",
+      "type": "multi_hop",
+      "question": "Which of Apple's geographic segments had the largest net sales in fiscal 2026?",
+      "gold_answer": "Americas, $198,083 million (Europe 127,604; Greater China 82,378; Rest of Asia Pacific 39,861; Japan 30,908)",
+      "gold_value": 198083000000,
+      "gold_fact_ids": [
+        "Americas"
+      ],
+      "docs": [
+        "data/pdfs/AAPL.pdf"
+      ],
+      "pages": [
+        39
+      ],
+      "evidence": [
+        {
+          "page": 39,
+          "key": "198,083",
+          "quote": "Americas $ 198,083 11 % $ 178,353 7 % $ 167,045"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Segment table in MD&A (FY2026 column first). Entity answer: plain name."
+    },
+    {
+      "id": "Q14",
+      "type": "multi_hop",
+      "question": "Among Apple, Microsoft, Alphabet and Amazon, which company had the largest total revenue in its latest fiscal year, and who is its auditor?",
+      "gold_answer": "Amazon.com, Inc. ($716,924 million, FY2025). Auditor: Ernst & Young LLP.",
+      "gold_value": 716924000000,
+      "gold_fact_ids": [
+        "Amazon.com, Inc.",
+        "Ernst & Young LLP"
+      ],
+      "docs": [
+        "data/pdfs/AMZN.pdf",
+        "data/pdfs/AAPL.pdf",
+        "data/pdfs/MSFT.pdf",
+        "data/pdfs/GOOGL.pdf"
+      ],
+      "pages": [
+        58,
+        54
+      ],
+      "evidence": [
+        {
+          "page": 58,
+          "key": "716,924",
+          "quote": "Total net sales 574,785 637,959 716,924"
+        },
+        {
+          "page": 54,
+          "key": "Ernst & Young LLP",
+          "quote": "Report of Ernst & Young LLP, Independent Registered Public Accounting Firm (PCAOB ID: 42)"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Compared latest FY: AAPL 478,834 (FY2026), MSFT 331,839 (FY2026), GOOGL 402,836 (FY2025, Revenues p84), AMZN 716,924 (FY2025). AMZN columns are ascending 2023,2024,2025. Auditor from the index line on p54 (the report itself is 10-K p.34)."
+    },
+    {
+      "id": "Q15",
+      "type": "multi_hop",
+      "question": "Who is the Chief Financial Officer of the bank among JPMorgan Chase, Bank of America and Citigroup with the largest total assets?",
+      "gold_answer": "Jeremy Barnum (JPMorgan Chase; largest total assets $4,424,900 million at FY2025)",
+      "gold_value": null,
+      "gold_fact_ids": [
+        "JPM|TotalAssets|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/JPM.pdf"
+      ],
+      "pages": [
+        79,
+        70
+      ],
+      "evidence": [
+        {
+          "page": 79,
+          "key": "4,424,900",
+          "quote": "Total assets 4,424,900 4,002,814 3,875,393"
+        },
+        {
+          "page": 70,
+          "key": "Chief Financial Officer since May 2021",
+          "quote": "Jeremy Barnum 53 Chief Financial Officer since May 2021"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Two-hop: ranking on total assets, then executive officer section. BAC FY2025 total assets 3,411,738 (p65) and C 2,657,202 (p15)."
+    },
+    {
+      "id": "Q16",
+      "type": "multi_hop",
+      "question": "Which of PepsiCo, Procter & Gamble, Coca-Cola and McDonald's had the largest revenue in its latest fiscal year, and in which city is that company headquartered?",
+      "gold_answer": "PepsiCo: $93,925 million net revenue (FY2025). Headquarters: Purchase, New York (700 Anderson Hill Road, Purchase, New York 10577).",
+      "gold_value": 93925000000,
+      "gold_fact_ids": [
+        "PepsiCo",
+        "Purchase, New York"
+      ],
+      "docs": [
+        "data/pdfs/PEP.pdf",
+        "data/pdfs/PG.pdf",
+        "data/pdfs/KO.pdf",
+        "data/pdfs/MCD.pdf"
+      ],
+      "pages": [
+        105,
+        1
+      ],
+      "evidence": [
+        {
+          "page": 105,
+          "key": "93,925",
+          "quote": "Net Revenue $ 93,925 $ 91,854 $ 91,471"
+        },
+        {
+          "page": 1,
+          "key": "700 Anderson Hill Road, Purchase, New York",
+          "quote": "700 Anderson Hill Road, Purchase, New York 10577"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Comparison: PG 87,032 (FY2026, p38), KO 47,941 (FY2025, p108), MCD 26,885 (FY2025, p16). HQ is the cover-page principal executive office address."
+    },
+    {
+      "id": "Q17",
+      "type": "multi_hop",
+      "question": "What was Eli Lilly's net margin in fiscal 2025 (net income divided by revenue)?",
+      "gold_answer": "31.67% = 20,640 / 65,179",
+      "gold_value": 0.316666,
+      "gold_fact_ids": [
+        "LLY|NetIncome|FY2025",
+        "LLY|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/LLY.pdf"
+      ],
+      "pages": [
+        75,
+        75
+      ],
+      "evidence": [
+        {
+          "page": 75,
+          "key": "20,640",
+          "quote": "Net income $ 20,640 $ 10,590 $ 5,240"
+        },
+        {
+          "page": 75,
+          "key": "65,179",
+          "quote": "Revenue $ 65,179 $ 45,043 $ 34,124"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Derived ratio; income statement is on p75 (the p59 MD&A shows the same 20,640)."
+    },
+    {
+      "id": "Q18",
+      "type": "multi_hop",
+      "question": "What was NVIDIA's operating margin in fiscal 2026 (operating income divided by revenue)?",
+      "gold_answer": "60.38% = 130,387 / 215,938",
+      "gold_value": 0.603817,
+      "gold_fact_ids": [
+        "NVDA|OperatingIncome|FY2026",
+        "NVDA|Revenue|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/NVDA.pdf"
+      ],
+      "pages": [
+        71,
+        71
+      ],
+      "evidence": [
+        {
+          "page": 71,
+          "key": "130,387",
+          "quote": "Operating income 130,387 81,453 32,972"
+        },
+        {
+          "page": 71,
+          "key": "215,938",
+          "quote": "Revenue $ 215,938 $ 130,497 $ 60,922"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Derived ratio."
+    },
+    {
+      "id": "Q19",
+      "type": "multi_hop",
+      "question": "What was Meta's net margin in fiscal 2025 (net income divided by revenue)?",
+      "gold_answer": "30.08% = 60,458 / 200,966",
+      "gold_value": 0.300837,
+      "gold_fact_ids": [
+        "META|NetIncome|FY2025",
+        "META|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/META.pdf"
+      ],
+      "pages": [
+        121,
+        121
+      ],
+      "evidence": [
+        {
+          "page": 121,
+          "key": "60,458",
+          "quote": "Net income $ 60,458 $ 62,360 $ 39,098"
+        },
+        {
+          "page": 121,
+          "key": "200,966",
+          "quote": "Revenue $ 200,966 $ 164,501 $ 134,902"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Derived ratio. Descending columns (2025 first). The filing's own table shows 30%."
+    },
+    {
+      "id": "Q20",
+      "type": "multi_hop",
+      "question": "What was JPMorgan Chase's gross profit in fiscal 2025?",
+      "gold_answer": "Not answerable: banks report no gross profit line in the filing (total net revenue $182,447 million is the closest line, which is not gross profit).",
+      "gold_value": null,
+      "gold_fact_ids": [
+        "JPM|GrossProfit|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/JPM.pdf"
+      ],
+      "pages": [
+        79
+      ],
+      "evidence": [
+        {
+          "page": 79,
+          "key": "182,447",
+          "quote": "Total net revenue 182,447 177,556 158,104"
+        }
+      ],
+      "verified": false,
+      "answerable": false,
+      "expected_behaviour": "abstain",
+      "notes": "Honest-failure test: metric not in a bank's filing (GrossProfit applies to nonbank filers). Abstain expected. Page 79 is cited as the closest revenue line only.",
+      "answerable_by_graph": "unknown"
+    },
+    {
+      "id": "Q21",
+      "type": "cross_filing",
+      "question": "Which of JPMorgan Chase, Bank of America and Citigroup reported the largest total assets at fiscal year-end 2025?",
+      "gold_answer": "JPMorgan Chase: $4,424,900 million (BAC $3,411,738; Citigroup $2,657,202)",
+      "gold_value": 4424900000000,
+      "gold_fact_ids": [
+        "JPM|TotalAssets|FY2025",
+        "BAC|TotalAssets|FY2025",
+        "C|TotalAssets|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/JPM.pdf",
+        "data/pdfs/BAC.pdf",
+        "data/pdfs/C.pdf"
+      ],
+      "pages": [
+        79,
+        65,
+        15
+      ],
+      "evidence": [
+        {
+          "page": 79,
+          "key": "4,424,900",
+          "quote": "Total assets 4,424,900 4,002,814 3,875,393"
+        },
+        {
+          "page": 65,
+          "key": "3,411,738",
+          "quote": "Total assets $ 3,411,738 $ 3,261,299"
+        },
+        {
+          "page": 15,
+          "key": "2,657,202",
+          "quote": "Total assets $ 2,657,202 $ 2,352,945"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "BAC p68 'Selected Annual Financial Data' shows 3,410,412; the difference is not resolved here, and the ranking is unaffected."
+    },
+    {
+      "id": "Q22",
+      "type": "cross_filing",
+      "question": "Among Apple, Microsoft and NVIDIA, which reported the highest diluted EPS in fiscal 2026?",
+      "gold_answer": "Microsoft: $17.95 per diluted share (Apple $8.98; NVIDIA $4.90)",
+      "gold_value": 17.95,
+      "gold_fact_ids": [
+        "MSFT|EPS|FY2026",
+        "AAPL|EPS|FY2026",
+        "NVDA|EPS|FY2026"
+      ],
+      "docs": [
+        "data/pdfs/MSFT.pdf",
+        "data/pdfs/AAPL.pdf",
+        "data/pdfs/NVDA.pdf"
+      ],
+      "pages": [
+        73,
+        49,
+        71
+      ],
+      "evidence": [
+        {
+          "page": 73,
+          "key": "17.95",
+          "quote": "Diluted $ 17.95 $ 13.64 $ 11.80"
+        },
+        {
+          "page": 49,
+          "key": "8.98",
+          "quote": "Diluted $ 8.98 $ 7.46 $ 6.08"
+        },
+        {
+          "page": 71,
+          "key": "4.90",
+          "quote": "Diluted $ 4.90 $ 2.94 $ 1.19"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Diluted EPS as reported."
+    },
+    {
+      "id": "Q23",
+      "type": "cross_filing",
+      "question": "What was the combined total revenue of Pfizer, AbbVie and Eli Lilly in fiscal 2025?",
+      "gold_answer": "$188,918 million = 62,579 + 61,160 + 65,179",
+      "gold_value": 188918000000,
+      "gold_fact_ids": [
+        "PFE|Revenue|FY2025",
+        "ABBV|Revenue|FY2025",
+        "LLY|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/PFE.pdf",
+        "data/pdfs/ABBV.pdf",
+        "data/pdfs/LLY.pdf"
+      ],
+      "pages": [
+        108,
+        95,
+        75
+      ],
+      "evidence": [
+        {
+          "page": 108,
+          "key": "62,579",
+          "quote": "Total revenues 62,579 63,627 59,553"
+        },
+        {
+          "page": 95,
+          "key": "61,160",
+          "quote": "Net revenues $ 61,160 $ 56,334 $ 54,318"
+        },
+        {
+          "page": 75,
+          "key": "65,179",
+          "quote": "Revenue $ 65,179 $ 45,043 $ 34,124"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Sum of reported FY2025 revenue lines. Pfizer 'Total revenues' vs AbbVie 'Net revenues' vs Lilly 'Revenue'."
+    },
+    {
+      "id": "Q24",
+      "type": "cross_filing",
+      "question": "Which of NVIDIA, Microsoft and Apple had the highest revenue growth in fiscal 2026 versus fiscal 2025?",
+      "gold_answer": "NVIDIA: 65.47% (215,938 / 130,497 - 1); Microsoft 17.79%; Apple 15.06%",
+      "gold_value": 0.654735,
+      "gold_fact_ids": [
+        "NVDA|Revenue|FY2026",
+        "NVDA|Revenue|FY2025",
+        "MSFT|Revenue|FY2026",
+        "MSFT|Revenue|FY2025",
+        "AAPL|Revenue|FY2026",
+        "AAPL|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/NVDA.pdf",
+        "data/pdfs/MSFT.pdf",
+        "data/pdfs/AAPL.pdf"
+      ],
+      "pages": [
+        71,
+        73,
+        49
+      ],
+      "evidence": [
+        {
+          "page": 71,
+          "key": "130,497",
+          "quote": "Revenue $ 215,938 $ 130,497 $ 60,922"
+        },
+        {
+          "page": 73,
+          "key": "331,839",
+          "quote": "Total revenue 331,839 281,724 245,122"
+        },
+        {
+          "page": 49,
+          "key": "478,834",
+          "quote": "Total net sales 478,834 416,161 391,035"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Growth = FY2026/FY2025 - 1 from the filing's own columns. gold_value is the NVIDIA growth fraction."
+    },
+    {
+      "id": "Q25",
+      "type": "cross_filing",
+      "question": "Which of American Express, Mastercard and Capital One reported the largest total revenue in fiscal 2025?",
+      "gold_answer": "American Express: $72,229 million total revenues net of interest expense (Capital One $53,434; Mastercard $32,791)",
+      "gold_value": 72229000000,
+      "gold_fact_ids": [
+        "AXP|Revenue|FY2025",
+        "COF|Revenue|FY2025",
+        "MA|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/AXP.pdf",
+        "data/pdfs/COF.pdf",
+        "data/pdfs/MA.pdf"
+      ],
+      "pages": [
+        71,
+        61,
+        62
+      ],
+      "evidence": [
+        {
+          "page": 71,
+          "key": "72,229",
+          "quote": "Total revenues net of interest expense $ 72,229 $ 65,949 $ 60,515"
+        },
+        {
+          "page": 61,
+          "key": "53,434",
+          "quote": "Total net revenue 53,434 39,112 36,787"
+        },
+        {
+          "page": 62,
+          "key": "32,791",
+          "quote": "Net revenue $ 32,791 $ 28,167 $ 25,098"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "COF 'Total net revenue' from the three-year selected-data table (column order 2025, 2024, 2023). Revenue definitions differ by issuer."
+    },
+    {
+      "id": "Q26",
+      "type": "cross_filing",
+      "question": "Which of Goldman Sachs and Morgan Stanley reported higher net revenues in fiscal 2025?",
+      "gold_answer": "Morgan Stanley: $70,645 million (Goldman Sachs $58,283 million)",
+      "gold_value": 70645000000,
+      "gold_fact_ids": [
+        "GS|Revenue|FY2025",
+        "MS|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/GS.pdf",
+        "data/pdfs/MS.pdf"
+      ],
+      "pages": [
+        130,
+        68
+      ],
+      "evidence": [
+        {
+          "page": 130,
+          "key": "58,283",
+          "quote": "Net revenues $ 58,283 $ 53,512 $ 46,254"
+        },
+        {
+          "page": 68,
+          "key": "70,645",
+          "quote": "Net revenues $ 70,645 $ 61,761 $ 54,143"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "GS total net revenues from the financial-data table on p130; MS from the MD&A summary table on p68."
+    },
+    {
+      "id": "Q27",
+      "type": "cross_filing",
+      "question": "Which had higher total revenue in fiscal 2025, PepsiCo or Coca-Cola?",
+      "gold_answer": "PepsiCo: $93,925 million net revenue (Coca-Cola $47,941 million)",
+      "gold_value": 93925000000,
+      "gold_fact_ids": [
+        "PEP|Revenue|FY2025",
+        "KO|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/PEP.pdf",
+        "data/pdfs/KO.pdf"
+      ],
+      "pages": [
+        105,
+        108
+      ],
+      "evidence": [
+        {
+          "page": 105,
+          "key": "93,925",
+          "quote": "Net Revenue $ 93,925 $ 91,854 $ 91,471"
+        },
+        {
+          "page": 108,
+          "key": "47,941",
+          "quote": "Net Operating Revenues $ 47,941 $ 47,061 $ 45,754"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Two companies, pairwise comparison; differs in revenue line naming."
+    },
+    {
+      "id": "Q28",
+      "type": "cross_filing",
+      "question": "Among Pfizer, AbbVie and Eli Lilly, which reported the highest diluted EPS in fiscal 2025?",
+      "gold_answer": "Eli Lilly: $22.95 per diluted share (AbbVie $2.36; Pfizer $1.36)",
+      "gold_value": 22.95,
+      "gold_fact_ids": [
+        "LLY|EPS|FY2025",
+        "ABBV|EPS|FY2025",
+        "PFE|EPS|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/LLY.pdf",
+        "data/pdfs/ABBV.pdf",
+        "data/pdfs/PFE.pdf"
+      ],
+      "pages": [
+        75,
+        95,
+        108
+      ],
+      "evidence": [
+        {
+          "page": 75,
+          "key": "22.95",
+          "quote": "Diluted $ 22.95 $ 11.71 $ 5.80"
+        },
+        {
+          "page": 95,
+          "key": "2.36",
+          "quote": "Diluted earnings per share attributable to AbbVie Inc. $ 2.36 $ 2.39 $ 2.72"
+        },
+        {
+          "page": 108,
+          "key": "1.36",
+          "quote": "Net income attributable to Pfizer Inc. common shareholders $ 1.36 $ 1.41 $ 0.37"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Reported diluted EPS."
+    },
+    {
+      "id": "Q29",
+      "type": "cross_filing",
+      "question": "Among Amazon, Alphabet and Meta, which had the largest total revenue in fiscal 2025?",
+      "gold_answer": "Amazon.com: $716,924 million (Alphabet $402,836; Meta $200,966)",
+      "gold_value": 716924000000,
+      "gold_fact_ids": [
+        "AMZN|Revenue|FY2025",
+        "GOOGL|Revenue|FY2025",
+        "META|Revenue|FY2025"
+      ],
+      "docs": [
+        "data/pdfs/AMZN.pdf",
+        "data/pdfs/GOOGL.pdf",
+        "data/pdfs/META.pdf"
+      ],
+      "pages": [
+        58,
+        84,
+        121
+      ],
+      "evidence": [
+        {
+          "page": 58,
+          "key": "716,924",
+          "quote": "Total net sales 574,785 637,959 716,924"
+        },
+        {
+          "page": 84,
+          "key": "402,836",
+          "quote": "Revenues $ 307,394 $ 350,018 $ 402,836"
+        },
+        {
+          "page": 121,
+          "key": "200,966",
+          "quote": "Revenue $ 200,966 $ 164,501 $ 134,902"
+        }
+      ],
+      "verified": false,
+      "answerable": true,
+      "expected_behaviour": "answer",
+      "notes": "Alphabet and Amazon statements list columns ascending (2023 to 2025); Meta descending. Values taken from each column's FY2025 label."
+    }
+  ]
+}
