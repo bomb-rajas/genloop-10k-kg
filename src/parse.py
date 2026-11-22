@@ -58,10 +58,42 @@ def _title_lines(text):
     return out[:8]
 
 
+# Words that mark an MD&A or segment heading ('BALANCE SHEET OVERVIEW', 'Income Statement Information').
+BANNED_HEADING_WORDS = re.compile(r"\b(overview|analysis|summary|discussion|selected|table|highlights|results|notes?|expressed|information)\b", re.I)
+PCT_VALUE_LINE = re.compile(r"\d\s*%")
+PCT_OR_CHANGE_HEAD = re.compile(r"%|percent|\bchange\b|increase|decrease", re.I)
+
+
+def _is_heading(line, match):
+    """True when the text around a title match is a short company name or a '(Continued)' tag, not an MD&A
+    sentence: 'Consolidated Statements of Income expressed as a percentage' fails on the banned word."""
+    rest = re.sub(r"\([^)]*\)", " ", line[:match.start()] + " " + line[match.end():])
+    if BANNED_HEADING_WORDS.search(rest):
+        return False
+    return len(rest.split()) <= 8  # company name prefix, not a sentence
+
+
 def title_kinds(text):
-    """Statement kinds whose title is on this page (first 8 lines)."""
+    """Statement kinds whose title is a heading line on this page (first 8 lines)."""
     lines = [ln for ln in _title_lines(text) if not TITLE_SKIP.search(ln)]
-    return [k for k in KINDS if any(TITLES[k].search(ln) for ln in lines)]
+    out = []
+    for k in KINDS:
+        for ln in lines:
+            m = TITLES[k].search(ln)
+            if m and _is_heading(ln, m):
+                out.append(k)
+                break
+    return out
+
+
+def is_statement_layout(text):
+    """False for MD&A-style pages: percent-of-revenue rows, '%' or change columns in the header, or
+    3+ rows with 5 or more value columns (segment tables)."""
+    if sum(bool(PCT_VALUE_LINE.search(ln)) for ln in (text or "").splitlines()) >= 3:
+        return False
+    if PCT_OR_CHANGE_HEAD.search(header_text(text)):
+        return False
+    return sum(len(r["values"]) >= 5 for r in parse_text_lines(text)) < 3
 
 
 def key_kinds(text):
@@ -81,7 +113,10 @@ def key_kinds(text):
 def is_continuation(text):
     """A page that carries on a statement: numeric rows, no statement heading, no notes heading."""
     lines = _title_lines(text)
-    if NON_CONTINUATION.search(" ".join(lines)) or STATEMENT_WORD.search(" ".join(lines[:3])):
+    continued = re.search(r"\(continued\)", " ".join(lines[:3]), re.I)  # bank pages repeat the title with '(Continued)'
+    if not continued and (NON_CONTINUATION.search(" ".join(lines)) or STATEMENT_WORD.search(" ".join(lines[:3]))):
+        return False
+    if not is_statement_layout(text):
         return False
     rows = parse_text_lines(text)
     nonempty = [ln for ln in (text or "").splitlines() if ln.strip()]
@@ -96,7 +131,7 @@ def find_statements(page_texts):
     found = {}
     for kind in KINDS:
         for i in range(len(page_texts)):
-            if kind not in keys[i]:
+            if kind not in keys[i] or not is_statement_layout(page_texts[i]):
                 continue
             if kind in titles[i]:
                 start = i

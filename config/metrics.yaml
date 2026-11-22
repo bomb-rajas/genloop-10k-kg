@@ -1,22 +1,30 @@
-# Canonical metrics. synonyms: lowercase as-reported line-item labels (matched case-insensitively).
-# xbrl_tags: us-gaap concepts used only by the validation gate (never as an answer source).
+# Canonical metrics. synonyms: as-reported line-item labels (normalised by src/extract.norm: lowercase,
+# punctuation to spaces, footnote markers removed). Match order: synonyms (exact) -> label_regex ->
+# prefix of a multi-word synonym (rest of label must not contain exclude words) -> fallback_labels (exact, prefix).
+# identity: derived value when no direct row exists (method 'identity'): sum(plus) - sum(minus).
+# xbrl_tags: us-gaap concepts used only by the validation gate (src/validate.py), never as an answer source.
 # applies_to: all (non-bank and bank) | nonbank. Bank metrics = the applies_to: all subset (6).
-# derived: computed from canonical metrics; formula is documented, value computed in build_graph.
+# derived: computed from canonical metrics; formula documented, not extracted.
 metrics:
   - name: Revenue
     category: income
     statement: income_statement
     applies_to: all
     unit: USD
-    synonyms: [total net sales, net sales, total revenues, total revenue, net revenues, net revenue, revenues, revenue, total net revenue, sales, net sales and revenue]
-    xbrl_tags: [Revenues, RevenueFromContractWithCustomerExcludingAssessedTax, RevenueFromContractWithCustomerIncludingAssessedTax, SalesRevenueNet]
+    synonyms: [total net sales, total revenues, total revenue, total net revenue, total net revenues, net sales, net revenues, net revenue, net operating revenues, sales to customers, net sales and revenue, revenues, revenue, sales]
+    label_regex: ['^total [a-z ]*revenues?$']
+    exclude: [cost, other income, non]
+    xbrl_tags: [Revenues, RevenuesNetOfInterestExpense, RevenueFromContractWithCustomerExcludingAssessedTax, RevenueFromContractWithCustomerIncludingAssessedTax, SalesRevenueNet]
 
   - name: NetIncome
     category: income
     statement: income_statement
     applies_to: all
     unit: USD
-    synonyms: [net income, net income attributable to common stockholders, net earnings, net income (loss), net income attributable to company, net income attributable to shareholders, net earnings attributable to]
+    synonyms: [net income attributable to common stockholders, net income attributable to company, net income attributable to shareholders, net earnings attributable to, net income attributable to merck co inc]
+    label_regex: ['^net (income|earnings)( loss)? attributable to (?!.*non ?controlling)', '^consolidated net (income|earnings) attributable to (?!.*non ?controlling)', "^[a-z ]+s net income$"]
+    exclude: [per share, per common share, noncontrolling, non controlling, discontinued, continuing]
+    fallback_labels: [net income, net earnings, net income loss, consolidated net income]
     xbrl_tags: [NetIncomeLoss, ProfitLoss]
 
   - name: EPS
@@ -24,7 +32,10 @@ metrics:
     statement: income_statement
     applies_to: all
     unit: USD/share
-    synonyms: [diluted earnings per share, basic earnings per share, earnings per share, diluted net income per share, basic net income per share, net income per share, earnings per common share]
+    synonyms: [diluted earnings per share, diluted net income per share, diluted earnings per common share, earnings per common share assuming dilution]
+    label_regex: ['^diluted earnings$', '\bper (common )?(diluted|dilution)|(diluted|dilution).*\bper (common )?share|\bper (common )?share.*(diluted|dilution)']
+    exclude: [basic]
+    fallback_labels: [diluted, basic]
     xbrl_tags: [EarningsPerShareDiluted, EarningsPerShareBasic]
 
   - name: TotalAssets
@@ -33,6 +44,8 @@ metrics:
     applies_to: all
     unit: USD
     synonyms: [total assets]
+    exclude: [held for sale]
+    identity: {plus: [TotalLiabilitiesAndEquity]}
     xbrl_tags: [Assets]
 
   - name: TotalLiabilities
@@ -41,6 +54,7 @@ metrics:
     applies_to: all
     unit: USD
     synonyms: [total liabilities]
+    identity: {plus: [TotalLiabilitiesAndEquity], minus: [Equity]}
     xbrl_tags: [Liabilities]
 
   - name: Equity
@@ -48,7 +62,9 @@ metrics:
     statement: balance_sheet
     applies_to: all
     unit: USD
-    synonyms: [total stockholders equity, total shareholders equity, total shareholders' equity, total stockholders' equity, total equity, stockholders equity, shareholders equity, total common stockholders equity]
+    synonyms: [total stockholders equity, total shareholders equity, total common stockholders equity, total equity, stockholders equity, shareholders equity]
+    label_regex: ['^total (?!liabilities)[a-z ]*(stockholders|shareholders) (equity|investment|deficit)$']
+    fallback_labels: [total equity]
     xbrl_tags: [StockholdersEquity, StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest]
 
   - name: GrossProfit
@@ -56,7 +72,7 @@ metrics:
     statement: income_statement
     applies_to: nonbank
     unit: USD
-    synonyms: [gross profit, gross income, total gross profit]
+    synonyms: [gross profit, gross income, total gross profit, gross margin]
     xbrl_tags: [GrossProfit]
 
   - name: OperatingIncome
@@ -64,7 +80,7 @@ metrics:
     statement: income_statement
     applies_to: nonbank
     unit: USD
-    synonyms: [operating income, income from operations, operating profit, total operating income, operating income (loss), income (loss) from operations]
+    synonyms: [operating income, operating earnings, earnings from operations, income from operations, operating profit, total operating income, operating income (loss), income (loss) from operations]
     xbrl_tags: [OperatingIncomeLoss]
 
   - name: OperatingCashFlow
@@ -72,7 +88,7 @@ metrics:
     statement: cash_flow_statement
     applies_to: nonbank
     unit: USD
-    synonyms: [net cash provided by operating activities, net cash from operating activities, cash generated by operating activities, net cash provided by (used in) operating activities, cash provided by operating activities, net cash flows from operating activities]
+    synonyms: [net cash from operations, cash provided by operations, cash flows from operating activities, total operating activities, net cash provided by operating activities, net cash from operating activities, cash generated by operating activities, net cash provided by (used in) operating activities, cash provided by operating activities, net cash flows from operating activities]
     xbrl_tags: [NetCashProvidedByUsedInOperatingActivities]
 
   - name: CapEx
@@ -80,7 +96,9 @@ metrics:
     statement: cash_flow_statement
     applies_to: nonbank
     unit: USD
-    synonyms: [payments for property and equipment, payments for property, plant and equipment, purchases of property and equipment, capital expenditures, additions to property and equipment, purchases of property, plant and equipment, payments to acquire property, plant and equipment, property and equipment additions]
+    absolute: true  # reported as a negative outflow; stored positive (D-057)
+    synonyms: [payments for acquisition of property plant and equipment, payments for property and equipment, purchases of property and equipment, capital expenditures, additions to property and equipment, payments to acquire property plant and equipment, property and equipment additions, capital spending]
+    label_regex: ['^(purchases?|payments?|additions?|expenditures|acquisitions) (of |for |to )?(property|capital)', '^capital (expenditures|spending)']
     xbrl_tags: [PaymentsToAcquirePropertyPlantAndEquipment, PaymentsToAcquireProductiveAssets]
 
   - name: R&D
@@ -88,7 +106,7 @@ metrics:
     statement: income_statement
     applies_to: nonbank
     unit: USD
-    synonyms: [research and development, research and development expense, research and development expenses, research and development costs, research, development and engineering]
+    synonyms: [research and development, research and development expense, research and development expenses, research and development costs, research development and engineering]
     xbrl_tags: [ResearchAndDevelopmentExpense, ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost]
 
   - name: Cash
@@ -98,6 +116,13 @@ metrics:
     unit: USD
     synonyms: [cash and cash equivalents, cash and equivalents, cash and due from banks, cash and cash equivalents at end of period, cash and short-term investments]
     xbrl_tags: [CashAndCashEquivalentsAtCarryingValue, CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents]
+
+# Helper rows used only as identity inputs (not admitted as facts).
+helper_metrics:
+  - name: TotalLiabilitiesAndEquity
+    statement: balance_sheet
+    synonyms: [total liabilities and equity, total liabilities and stockholders equity, total liabilities and shareholders equity]
+    label_regex: ['^total liabilities (redeemable )?(non ?controlling interest )?and (stockholders|shareholders) (equity|investment|deficit)']
 
 derived:
   - name: NetMargin

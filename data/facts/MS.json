@@ -1,0 +1,323 @@
+[
+ {
+  "id": "MS|EPS|FY2025",
+  "ticker": "MS",
+  "metric": "EPS",
+  "value": 10.21,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Diluted 10.21 7.95 5.18",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 10.21,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|EPS|FY2024",
+  "ticker": "MS",
+  "metric": "EPS",
+  "value": 7.95,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Diluted 10.21 7.95 5.18",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 7.95,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|EPS|FY2023",
+  "ticker": "MS",
+  "metric": "EPS",
+  "value": 5.18,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Diluted 10.21 7.95 5.18",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 5.18,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|Equity|FY2025",
+  "ticker": "MS",
+  "metric": "Equity",
+  "value": 112652000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total equity",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 188,
+  "snippet": "Total equity 112,652 105,428",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 112652000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "MS|Equity|FY2024",
+  "ticker": "MS",
+  "metric": "Equity",
+  "value": 105428000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total equity",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 188,
+  "snippet": "Total equity 112,652 105,428",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 105428000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "MS|NetIncome|FY2025",
+  "ticker": "MS",
+  "metric": "NetIncome",
+  "value": 17025000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Net income 17,025 13,529 9,230",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 17025000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|NetIncome|FY2024",
+  "ticker": "MS",
+  "metric": "NetIncome",
+  "value": 13529000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Net income 17,025 13,529 9,230",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 13529000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|NetIncome|FY2023",
+  "ticker": "MS",
+  "metric": "NetIncome",
+  "value": 9230000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Net income 17,025 13,529 9,230",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 9230000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|Revenue|FY2025",
+  "ticker": "MS",
+  "metric": "Revenue",
+  "value": 70645000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net revenues",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Net revenues 70,645 61,761 54,143",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 70645000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|Revenue|FY2024",
+  "ticker": "MS",
+  "metric": "Revenue",
+  "value": 61761000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net revenues",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Net revenues 70,645 61,761 54,143",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 61761000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|Revenue|FY2023",
+  "ticker": "MS",
+  "metric": "Revenue",
+  "value": 54143000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net revenues",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 187,
+  "snippet": "Net revenues 70,645 61,761 54,143",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 54143000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MS|TotalAssets|FY2025",
+  "ticker": "MS",
+  "metric": "TotalAssets",
+  "value": 1420270000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 188,
+  "snippet": "Total assets 1,420,270 1,215,071",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1420270000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "MS|TotalAssets|FY2024",
+  "ticker": "MS",
+  "metric": "TotalAssets",
+  "value": 1215071000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 188,
+  "snippet": "Total assets 1,420,270 1,215,071",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1215071000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "MS|TotalLiabilities|FY2025",
+  "ticker": "MS",
+  "metric": "TotalLiabilities",
+  "value": 1307618000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 188,
+  "snippet": "Total liabilities 1,307,618 1,109,643",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1307618000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "MS|TotalLiabilities|FY2024",
+  "ticker": "MS",
+  "metric": "TotalLiabilities",
+  "value": 1109643000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/MS.pdf",
+  "page": 188,
+  "snippet": "Total liabilities 1,307,618 1,109,643",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1109643000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ }
+]

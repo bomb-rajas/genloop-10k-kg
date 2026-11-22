@@ -1,0 +1,323 @@
+[
+ {
+  "id": "GS|EPS|FY2025",
+  "ticker": "GS",
+  "metric": "EPS",
+  "value": 51.32,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Diluted 51.32 40.54 22.87",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 51.32,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|EPS|FY2024",
+  "ticker": "GS",
+  "metric": "EPS",
+  "value": 40.54,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Diluted 51.32 40.54 22.87",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 40.54,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|EPS|FY2023",
+  "ticker": "GS",
+  "metric": "EPS",
+  "value": 22.87,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Diluted 51.32 40.54 22.87",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 22.87,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|Equity|FY2025",
+  "ticker": "GS",
+  "metric": "Equity",
+  "value": 124972000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total shareholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 265,
+  "snippet": "Total shareholders\u2019 equity 124,972 121,996",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 124972000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "GS|Equity|FY2024",
+  "ticker": "GS",
+  "metric": "Equity",
+  "value": 121996000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total shareholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 265,
+  "snippet": "Total shareholders\u2019 equity 124,972 121,996",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 121996000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "GS|NetIncome|FY2025",
+  "ticker": "GS",
+  "metric": "NetIncome",
+  "value": 17176000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net earnings",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Net earnings 17,176 14,276 8,516",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 17176000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|NetIncome|FY2024",
+  "ticker": "GS",
+  "metric": "NetIncome",
+  "value": 14276000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net earnings",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Net earnings 17,176 14,276 8,516",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 14276000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|NetIncome|FY2023",
+  "ticker": "GS",
+  "metric": "NetIncome",
+  "value": 8516000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net earnings",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Net earnings 17,176 14,276 8,516",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 8516000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|Revenue|FY2025",
+  "ticker": "GS",
+  "metric": "Revenue",
+  "value": 58283000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total net revenues",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Total net revenues 58,283 53,512 46,254",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 58283000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|Revenue|FY2024",
+  "ticker": "GS",
+  "metric": "Revenue",
+  "value": 53512000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total net revenues",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Total net revenues 58,283 53,512 46,254",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 53512000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|Revenue|FY2023",
+  "ticker": "GS",
+  "metric": "Revenue",
+  "value": 46254000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total net revenues",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 263,
+  "snippet": "Total net revenues 58,283 53,512 46,254",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 46254000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|TotalAssets|FY2025",
+  "ticker": "GS",
+  "metric": "TotalAssets",
+  "value": 1809320000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 265,
+  "snippet": "Total assets 1,809,320 1,675,972",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1809320000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "GS|TotalAssets|FY2024",
+  "ticker": "GS",
+  "metric": "TotalAssets",
+  "value": 1675972000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 265,
+  "snippet": "Total assets 1,809,320 1,675,972",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1675972000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "GS|TotalLiabilities|FY2025",
+  "ticker": "GS",
+  "metric": "TotalLiabilities",
+  "value": 1684348000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 265,
+  "snippet": "Total liabilities 1,684,348 1,553,976",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1684348000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "GS|TotalLiabilities|FY2024",
+  "ticker": "GS",
+  "metric": "TotalLiabilities",
+  "value": 1553976000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 265,
+  "snippet": "Total liabilities 1,684,348 1,553,976",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 1553976000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ }
+]

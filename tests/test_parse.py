@@ -1,4 +1,4 @@
-from src.parse import find_statements, key_kinds, title_kinds, TITLE_SKIP
+from src.parse import find_statements, is_continuation, is_statement_layout, key_kinds, title_kinds, TITLE_SKIP
 from src.tables import find_scale, parse_line
 
 INCOME_ROWS = "\n".join(f"Line item {i} 1,000 900 800" for i in range(10)) + "\nNet income 2,000 1,800 1,600"
@@ -140,3 +140,33 @@ class _FakePdf:
 
     def __exit__(self, *exc):
         return False
+
+
+def test_mdna_sentence_and_overview_headings_are_not_titles():
+    # NVDA p57, C p16, MS p82: title words inside MD&A sentences or overview headings
+    assert title_kinds("Consolidated Statements of Income expressed as a percentage of revenue") == []
+    assert title_kinds("BALANCE SHEET OVERVIEW") == []
+    assert title_kinds("Income Statement Information") == []
+
+
+def test_company_prefixed_lowercase_title_is_kept():
+    # JNJ prints 'Johnson & Johnson and subsidiaries consolidated balance sheets'
+    assert title_kinds("Johnson & Johnson and subsidiaries consolidated balance sheets") == ["balance_sheet"]
+
+
+def test_percent_of_revenue_and_segment_pages_are_rejected():
+    pct = "Revenue 100.0 % 100.0 %\nCost of revenue 28.9 % 25.1 %\nGross margin 71.1 % 74.9 %\nR&D 8.6 % 9.9 %"
+    assert not is_statement_layout(pct)
+    seg = "Segment table 2025 2024\n" + "\n".join(f"Segment {i} 1,000 900 800 700 600" for i in range(3))
+    assert not is_statement_layout(seg)
+    assert is_statement_layout(INCOME_ROWS)
+
+
+def test_percent_change_header_is_rejected():
+    assert not is_statement_layout("Consolidated Balance Sheet\n2025 2024 % change\n" + BS_ROWS)
+
+
+def test_continued_bank_page_is_a_continuation():
+    text = "Consolidated Balance Sheet (Continued)\nLiabilities\n" + BS_ROWS
+    assert is_continuation(text)
+    assert not is_continuation("Notes to consolidated financial statements\n" + BS_ROWS)

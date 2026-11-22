@@ -1,0 +1,323 @@
+[
+ {
+  "id": "BAC|EPS|FY2025",
+  "ticker": "BAC",
+  "metric": "EPS",
+  "value": 3.81,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Diluted earnings 3.81 3.19 3.05",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 3.81,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|EPS|FY2024",
+  "ticker": "BAC",
+  "metric": "EPS",
+  "value": 3.19,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Diluted earnings 3.81 3.19 3.05",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 3.19,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|EPS|FY2023",
+  "ticker": "BAC",
+  "metric": "EPS",
+  "value": 3.05,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Diluted earnings 3.81 3.19 3.05",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 3.05,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|Equity|FY2025",
+  "ticker": "BAC",
+  "metric": "Equity",
+  "value": 303243000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total shareholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 168,
+  "snippet": "Total shareholders\u2019 equity 303,243 293,963",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 303243000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "BAC|Equity|FY2024",
+  "ticker": "BAC",
+  "metric": "Equity",
+  "value": 293963000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total shareholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 168,
+  "snippet": "Total shareholders\u2019 equity 303,243 293,963",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 293963000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "BAC|NetIncome|FY2025",
+  "ticker": "BAC",
+  "metric": "NetIncome",
+  "value": 30509000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Net income 30,509 26,973 26,305",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 30509000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|NetIncome|FY2024",
+  "ticker": "BAC",
+  "metric": "NetIncome",
+  "value": 26973000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Net income 30,509 26,973 26,305",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 26973000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|NetIncome|FY2023",
+  "ticker": "BAC",
+  "metric": "NetIncome",
+  "value": 26305000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Net income 30,509 26,973 26,305",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 26305000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|Revenue|FY2025",
+  "ticker": "BAC",
+  "metric": "Revenue",
+  "value": 113097000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total revenue, net of interest expense",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Total revenue, net of interest expense 113,097 105,856 102,769",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 113097000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|Revenue|FY2024",
+  "ticker": "BAC",
+  "metric": "Revenue",
+  "value": 105856000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total revenue, net of interest expense",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Total revenue, net of interest expense 113,097 105,856 102,769",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 105856000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|Revenue|FY2023",
+  "ticker": "BAC",
+  "metric": "Revenue",
+  "value": 102769000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total revenue, net of interest expense",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 165,
+  "snippet": "Total revenue, net of interest expense 113,097 105,856 102,769",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 102769000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "BAC|TotalAssets|FY2025",
+  "ticker": "BAC",
+  "metric": "TotalAssets",
+  "value": 3411738000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 168,
+  "snippet": "Total assets 3,411,738 3,261,299",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 3411738000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "BAC|TotalAssets|FY2024",
+  "ticker": "BAC",
+  "metric": "TotalAssets",
+  "value": 3261299000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 168,
+  "snippet": "Total assets 3,411,738 3,261,299",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 3261299000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "BAC|TotalLiabilities|FY2025",
+  "ticker": "BAC",
+  "metric": "TotalLiabilities",
+  "value": 3108495000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 168,
+  "snippet": "Total liabilities 3,108,495 2,967,336",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 3108495000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "BAC|TotalLiabilities|FY2024",
+  "ticker": "BAC",
+  "metric": "TotalLiabilities",
+  "value": 2967336000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/BAC.pdf",
+  "page": 168,
+  "snippet": "Total liabilities 3,108,495 2,967,336",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 2967336000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ }
+]

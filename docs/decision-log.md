@@ -59,6 +59,16 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-051 | M3 | Scale and year source across statement pages; glued dollar | Scale and years searched over the header of all statement pages, then the full pages; SCALE_RE accepts "(Millions, except" and "(MILLIONS"; "$" split from "(19,669)$" | Title page often has no unit line (V, AXP, TGT, PFE) |
 | D-053 | M3 | Note-column rule, atomic write, cache guard | Drop a leading note column only when most value rows in the statement have width+1 values with a small integer first value (not per row); JSON written to .json.tmp then replaced; unreadable cached JSON treated as missing (PDF parsed instead) | Per-row drop could strip a real column from one odd row; partial writes could corrupt reuse |
 | D-052 | M3 | Re-run mode | --reuse-pages rebuilds statements from page text already in data/parsed (no PDF reopen); --force still re-parses | 40 companies rebuilt in 3 s; PDF text unchanged |
+| D-054 | M4 | Multi-year extraction | Each statement contributes its year columns: IS and CF up to 3 years, BS up to 2 | Prior-year facts are still filings' own values; 3 IS years cover the comparative columns |
+| D-055 | M4 | Label matching tiers | Normalise (lowercase, drop parentheticals, punctuation to space); exact synonym, then label_regex, then prefix of a multi-word synonym whose remainder has no exclude word, then fallback_labels exact and prefix | Exact first avoids prefix false hits; generic exclude words (margin, growth, change, percent, ratio, before, and) and per-metric exclude stop 'net income' matching 'net income per share' |
+| D-056 | M4 | Identity fallback | TotalLiabilities = TotalLiabilitiesAndEquity - Equity, TotalAssets = TotalLiabilitiesAndEquity (helper_metrics); method 'identity' | Merck and ABT balance sheets have no 'Total liabilities' label, but the parsed rows still show equity and the combined total |
+| D-057 | M4 | CapEx sign | CapEx absolute: true, stored as abs(raw) x scale | Cash-flow outflows are printed negative in the PDF; XBRL PaymentsToAcquire... is positive; rejects in the first run came from this |
+| D-058 | M4 | Fiscal-year labelling per statement | shift = report year - max header year <= report year; fiscal_year = header + shift (period-end year, D-043); window newest - N < year <= newest | HD and TGT print the company's fiscal label (HD '2025' ends 2026-02-01); a company-wide shift broke balance sheets, so it is per statement |
+| D-059 | M4 | Layout normalisation | infer_header takes the year row (>=2 years 1990-2100) as columns; columns after the newest year dropped when rows match the kept width; interleaved % columns collapsed to values[0::2] unless the label has per/share | Parser misreads: PG header row, MRK 2026 column, CRM and HD % columns; per-share rows must not be collapsed (HD EPS row) |
+| D-060 | M4 | XBRL gate semantics | Candidates: own-accession 10-K FY entries, else all 10-K FY; flow needs a 350-380 day span; balance is instant; end date within 7 days of the fiscal-year anchor; match if any candidate within TOLERANCE=0.005 relative (EPS 0.005 absolute); mismatch rejected to {T}.rejected.json; no candidate admitted as no_xbrl; identity check and sanity logged only | The gate validates; XBRL never supplies a value. Reject-not-admit keeps wrong numbers out of the graph; no_xbrl keeps coverage |
+| D-061 | M4 | Revenue exclude 'non' | Revenue exclude list adds 'non' | 'Total non-interest revenues' is a sub-total and was taken as total revenue; rejects 9 to 6 (AXP still wrong; fixed by D-063) |
+| D-062 | M3 | Statement page selection (audited statements) | A title counts only as a heading (short company-name prefix, no MD&A word such as overview, analysis, summary, expressed, information); a page is a statement only if is_statement_layout: fewer than 3 percent-value lines, no %/percent/change/increase/decrease in the header, fewer than 3 rows with 5+ values; '(Continued)' bank pages are continuations even when the title repeats; EPS label '^diluted earnings$' and NetIncome 'Citigroup s net income' style label added to metrics.yaml | NVDA MD&A percent table, C segment and overview pages, JPM/BAC/COF/MS/AXP MD&A pages won selection; the rules are generic (no ticker special case), and the label additions cover BAC 'Diluted earnings' and C 'Citigroup's net income' rows |
+| D-063 | M4 | XBRL tag and label fixes | Revenue xbrl_tags adds RevenuesNetOfInterestExpense (AXP); Equity and TotalLiabilitiesAndEquity regex accept 'deficit' and 'investment' (SBUX, TGT) | AXP PDF 72229 equals the RevenuesNetOfInterestExpense FY2025 value in data/xbrl/AXP.json, so the PDF was right and the gate lacked the tag; 0 rejects, 1004 admitted, match 976/976 |
 
 ## Full entries
 
@@ -689,3 +699,121 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Outcome: Applied. Values for the 40 are unchanged in the spot-check labels (Total assets, net income, revenue) because the note rule still drops the leading column when most rows have it.
 - Status: active
 
+### D-054
+- Time: 2026-11-23 04:13 IST
+- Stage: M4
+- Trigger: M4a asked for all year columns of each statement, not only the newest filed year.
+- Decision: STATEMENT_YEARS = IS 3, CF 3, BS 2. Each statement's columns within the window newest - N < year + shift <= newest yield one fact per metric per year.
+- Chosen: extract_company loops years_of(statement) and creates one fact per year column.
+- Why: Prior-year values from the same filing are the reported values for those years and fill coverage.
+- Rejected: Only the newest column (loses prior-year facts); older 10-K filings (out of scope, D-001).
+- Evidence: Output sample AAPL Revenue FY2026, FY2025, FY2024 in data/facts/AAPL.json; tests/test_extract.py::test_scale_and_column_years_and_absolute_capex (FY2025 and FY2023 checked).
+- Outcome: 991 candidate facts across 40 companies before the gate (run at 04:12 IST).
+- Status: active
+
+### D-055
+- Time: 2026-11-23 04:13 IST
+- Stage: M4
+- Trigger: Label matching needed to handle footnotes, prefix collisions and known M3 label gaps (WMT 'Consolidated net income', COF/KO/NKE revenue, JNJ 'Sales to customers').
+- Decision: norm() lowercases, drops parentheticals and punctuation. match_row tries exact synonym, then label_regex, then prefix of a multi-word synonym (remainder must not contain GENERIC_EXCLUDE or metric exclude words), then fallback_labels exact and prefix. Regex hits respect the metric exclude list only (not the generic list).
+- Chosen: Only full-width rows (values count == column count) are candidates; first hit in statement order.
+- Why: Exact first avoids prefix collisions; generic exclude words stop 'net income margin' and 'net income per share' matches; regex carries spelling variants such as 'purchases of property, plant and equipment'.
+- Rejected: Per-ticker label maps (general synonyms only); fuzzy matching (not reproducible).
+- Evidence: tests/test_extract.py: test_norm_strips_footnotes_and_punctuation, test_exact_synonym_beats_prefix, test_prefix_rejected_by_exclusion_word, test_prefix_match_with_plain_remainder, test_fallback_label_used_when_no_synonym, test_regex_tier_for_revenue_and_eps_exclusions.
+- Outcome: Revenue, NetIncome, EPS coverage in the Missing list (below). Bug found and fixed in this step: the regex tier had ignored exclusions (Total cost of revenues matched) and then the generic list wrongly blocked 'plant and equipment'.
+- Status: active
+
+### D-056
+- Time: 2026-11-23 04:13 IST
+- Stage: M4
+- Trigger: M3 notes: MRK has no 'Total assets' label; ABT total assets and liabilities are unlabelled.
+- Decision: metrics.yaml gets helper_metrics (TotalLiabilitiesAndEquity) and identity {plus, minus} for TotalAssets and TotalLiabilities. Identity runs only when no direct row exists; value = sum(plus) - sum(minus) per year column; method 'identity'; snippet lists the inputs.
+- Chosen: Identity facts carry the first plus row's page and label.
+- Why: The identity is exact accounting, so a derived value is still PDF-only (no XBRL value used).
+- Rejected: Taking the XBRL Assets value as a fallback (forbidden: XBRL is validator only).
+- Evidence: tests/test_extract.py::test_identity_fallback_total_liabilities. Identity check (TA vs TL + Eq) runs on 54 balance pairs at 04:16 IST: 2 fail (UNH, logged only; likely redeemable NCI, not an extraction error).
+- Outcome (04:16 IST): 22 identity facts, all TotalLiabilities, ALL 22 xbrl_status no_xbrl (admitted unvalidated, since the filer has no XBRL Liabilities tag). The 976/976 match count does not include them. TGT is one of them (TLAE regex fix, D-063). TotalAssets has no identity facts. MRK and ABT stay unresolved: MRK TotalAssets/TotalLiabilities and ABT TotalAssets/TotalLiabilities are still missing (the parser does not return their balance-sheet totals, so the identity inputs are absent; not fixed here, parser-owned). TotalLiabilities XBRL: 54/54 matched, 22 no_xbrl.
+- Status: active
+### D-057
+- Time: 2026-11-23 04:13 IST
+- Stage: M4
+- Trigger: First 5-company run: 6 rejected facts, all CapEx (MSFT 'Additions to property and equipment' (115,948)).
+- Decision: metrics.yaml CapEx has absolute: true; extract applies abs() to the value.
+- Chosen: Sign normalised only for CapEx; all other metrics keep the reported sign.
+- Why: Root cause was sign convention: cash-flow outflows are printed negative in the PDF; XBRL PaymentsToAcquire... is positive. Fixing the rule, not the tolerance.
+- Rejected: Loosening the tolerance or allowing negative matches (would hide real sign errors).
+- Evidence: Spot-check MSFT|CapEx|FY2026 = 115948000000 (PDF page 76 '(115,948)'), xbrl match.
+- Outcome: CapEx 93/93 matched after the fix.
+- Status: active
+
+### D-058
+- Time: 2026-11-23 04:13 IST
+- Stage: M4
+- Trigger: HD and TGT rejected: IS header '2025' is the company fiscal label (HD period ends 2026-02-01); a company-wide shift broke balance sheets.
+- Decision: shift_of(stmt) = report year - max(column year <= report year) per statement. fiscal_year = header year + shift (period-end year, D-043). The gate anchor uses the report month and day inside the fiscal year, with no extra shift.
+- Chosen: The shift is computed per statement from the header and the filing's report_date.
+- Why: Retail fiscal calendars (ending late Jan or early Feb) shift the printed year, while balance sheet headers match the period-end year.
+- Rejected: Company-wide shift (broke BS); fiscal calendar lookup from XBRL (XBRL is validator only, though it would need a value source).
+- Evidence: HD|Revenue|FY2026 = 164683000000, PDF page 51 header '2025' with 'Net sales $ 164,683', period_end 2026-02-01, xbrl match.
+- Outcome: HD and TGT match after the fix.
+- Status: active
+
+### D-059
+- Time: 2026-11-23 04:13 IST
+- Stage: M4
+- Trigger: Layout failures from parse output: PG columns [] (header row kept as data), MRK column 2026 spurious (rows have 3 values), CRM and HD '% of revenue' interleaved columns, HD EPS row with 6 values wrongly collapsed.
+- Decision: infer_header uses the first row with a trailing run of >=2 integers in 1990-2100 as columns and removes it from rows. normalise_layout drops columns after the newest year when rows match the kept width. It collapses values[0::2] for interleaved percentage columns when all odd values are <=100 in absolute terms and the label has no 'per' or 'share'.
+- Chosen: Applied before row matching; facts keep the labelled values.
+- Why: Per-share rows (EPS) are the only rows where the percentage test can be wrong; excluding them avoided the HD EPS rejection.
+- Rejected: Re-parsing all pages (the parser is owned by another agent; see D-061 and the gaps list).
+- Evidence: tests/test_extract.py::test_layout_drops_future_column_and_keeps_value_of_pct_pairs, test_infer_header_from_year_row.
+- Outcome: PG and MRK columns fixed; HD EPS not collapsed.
+- Status: active
+
+### D-060
+- Time: 2026-11-23 04:13 IST
+- Stage: M4
+- Trigger: Gate design and numbers (M4a deliverable 2).
+- Decision: validate.gate per fact: candidates from data/xbrl/{T}.json us-gaap tags (metrics.yaml xbrl_tags, units USD or USD/shares), own-accession 10-K FY entries if any, else all 10-K FY entries. Flow metrics need a 350-380 day span; balance metrics are instant; end date within DATE_WINDOW_DAYS=7 of the fiscal year anchor. Match if any candidate is within TOLERANCE=0.005 (relative; EPS within 0.005 absolute). Mismatch: fact rejected, written to data/facts/{T}.rejected.json with reason 'xbrl_mismatch: pdf X vs xbrl Y'. No candidate: admitted with xbrl_status no_xbrl and validated False. Identity check (TA vs TL + Eq, IDENTITY_TOLERANCE=0.005) and a sign and magnitude check (MAX_ABS_USD=1e13, MAX_ABS_EPS=1000) are logged only.
+- Chosen: Reject, not admit, when the XBRL value is present and disagrees; admit with no_xbrl when absent.
+- Why: A wrong admitted value is worse than a missing one (the system abstains on missing facts). no_xbrl keeps coverage where XBRL has no tag.
+- Rejected: Loosened tolerance (forbidden by M4a); using XBRL as value source (forbidden); flagging instead of rejecting (would let bad facts into the graph).
+- Evidence: tests/test_validate.py (tolerance edges, mismatch rejected, no_xbrl admitted, period matching ignores 10-Q and other years, identity logs only); 118 pytest pass repo-wide at 04:18 IST.
+- Outcome (run 04:16 IST, after D-063 and the parser fix D-062): XBRL match 976/976 = 100% of compared; rejected 0; no_xbrl 28; candidates 1004 (admitted 1004, identity 22, period_end None 15: all no_xbrl facts, no XBRL end date to fill from, left None). Per metric (matched/compared): Revenue 117/117, NetIncome 120/120, EPS 111/111, TotalAssets 76/76, TotalLiabilities 54/54 (22 no_xbrl), Equity 78/78, GrossProfit 33/33, OperatingIncome 81/81, OperatingCashFlow 99/99, CapEx 93/93 (3 no_xbrl), R&D 48/48 (3 no_xbrl), Cash 66/66. Identity check: 54 checked, 2 failed (UNH, logged only). Sanity failures: 0.
+- Earlier run (04:12, before D-062 and D-063): 953/959 matched, 6 rejected (AXP Revenue 3, C NetIncome 3). Superseded.
+- Status: active
+### D-061
+- Time: 2026-11-23 04:13 IST (corrected 04:16 IST)
+- Stage: M4
+- Trigger: Gate rejections after the D-055 and D-057 fixes.
+- Decision: Revenue exclude list adds 'non' (stops 'Total non-interest revenues' being taken as total revenue). Rejects went from 9 to 6 (only the C Revenue facts were fixed; the AXP rejections remained). The remaining 6 were investigated: AXP Revenue (3) fixed in D-063; C NetIncome (3) is not a scale error: the parsed value 7,110 (million) on p159 does not match XBRL 14,306 (no power of 1000 links them), so it is a wrong page or row in the parse. The parser is owned by another agent; this is recorded, not fixed here.
+- Chosen: Exclude 'non' as a general rule, not a per-ticker override.
+- Why: 'non' is a general marker of sub-totals (non-interest, non-GAAP); the gate is the check that caught it.
+- Rejected: Adding 'net of interest' as a synonym for AXP (superseded by the tag fix D-063, not a label change).
+- Evidence: Run output at 04:12 IST: 9 rejects before the 'non' exclusion, 6 after.
+- Outcome: 0 rejected at 04:16 IST after D-062 parser fix and D-063.
+- Status: active
+### D-062
+- Time: 2026-11-23
+- Stage: M3
+- Trigger: M4 XBRL gate: NVDA income_statement picked MD&A percent table p57; bank statements picked MD&A/segment/overview pages (C p16 and p39, JPM p79/p93, BAC, COF, MS, AXP missing Revenue/NetIncome/EPS/TotalAssets/Equity).
+- Decision: (1) title_kinds requires _is_heading: text outside the title match is at most 8 words and has no banned word (overview, analysis, summary, discussion, selected, table, highlights, results, notes, expressed, information). (2) is_statement_layout rejects pages with 3+ lines of 'N %' values, a header with %/percent/change/increase/decrease, or 3+ rows with 5+ values. find_statements skips candidate pages that fail the layout check. (3) is_continuation accepts a page whose first 3 lines carry '(Continued)' even when the title repeats, and still requires the layout check. (4) metrics.yaml: EPS label_regex '^diluted earnings$' (BAC prints 'Diluted earnings'); NetIncome label_regex '^[a-z ]+s net income$' (after norm drops the apostrophe, C prints "Citigroup's net income" = 14,306).
+- Chosen: rules in src/parse.py (title, layout, continuation); two label regexes in config/metrics.yaml; tests in tests/test_parse.py (test_mdna_sentence_and_overview_headings_are_not_titles, test_company_prefixed_lowercase_title_is_kept, test_percent_of_revenue_and_segment_pages_are_rejected, test_percent_change_header_is_rejected, test_continued_bank_page_is_a_continuation).
+- Why: The audited statements carry the title as a heading, have a few year columns and no percent rows; MD&A pages repeat the title inside sentences or tables. A short company-name prefix (JNJ 'Johnson & Johnson and subsidiaries consolidated balance sheets') must still pass, so the rule is word-based, not capitalisation-based (a capitalisation rule dropped JNJ statements in a test run).
+- Rejected: Ticker-specific page overrides (not needed for the banks; the generic rules picked the right pages for all 8 banks). Merging all pages with a title (would pull in MD&A pages). Changing the XBRL gate for AXP revenue (gate working as designed; see Outcome).
+- Evidence: After the rules, data/parsed reuse run: 0 of 40 lacking statement or scale. NVDA IS p71 Revenue 215,938 (income statement) and BS p73 Total assets 206,803. JPM IS p243 Total net revenue 182,447 and NI 57,048; BS p245 Total assets 4,424,900. C IS p159-160, BS p161-162, CF p165-166, Citigroup's net income 14,306 admitted by the gate. BAC EPS admitted (3.81). Pytest 117 passed.
+- Outcome: Extract run: XBRL match 965/968 (99.7%), rejected 3 (all AXP Revenue: 'Total revenues net of interest expense' 72,229 vs XBRL 41,304, a gate/tag mismatch not a parse error). Still missing for core metrics: COF Revenue (no total-revenue row; COF prints net interest income plus non-interest income), C EPS (EPS values not on the label line in the PDF text), V EPS, PFE EPS, SBUX Equity, TGT TotalLiabilities, MRK TotalAssets and TotalLiabilities (MRK balance sheet column layout unresolved; MRK IS header parsed as 2025,2024,2026,2023). Identity fallback (D-056) covers ABT now. Status: active
+
+### D-063
+- Time: 2026-11-23 04:16 IST
+- Stage: M4
+- Trigger: Final-stage gate rejects (AXP Revenue x3) and missing SBUX Equity and TGT TotalLiabilities.
+- Decision: (1) Revenue xbrl_tags adds RevenuesNetOfInterestExpense, the XBRL concept for revenue net of interest expense, which AXP reports (FY2025 72229000000 is in data/xbrl/AXP.json under that tag). (2) Equity label_regex and TotalLiabilitiesAndEquity label_regex accept 'deficit' and 'investment' in place of 'equity' (SBUX: 'Total shareholders' deficit'; TGT: 'Total shareholders' investment' and 'Total liabilities and shareholders' investment').
+- Chosen: Add the XBRL tag as a general candidate (gate tolerance unchanged, TOLERANCE=0.005); regex extended by a general word.
+- Why: The root cause was a missing XBRL tag, not a wrong PDF value (verified: the tag holds 72229000000 for end 2025-12-31). Regex widening is general (any company using deficit/investment wording).
+- Rejected: Loosening the tolerance; per-ticker overrides; using the XBRL value as the fact value.
+- Evidence: Rerun 04:16 IST: rejected 0 (was 3 at the parser-fix run); SBUX Equity FY2026 -7669100000 and FY2025 -8096600000, both match in XBRL. TGT TotalLiabilities via identity is admitted with xbrl_status no_xbrl (unvalidated: the XBRL Liabilities tag is absent for TGT); it is not a match. tests: 118 pass.
+- Gate fix (same date): gate_fact took xbrl_value and period_end from the first candidate even when a later one matched; now from the matched candidate. Before: 19 matched facts had xbrl_value != value; after: 0. Match counts unchanged.
+- period_end None (15): all prior-year, no_xbrl facts; the filing's report_date covers only the newest year, so they stay None.
+- Outcome: 976/976 matched; 0 rejected; COF Revenue, C EPS, PFE EPS, V EPS, MRK and ABT totals remain missing (see D-062 and D-056 outcome lines).
+- Status: active

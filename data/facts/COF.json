@@ -1,0 +1,260 @@
+[
+ {
+  "id": "COF|EPS|FY2025",
+  "ticker": "COF",
+  "metric": "EPS",
+  "value": 4.03,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Net income per diluted common share",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 146,
+  "snippet": "Net income per diluted common share 4.03 11.59 11.95",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 4.03,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|EPS|FY2024",
+  "ticker": "COF",
+  "metric": "EPS",
+  "value": 11.59,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Net income per diluted common share",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 146,
+  "snippet": "Net income per diluted common share 4.03 11.59 11.95",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 11.59,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|EPS|FY2023",
+  "ticker": "COF",
+  "metric": "EPS",
+  "value": 11.95,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Net income per diluted common share",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 146,
+  "snippet": "Net income per diluted common share 4.03 11.59 11.95",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 11.95,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|Equity|FY2025",
+  "ticker": "COF",
+  "metric": "Equity",
+  "value": 113616000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total stockholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 148,
+  "snippet": "Total stockholders\u2019 equity 113,616 60,784",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 113616000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "COF|Equity|FY2024",
+  "ticker": "COF",
+  "metric": "Equity",
+  "value": 60784000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total stockholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 148,
+  "snippet": "Total stockholders\u2019 equity 113,616 60,784",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 60784000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "COF|NetIncome|FY2025",
+  "ticker": "COF",
+  "metric": "NetIncome",
+  "value": 2453000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 146,
+  "snippet": "Net income 2,453 4,750 4,887",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 2453000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|NetIncome|FY2024",
+  "ticker": "COF",
+  "metric": "NetIncome",
+  "value": 4750000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 146,
+  "snippet": "Net income 2,453 4,750 4,887",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 4750000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|NetIncome|FY2023",
+  "ticker": "COF",
+  "metric": "NetIncome",
+  "value": 4887000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 146,
+  "snippet": "Net income 2,453 4,750 4,887",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 4887000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|TotalAssets|FY2025",
+  "ticker": "COF",
+  "metric": "TotalAssets",
+  "value": 669009000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 148,
+  "snippet": "Total assets 669,009 490,144",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 669009000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "COF|TotalAssets|FY2024",
+  "ticker": "COF",
+  "metric": "TotalAssets",
+  "value": 490144000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 148,
+  "snippet": "Total assets 669,009 490,144",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 490144000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "COF|TotalLiabilities|FY2025",
+  "ticker": "COF",
+  "metric": "TotalLiabilities",
+  "value": 555393000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 148,
+  "snippet": "Total liabilities 555,393 429,360",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 555393000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "COF|TotalLiabilities|FY2024",
+  "ticker": "COF",
+  "metric": "TotalLiabilities",
+  "value": 429360000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 148,
+  "snippet": "Total liabilities 555,393 429,360",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 429360000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ }
+]

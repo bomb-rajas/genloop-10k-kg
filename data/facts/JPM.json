@@ -1,0 +1,323 @@
+[
+ {
+  "id": "JPM|EPS|FY2025",
+  "ticker": "JPM",
+  "metric": "EPS",
+  "value": 20.02,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings per share",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Diluted earnings per share 20.02 19.75 16.23",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 20.02,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|EPS|FY2024",
+  "ticker": "JPM",
+  "metric": "EPS",
+  "value": 19.75,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings per share",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Diluted earnings per share 20.02 19.75 16.23",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 19.75,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|EPS|FY2023",
+  "ticker": "JPM",
+  "metric": "EPS",
+  "value": 16.23,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings per share",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Diluted earnings per share 20.02 19.75 16.23",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 16.23,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|Equity|FY2025",
+  "ticker": "JPM",
+  "metric": "Equity",
+  "value": 362438000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total stockholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 245,
+  "snippet": "Total stockholders\u2019 equity 362,438 344,758",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 362438000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "JPM|Equity|FY2024",
+  "ticker": "JPM",
+  "metric": "Equity",
+  "value": 344758000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total stockholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 245,
+  "snippet": "Total stockholders\u2019 equity 362,438 344,758",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 344758000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "JPM|NetIncome|FY2025",
+  "ticker": "JPM",
+  "metric": "NetIncome",
+  "value": 57048000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Net income 57,048 58,471 49,552",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 57048000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|NetIncome|FY2024",
+  "ticker": "JPM",
+  "metric": "NetIncome",
+  "value": 58471000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Net income 57,048 58,471 49,552",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 58471000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|NetIncome|FY2023",
+  "ticker": "JPM",
+  "metric": "NetIncome",
+  "value": 49552000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Net income 57,048 58,471 49,552",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 49552000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|Revenue|FY2025",
+  "ticker": "JPM",
+  "metric": "Revenue",
+  "value": 182447000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total net revenue",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Total net revenue 182,447 177,556 158,104",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 182447000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|Revenue|FY2024",
+  "ticker": "JPM",
+  "metric": "Revenue",
+  "value": 177556000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total net revenue",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Total net revenue 182,447 177,556 158,104",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 177556000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|Revenue|FY2023",
+  "ticker": "JPM",
+  "metric": "Revenue",
+  "value": 158104000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total net revenue",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 243,
+  "snippet": "Total net revenue 182,447 177,556 158,104",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 158104000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|TotalAssets|FY2025",
+  "ticker": "JPM",
+  "metric": "TotalAssets",
+  "value": 4424900000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets(a)",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 245,
+  "snippet": "Total assets(a) 4,424,900 4,002,814",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 4424900000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "JPM|TotalAssets|FY2024",
+  "ticker": "JPM",
+  "metric": "TotalAssets",
+  "value": 4002814000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets(a)",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 245,
+  "snippet": "Total assets(a) 4,424,900 4,002,814",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 4002814000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "JPM|TotalLiabilities|FY2025",
+  "ticker": "JPM",
+  "metric": "TotalLiabilities",
+  "value": 4062462000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities(a)",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 245,
+  "snippet": "Total liabilities(a) 4,062,462 3,658,056",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 4062462000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "JPM|TotalLiabilities|FY2024",
+  "ticker": "JPM",
+  "metric": "TotalLiabilities",
+  "value": 3658056000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities(a)",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 245,
+  "snippet": "Total liabilities(a) 4,062,462 3,658,056",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 3658056000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ }
+]

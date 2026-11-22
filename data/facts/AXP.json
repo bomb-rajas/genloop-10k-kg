@@ -1,0 +1,323 @@
+[
+ {
+  "id": "AXP|EPS|FY2025",
+  "ticker": "AXP",
+  "metric": "EPS",
+  "value": 15.38,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Diluted 15.38 14.01 11.21",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 15.38,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|EPS|FY2024",
+  "ticker": "AXP",
+  "metric": "EPS",
+  "value": 14.01,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Diluted 15.38 14.01 11.21",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 14.01,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|EPS|FY2023",
+  "ticker": "AXP",
+  "metric": "EPS",
+  "value": 11.21,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Diluted 15.38 14.01 11.21",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 11.21,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|Equity|FY2025",
+  "ticker": "AXP",
+  "metric": "Equity",
+  "value": 33474000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total shareholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 136,
+  "snippet": "Total shareholders\u2019 equity 33,474 30,264",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 33474000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "AXP|Equity|FY2024",
+  "ticker": "AXP",
+  "metric": "Equity",
+  "value": 30264000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total shareholders\u2019 equity",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 136,
+  "snippet": "Total shareholders\u2019 equity 33,474 30,264",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 30264000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "AXP|NetIncome|FY2025",
+  "ticker": "AXP",
+  "metric": "NetIncome",
+  "value": 10833000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Net income 10,833 10,129 8,374",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 10833000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|NetIncome|FY2024",
+  "ticker": "AXP",
+  "metric": "NetIncome",
+  "value": 10129000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Net income 10,833 10,129 8,374",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 10129000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|NetIncome|FY2023",
+  "ticker": "AXP",
+  "metric": "NetIncome",
+  "value": 8374000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net income",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Net income 10,833 10,129 8,374",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 8374000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|Revenue|FY2025",
+  "ticker": "AXP",
+  "metric": "Revenue",
+  "value": 72229000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total revenues net of interest expense",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Total revenues net of interest expense 72,229 65,949 60,515",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 72229000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|Revenue|FY2024",
+  "ticker": "AXP",
+  "metric": "Revenue",
+  "value": 65949000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total revenues net of interest expense",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Total revenues net of interest expense 72,229 65,949 60,515",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 65949000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|Revenue|FY2023",
+  "ticker": "AXP",
+  "metric": "Revenue",
+  "value": 60515000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total revenues net of interest expense",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 134,
+  "snippet": "Total revenues net of interest expense 72,229 65,949 60,515",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 60515000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|TotalAssets|FY2025",
+  "ticker": "AXP",
+  "metric": "TotalAssets",
+  "value": 300052000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 136,
+  "snippet": "Total assets 300,052 271,461",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 300052000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "AXP|TotalAssets|FY2024",
+  "ticker": "AXP",
+  "metric": "TotalAssets",
+  "value": 271461000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 136,
+  "snippet": "Total assets 300,052 271,461",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 271461000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "AXP|TotalLiabilities|FY2025",
+  "ticker": "AXP",
+  "metric": "TotalLiabilities",
+  "value": 266578000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 136,
+  "snippet": "Total liabilities 266,578 241,197",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 266578000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ },
+ {
+  "id": "AXP|TotalLiabilities|FY2024",
+  "ticker": "AXP",
+  "metric": "TotalLiabilities",
+  "value": 241197000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 136,
+  "snippet": "Total liabilities 266,578 241,197",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_value": 241197000000.0,
+  "sanity_ok": true,
+  "identity_ok": true
+ }
+]
