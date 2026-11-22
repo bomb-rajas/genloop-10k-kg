@@ -125,24 +125,29 @@ def _page_rows(pdf, page_no, text):
 
 
 def build_statement(pdf, page_texts, pages):
-    primary = page_texts[pages[0] - 1]
     # The title page often has no unit or year line; the units and years sit on the page after it.
     head = "\n".join(header_text(page_texts[p - 1]) for p in pages)
     scale, snippet = find_scale(head)
-    for p in [pages[0]] + pages:
+    for p in pages:
         if scale is None:
             scale, snippet = find_scale(page_texts[p - 1])
     columns = extract_years(head)
     newest = pick_year_column(head)
-    merged, width = [], len(columns)
+    width = len(columns)
+    merged, page_rows = [], []
     for p in pages:
-        rows = []
-        for r in _page_rows(pdf, p, page_texts[p - 1]):
-            vals = r["values"]
-            if width and len(vals) == width + 1 and vals[0].is_integer() and abs(vals[0]) <= 99:
-                vals = vals[1:]  # leading note-reference column
-            rows.append({"label": r["label"], "values": vals, "page": p})
-        merged = merge_split_tables(merged, [r for r in rows if not is_header_row(r)])
+        page_rows.append((p, [r for r in _page_rows(pdf, p, page_texts[p - 1]) if not is_header_row(r)]))
+    # A leading note-reference column (width+1 values, small integer) is dropped only when most value rows have it.
+    value_rows = [r for _, rows in page_rows for r in rows if len(r["values"]) >= 2]
+    note_col = bool(width) and bool(value_rows) and 2 * sum(
+        len(r["values"]) == width + 1 and r["values"][0].is_integer() and abs(r["values"][0]) <= 99
+        for r in value_rows) > len(value_rows)
+    for p, rows in page_rows:
+        out = []
+        for r in rows:
+            vals = r["values"][1:] if note_col and len(r["values"]) == width + 1 else r["values"]
+            out.append({"label": r["label"], "values": vals, "page": p})
+        merged = merge_split_tables(merged, out)
     return {"pages": pages, "scale": scale, "scale_source_text": snippet, "columns": columns,
             "newest_col": newest, "rows": merged}
 
@@ -176,13 +181,23 @@ def run_company(ticker, force=False, reuse_pages=False):
         return ticker, 0.0, None, "skipped"
     t0 = time.time()
     try:
-        cached = json.loads(out.read_text()) if reuse_pages and out.exists() else None
+        cached = _read_cached(out) if reuse_pages else None
         result = parse_pdf(ticker, cached)
     except Exception as exc:  # one bad PDF must not stop the batch
         return ticker, time.time() - t0, None, f"{type(exc).__name__}: {exc}"
     PARSED_DIR.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(result, ensure_ascii=False))
+    tmp = out.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(result, ensure_ascii=False))
+    tmp.replace(out)  # atomic: a crash never leaves a half-written JSON
     return ticker, time.time() - t0, result["n_pages"], None
+
+
+def _read_cached(path):
+    """Parsed JSON for reuse, or None when missing or unreadable (then the PDF is parsed)."""
+    try:
+        return json.loads(path.read_text())
+    except (OSError, ValueError):
+        return None
 
 
 def summarize(ticker):

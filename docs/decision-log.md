@@ -52,11 +52,12 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-044 | M3 | PDF text library and table path | pdfplumber page text is primary (text-line parser in src/tables.py); pdfplumber extract_tables only for a statement page with fewer than 5 text rows | Statement tables have no ruling lines; text lines were stable on 5 pilot companies |
 | D-045 | M3 | Statement page classification (superseded by D-050) | Title is the end of one of the first 8 lines (company-name prefix allowed, TOC lines excluded); page needs a key row with >=2 values (IS net income, BS total assets, CF operating activities) and >=10 two-value rows; up to 2 continuation pages | Titles vary (JNJ, MSFT, WMT, JPM); text search alone hit MD&A and notes. Resolves D-042 outcome |
 | D-046 | M3 | Scale rule (amended by D-051) | Scale from the statement header (text above first line item), then the whole primary page; None when absent, never assumed | Units differ by company (in millions, thousands, Dollars in Millions) |
-| D-047 | M3 | Year columns | columns = unique years in the header; newest_col = index of max year; values kept as reported, note-number leading column dropped | Newest-first is common but not guaranteed; index makes it explicit |
+| D-047 | M3 | Year columns (note-column part amended by D-053) | columns = unique years in the header; newest_col = index of max year; values kept as reported, note-number leading column dropped | Newest-first is common but not guaranteed; index makes it explicit |
 | D-048 | M3 | Output format and run mode | data/parsed/{T}.json; pages text for all pages keyed by 1-based page; Pool(4) with imap_unordered; skip existing unless --force | Idempotent reruns; 40 companies in minutes |
 | D-049 | M3 | Commit or ignore parsed JSON | Committed: 20 MB total, under the 60 MB limit | Spec limit; the page text is the source for later citations |
 | D-050 | M3 | Title and classification rules for the 13 failures | Title anywhere in the first 8 cleaned lines (Table of Contents and ImageNN.jpg stripped); singular and bank titles (statement of cash flow, balance sheet, statement of financial condition); title on the page before a data page; TOC lines ending in a page number and condensed or parent-company statements skipped; BS key row also "total liabilities"; CF key row also "by/from operations" | Failures were titles and key rows, not missing pages (see D-050 entry) |
 | D-051 | M3 | Scale and year source across statement pages; glued dollar | Scale and years searched over the header of all statement pages, then the full pages; SCALE_RE accepts "(Millions, except" and "(MILLIONS"; "$" split from "(19,669)$" | Title page often has no unit line (V, AXP, TGT, PFE) |
+| D-053 | M3 | Note-column rule, atomic write, cache guard | Drop a leading note column only when most value rows in the statement have width+1 values with a small integer first value (not per row); JSON written to .json.tmp then replaced; unreadable cached JSON treated as missing (PDF parsed instead) | Per-row drop could strip a real column from one odd row; partial writes could corrupt reuse |
 | D-052 | M3 | Re-run mode | --reuse-pages rebuilds statements from page text already in data/parsed (no PDF reopen); --force still re-parses | 40 companies rebuilt in 3 s; PDF text unchanged |
 
 ## Full entries
@@ -582,6 +583,7 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 ### D-045
 - Time: 2026-11-23 03:52 IST
 - Stage: M3
+- Note (2026-11-23 04:01): superseded by D-050 (title, key-row and continuation rules) and D-053 (note-column rule). The text below is the first version.
 - Trigger: Failure in first run: JNJ found no statements (titles prefixed by company name, e.g. "Johnson & Johnson and subsidiaries consolidated statements of earnings"); WMT IS missed (net income labelled "Consolidated net income"); MSFT CF missed ("Net cash from operations") and MSFT BS absorbed the cash flow page as a continuation.
 - Decision: Classify a statement page by title, key row and density, with continuation pages.
 - Chosen: TITLES match the end of a line in the first 8 non-empty lines (regex with (?:^|\s) prefix and \s*$ suffix). KEY_ROWS: income_statement r"\bnet\s+(income|earnings|\(loss\)|loss)\b" (rows with "per" excluded); balance_sheet r"^total\s+assets\b"; cash_flow_statement r"operating\s+activities|net\s+cash\s+.*\boperations\b"; each needs >=2 values. Page needs >=10 rows with >=2 values (MIN_VALUE_ROWS). Continuation: up to 2 following pages that are not any statement, have no "notes to", "statements of", "balance sheet", "comprehensive" in the page title lines, and no "statement(s)" or "balance sheet" in the first 3 lines, and have >=3 rows with rows/non-empty lines >=0.3. Table of contents lines (title then a page number) do not match because the title must end the line.
@@ -673,5 +675,17 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Rejected: Always re-reading PDFs (slower, same result).
 - Evidence: 40 companies rebuilt in 3 s (log).
 - Outcome: Used for loop 1.
+- Status: active
+
+### D-053
+- Time: 2026-11-23 04:01 IST
+- Stage: M3
+- Trigger: Ponytail review (coordinator): the per-row note-column drop in build_statement could strip a real value from one odd row; the JSON write was not atomic; unreadable cached JSON crashed reuse.
+- Decision: Drop a leading note column only when a clear majority (more than half) of the statement's value rows (>=2 values) have width+1 values and a small integer first value. Write data/parsed/{T}.json via a .json.tmp file then replace. Read cached JSON with _read_cached; an unreadable file is treated as missing and the PDF is parsed. Removed the duplicate pages[0] search in the scale fallback.
+- Chosen: build_statement collects page rows first, decides note_col once per statement; run_company uses _read_cached and atomic replace.
+- Why: Per-row drops are unstable; a single stray row should not change the statement. A partial write would leave a broken JSON that reuse would then trip on.
+- Rejected: Keeping the per-row rule (one odd row loses its first value); a lock file for writes (single process per company, so replace is enough).
+- Evidence: tests/test_parse.py: test_build_statement_drops_majority_note_column, test_build_statement_keeps_values_when_note_column_is_minority, test_build_statement_too_narrow_header_keeps_all_values, test_run_company_writes_atomic_json_and_skips_unreadable_cache, test_read_cached_returns_none_when_unreadable. Rebuild of 40 with --reuse-pages --force: 0 of 40 lacking statements or scale; pytest 95 passed.
+- Outcome: Applied. Values for the 40 are unchanged in the spot-check labels (Total assets, net income, revenue) because the note rule still drops the leading column when most rows have it.
 - Status: active
 

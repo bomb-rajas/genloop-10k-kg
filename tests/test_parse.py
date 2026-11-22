@@ -63,3 +63,80 @@ def test_parse_line_glued_dollar_splits():
     # Citigroup prints '(67,632)$ (19,669)$' with no space
     label, values = parse_line("Net cash provided by (used in) operating activities $ (67,632)$ (19,669)$ (73,416)")
     assert values == [-67632.0, -19669.0, -73416.0]
+
+
+import json
+import types
+
+from src import parse
+
+
+def _bs_page(note_col, total="Total assets 5,000 4,800"):
+    head = "CONSOLIDATED BALANCE SHEETS\n(In millions, except per share amounts)\nDecember 31,\n2025 2024\n"
+    note = " 1" if note_col else ""  # a note-reference number before the two year values
+    rows = [f"Asset line {chr(65 + i)}{note} 100 90" for i in range(10)]
+    return head + "\n".join(rows) + "\n" + total
+
+
+def test_build_statement_drops_majority_note_column():
+    st = parse.build_statement(None, [_bs_page(note_col=True)], [1])
+    assert st["scale"] == 1e6 and st["columns"] == [2025, 2024]
+    total = [r for r in st["rows"] if r["label"] == "Total assets"][0]
+    assert total["values"] == [5000.0, 4800.0]
+    assert [r for r in st["rows"] if r["label"] == "Asset line A"][0]["values"] == [100.0, 90.0]
+
+
+def test_build_statement_keeps_values_when_note_column_is_minority():
+    # One stray row with width+1 values must not drop a real column from every row.
+    page = _bs_page(note_col=False, total="Odd row 3 5,000 4,800")
+    st = parse.build_statement(None, [page], [1])
+    assert [r for r in st["rows"] if r["label"] == "Odd row"][0]["values"] == [3.0, 5000.0, 4800.0]
+    assert [r for r in st["rows"] if r["label"] == "Asset line A"][0]["values"] == [100.0, 90.0]
+
+
+def test_build_statement_too_narrow_header_keeps_all_values():
+    # Header shows one year but rows have two: no note column is inferred from a single header year.
+    page = "CONSOLIDATED BALANCE SHEETS\n(In thousands)\n2025\n" + "\n".join(
+        f"Asset {i} 100 90" for i in range(10)) + "\nTotal assets 5,000 4,800"
+    st = parse.build_statement(None, [page], [1])
+    assert st["scale"] == 1e3 and st["columns"] == [2025]
+    assert [r for r in st["rows"] if r["label"] == "Total assets"][0]["values"] == [5000.0, 4800.0]
+
+
+def test_run_company_writes_atomic_json_and_skips_unreadable_cache(tmp_path, monkeypatch):
+    monkeypatch.setattr(parse, "PARSED_DIR", tmp_path)
+    monkeypatch.setattr(parse, "PDF_DIR", tmp_path)
+    page1 = "CONSOLIDATED STATEMENTS OF INCOME\n(In millions)\n2025 2024\n" + "\n".join(
+        f"Item {chr(65 + i)} 10 9" for i in range(10)) + "\nNet income 2,000 1,800"
+    page2 = _bs_page(note_col=False)
+    cf = "CONSOLIDATED STATEMENTS OF CASH FLOWS\n(In millions)\n2025 2024\n" + "\n".join(
+        f"Adj {chr(65 + i)} 5 4" for i in range(10)) + "\nNet cash provided by operating activities 7,000 6,000"
+    texts = [page1, page2, cf]
+    monkeypatch.setattr(parse.pdfplumber, "open", lambda path: _FakePdf(texts))
+    (tmp_path / "TST.json").write_text("{not json")  # unreadable cache: parse from the PDF text instead
+    ticker, _, n, err = parse.run_company("TST", force=True, reuse_pages=True)
+    assert err is None and n == 3
+    out = json.loads((tmp_path / "TST.json").read_text())
+    assert out["statements"]["income_statement"]["scale"] == 1e6
+    assert out["statements"]["income_statement"]["columns"] == [2025, 2024]
+    assert out["statements"]["balance_sheet"]["pages"] == [2]
+    ni = [r for r in out["statements"]["income_statement"]["rows"] if r["label"] == "Net income"][0]
+    assert ni["values"] == [2000.0, 1800.0] and ni["page"] == 1
+    assert not (tmp_path / "TST.json.tmp").exists()
+
+
+def test_read_cached_returns_none_when_unreadable(tmp_path):
+    assert parse._read_cached(tmp_path / "missing.json") is None
+    (tmp_path / "bad.json").write_text("{")
+    assert parse._read_cached(tmp_path / "bad.json") is None
+
+
+class _FakePdf:
+    def __init__(self, texts):
+        self.pages = [types.SimpleNamespace(extract_text=lambda t=t: t) for t in texts]
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        return False
