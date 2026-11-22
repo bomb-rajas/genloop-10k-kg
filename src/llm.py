@@ -1,6 +1,6 @@
 """LLM wrapper: Groq primary, Gemini secondary, disk cache keyed by prompt+system.
 
-Env: GROQ_API_KEY, GEMINI_API_KEY, LLM_PROVIDER (groq|gemini forces one provider), GROQ_TPM (Groq tokens/min, default 6000).
+Env: GROQ_API_KEY, GEMINI_API_KEY, LLM_PROVIDER (groq|gemini forces one provider), GROQ_TPM (Groq tokens/min, default 7500).
 Cache files live in data/llm_cache/<sha256>.json and are read before any key check.
 """
 import hashlib
@@ -17,9 +17,9 @@ from src.config import LLM_CACHE_DIR, load_env
 
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL = "openai/gpt-oss-120b"
-GROQ_TPM_BUDGET = int(os.environ.get("GROQ_TPM", "6000"))
+GROQ_TPM_BUDGET = int(os.environ.get("GROQ_TPM", "7500"))
 GROQ_RETRIES = 4
-REASONING_ALLOWANCE = 1500  # estimated output tokens per Groq call (reasoning + answer)
+REASONING_ALLOWANCE = 800  # estimated output tokens per Groq call (reasoning + answer)
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 GEMINI_MODEL = "gemini-3.1-flash-lite"
 GEMINI_RETRIES = 3
@@ -97,8 +97,9 @@ def _groq_reserve(tokens: int) -> None:
             used = sum(n for _, n in _GROQ_WINDOW)
             # A single call larger than the whole budget is let through when the window is empty, else it would never run.
             if used + tokens <= GROQ_TPM_BUDGET or not _GROQ_WINDOW:
-                _GROQ_WINDOW.append((now, tokens))
-                return
+                entry = [now, tokens]
+                _GROQ_WINDOW.append(entry)
+                return entry
             time.sleep(WINDOW - (now - _GROQ_WINDOW[0][0]))
 
 
@@ -108,7 +109,12 @@ def _groq(prompt: str, system: str | None, json_mode: bool, key: str) -> str:
     if json_mode:
         body["response_format"] = {"type": "json_object"}
     tokens = (len(prompt) + len(system or "")) // 4 + REASONING_ALLOWANCE
-    data = _post(GROQ_URL, {"Authorization": f"Bearer {key}"}, body, GROQ_RETRIES, lambda: _groq_reserve(tokens))
+    entries = []
+    data = _post(GROQ_URL, {"Authorization": f"Bearer {key}"}, body, GROQ_RETRIES, lambda: entries.append(_groq_reserve(tokens)))
+    actual = (data.get("usage") or {}).get("total_tokens")
+    if actual and entries:
+        with _GROQ_LOCK:
+            entries[-1][1] = actual  # replace the estimate with the real usage so the window is not over-reserved
     return data["choices"][0]["message"]["content"]
 
 
