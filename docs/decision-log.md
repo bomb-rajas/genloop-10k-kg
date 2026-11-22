@@ -49,6 +49,15 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-041 | M2 | filings.json schema | Single file: {ticker: {accession, filing_date, report_date, url, form, pdf, status, financials_page}}; status ok, no_financials, or "error: msg"; written after each company | One index file as the spec asks; status feeds the M3 skip logic |
 | D-042 | M2 | Financials presence check (revised) | First page after the first 15% with "total assets" AND ("total liabilities" or "total equity" or "shareholders" or "stockholders"); else no_financials | Phrase rule missed V, TGT, MRK. Current rule still has false hits (see entry) |
 | D-043 | M2 | Fiscal-year label | FY = fiscal year of report_date; fact IDs use period-end FY | Filings are the latest 10-K as of run date, not FY2025 |
+| D-044 | M3 | PDF text library and table path | pdfplumber page text is primary (text-line parser in src/tables.py); pdfplumber extract_tables only for a statement page with fewer than 5 text rows | Statement tables have no ruling lines; text lines were stable on 5 pilot companies |
+| D-045 | M3 | Statement page classification (superseded by D-050) | Title is the end of one of the first 8 lines (company-name prefix allowed, TOC lines excluded); page needs a key row with >=2 values (IS net income, BS total assets, CF operating activities) and >=10 two-value rows; up to 2 continuation pages | Titles vary (JNJ, MSFT, WMT, JPM); text search alone hit MD&A and notes. Resolves D-042 outcome |
+| D-046 | M3 | Scale rule (amended by D-051) | Scale from the statement header (text above first line item), then the whole primary page; None when absent, never assumed | Units differ by company (in millions, thousands, Dollars in Millions) |
+| D-047 | M3 | Year columns | columns = unique years in the header; newest_col = index of max year; values kept as reported, note-number leading column dropped | Newest-first is common but not guaranteed; index makes it explicit |
+| D-048 | M3 | Output format and run mode | data/parsed/{T}.json; pages text for all pages keyed by 1-based page; Pool(4) with imap_unordered; skip existing unless --force | Idempotent reruns; 40 companies in minutes |
+| D-049 | M3 | Commit or ignore parsed JSON | Committed: 20 MB total, under the 60 MB limit | Spec limit; the page text is the source for later citations |
+| D-050 | M3 | Title and classification rules for the 13 failures | Title anywhere in the first 8 cleaned lines (Table of Contents and ImageNN.jpg stripped); singular and bank titles (statement of cash flow, balance sheet, statement of financial condition); title on the page before a data page; TOC lines ending in a page number and condensed or parent-company statements skipped; BS key row also "total liabilities"; CF key row also "by/from operations" | Failures were titles and key rows, not missing pages (see D-050 entry) |
+| D-051 | M3 | Scale and year source across statement pages; glued dollar | Scale and years searched over the header of all statement pages, then the full pages; SCALE_RE accepts "(Millions, except" and "(MILLIONS"; "$" split from "(19,669)$" | Title page often has no unit line (V, AXP, TGT, PFE) |
+| D-052 | M3 | Re-run mode | --reuse-pages rebuilds statements from page text already in data/parsed (no PDF reopen); --force still re-parses | 40 companies rebuilt in 3 s; PDF text unchanged |
 
 ## Full entries
 
@@ -557,3 +566,112 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Evidence: filings.json report_date values for AAPL, V, TGT, MRK, AXP, C.
 - Outcome: Caveat: TGT's year ended 2026-01-31 is called fiscal 2025 by Target. The rule gives FY2026. Confirm the label convention before M4 fact IDs are fixed.
 - Status: active
+
+### D-044
+- Time: 2026-11-23 03:48 IST
+- Stage: M3
+- Trigger: planned (GOAL M3); statement tables have no ruling lines on the pages checked.
+- Decision: Which PDF text path to use for statement rows?
+- Chosen: pdfplumber page.extract_text() for every page. Rows come from src/tables.py parse_text_lines (label then trailing numeric tokens). pdfplumber extract_tables is used only for a statement page whose text gives fewer than 5 rows (TABLE_FALLBACK_BELOW). rows_from_table joins cells first so split '$' and ')' cells merge.
+- Why: Text lines carry the label and all values on one line; table detection finds nothing useful on unruled pages.
+- Rejected: extract_tables as primary (unruled pages, split cells). HTML parsing (D-005). Camelot or other libraries (not installed; D-033 keeps requirements minimal).
+- Evidence: AAPL p51 BS: text gives 28 rows with values, Total assets [404548, 359241].  Not compared against extract_tables output (fallback used only on pages with fewer than 5 text rows).
+- Outcome: Good on AAPL, JPM, WMT, JNJ, MSFT and most of the 40. Labels can carry footnote letters, e.g. JPM "Total assets(a)" (kept, not stripped).
+- Status: active
+
+### D-045
+- Time: 2026-11-23 03:52 IST
+- Stage: M3
+- Trigger: Failure in first run: JNJ found no statements (titles prefixed by company name, e.g. "Johnson & Johnson and subsidiaries consolidated statements of earnings"); WMT IS missed (net income labelled "Consolidated net income"); MSFT CF missed ("Net cash from operations") and MSFT BS absorbed the cash flow page as a continuation.
+- Decision: Classify a statement page by title, key row and density, with continuation pages.
+- Chosen: TITLES match the end of a line in the first 8 non-empty lines (regex with (?:^|\s) prefix and \s*$ suffix). KEY_ROWS: income_statement r"\bnet\s+(income|earnings|\(loss\)|loss)\b" (rows with "per" excluded); balance_sheet r"^total\s+assets\b"; cash_flow_statement r"operating\s+activities|net\s+cash\s+.*\boperations\b"; each needs >=2 values. Page needs >=10 rows with >=2 values (MIN_VALUE_ROWS). Continuation: up to 2 following pages that are not any statement, have no "notes to", "statements of", "balance sheet", "comprehensive" in the page title lines, and no "statement(s)" or "balance sheet" in the first 3 lines, and have >=3 rows with rows/non-empty lines >=0.3. Table of contents lines (title then a page number) do not match because the title must end the line.
+- Why: Title-only and phrase-only rules hit MD&A and notes (see D-042 evidence). Density and key rows separate statements from prose.
+- Rejected: Title in first line only (JNJ and MSFT put a name or heading first). "cash flows" as a continuation stop word (would reject data rows that start with cash flow labels). Fixed page numbers per company (not portable).
+- Evidence: After fix: AAPL IS p49, BS p51, CF p54. JPM IS p243, BS p245, CF p248. WMT IS p75, BS p77, CF p79. JNJ IS p52, BS p51, CF pp55-56. MSFT IS p73, BS p75, CF p76. Full run: none of the D-042 false hits (AXP p96, C p190, MRK p150, MCD p31) is a classified statement page (checked in data/parsed JSON page lists). Full-40 run: 27 of 40 have all 3 statements with a scale; 13 lack something (see PROGRESS.md M3).
+- Outcome: Resolves the D-042 open outcome for the statement pages (the D-042 financials_page rule in download.py is unchanged). Still open: 13 companies lack a statement; see PROGRESS.md M3.
+- Status: active
+
+### D-046
+- Time: 2026-11-23 03:52 IST
+- Stage: M3
+- Trigger: planned; units differ by company (In millions, in thousands, Amounts in millions, Dollars in Millions).
+- Decision: How is the statement scale found?
+- Chosen: src/tables.py find_scale(text) with SCALE_RE "(in|amounts in|dollars in) (dollars|units|thousands|millions|billions)" (case-insensitive) mapped to 1, 1e3, 1e6, 1e9 (dollars and units = 1). Searched in header_text (the lines above the first line item), then the whole primary page. Stored as scale plus scale_source_text. None when absent; the caller must not assume a scale.
+- Why: The unit line sits in the statement header, so the search stays off the data.
+- Rejected: Assuming millions (the default in most filings), which the task forbids. Reading scale from MD&A text (wrong page).
+- Evidence: 5-company run: AAPL, JPM, WMT, JNJ, MSFT all got a scale from the header.
+- Outcome: Values are stored as reported, not multiplied. Scaling is left to M4 fact extraction.
+- Status: active
+
+### D-047
+- Time: 2026-11-23 03:52 IST
+- Stage: M3
+- Trigger: planned; period headers differ (Dec 31, 2025 Dec 31, 2024 / 2025 2024 2023 / Year Ended June 30, 2026 2025 2024).
+- Decision: How are year columns chosen?
+- Chosen: columns = unique 4-digit years in header_text in order (extract_years). newest_col = pick_year_column(header) = index of the maximum year (None if no year). A row whose value count is one more than the column count and whose first value is an integer <=99 has that leading note-reference value dropped. Header rows (dates, all-year rows) are dropped from rows.
+- Why: Newest-first is common but not guaranteed, so the index is stored explicitly. Note-reference columns (e.g. "Note 2") would otherwise shift values.
+- Rejected: Assuming columns are newest-first. Keeping note columns (shifts values).
+- Evidence: AAPL columns [2026,2025,2024] newest_col 0; MSFT [2026,2025,2024]; JNJ [2025,2024,2023].
+- Outcome: The note-column rule has no test on a real note column yet (none found in the 5 pilot companies). Check in M4.
+- Status: active
+
+### D-048
+- Time: 2026-11-23 03:52 IST
+- Stage: M3
+- Trigger: planned (M3 spec: per-company output, parallel, idempotent).
+- Decision: Output format and run mode for src/parse.py.
+- Chosen: data/parsed/{T}.json = {ticker, n_pages, pages:{"1":text,...}, statements:{income_statement|balance_sheet|cash_flow_statement: {pages, scale, scale_source_text, columns, newest_col, rows:[{label, values, page}]}}}. multiprocessing Pool(4), imap_unordered, one worker per company; per-company progress print; skip when the JSON exists unless --force; a worker exception is caught and printed (one bad PDF does not stop the batch). pdfplumber is opened once per company.
+- Why: Keeps the JSON self-contained for citations (page text is stored). Four workers match the spec and the machine; the 40-company run took 255 s wall time.
+- Rejected: Per-page JSON files (more files, no gain). A process per statement (more overhead).
+- Evidence: 5 pilot companies: 5 files in 42 s wall time with Pool(4), JPM (479 pages) took 41 s.
+- Outcome: Done. Run prints per-company progress and a lacking-statements table.
+- Status: active
+
+### D-049
+- Time: 2026-11-23 03:53 IST
+- Stage: M3
+- Trigger: Spec: parsed JSON committed if total <60 MB, else gitignore the page text.
+- Decision: Commit data/parsed/*.json or ignore it?
+- Chosen: To be committed with the code (no git commit made in M3). data/parsed/*.json totals 20 MB for 40 companies (under 60 MB); page text kept in the JSON.
+- Why: The spec limit. Page text is needed to show citations without re-running the PDF step.
+- Rejected: Ignoring it by default (reruns need the PDFs, which are gitignored anyway).
+- Evidence: du of data/parsed after the 40-company run (recorded in PROGRESS.md).
+- Outcome: 20.4 MB measured (du -sk 20424). To be committed with the code, as the spec allows.
+- Status: active
+
+### D-050
+- Time: 2026-11-23 03:57 IST
+- Stage: M3
+- Trigger: Coordinator m00204 loop 1: 13 of 40 companies lacked a statement or scale.
+- Decision: Supersedes D-045 classification rules (title, key row, continuation). Title may sit anywhere in the first 8 cleaned lines and may be on the page before the data page; TOC and condensed or parent-only statements are excluded; BS key row adds "total liabilities" (Merck has no "Total assets" label); CF key row adds "by/from operations" (Nike, McDonald's).
+- Chosen: General rules in src/parse.py (TITLES, TITLE_SKIP, KEY_ROWS, find_statements). No per-ticker override was needed.
+- Why: Diagnosis from stored JSON: titles had company prefix or "Table of Contents"/"ImageNN.jpg" headers (MS, JNJ); singular titles (C, MS, MCD, NKE, ABT, PFE); title-only page followed by data page (GS CF p269 to p270, META CF p147 to p148, V BS p94 to p95, V IS p96 to p97, SBUX CF p75 to p76); condensed parent-only pages (C p340, GS p482) must not win.
+- Rejected: Per-ticker page overrides in config/ (not needed after general rules); widening key rows to any number-only line (would hit MD&A tables).
+- Evidence: After the rules, 40 of 40 have IS, BS, CF pages (reuse-pages run, data/parsed rebuilt). tests/test_parse.py covers title variants, TOC skip, condensed skip, key rows, previous-page title, continuation.
+- Outcome: 0 of 40 lacking a statement. Key values still blank for some (see PROGRESS.md).
+- Status: active
+
+### D-051
+- Time: 2026-11-23 03:57 IST
+- Stage: M3
+- Trigger: V, AXP, TGT, PFE had no scale; C CF key row was glued "(67,632)$ (19,669)$".
+- Decision: Supersedes the D-046 search order. Scale and year columns come from the header of every statement page (title page often has no unit line), then the full pages. SCALE_RE also matches "(Millions," and "(MILLIONS,". parse_line inserts a space before "$" in glued tokens.
+- Chosen: Regex extended in src/tables.py, search widened in src/parse.py build_statement.
+- Why: Unit line sits on the page after the title (V, AXP, TGT); Citigroup prints "$" glued to the preceding number.
+- Rejected: Assuming scale 1e6 when absent (D-046 forbids it).
+- Evidence: test_find_scale_parenthesised_units and test_parse_line_glued_dollar_splits in tests/test_parse.py; 0 of 40 lack scale after rebuild.
+- Outcome: All 40 scale = 1e6 from the reuse-pages run (scale_source_text kept per statement).
+- Status: active
+
+### D-052
+- Time: 2026-11-23 03:57 IST
+- Stage: M3
+- Trigger: Iterating on rules without re-reading 40 PDFs.
+- Decision: Add --reuse-pages: rebuild statements from pages already in data/parsed/{T}.json. --force still re-parses from the PDF.
+- Chosen: run_company(ticker, force, reuse_pages); parse_pdf(ticker, cached) takes cached page text.
+- Why: Page text is the cached source; reopening PDFs for a rule change wastes time.
+- Rejected: Always re-reading PDFs (slower, same result).
+- Evidence: 40 companies rebuilt in 3 s (log).
+- Outcome: Used for loop 1.
+- Status: active
+

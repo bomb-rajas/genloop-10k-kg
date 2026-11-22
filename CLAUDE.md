@@ -23,7 +23,7 @@
 | Raw HTML (gitignored) | data/raw_html/ | M2 done |
 | 10-K PDFs (gitignored, except report/) | data/pdfs/ | M2 done (40) |
 | XBRL companyfacts (gitignored, ~175 MB, D-040) | data/xbrl/ | M2 done |
-| pdfplumber text and tables per page | src/parse.py, output data/parsed/ | M3 planned |
+| pdfplumber text and tables per page; statement rows | src/parse.py: python -m src.parse [--tickers] [--force]; src/tables.py (pure helpers); output data/parsed/{T}.json | M3 done, 40 of 40 have 3 statements and scale (D-050 to D-052) |
 | Fact extraction (LLM on narrative pages) | src/extract.py, output data/facts/ | M4 planned |
 | XBRL validation gate | src/validate.py | M4 planned |
 | LLM disk cache (committed, read before key check) | data/llm_cache/ | M1 done |
@@ -31,7 +31,7 @@
 | Query planner, traversal, abstain | src/query.py | M6 planned |
 | Benchmark questions | benchmark/benchmark.json | M7 planned |
 | Scoring and metrics | src/evaluate.py, output results/metrics.json, results/predictions.jsonl | M8 planned |
-| Unit tests (pytest) | tests/ (test_config.py done; M3 adds parser tests) | M1 done |
+| Unit tests (pytest) | tests/ (test_config.py, test_download.py, test_tables.py, test_parse.py) | M3 done |
 | README | README.md | M9 planned |
 | Results PDF | report/results.pdf | M9 planned |
 | Pipeline doc | docs/flow.md | M10 planned |
@@ -40,7 +40,9 @@
 - Never git-add .env or *.pdf outside report/.
 - Quote SEC_USER_AGENT in .env (contains spaces).
 - M2: matching "consolidated balance sheet" alone hit index pages and missed MSFT "BALANCE SHEETS"; now "balance sheet" AND "total assets" (D-039).
-- M2: first financials rule (D-039) missed V, TGT, MRK. D-042 rule now marks all 40 ok but AXP p96, C p190, MRK p150, MCD p31 are not statements. Fix before M3.
+- M3: first parse run missed JNJ (company-name title prefix), WMT net income ("Consolidated net income") and MSFT CF ("Net cash from operations"); fixed by D-045 rules.
+- M3: second run missed 13 companies (singular titles, title on the page before the data, Merck with no "Total assets" label, unit line on the next page, glued "$"); fixed by D-050 and D-051.
+- M2: first financials rule (D-039) missed V, TGT, MRK. D-042 rule now marks all 40 ok but AXP p96, C p190, MRK p150, MCD p31 are not statements. M3 statement parser (D-045) does not select those pages; the D-042 download rule is unchanged.
 
 ## 4. Decision-log rule
 Every meaningful design or build choice gets an entry in docs/decision-log.md in the same change, before moving on. That covers architecture, schema, fact-ID format, metric mapping, libraries, parsing rules, extraction approach, LLM prompts and output schemas, validation thresholds, benchmark design, scoring rules, and company swaps. Failures are logged only when they forced a decision. If you chose between options, log it, including choices made by subagents.
