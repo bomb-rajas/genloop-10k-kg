@@ -1,0 +1,7 @@
+.env
+data/raw_html/
+data/pdfs/
+__pycache__/
+.venv/
+*.pdf
+!report/*.pdf
