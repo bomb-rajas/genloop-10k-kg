@@ -15,3 +15,4 @@
 | M9 README | pending | - | - |
 | M10 docs/flow.md | done | 2026-11-23 05:57 IST (date: Mon Nov 23 05:57:52 IST 2026) | docs/flow.md (154 lines) derived from src/ code: mermaid pipeline, per-stage file:line, gates, LLM cache, abstain paths, guarantee table, traced query output. No code or benchmark changed. |
 | M8 scorer amendment (D-080) | done, gold not edited | 2026-11-23 06:01 IST | Scorer changed after the first run (19/28 before, 20/28 after; Q27 false positive removed by numeric-value rule, stays wrong). Verifier judged Q07, Q19, Q21, Q26 gold-suspect (gold lists summary pages; system cites primary statement pages that contain the value). Left unedited for the user's gold verification. Not committed. |
+| Results report | done | 2026-11-23 06:03 IST (date: Mon Nov 23 06:03:13 IST 2026) | report/results.html and report/results.pdf (1 page), numbers from results/metrics.json. Not committed. |

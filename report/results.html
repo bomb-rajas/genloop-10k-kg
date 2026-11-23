@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8"><title>GenLoop Results</title><style>
+@page{size:A4;margin:12mm}body{font:9.3pt/1.32 Helvetica,Arial,sans-serif;color:#111;margin:0}
+h1{font-size:15pt;margin:0 0 2px}h2{font-size:10.5pt;margin:8px 0 2px;border-bottom:1px solid #999}
+p,ul{margin:2px 0}ul{padding-left:15px}li{margin:1px 0}
+table{border-collapse:collapse;margin:3px 0;font-size:8.8pt}td,th{border:1px solid #999;padding:1px 6px;text-align:right}th:first-child,td:first-child{text-align:left}th{background:#eee}
+.s{color:#444;font-size:8.5pt}</style></head><body>
+<h1>GenLoop: Financial Knowledge Graph QA, Results</h1>
+<p class="s">40 company 10-K filings (FY2025/FY2026), 29-question benchmark. All numbers from results/metrics.json and results/per_question.csv. Gold is unverified by a human (see Gaps).</p>
+<h2>Results</h2>
+<table><tr><th>Slice</th><th>n</th><th>Scored</th><th>Correct</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>Abstained (correct/expected)</th></tr>
+<tr><td>Overall</td><td>29</td><td>28</td><td>20</td><td>71.43%</td><td>0.840</td><td>0.827</td><td>7 (3/3)</td></tr>
+<tr><td>single_fact</td><td>10</td><td>10</td><td>8</td><td>80.00%</td><td>0.800</td><td>0.800</td><td>4 (2/2)</td></tr>
+<tr><td>multi_hop</td><td>10</td><td>9</td><td>7</td><td>77.78%</td><td>1.000</td><td>1.000</td><td>1 (1/1)</td></tr>
+<tr><td>cross_filing</td><td>9</td><td>9</td><td>5</td><td>55.56%</td><td>0.778</td><td>0.741</td><td>2 (0/0)</td></tr></table>
+<p class="s">Q15 is unscored (no checkable gold) and excluded from all means. Doc hit rate 1.00 on answered rows; strict page hit 0.714. Accuracy counts the 4 wrong_page rows as correct (value right, cited page not in gold). Precision/recall are as defined in src/evaluate.py; with n=29 one question moves accuracy by about 3.5 points.</p>
+<h2>Methodology</h2>
+<ul>
+<li><b>PDF-only parsing.</b> EDGAR 10-K HTML was printed to PDF with headless Chrome (same flags for every filing) and parsed with pdfplumber into page text and tables; every fact carries doc, page and snippet.</li>
+<li><b>XBRL as a validation gate only.</b> Facts come from the PDFs; XBRL company-facts data is used only to check them: 947/947 compared facts match, 57 have no XBRL counterpart (22 are derived TotalLiabilities). 1004 candidates admitted, 0 rejected.</li>
+<li><b>Grounded LLM entity extraction.</b> An LLM extracts people, locations, segments, organizations, employee counts from cited pages. An entity is admitted only if its name appears literally on the cited page: 488 of 504 admitted (96.8%).</li>
+<li><b>Graph and query.</b> NetworkX MultiDiGraph (1039 Fact nodes plus company, period, filing, entity nodes). A rule-based planner builds a query plan; an LLM planner is called only if the rule plan fails validation. Questions with no supporting fact abstain with a reason rather than guess.</li>
+<li><b>Benchmark.</b> 29 questions (10 single_fact, 10 multi_hop, 9 cross_filing, 3 deliberately unanswerable). Gold was typed from PDF page text, not from the graph, to avoid circularity.</li></ul>
+<h2>Gaps (with examples)</h2>
+<ul>
+<li><b>Missing facts in graph (4 rows):</b> Q08 MRK total assets (gold $136,866M; the PDF has no "Total assets" label) and Q09/Q28 PFE diluted EPS ($1.36) and Q25 COF revenue all abstain with no_fact. The values are in the PDFs; the parser did not extract them.</li>
+<li><b>Planner/comparison errors:</b> Q13 (largest Apple geographic segment) lists all five segments instead of ranking, so no answer is picked. Q27 (PepsiCo vs Coca-Cola, higher revenue) returns the sum, $141.87B, instead of comparing. Q29 sums GOOGL and META and omits Amazon; Q14 picks Apple, not Amazon, as the largest of four (wrong_company).</li>
+<li><b>wrong_page (4: Q07, Q19, Q21, Q26):</b> values are correct but the cited page is not in gold. The gold lists one page per value (often a summary page) while the system cites the primary statement page that holds the value. Likely a gold issue; gold was left unedited.</li>
+<li><b>Thin entity coverage:</b> auditor admitted for only 13 of 40 companies (absent for BAC, C, GS, V, MA, AXP, PYPL among others); officers missing for 5, Apple has no executive edges, so entity questions often abstain or are unscored (Q15).</li>
+<li><b>Provenance:</b> entity extraction mixed providers (194 cache files: 144 Groq, 50 Gemini) and the provider is not stored per entity.</li>
+<li><b>Evaluation caveats:</b> n=29 is small; no confidence intervals. The scorer was amended after the first run (D-080): 19/28 became 20/28 (Q16 now credited; the Q27 false positive was removed). Benchmark question selection was informed by the known gap list (D-072), so results are likely optimistic for the abstain cases. Gold is not human-verified (all items verified=false).</li></ul>
+<h2>Concrete improvements</h2>
+<ul>
+<li>Derive missing rows via accounting identities (e.g. MRK total assets = liabilities + equity; EPS = net income / shares) and fix the parser label gaps for MRK, ABT, PFE, COF.</li>
+<li>Replace aggregation in the comparison planner: a "which/higher/largest" cue must route to rank/compare over named companies, and rank segments by value (Q13, Q27, Q29, Q14).</li>
+<li>Log the LLM provider and model per entity and per plan call.</li>
+<li>Grow the benchmark well beyond 29 items and select questions before inspecting system output.</li>
+<li>Human-verify gold, including the page lists for Q07, Q19, Q21, Q26; accept any page that contains the value. Improve auditor extraction (engagement sentence location) for banks.</li></ul>
+</body></html>
