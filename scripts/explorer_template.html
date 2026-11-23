@@ -100,8 +100,12 @@ document.getElementById('side').addEventListener('click',e=>{const a=e.target.cl
 const lg=document.getElementById('legend'),cnt={};N.forEach(n=>cnt[n.node_type]=(cnt[n.node_type]||0)+1);
 ['Sector','Company',...HIDEABLE].forEach(t=>{const b=BASE(t);lg.insertAdjacentHTML('beforeend','<label class="t"><input type="checkbox" data-t="'+t+'"'+(on.has(t)||b?' checked':'')+(b?' disabled':'')+'><span class="sw" style="background:'+(t=='Sector'?'#000':C[t])+'"></span>'+t+' <small style="color:var(--mut)">'+cnt[t]+'</small></label>')});
 lg.addEventListener('change',e=>{const t=e.target.dataset.t;e.target.checked?on.add(t):on.delete(t);applyTypes();status()});
-bExp.onclick=()=>{N.forEach((n,id)=>{if(on.has(n.node_type)||BASE(n.node_type))addNode(id,null);});
- N.forEach((n,id)=>{if(nodes.get(id)){link(id)}});N.forEach((n,id)=>{if(nodes.get(id))expanded.add(id)});status();if(!frozen)kick()};
+bExp.onclick=()=>{document.getElementById('msg').textContent='Expanding all, laying out 1,600+ nodes (a few seconds)...';
+ setTimeout(()=>{net.setOptions({physics:{enabled:false}});
+  N.forEach((n,id)=>{if(on.has(n.node_type)||BASE(n.node_type))addNode(id,null);});
+  N.forEach((n,id)=>{if(nodes.get(id))link(id)});N.forEach((n,id)=>{if(nodes.get(id))expanded.add(id)});
+  net.setOptions({physics:{enabled:true,solver:'forceAtlas2Based',forceAtlas2Based:{gravitationalConstant:-40,centralGravity:.01,springLength:60,springConstant:.06,damping:.6,avoidOverlap:.3},stabilization:{iterations:150,updateInterval:50}}});
+  net.stabilize(150);net.fit();status()},30)};
 bReset.onclick=()=>{initial();select&&0;document.getElementById('side').innerHTML='<i>Select a node.</i>';if(!frozen)kick();setTimeout(()=>net.fit(),300)};
 bFreeze.onclick=()=>{frozen=!frozen;bFreeze.textContent=frozen?'Unfreeze':'Freeze';net.setOptions({physics:{enabled:!frozen}})};
 bFit.onclick=()=>net.fit();
