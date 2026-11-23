@@ -108,7 +108,10 @@ table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px so
 <h2>Improvements</h2>
 <ul><li>Store per-segment values so segments can be ranked and compared.</li><li>Label fiscal years by each company's own convention, not by period-end year.</li><li>Let the planner compose several metrics (sum, ratio, difference) with their input facts cited.</li><li>Locate entity pages by search instead of a fixed window, and normalise punctuation before the exact-match check.</li><li>Store the LLM provider and model on every entity and plan call.</li><li>Tighten the XBRL tolerance and add a second independent source for the unvalidated facts.</li></ul>
 <h2>With more time</h2>
-<ul><li>Hand-verified gold and a larger benchmark written before inspecting system output; confidence intervals; a paid or larger model to compare against the rule planner.</li></ul>
+<ul><li>Hand-verified gold and a larger benchmark written before inspecting system output; confidence intervals; a paid or larger model to compare against the rule planner.</li>
+<li><b>Continual learning.</b> Treat the graph as living: when a new 10-K or 10-Q arrives, add its Filing and Period nodes, run the new facts through the same XBRL admission gate, and mark older values superseded instead of overwriting them, so every answer keeps its provenance and history. This also gives time series across years.</li>
+<li><b>Fact families (from the Living Context Graphs paper).</b> Group related facts (revenue, margin, growth) so that when one changes, its derived facts are recomputed and re-validated together; and let a fact be retired when later evidence contradicts it, rather than silently kept.</li>
+<li><b>Learn from failures.</b> Log every abstention and wrong answer, then use the cases (such as Q13 or the fiscal-year shifts) to propose new extraction rules, admitted only after they pass the existing tests and benchmark.</li></ul>
 </body></html>"""
 tmp = Path(tempfile.mkdtemp()) / "results.html"; tmp.write_text(html)
 chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
