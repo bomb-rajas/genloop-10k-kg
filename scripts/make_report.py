@@ -72,6 +72,27 @@ chart_m = hbar(mc.most_common(), "Facts per metric")
 chart_s = hbar([(k, sc_[k]) for k in secs], "Facts per sector")
 chart_e = hbar([("Auditor (of 40)", aud), ("Headquarters (of 40)", hq), ("Executives (cos. of 40)", execs)], "Companies with entity data (of 40)")
 
+# per-question outcome grid
+col = {"correct": ACC, "wrong": "#c0504d", "abstain ok": "#9bbb59", "unscored": "#bdbdbd"}
+def status(r):
+    if r["failure_category"] == "unscored": return "unscored"
+    if r["expected_abstain"] == "True" and r["correct"] == "True": return "abstain ok"
+    return "correct" if r["correct"] == "True" else "wrong"
+fig, ax = plt.subplots(figsize=(7.2, 1.5))
+for t, tn in enumerate(names):
+    for j, r in enumerate([x for x in rows if x["type"] == tn]):
+        st = status(r); ax.add_patch(plt.Rectangle((j, -t), .9, .8, color=col[st])); ax.text(j + .45, -t + .4, r["id"][1:], ha="center", va="center", fontsize=5.5, color="white" if st != "unscored" else "black")
+    ax.text(-.3, -t + .4, tn.replace("_", " "), ha="right", va="center", fontsize=6.5)
+ax.set_xlim(-.3, 10.3); ax.set_ylim(-2.2, 1.0); ax.axis("off")
+for i, (k, c) in enumerate(col.items()): ax.add_patch(plt.Rectangle((i * 2.3, 0.95), .35, .35, color=c, clip_on=False)); ax.text(i * 2.3 + .45, 1.12, k, va="center", fontsize=6)
+chart_q = svg(fig)
+fc_ = Counter(f["ticker"] for f in facts if f["metric"] != "Employees")
+tk = sorted(fc_, key=lambda t: (secs.index(sec[t]), -fc_[t]))
+fig, ax = plt.subplots(figsize=(7.2, 1.7)); pal = dict(zip(secs, [ACC, "#c07a2c", "#6a9a3a", "#8a4f9e"]))
+ax.bar(range(len(tk)), [fc_[t] for t in tk], color=[pal[sec[t]] for t in tk]); ax.set_xticks(range(len(tk))); ax.set_xticklabels(tk, rotation=90, fontsize=5)
+ax.set_title("Facts per company (coloured by sector: " + ", ".join(secs) + ")", fontsize=7, loc="left"); ax.tick_params(labelsize=5.5, length=0); [ax.spines[x].set_visible(False) for x in ("top", "right")]
+chart_c = svg(fig)
+
 def tr(name, d, ab=True):
     abst = f"{d['abstain_correct']}/{d['abstain_expected']}"
     return f"<tr><td>{name}</td><td>{d['n']}</td><td>{d['scored']}</td><td>{d['correct']}</td><td>{d['accuracy']:.1%}</td><td>{d['precision']:.3f}</td><td>{d['recall']:.3f}</td><td>{abst}</td></tr>"
@@ -121,6 +142,10 @@ table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px so
 <li><b>Validation coverage.</b> XBRL cannot check every fact: 67 facts have no XBRL counterpart (22 are derived TotalLiabilities), so they are admitted unvalidated.</li>
 <li><b>Provenance.</b> Entity extraction mixed two LLM providers (Groq, Gemini) and the provider is not stored per entity.</li>
 <li><b>Evaluation.</b> The scorer was amended once after the first run; questions were chosen after seeing known extractor gaps; n is small (one question is about {100/o['n']:.1f} points).</li></ul>
+<h2 style="break-before:page">Per-question outcomes and fact coverage</h2>
+{chart_q}
+<p class="s">Each square is one benchmark question. The only wrong answer is Q13; Q15 is unscored.</p>
+{chart_c}
 <h2>Improvements</h2>
 <ul><li>Store per-segment values so segments can be ranked and compared.</li><li>Label fiscal years by each company's own convention, not by period-end year.</li><li>Let the planner compose several metrics (sum, ratio, difference) with their input facts cited.</li><li>Locate entity pages by search instead of a fixed window, and normalise punctuation before the exact-match check.</li><li>Store the LLM provider and model on every entity and plan call.</li><li>Tighten the XBRL tolerance and add a second independent source for the unvalidated facts.</li></ul>
 <h2>With more time</h2>
