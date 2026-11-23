@@ -111,6 +111,17 @@ def test_wrong_company_and_wrong_page_categories():
     assert wp["correct"] is True and wp["failure_category"] == "wrong_page" and wp["page_hit_strict"] is False
 
 
+def test_acceptable_pages_count_as_page_hit():
+    it = item(gold_fact_ids=["AMZN|Revenue|FY2025"], gold_value=716924e6,
+              acceptable_pages=[{"doc": "data/pdfs/AMZN.pdf", "page": 101}])
+    r = lambda d, p: ev.score(it, res(answer="AMZN", value=716924e6, unit="USD", fact_ids=["AMZN|Revenue|FY2025"],
+                                      citations=[cite(d, p)]), G)
+    assert r("data/pdfs/AMZN.pdf", 101)["page_hit_strict"] is True
+    assert r("data/pdfs/AMZN.pdf", 58)["page_hit_strict"] is True
+    assert r("data/pdfs/AMZN.pdf", 99)["failure_category"] == "wrong_page"
+    assert r("data/pdfs/PEP.pdf", 101)["page_hit_strict"] is False  # page pairs with its doc
+
+
 def test_missing_fact_and_planner_failed_categories():
     it = item(gold_fact_ids=["MRK|TotalAssets|FY2025"], gold_value=136866e6)
     assert ev.score(it, res(abstained=True, reason="no_fact"), G)["failure_category"] == "missing_fact_in_graph"

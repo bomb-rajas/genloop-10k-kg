@@ -27,7 +27,34 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Statement of operations, years ended Sep 26 2026 (first column)."
+      "notes": "Statement of operations, years ended Sep 26 2026 (first column).",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 39
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 41
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 77
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "478,834 Total net sales FY2026 (FY ends Sep 26 2026) on p49 income statement; also MD&A, revenue and segment notes."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q02",
@@ -54,7 +81,38 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Income statements, year ended June 30 2026."
+      "notes": "Income statements, year ended June 30 2026.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 56
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 63
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 74
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 77
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 89
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "133,749 FY2026 (Jun 30 2026) on p73; also MD&A, equity/cash-flow statements, EPS note."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q03",
@@ -81,7 +139,34 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Consolidated Statements of Income, first column = FY2026."
+      "notes": "Consolidated Statements of Income, first column = FY2026.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 53
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 57
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 104
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 105
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 106
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "215,938 FY2026 (year ended Jan 25 2026, D-043) on p71; also MD&A and segment notes."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q04",
@@ -108,7 +193,26 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Columns ordered 2026, 2025, 2024 (newest first)."
+      "notes": "Columns ordered 2026, 2025, 2024 (newest first).",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/WMT.pdf",
+          "page": 56
+        },
+        {
+          "doc": "data/pdfs/WMT.pdf",
+          "page": 109
+        },
+        {
+          "doc": "data/pdfs/WMT.pdf",
+          "page": 110
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "713,163 FY2026 (Jan 31 2026) on p75; also MD&A and segment note."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q05",
@@ -135,7 +239,22 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Consolidated income statement; excludes consolidated NI 13,137 (includes NCI)."
+      "notes": "Consolidated income statement; excludes consolidated NI 13,137 (includes NCI).",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 112
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 176
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "13,107 attributable to shareowners FY2025 on p108; also equity statement and note."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q06",
@@ -163,7 +282,12 @@
       "answerable": false,
       "expected_behaviour": "abstain",
       "notes": "Honest-failure test: period outside the filing. Abstain expected. Page 65 is cited only as the FY2025 value the system may wrongly substitute.",
-      "answerable_by_graph": "unknown"
+      "answerable_by_graph": "unknown",
+      "review": {
+        "status": "confirmed",
+        "note": "Abstain correct: BAC 10-K covers FY2025 only (year-end 3,411,738); no FY2026 data."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q07",
@@ -190,7 +314,26 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Three-year summary of consolidated financial highlights."
+      "notes": "Three-year summary of consolidated financial highlights.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 93
+        },
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 245
+        },
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 447
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "4,424,900 at Dec 31 2025 on p79 (selected data); also MD&A balance sheet analysis p93, consolidated balance sheet p245, segment total p447."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q08",
@@ -217,7 +360,12 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "The 'Total assets' label is absent from the parsed text; the unlabeled closing total $136,866 is the balance-sheet total. Check: liabilities 28,327+46,750+1,439+7,688=84,204 + total equity 52,662 = 136,866. Hard case, not a system output check."
+      "notes": "The 'Total assets' label is absent from the parsed text; the unlabeled closing total $136,866 is the balance-sheet total. Check: liabilities 28,327+46,750+1,439+7,688=84,204 + total equity 52,662 = 136,866. Hard case, not a system output check.",
+      "review": {
+        "status": "confirmed",
+        "note": "136,866 only on p114; balance identity re-checked (43,516+956+25,316+21,579+26,681+18,818)."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q09",
@@ -244,7 +392,22 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Diluted row under 'Earnings per common share--diluted'. Reported value, not Adjusted EPS ($3.22 on p70)."
+      "notes": "Diluted row under 'Earnings per common share--diluted'. Reported value, not Adjusted EPS ($3.22 on p70).",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 70
+        },
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 97
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "Diluted 1.36 (basic 1.37) FY2025 on p108; also MD&A p70 and p97."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q10",
@@ -272,7 +435,12 @@
       "answerable": false,
       "expected_behaviour": "abstain",
       "notes": "Honest-failure test: metric absent by design. Abstain expected. Page 97 is the consolidated statement of operations, which has no R&D row.",
-      "answerable_by_graph": "unknown"
+      "answerable_by_graph": "unknown",
+      "review": {
+        "status": "confirmed",
+        "note": "Abstain correct: p97 statement of operations has no R&D line; only a tax-credit mention elsewhere."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q11",
@@ -306,7 +474,46 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Derived ratio. gold_value is a fraction (0.2760), not a percent."
+      "notes": "Derived ratio. gold_value is a fraction (0.2760), not a percent.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 39
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 41
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 77
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 50
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 53
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 54
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "132,175/478,834 = 27.6035%, recomputed."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q12",
@@ -340,7 +547,50 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Derived ratio, fraction in gold_value."
+      "notes": "Derived ratio, fraction in gold_value.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 56
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 63
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 74
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 77
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 89
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 57
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 121
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 123
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "133,749/331,839 = 40.3054%, recomputed."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q13",
@@ -367,7 +617,18 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Segment table in MD&A (FY2026 column first). Entity answer: plain name."
+      "notes": "Segment table in MD&A (FY2026 column first). Entity answer: plain name.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 76
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "Americas 198,083 largest (Europe 127,604, GC 82,378, Japan 30,908, RoAP 39,861) on p39; also segment note p76."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q14",
@@ -404,7 +665,102 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Compared latest FY: AAPL 478,834 (FY2026), MSFT 331,839 (FY2026), GOOGL 402,836 (FY2025, Revenues p84), AMZN 716,924 (FY2025). AMZN columns are ascending 2023,2024,2025. Auditor from the index line on p54 (the report itself is 10-K p.34)."
+      "notes": "Compared latest FY: AAPL 478,834 (FY2026), MSFT 331,839 (FY2026), GOOGL 402,836 (FY2025, Revenues p84), AMZN 716,924 (FY2025). AMZN columns are ascending 2023,2024,2025. Auditor from the index line on p54 (the report itself is 10-K p.34).",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 41
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 50
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 101
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 102
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 55
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 56
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 107
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 49
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 39
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 41
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 77
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 73
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 56
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 57
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 121
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 123
+        },
+        {
+          "doc": "data/pdfs/GOOGL.pdf",
+          "page": 84
+        },
+        {
+          "doc": "data/pdfs/GOOGL.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/GOOGL.pdf",
+          "page": 102
+        },
+        {
+          "doc": "data/pdfs/GOOGL.pdf",
+          "page": 139
+        }
+      ],
+      "review": {
+        "status": "ambiguous",
+        "note": "Answer confirmed (AMZN 716,924 > AAPL 478,834 > GOOGL 402,836 > MSFT 331,839; EY auditor, /s/ on p56, ICFR report p107). Ambiguity: 'latest fiscal year' mixes FY2025 (AMZN, GOOGL) and FY2026 (AAPL, MSFT); ranking holds under either reading. Gold p54 is an index line; report pages 55-56 added."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q15",
@@ -437,7 +793,30 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Two-hop: ranking on total assets, then executive officer section. BAC FY2025 total assets 3,411,738 (p65) and C 2,657,202 (p15)."
+      "notes": "Two-hop: ranking on total assets, then executive officer section. BAC FY2025 total assets 3,411,738 (p65) and C 2,657,202 (p15).",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 93
+        },
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 245
+        },
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 447
+        },
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 479
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "JPM largest assets; Jeremy Barnum CFO p70, also signature p479 (Principal Financial Officer). multi_hop type correct."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q16",
@@ -474,7 +853,78 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Comparison: PG 87,032 (FY2026, p38), KO 47,941 (FY2025, p108), MCD 26,885 (FY2025, p16). HQ is the cover-page principal executive office address."
+      "notes": "Comparison: PG 87,032 (FY2026, p38), KO 47,941 (FY2025, p108), MCD 26,885 (FY2025, p16). HQ is the cover-page principal executive office address.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 78
+        },
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 118
+        },
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 123
+        },
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 51
+        },
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 198
+        },
+        {
+          "doc": "data/pdfs/PG.pdf",
+          "page": 38
+        },
+        {
+          "doc": "data/pdfs/PG.pdf",
+          "page": 69
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 108
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 83
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 131
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 191
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 193
+        },
+        {
+          "doc": "data/pdfs/MCD.pdf",
+          "page": 16
+        },
+        {
+          "doc": "data/pdfs/MCD.pdf",
+          "page": 19
+        },
+        {
+          "doc": "data/pdfs/MCD.pdf",
+          "page": 53
+        },
+        {
+          "doc": "data/pdfs/MCD.pdf",
+          "page": 69
+        }
+      ],
+      "review": {
+        "status": "ambiguous",
+        "note": "Answer confirmed (PEP 93,925 FY2025 > PG 87,032 FY2026 > KO 47,941 > MCD 26,885); HQ Purchase NY on p1, also p51 and p198. Ambiguity: 'latest fiscal year' mixes FY2025/FY2026; ranking holds either way."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q17",
@@ -508,7 +958,42 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Derived ratio; income statement is on p75 (the p59 MD&A shows the same 20,640)."
+      "notes": "Derived ratio; income statement is on p75 (the p59 MD&A shows the same 20,640).",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 79
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 117
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 66
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 82
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 85
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "20,640/65,179 = 31.6666%, recomputed."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q18",
@@ -542,7 +1027,34 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Derived ratio."
+      "notes": "Derived ratio.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 53
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 57
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 104
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 105
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 106
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "130,387/215,938 = 60.3817%, recomputed; operating income also p53."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q19",
@@ -576,7 +1088,46 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Derived ratio. Descending columns (2025 first). The filing's own table shows 30%."
+      "notes": "Derived ratio. Descending columns (2025 first). The filing's own table shows 30%.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 144
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 145
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 148
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 168
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 105
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 122
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 167
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 202
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "60,458/200,966 = 30.0837%. Gold p121 is MD&A; primary income statement is p144."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q20",
@@ -604,7 +1155,12 @@
       "answerable": false,
       "expected_behaviour": "abstain",
       "notes": "Honest-failure test: metric not in a bank's filing (GrossProfit applies to nonbank filers). Abstain expected. Page 79 is cited as the closest revenue line only.",
-      "answerable_by_graph": "unknown"
+      "answerable_by_graph": "unknown",
+      "review": {
+        "status": "confirmed",
+        "note": "Abstain correct: no 'gross profit' anywhere in the JPM filing."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q21",
@@ -647,7 +1203,54 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "BAC p68 'Selected Annual Financial Data' shows 3,410,412; the difference is not resolved here, and the ranking is unaffected."
+      "notes": "BAC p68 'Selected Annual Financial Data' shows 3,410,412; the difference is not resolved here, and the ranking is unaffected.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 93
+        },
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 245
+        },
+        {
+          "doc": "data/pdfs/JPM.pdf",
+          "page": 447
+        },
+        {
+          "doc": "data/pdfs/BAC.pdf",
+          "page": 62
+        },
+        {
+          "doc": "data/pdfs/BAC.pdf",
+          "page": 158
+        },
+        {
+          "doc": "data/pdfs/BAC.pdf",
+          "page": 168
+        },
+        {
+          "doc": "data/pdfs/BAC.pdf",
+          "page": 295
+        },
+        {
+          "doc": "data/pdfs/C.pdf",
+          "page": 16
+        },
+        {
+          "doc": "data/pdfs/C.pdf",
+          "page": 161
+        },
+        {
+          "doc": "data/pdfs/C.pdf",
+          "page": 162
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "JPM 4,424,900 > BAC 3,411,738 > C 2,657,202. Open note resolved: BAC 3,410,412 on p68/p72 is the AVERAGE balance sheet total assets; year-end 3,411,738 (p65, consolidated balance sheet p168) is correct."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q22",
@@ -690,7 +1293,38 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Diluted EPS as reported."
+      "notes": "Diluted EPS as reported.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 56
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 63
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 89
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 53
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 86
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "MSFT 17.95 > AAPL 8.98 > NVDA 4.90 diluted FY2026."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q23",
@@ -733,7 +1367,66 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Sum of reported FY2025 revenue lines. Pfizer 'Total revenues' vs AbbVie 'Net revenues' vs Lilly 'Revenue'."
+      "notes": "Sum of reported FY2025 revenue lines. Pfizer 'Total revenues' vs AbbVie 'Net revenues' vs Lilly 'Revenue'.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 81
+        },
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 193
+        },
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 195
+        },
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 198
+        },
+        {
+          "doc": "data/pdfs/ABBV.pdf",
+          "page": 72
+        },
+        {
+          "doc": "data/pdfs/ABBV.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/ABBV.pdf",
+          "page": 165
+        },
+        {
+          "doc": "data/pdfs/ABBV.pdf",
+          "page": 167
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 66
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 82
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 85
+        },
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 117
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "62,579+61,160+65,179 = 188,918, recomputed."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q24",
@@ -779,7 +1472,70 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Growth = FY2026/FY2025 - 1 from the filing's own columns. gold_value is the NVIDIA growth fraction."
+      "notes": "Growth = FY2026/FY2025 - 1 from the filing's own columns. gold_value is the NVIDIA growth fraction.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 53
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 57
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 104
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 105
+        },
+        {
+          "doc": "data/pdfs/NVDA.pdf",
+          "page": 106
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 56
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 57
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 121
+        },
+        {
+          "doc": "data/pdfs/MSFT.pdf",
+          "page": 123
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 39
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 41
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 76
+        },
+        {
+          "doc": "data/pdfs/AAPL.pdf",
+          "page": 77
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "NVDA 215,938/130,497-1 = 65.47%; MSFT 331,839/281,724-1 = 17.79%; AAPL 478,834/416,161-1 = 15.06%. Prior-year values on the same pages."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q25",
@@ -822,7 +1578,50 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "COF 'Total net revenue' from the three-year selected-data table (column order 2025, 2024, 2023). Revenue definitions differ by issuer."
+      "notes": "COF 'Total net revenue' from the three-year selected-data table (column order 2025, 2024, 2023). Revenue definitions differ by issuer.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/AXP.pdf",
+          "page": 75
+        },
+        {
+          "doc": "data/pdfs/AXP.pdf",
+          "page": 134
+        },
+        {
+          "doc": "data/pdfs/COF.pdf",
+          "page": 77
+        },
+        {
+          "doc": "data/pdfs/COF.pdf",
+          "page": 241
+        },
+        {
+          "doc": "data/pdfs/MA.pdf",
+          "page": 63
+        },
+        {
+          "doc": "data/pdfs/MA.pdf",
+          "page": 69
+        },
+        {
+          "doc": "data/pdfs/MA.pdf",
+          "page": 81
+        },
+        {
+          "doc": "data/pdfs/MA.pdf",
+          "page": 98
+        },
+        {
+          "doc": "data/pdfs/MA.pdf",
+          "page": 125
+        }
+      ],
+      "review": {
+        "status": "ambiguous",
+        "note": "Answer confirmed (AXP 72,229 > COF 53,434 > MA 32,791). Ambiguity: 'total revenue' definitions differ (AXP net of interest expense, COF total net revenue, MA net revenue); AXP also leads on gross (interest income 25,598 + non-interest revenues 54,865 vs COF 58,696 + 10,556)."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q26",
@@ -857,7 +1656,46 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "GS total net revenues from the financial-data table on p130; MS from the MD&A summary table on p68."
+      "notes": "GS total net revenues from the financial-data table on p130; MS from the MD&A summary table on p68.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/MS.pdf",
+          "page": 71
+        },
+        {
+          "doc": "data/pdfs/MS.pdf",
+          "page": 187
+        },
+        {
+          "doc": "data/pdfs/MS.pdf",
+          "page": 342
+        },
+        {
+          "doc": "data/pdfs/MS.pdf",
+          "page": 348
+        },
+        {
+          "doc": "data/pdfs/GS.pdf",
+          "page": 139
+        },
+        {
+          "doc": "data/pdfs/GS.pdf",
+          "page": 263
+        },
+        {
+          "doc": "data/pdfs/GS.pdf",
+          "page": 454
+        },
+        {
+          "doc": "data/pdfs/GS.pdf",
+          "page": 456
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "MS 70,645 > GS 58,283 FY2025. Primary statements: GS p263, MS p187."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q27",
@@ -892,7 +1730,42 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Two companies, pairwise comparison; differs in revenue line naming."
+      "notes": "Two companies, pairwise comparison; differs in revenue line naming.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 78
+        },
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 118
+        },
+        {
+          "doc": "data/pdfs/PEP.pdf",
+          "page": 123
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 83
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 131
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 191
+        },
+        {
+          "doc": "data/pdfs/KO.pdf",
+          "page": 193
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "PEP 93,925 > KO 47,941 FY2025."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q28",
@@ -935,7 +1808,34 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Reported diluted EPS."
+      "notes": "Reported diluted EPS.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/LLY.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/ABBV.pdf",
+          "page": 65
+        },
+        {
+          "doc": "data/pdfs/ABBV.pdf",
+          "page": 111
+        },
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 70
+        },
+        {
+          "doc": "data/pdfs/PFE.pdf",
+          "page": 97
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "LLY 22.95 > ABBV 2.36 > PFE 1.36 diluted FY2025."
+      },
+      "ai_reviewed": true
     },
     {
       "id": "Q29",
@@ -978,7 +1878,62 @@
       "verified": false,
       "answerable": true,
       "expected_behaviour": "answer",
-      "notes": "Alphabet and Amazon statements list columns ascending (2023 to 2025); Meta descending. Values taken from each column's FY2025 label."
+      "notes": "Alphabet and Amazon statements list columns ascending (2023 to 2025); Meta descending. Values taken from each column's FY2025 label.",
+      "acceptable_pages": [
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 41
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 50
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 101
+        },
+        {
+          "doc": "data/pdfs/AMZN.pdf",
+          "page": 102
+        },
+        {
+          "doc": "data/pdfs/GOOGL.pdf",
+          "page": 59
+        },
+        {
+          "doc": "data/pdfs/GOOGL.pdf",
+          "page": 102
+        },
+        {
+          "doc": "data/pdfs/GOOGL.pdf",
+          "page": 139
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 105
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 122
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 144
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 167
+        },
+        {
+          "doc": "data/pdfs/META.pdf",
+          "page": 202
+        }
+      ],
+      "review": {
+        "status": "confirmed",
+        "note": "AMZN 716,924 > GOOGL 402,836 > META 200,966 FY2025 (column order checked)."
+      },
+      "ai_reviewed": true
     }
   ]
 }

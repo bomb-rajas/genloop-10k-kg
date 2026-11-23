@@ -8,7 +8,7 @@ or on the graph name of a returned company. Items with neither a numeric nor a t
 correct, precision, recall, doc_hit or page_hit, and excluded from every mean (still listed in per_question).
 Fact precision/recall use gold fact ids that match 'TICKER|Metric|FYyyyy'; abstain-expected items use an empty gold set
 (P=1, R=1 when nothing is returned, P=0 when something is). Otherwise P/R are None and left out of the means.
-page_hit_strict is reported separately from accuracy: gold lists one page per value, so a summary page is a miss.
+page_hit_strict is reported separately from accuracy: the cited page must be a gold page or in acceptable_pages (D-081).
 wrong_page rows count as correct for accuracy.
 """
 import csv
@@ -112,13 +112,15 @@ def score(item, res, G):
     else:
         prec = rec = None
 
-    # citation check: doc ticker in gold docs and page in gold pages (strict: gold lists one page per value)
+    # citation check: doc ticker in gold docs and page in gold pages, or (doc, page) in acceptable_pages (D-081)
     gold_docs = {Path(d).stem for d in item.get("docs", [])}
     gold_pages = set(item.get("pages", []))
+    ok_pages = {(Path(a["doc"]).stem, a["page"]) for a in item.get("acceptable_pages", [])}
     cites = res.get("citations", []) or []
     scorable = correct is not None and not expect_abstain
     doc_hit = any(Path(str(c.get("doc"))).stem in gold_docs for c in cites) if cites and scorable else None
-    page_strict = any(c.get("page") in gold_pages and Path(str(c.get("doc"))).stem in gold_docs for c in cites) \
+    page_strict = any((c.get("page") in gold_pages and Path(str(c.get("doc"))).stem in gold_docs)
+                      or (Path(str(c.get("doc"))).stem, c.get("page")) in ok_pages for c in cites) \
         if cites and scorable else None
 
     missing = [f for f in gold_facts if f not in G.nodes]
@@ -172,8 +174,8 @@ def aggregate(rows):
 NOTES = {
     "accuracy": "correct is value/term based. wrong_page rows count as correct for accuracy.",
     "wrong_page": "value correct but the cited page is not in gold pages. Reported in failure_category only; not an accuracy miss.",
-    "page_strict_rate": "strict page check: cited page must be a gold page. Gold lists one page per value, so a primary "
-                        "statement page that holds the value and a summary page both count as misses. Not used for accuracy.",
+    "page_strict_rate": "strict page check: cited page must be a gold page or in acceptable_pages (other pages of the "
+                        "same filing that carry the value, D-081). Not used for accuracy.",
     "doc_hit_rate": "cited doc is a gold doc (answered rows only).",
     "unscored": "rows with no checkable gold (no number, no term) have no correct, precision, recall or citation "
                 "score and are excluded from all means. They stay listed in per_question.csv with failure_category unscored.",
