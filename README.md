@@ -1,6 +1,6 @@
 # GenLoop: 10-K knowledge-graph QA
 
-Builds a knowledge graph from the latest 10-K of 40 US public companies (4 sectors x 10) and answers questions by traversing the graph, not by vector search. Every answer cites its document and PDF page, or abstains when the fact is not in the graph. Repo: https://github.com/bomb-rajas/genloop-10k-kg
+Builds a knowledge graph from the latest 10-K of 40 US public companies (4 sectors x 10) and answers questions by traversing the graph, not by vector search. Every answer cites its document and PDF page, or abstains when the fact is not in the graph. Repo: https://github.com/bomb-rajas/genloop-10k-knowledge-graph
 
 ![GenLoop knowledge graph](kg-visualization/genloop-kg.png)
 
@@ -21,7 +21,7 @@ cp .env.example .env        # optional: GROQ_API_KEY, GEMINI_API_KEY (only neede
 **1. Set up** (the built graph `graph/kg.json` is already in the repo; no keys, downloads or build step needed):
 
 ```bash
-git clone https://github.com/bomb-rajas/genloop-10k-kg.git && cd genloop-10k-kg
+git clone https://github.com/bomb-rajas/genloop-10k-knowledge-graph.git && cd genloop-10k-knowledge-graph
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
@@ -119,5 +119,5 @@ The author decided what to build and the rules it had to follow; AI wrote the co
 - The author supplied the Groq and Gemini keys and chose Groq as primary with Gemini as fallback after testing which models worked.
 - The author set the process: AI works as Implementer and Verifier, review and test after each milestone, honest failure analysis, question selection disclosed.
 - The author asked for the blind second-model gold review and approved the planner and parser fixes after seeing the failure diagnosis.
-- The author asked for the interactive KG explorer and the minimal results PDF, and published the repo.
+- The author asked for the interactive knowledge graph explorer and the minimal results PDF, and published the repo.
 - The author verifies the gold by hand.

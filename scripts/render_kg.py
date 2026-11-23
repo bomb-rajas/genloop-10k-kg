@@ -147,7 +147,7 @@ def png(overview_H):
         cx, cy = mx + rad * dy, my - rad * dx
         ax.text((1-tt)**2*x1 + 2*tt*(1-tt)*cx + tt**2*x2, (1-tt)**2*y1 + 2*tt*(1-tt)*cy + tt**2*y2, f"{r} ({c})", ha="center", va="center",
                 fontsize=10, zorder=5, bbox=dict(fc="w", ec="none", pad=1.2, alpha=0.9))
-    ax.set_title(f"GenLoop KG schema: {G.number_of_nodes():,} nodes, {G.number_of_edges():,} edges", fontsize=16)
+    ax.set_title(f"GenLoop knowledge graph schema: {G.number_of_nodes():,} nodes, {G.number_of_edges():,} edges", fontsize=16)
     ax.axis("off")
     fig.savefig(OUT / "schema.png", dpi=150, bbox_inches="tight")
 

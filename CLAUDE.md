@@ -22,7 +22,7 @@
 | Benchmark (29 questions, verified:false) | benchmark/benchmark.json, benchmark/README.md |
 | Scoring | `python -m src.evaluate` -> report/metrics.json, report/per_question.csv |
 | Results PDF | results/results.pdf (built by scripts/make_report.py) |
-| KG views | kg-visualization/ (scripts/render_kg.py, scripts/explorer_template.html) |
+| Knowledge graph views | kg-visualization/ (scripts/render_kg.py, scripts/explorer_template.html) |
 | Tests | tests/ (`.venv/bin/python -m pytest -q`) |
 
 ## 3. Failure log
