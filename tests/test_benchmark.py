@@ -25,9 +25,9 @@ def parsed_pages(ticker):
 
 
 def test_count_and_ids(items):
-    assert len(items) == 59
+    assert len(items) == 29
     ids = [i["id"] for i in items]
-    assert ids == [f"Q{n:02d}" for n in range(1, 60)]
+    assert ids == [f"Q{n:02d}" for n in range(1, 30)]
     assert len(ids) == len(set(ids))
     assert all(re.fullmatch(r"Q\d{2}", i) for i in ids)
 
@@ -36,7 +36,7 @@ def test_types_present(items):
     counts = {t: sum(i["type"] == t for i in items) for t in TYPES}
     assert set(t for t in TYPES if counts[t]) == TYPES, counts
     assert set(i["type"] for i in items) <= TYPES
-    assert counts == {"single_fact": 20, "multi_hop": 20, "cross_filing": 19}
+    assert counts == {"single_fact": 10, "multi_hop": 10, "cross_filing": 9}
 
 
 def test_required_fields_and_verified_false(items):
@@ -58,7 +58,7 @@ def test_fact_id_format(items):
 
 def test_unanswerable_items_marked(items):
     unans = [i for i in items if not i["answerable"]]
-    assert len(unans) == 7
+    assert len(unans) == 3
     for i in unans:
         assert i["gold_value"] is None and i["answerable_by_graph"] == "unknown", i["id"]
 

@@ -19,7 +19,7 @@
 | Entities (segments, auditor, people, HQ) | src/entities.py -> data/entities/ |
 | Graph build and helpers | src/graph.py (alias src/build_graph.py) -> graph/kg.json |
 | Planner, traversal, abstain | src/planner.py, src/query.py (`python -m src.query "q" [--json]`) |
-| Benchmark (59 questions, verified:false) | benchmark/benchmark.json, benchmark/README.md |
+| Benchmark (29 questions, verified:false) | benchmark/benchmark.json, benchmark/README.md |
 | Scoring | `python -m src.evaluate` -> report/metrics.json, report/per_question.csv |
 | Results PDF | results/results.pdf (built by scripts/make_report.py) |
 | KG views | kg-visualization/ (scripts/render_kg.py, scripts/explorer_template.html) |

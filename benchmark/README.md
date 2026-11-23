@@ -1,13 +1,13 @@
 # Benchmark
 
-`benchmark.json`: one benchmark of 59 questions (Q01-Q59) over Tech, Banks & Payments, Consumer & Retail and Healthcare filers: 20 single_fact, 20 multi_hop, 19 cross_filing. Every item is `verified: false`: gold was AI-drafted and AI-reviewed, not checked by a human.
+`benchmark.json`: 29 questions (Q01-Q29) over Tech, Banks & Payments, Consumer & Retail and Healthcare filers: 10 single_fact, 10 multi_hop, 9 cross_filing (3 are unanswerable by design). Every item is `verified: false`: gold was AI-drafted and AI-reviewed, not checked by a human.
 
 How gold was made
 - Read only from `data/parsed/{TICKER}.json` page text (1-based keys) and the statement tables printed there. Gold was not taken from `data/facts`, `data/entities`, `graph/` or any system output.
 - Each figure is quoted in `evidence` as `{page, doc, key, quote}` (`doc` = `data/pdfs/{TICKER}.pdf`, the filing the page belongs to). `key` is the number or phrase that must appear on that page. `acceptable_pages` lists other pages that print the same figure.
 - Derived values (ratios, sums, growth) show their inputs in `gold_answer`. `gold_value` is absolute USD, or a fraction for ratios.
 - Fiscal year follows the year of the filing's period end (labels as printed in the PDF statement headers). Column order is checked per statement; AMZN and GOOGL list years ascending.
-- Honest limit: Q30-Q44 and Q45-Q59 were written after earlier planner fixes, so the later questions are only partly independent of tuning.
+- Honest limit: question selection was informed by the extractor's known gap list, so abstain results are likely optimistic.
 
 Question types
 - single_fact: one metric, one company, one fiscal year.

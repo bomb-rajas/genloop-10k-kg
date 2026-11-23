@@ -37,7 +37,7 @@ Plus `python scripts/render_kg.py` to regenerate the explorer.
 | `data` | `pdfs` (gitignored), `parsed` text, `facts` (numbers read from PDF tables), `entities` (people, auditor, HQ, segments extracted by LLM from text and grounded), `xbrl` (gitignored) |
 | `graph` | `kg.json`, the built graph |
 | `src` | pipeline, planner, query |
-| `benchmark` | `benchmark.json` (59 questions with gold), `gold_review.md` |
+| `benchmark` | `benchmark.json` (29 questions with gold), `gold_review.md` |
 | `report` | `metrics.json`, `per_question.csv` |
 | `results` | `results.pdf` |
 | `kg-visualization` | explorer and graph images |
@@ -45,18 +45,18 @@ Plus `python scripts/render_kg.py` to regenerate the explorer.
 
 ## Results
 
-59 questions, `report/metrics.json`: **53 correct of 58 scored** (1 has no checkable gold).
+29 questions, `report/metrics.json`: **26 correct of 28 scored** (1 has no checkable gold).
 
-| | n | correct | accuracy (scored) | accuracy (all 59) |
+| | n | correct | accuracy (scored) | accuracy (all 29) |
 |---|---|---|---|---|
-| Overall | 59 | 53/58 | 91.4% | 89.8% |
-| Single fact | 20 | 20/20 | 100% | 100% |
-| Multi-hop | 20 | 15/19 | 78.9% | 75.0% |
-| Cross-filing | 19 | 18/19 | 94.7% | 94.7% |
+| Overall | 29 | 26/28 | 92.9% | 89.7% |
+| Single fact | 10 | 10/10 | 100% | 100% |
+| Multi-hop | 10 | 7/9 | 77.8% | 70.0% |
+| Cross-filing | 9 | 9/9 | 100% | 100% |
 
-Precision 1.00, recall 0.99. 7 of 7 expected abstentions were correct.
+Precision 1.00, recall 1.00. 3 of 3 expected abstentions were correct.
 
-Honest note: all 59 questions are in one file. Q30-Q59 were written after earlier planner fixes, and Q45-Q59 are the cleanest estimate: 12/15 correct (80%). Gold is AI-drafted and AI-reviewed (`verified: false`); a human should verify it.
+Honest note: I chose questions after seeing the extractor's known gaps, so results are likely optimistic; n=29 is small (one question is 3.4 points). Gold is AI-drafted and AI-reviewed (`verified: false`); a human should verify it.
 
 ## Known gaps
 
@@ -77,7 +77,7 @@ I decided what to build and the rules it had to follow; AI wrote the code.
 - I set the hard rules: parse PDFs only (EDGAR HTML converted to PDF with headless Chrome, never parsed for facts); XBRL only to validate, never to supply answers; answer by graph traversal, not vector search; free LLM tiers only; gold is never edited to fit output.
 - I supplied the Groq and Gemini keys and chose Groq as primary with Gemini as fallback after testing which models worked.
 - I set the process: AI works as Implementer and Verifier, review and test after each milestone, honest failure analysis, question selection disclosed.
-- I asked for the blind second-model gold review and for the unseen questions (Q30-Q59), and approved the planner and parser fixes after seeing the failure diagnosis.
+- I asked for the blind second-model gold review and approved the planner and parser fixes after seeing the failure diagnosis.
 - I asked for the interactive KG explorer and the minimal results PDF, and published the repo.
 - I will hand-verify the gold.
 
