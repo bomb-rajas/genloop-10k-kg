@@ -20,6 +20,7 @@
       "evidence": [
         {
           "page": 49,
+          "doc": "data/pdfs/AAPL.pdf",
           "key": "478,834",
           "quote": "Total net sales 478,834 416,161 391,035"
         }
@@ -74,6 +75,7 @@
       "evidence": [
         {
           "page": 73,
+          "doc": "data/pdfs/MSFT.pdf",
           "key": "133,749",
           "quote": "Net income $ 133,749 $ 101,832 $ 88,136"
         }
@@ -132,6 +134,7 @@
       "evidence": [
         {
           "page": 71,
+          "doc": "data/pdfs/NVDA.pdf",
           "key": "215,938",
           "quote": "Revenue $ 215,938 $ 130,497 $ 60,922"
         }
@@ -186,6 +189,7 @@
       "evidence": [
         {
           "page": 75,
+          "doc": "data/pdfs/WMT.pdf",
           "key": "713,163",
           "quote": "Total revenues 713,163 680,985 648,125"
         }
@@ -232,6 +236,7 @@
       "evidence": [
         {
           "page": 108,
+          "doc": "data/pdfs/KO.pdf",
           "key": "13,107",
           "quote": "Net Income Attributable to Shareowners of The Coca-Cola Company $ 13,107 $ 10,631 $ 10,714"
         }
@@ -274,6 +279,7 @@
       "evidence": [
         {
           "page": 65,
+          "doc": "data/pdfs/BAC.pdf",
           "key": "3,411,738",
           "quote": "Total assets $ 3,411,738 $ 3,261,299 $ 150,439 5"
         }
@@ -307,6 +313,7 @@
       "evidence": [
         {
           "page": 79,
+          "doc": "data/pdfs/JPM.pdf",
           "key": "4,424,900",
           "quote": "Total assets 4,424,900 4,002,814 3,875,393"
         }
@@ -353,6 +360,7 @@
       "evidence": [
         {
           "page": 114,
+          "doc": "data/pdfs/MRK.pdf",
           "key": "136,866",
           "quote": "$ 136,866 $ 117,106"
         }
@@ -385,6 +393,7 @@
       "evidence": [
         {
           "page": 108,
+          "doc": "data/pdfs/PFE.pdf",
           "key": "1.36",
           "quote": "Net income attributable to Pfizer Inc. common shareholders $ 1.36 $ 1.41 $ 0.37"
         }
@@ -427,6 +436,7 @@
       "evidence": [
         {
           "page": 97,
+          "doc": "data/pdfs/V.pdf",
           "key": "45,903",
           "quote": "Net revenue $ 45,903 $ 40,000 $ 35,926"
         }
@@ -462,11 +472,13 @@
       "evidence": [
         {
           "page": 49,
+          "doc": "data/pdfs/AAPL.pdf",
           "key": "132,175",
           "quote": "Net income $ 132,175 $ 112,010 $ 93,736"
         },
         {
           "page": 49,
+          "doc": "data/pdfs/AAPL.pdf",
           "key": "478,834",
           "quote": "Total net sales 478,834 416,161 391,035"
         }
@@ -535,11 +547,13 @@
       "evidence": [
         {
           "page": 73,
+          "doc": "data/pdfs/MSFT.pdf",
           "key": "133,749",
           "quote": "Net income $ 133,749 $ 101,832 $ 88,136"
         },
         {
           "page": 73,
+          "doc": "data/pdfs/MSFT.pdf",
           "key": "331,839",
           "quote": "Total revenue 331,839 281,724 245,122"
         }
@@ -610,6 +624,7 @@
       "evidence": [
         {
           "page": 39,
+          "doc": "data/pdfs/AAPL.pdf",
           "key": "198,083",
           "quote": "Americas $ 198,083 11 % $ 178,353 7 % $ 167,045"
         }
@@ -653,11 +668,13 @@
       "evidence": [
         {
           "page": 58,
+          "doc": "data/pdfs/AMZN.pdf",
           "key": "716,924",
           "quote": "Total net sales 574,785 637,959 716,924"
         },
         {
           "page": 54,
+          "doc": "data/pdfs/AMZN.pdf",
           "key": "Ernst & Young LLP",
           "quote": "Report of Ernst & Young LLP, Independent Registered Public Accounting Firm (PCAOB ID: 42)"
         }
@@ -781,11 +798,13 @@
       "evidence": [
         {
           "page": 79,
+          "doc": "data/pdfs/JPM.pdf",
           "key": "4,424,900",
           "quote": "Total assets 4,424,900 4,002,814 3,875,393"
         },
         {
           "page": 70,
+          "doc": "data/pdfs/JPM.pdf",
           "key": "Chief Financial Officer since May 2021",
           "quote": "Jeremy Barnum 53 Chief Financial Officer since May 2021"
         }
@@ -841,11 +860,13 @@
       "evidence": [
         {
           "page": 105,
+          "doc": "data/pdfs/PEP.pdf",
           "key": "93,925",
           "quote": "Net Revenue $ 93,925 $ 91,854 $ 91,471"
         },
         {
           "page": 1,
+          "doc": "data/pdfs/PEP.pdf",
           "key": "700 Anderson Hill Road, Purchase, New York",
           "quote": "700 Anderson Hill Road, Purchase, New York 10577"
         }
@@ -946,11 +967,13 @@
       "evidence": [
         {
           "page": 75,
+          "doc": "data/pdfs/LLY.pdf",
           "key": "20,640",
           "quote": "Net income $ 20,640 $ 10,590 $ 5,240"
         },
         {
           "page": 75,
+          "doc": "data/pdfs/LLY.pdf",
           "key": "65,179",
           "quote": "Revenue $ 65,179 $ 45,043 $ 34,124"
         }
@@ -1015,11 +1038,13 @@
       "evidence": [
         {
           "page": 71,
+          "doc": "data/pdfs/NVDA.pdf",
           "key": "130,387",
           "quote": "Operating income 130,387 81,453 32,972"
         },
         {
           "page": 71,
+          "doc": "data/pdfs/NVDA.pdf",
           "key": "215,938",
           "quote": "Revenue $ 215,938 $ 130,497 $ 60,922"
         }
@@ -1076,11 +1101,13 @@
       "evidence": [
         {
           "page": 121,
+          "doc": "data/pdfs/META.pdf",
           "key": "60,458",
           "quote": "Net income $ 60,458 $ 62,360 $ 39,098"
         },
         {
           "page": 121,
+          "doc": "data/pdfs/META.pdf",
           "key": "200,966",
           "quote": "Revenue $ 200,966 $ 164,501 $ 134,902"
         }
@@ -1147,6 +1174,7 @@
       "evidence": [
         {
           "page": 79,
+          "doc": "data/pdfs/JPM.pdf",
           "key": "182,447",
           "quote": "Total net revenue 182,447 177,556 158,104"
         }
@@ -1186,16 +1214,19 @@
       "evidence": [
         {
           "page": 79,
+          "doc": "data/pdfs/JPM.pdf",
           "key": "4,424,900",
           "quote": "Total assets 4,424,900 4,002,814 3,875,393"
         },
         {
           "page": 65,
+          "doc": "data/pdfs/BAC.pdf",
           "key": "3,411,738",
           "quote": "Total assets $ 3,411,738 $ 3,261,299"
         },
         {
           "page": 15,
+          "doc": "data/pdfs/C.pdf",
           "key": "2,657,202",
           "quote": "Total assets $ 2,657,202 $ 2,352,945"
         }
@@ -1276,16 +1307,19 @@
       "evidence": [
         {
           "page": 73,
+          "doc": "data/pdfs/MSFT.pdf",
           "key": "17.95",
           "quote": "Diluted $ 17.95 $ 13.64 $ 11.80"
         },
         {
           "page": 49,
+          "doc": "data/pdfs/AAPL.pdf",
           "key": "8.98",
           "quote": "Diluted $ 8.98 $ 7.46 $ 6.08"
         },
         {
           "page": 71,
+          "doc": "data/pdfs/NVDA.pdf",
           "key": "4.90",
           "quote": "Diluted $ 4.90 $ 2.94 $ 1.19"
         }
@@ -1350,16 +1384,19 @@
       "evidence": [
         {
           "page": 108,
+          "doc": "data/pdfs/PFE.pdf",
           "key": "62,579",
           "quote": "Total revenues 62,579 63,627 59,553"
         },
         {
           "page": 95,
+          "doc": "data/pdfs/ABBV.pdf",
           "key": "61,160",
           "quote": "Net revenues $ 61,160 $ 56,334 $ 54,318"
         },
         {
           "page": 75,
+          "doc": "data/pdfs/LLY.pdf",
           "key": "65,179",
           "quote": "Revenue $ 65,179 $ 45,043 $ 34,124"
         }
@@ -1455,16 +1492,19 @@
       "evidence": [
         {
           "page": 71,
+          "doc": "data/pdfs/NVDA.pdf",
           "key": "130,497",
           "quote": "Revenue $ 215,938 $ 130,497 $ 60,922"
         },
         {
           "page": 73,
+          "doc": "data/pdfs/MSFT.pdf",
           "key": "331,839",
           "quote": "Total revenue 331,839 281,724 245,122"
         },
         {
           "page": 49,
+          "doc": "data/pdfs/AAPL.pdf",
           "key": "478,834",
           "quote": "Total net sales 478,834 416,161 391,035"
         }
@@ -1561,16 +1601,19 @@
       "evidence": [
         {
           "page": 71,
+          "doc": "data/pdfs/AXP.pdf",
           "key": "72,229",
           "quote": "Total revenues net of interest expense $ 72,229 $ 65,949 $ 60,515"
         },
         {
           "page": 61,
+          "doc": "data/pdfs/COF.pdf",
           "key": "53,434",
           "quote": "Total net revenue 53,434 39,112 36,787"
         },
         {
           "page": 62,
+          "doc": "data/pdfs/MA.pdf",
           "key": "32,791",
           "quote": "Net revenue $ 32,791 $ 28,167 $ 25,098"
         }
@@ -1644,11 +1687,13 @@
       "evidence": [
         {
           "page": 130,
+          "doc": "data/pdfs/GS.pdf",
           "key": "58,283",
           "quote": "Net revenues $ 58,283 $ 53,512 $ 46,254"
         },
         {
           "page": 68,
+          "doc": "data/pdfs/MS.pdf",
           "key": "70,645",
           "quote": "Net revenues $ 70,645 $ 61,761 $ 54,143"
         }
@@ -1718,11 +1763,13 @@
       "evidence": [
         {
           "page": 105,
+          "doc": "data/pdfs/PEP.pdf",
           "key": "93,925",
           "quote": "Net Revenue $ 93,925 $ 91,854 $ 91,471"
         },
         {
           "page": 108,
+          "doc": "data/pdfs/KO.pdf",
           "key": "47,941",
           "quote": "Net Operating Revenues $ 47,941 $ 47,061 $ 45,754"
         }
@@ -1791,16 +1838,19 @@
       "evidence": [
         {
           "page": 75,
+          "doc": "data/pdfs/LLY.pdf",
           "key": "22.95",
           "quote": "Diluted $ 22.95 $ 11.71 $ 5.80"
         },
         {
           "page": 95,
+          "doc": "data/pdfs/ABBV.pdf",
           "key": "2.36",
           "quote": "Diluted earnings per share attributable to AbbVie Inc. $ 2.36 $ 2.39 $ 2.72"
         },
         {
           "page": 108,
+          "doc": "data/pdfs/PFE.pdf",
           "key": "1.36",
           "quote": "Net income attributable to Pfizer Inc. common shareholders $ 1.36 $ 1.41 $ 0.37"
         }
@@ -1861,16 +1911,19 @@
       "evidence": [
         {
           "page": 58,
+          "doc": "data/pdfs/AMZN.pdf",
           "key": "716,924",
           "quote": "Total net sales 574,785 637,959 716,924"
         },
         {
           "page": 84,
+          "doc": "data/pdfs/GOOGL.pdf",
           "key": "402,836",
           "quote": "Revenues $ 307,394 $ 350,018 $ 402,836"
         },
         {
           "page": 121,
+          "doc": "data/pdfs/META.pdf",
           "key": "200,966",
           "quote": "Revenue $ 200,966 $ 164,501 $ 134,902"
         }

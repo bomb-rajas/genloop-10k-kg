@@ -186,6 +186,9 @@ def test_aggregate_per_type():
     rep = ev.build_report(rows)
     assert rep["overall"]["n"] == 3 and rep["overall"]["correct"] == 2 and rep["overall"]["accuracy"] == 0.6667
     assert rep["overall"]["abstained"] == 1 and rep["overall"]["abstain_correct"] == 1
+    assert rep["overall"]["accuracy_over_all"] == 0.6667
+    assert rep["overall"]["precision_excl_abstain"] == 0.5 and rep["overall"]["recall_excl_abstain"] == 0.5
+    assert rep["per_type"]["multi_hop"]["precision_excl_abstain"] is None
     assert rep["per_type"]["single_fact"]["accuracy"] == 0.5
     assert rep["per_type"]["multi_hop"]["n"] == 1
     assert rep["per_type"]["multi_hop"]["accuracy"] == 1.0
@@ -207,3 +210,11 @@ def test_run_survives_exception(monkeypatch):
     monkeypatch.setattr(query, "answer", boom)
     rows = ev.run([item()], G)
     assert rows[0]["abstained"] is True and rows[0]["reason"] == "plan_failed"
+
+
+def test_accuracy_over_all_counts_unscored_in_denominator():
+    rows = [ev.score(item(gold_value=716924e6, gold_fact_ids=["AMZN|Revenue|FY2025"]),
+                     res(value=716924e6, unit="USD", fact_ids=["AMZN|Revenue|FY2025"]), G),
+            ev.score(item(id="u"), res(), G)]  # no checkable gold: unscored
+    a = ev.aggregate(rows)
+    assert a["accuracy"] == 1.0 and a["accuracy_over_all"] == 0.5

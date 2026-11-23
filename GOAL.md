@@ -6,7 +6,7 @@ Build the Genloop SEC 10-K knowledge-graph QA project end to end until every ite
 
 ## Project
 A knowledge graph built from the latest 10-K of 40 companies (4 sectors × 10), queried by graph traversal (not vector search). Every answer cites its document and page. Evaluated on a self-made benchmark. Python 3.13, NetworkX, pdfplumber, Gemini free tier with Groq as fallback.
-Repo: /Users/pimp_juice/Documents/GenLoop. handoff.md is the spec: companies, schema, folder layout, risks. Read it once at the start.
+Repo: . (repo root). handoff.md is the spec: companies, schema, folder layout, risks. Read it once at the start.
 Constraints: free LLMs only; no GPU or paid APIs in the pipeline.
 PDF-only parsing: all text, tables and facts are parsed from the PDFs. EDGAR serves HTML, so the download step converts it to PDF with headless Chrome, and that HTML is never parsed for facts. Do not add HTML parsing as a fallback without my approval. SEC XBRL JSON is used only to validate extracted facts, never as an answer source.
 Time: build finished by 08:00 IST. No scope cuts. Run `date` at the start of each milestone and note it in PROGRESS.md.

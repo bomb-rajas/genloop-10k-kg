@@ -166,7 +166,10 @@ def aggregate(rows):
     return dict(
         n=len(rows), scored=len(scored), correct=sum(bool(r["correct"]) for r in scored),
         accuracy=_mean([float(bool(r["correct"])) for r in scored]),
+        accuracy_over_all=round(sum(bool(r["correct"]) for r in scored) / len(rows), 4) if rows else None,  # task rule: correct / total
         precision=_mean([r["precision"] for r in scored]), recall=_mean([r["recall"] for r in scored]),
+        precision_excl_abstain=_mean([r["precision"] for r in scored if not r["expected_abstain"]]),
+        recall_excl_abstain=_mean([r["recall"] for r in scored if not r["expected_abstain"]]),
         doc_hit_rate=_mean([None if r["doc_hit"] is None else float(r["doc_hit"]) for r in ans]),
         page_strict_rate=_mean([None if r["page_hit_strict"] is None else float(r["page_hit_strict"]) for r in ans]),
         abstained=sum(r["abstained"] for r in rows),
@@ -177,6 +180,8 @@ def aggregate(rows):
 
 
 NOTES = {
+    "accuracy_over_all": "correct / n (all questions, unscored count as not correct); the task-defined accuracy. 'accuracy' is correct / scored.",
+    "precision_excl_abstain": "precision and recall means over scored rows that are not abstain-expected (abstain-expected rows score P=R=1 when refused, which lifts the plain means).",
     "accuracy": "correct is value/term based. wrong_page rows count as correct for accuracy.",
     "wrong_page": "value correct but the cited page is not in gold pages. Reported in failure_category only; not an accuracy miss.",
     "page_strict_rate": "strict page check: cited page must be a gold page or in acceptable_pages (other pages of the "
@@ -204,11 +209,11 @@ def build_report(rows):
 
 
 def table(report):
-    cols = ("n", "scored", "correct", "accuracy", "precision", "recall", "doc_hit_rate", "page_strict_rate",
-            "abstained", "unscored")
-    lines = [f"{'group':<14}" + "".join(f"{c:>17}" for c in cols)]
+    cols = ("n", "scored", "correct", "accuracy", "accuracy_over_all", "precision", "recall", "precision_excl_abstain",
+            "recall_excl_abstain", "doc_hit_rate", "page_strict_rate", "abstained", "unscored")
+    lines = [f"{'group':<14}" + "".join(f"{c[:22]:>23}" for c in cols)]
     for name, agg in [("overall", report["overall"]), *report["per_type"].items()]:
-        lines.append(f"{name:<14}" + "".join(f"{str(agg[c]):>17}" for c in cols))
+        lines.append(f"{name:<14}" + "".join(f"{str(agg[c]):>23}" for c in cols))
     lines.append("")
     lines.append(f"{'id':<5}{'type':<12}{'ok':<6}{'P':>6}{'R':>6}{'doc':>6}{'pg_strict':>10}  failure_category")
     for r in report["per_question"]:

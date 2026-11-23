@@ -61,11 +61,11 @@ def test_unanswerable_items_marked(items):
 
 
 def test_evidence_pages_exist_and_contain_key(items):
-    # evidence carries no doc field, so the key must appear on that page of one of the item's docs
+    # each evidence entry names its doc (one of the item's docs); the key must appear on that page of that doc
     for i in items:
         tickers = [Path(d).stem for d in i["docs"]]
         for e in i["evidence"]:
             assert e["page"] in i["pages"], (i["id"], e["page"])
-            texts = [parsed_pages(t)[str(e["page"])] for t in tickers if str(e["page"]) in parsed_pages(t)]
-            assert texts, (i["id"], e["page"])
-            assert any(e["key"] in txt for txt in texts), (i["id"], e["page"], e["key"])
+            assert e["doc"] in i["docs"], (i["id"], e["doc"])
+            txt = parsed_pages(Path(e["doc"]).stem).get(str(e["page"]), "")
+            assert e["key"] in txt, (i["id"], e["page"], e["key"])

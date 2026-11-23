@@ -4,7 +4,7 @@
 
 How gold was made
 - Read only from `data/parsed/{TICKER}.json` page text (1-based keys) and the statement tables printed there. Gold was not taken from `data/facts`, `data/entities`, `graph/` or any system output.
-- Each figure is quoted in `evidence` as `{page, key, quote}`. `key` is the number or phrase that must appear on that page.
+- Each figure is quoted in `evidence` as `{page, doc, key, quote}` (`doc` = `data/pdfs/{TICKER}.pdf`, the filing the page belongs to). `key` is the number or phrase that must appear on that page.
 - Derived values (ratios, sums, growth) show their inputs in `gold_answer`. `gold_value` is absolute USD, or a fraction for ratios.
 - Fiscal year follows D-043: FY = year of the filing's period end (labels as printed in the PDF statement headers).
 - Column order is checked per statement; AMZN and GOOGL list years ascending.

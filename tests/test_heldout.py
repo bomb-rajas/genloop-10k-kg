@@ -26,9 +26,7 @@ def test_schema():
 
 def test_evidence_on_pages():
     for i in ITEMS:
-        stems = [Path(d).stem for d in i["docs"]]
         for e in i["evidence"]:
-            assert e["page"] in i["pages"], i["id"]
-            texts = [p[str(e["page"])] for s in stems
-                     for p in [json.loads((ROOT / "data/parsed" / f"{s}.json").read_text())["pages"]] if str(e["page"]) in p]
-            assert any(e["key"] in t for t in texts), (i["id"], e)
+            assert e["page"] in i["pages"] and e["doc"] in i["docs"], i["id"]
+            pages = json.loads((ROOT / "data/parsed" / f"{Path(e['doc']).stem}.json").read_text())["pages"]
+            assert e["key"] in pages.get(str(e["page"]), ""), (i["id"], e)
