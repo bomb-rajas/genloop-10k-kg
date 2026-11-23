@@ -56,7 +56,7 @@ def tr(name, d, ab=True):
     return f"<tr><td>{name}</td><td>{d['n']}</td><td>{d['scored']}</td><td>{d['correct']}</td><td>{d['accuracy']:.1%}</td><td>{d['precision']:.3f}</td><td>{d['recall']:.3f}</td><td>{abst}</td></tr>"
 table = tr("Overall", o) + "".join(tr(t, m["per_type"][t]) for t in names)
 
-def short(n): return re.sub(r",? (Inc\.?|Corp\.?|Co\.?|Corporation|Group Inc\.|& Co\.|Company)$", "", n).replace(" Inc.", "")
+def short(n): return re.sub(r",? (Inc\.?|Corp\.?|Corporation|Group Inc\.|Company)$", "", n).replace(" Inc.", "")
 sectors = list(dict.fromkeys(c["sector"] for c in companies))
 blocks = ""
 for s in sectors:
