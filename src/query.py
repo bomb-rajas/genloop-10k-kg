@@ -218,7 +218,7 @@ def role_ok(role, title):
 def entity_answer(G, plan, sel):
     rel, role, parts, ids, cites = plan["entity_rel"], plan.get("role"), [], [], []
     targets = [sel["winner"]] if sel else plan["companies"]
-    found = {}
+    found, missing = {}, []
     for t in targets:
         if rel == "EXECUTIVE_OF":
             hits = [(u, d) for u, _, d in G.in_edges(t, data=True) if d["rel"] == rel]
@@ -226,7 +226,11 @@ def entity_answer(G, plan, sel):
         else:
             hits = [(v, d) for _, v, d in G.out_edges(t, data=True) if d["rel"] == rel]
         if not hits:
-            raise Abstain("no_fact", f"{t} has no {rel} entity" + (f" with role '{role}'" if role else "") + " in the graph")
+            msg = f"{t} has no {rel} entity" + (f" with role '{role}'" if role else "") + " in the graph"
+            if sel or len(targets) == 1:
+                raise Abstain("no_fact", msg)
+            missing.append(t)  # several companies asked: answer the ones we have and name the gaps (partial answer)
+            continue
         found[t] = []
         for n, d in {h[0]: h for h in hits}.values():
             nd = G.nodes[n]
@@ -235,6 +239,9 @@ def entity_answer(G, plan, sel):
             ids.append(n)
             cites.append(cite(G, n))
         parts.append(f"{t}: " + "; ".join(found[t]))
+    if not found:
+        raise Abstain("no_fact", f"none of {', '.join(missing)} has a {rel} entity in the graph")
+    parts += [f"{t}: not in the graph" for t in missing]
     return parts, ids, cites, found
 
 

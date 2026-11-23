@@ -164,3 +164,10 @@ def test_rank_mixed_fiscal_years_named_in_text(env):
     a = query.answer("Rank banks by revenue", G, env[1])
     assert a["mixed_years"] is True and not a["abstained"]
     assert "CCC FY2025" in a["answer"] and "DDD FY2024" in a["answer"]
+
+
+def test_entity_partial_answer_names_missing_company():
+    from src import query
+    r = query.answer("Who audits Apple and Amazon?")
+    assert not r["abstained"] and "AAPL:" in r["answer"] and "AMZN: not in the graph" in r["answer"]
+    assert query.answer("Who audits Amazon?")["abstained"]
