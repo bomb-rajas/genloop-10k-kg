@@ -42,8 +42,8 @@ SECTOR_ALIASES = {"Tech": ["tech", "technology", "software"], "Banks": ["bank", 
 EXTRA_NAMES = {"GOOGL": ["google"], "JPM": ["jp morgan", "chase"], "BAC": ["bofa"], "C": ["citi", "citibank"],
                "AXP": ["amex"], "PG": ["p&g"], "KO": ["coke"], "PEP": ["pepsi"], "JNJ": ["j&j"], "LLY": ["lilly"],
                "UNH": ["united health"], "META": ["facebook"], "WMT": ["wal mart"]}
-GENERIC_FIRST = {"bank", "capital", "american", "home", "morgan", "johnson", "eli", "amazon"}
-NAME_SUFFIX = {"inc", "corp", "corporation", "co", "company", "group", "holdings", "and", "ltd", "llc", "wholesale",
+GENERIC_FIRST = {"bank", "capital", "american", "home", "morgan", "johnson", "eli"}
+NAME_SUFFIX = {"com", "inc", "corp", "corporation", "co", "company", "group", "holdings", "and", "ltd", "llc", "wholesale",
                "financial", "platforms", "laboratories", "health"}
 CASE_SENSITIVE = {"target"}  # common English words: match only when capitalised
 ENTITY_PATTERNS = [
@@ -52,6 +52,7 @@ ENTITY_PATTERNS = [
     (r"\bceo\b|chief executive", "EXECUTIVE_OF", "chief executive"),
     (r"\bcfo\b|chief financial", "EXECUTIVE_OF", "chief financial"),
     (r"\bcoo\b|chief operating", "EXECUTIVE_OF", "chief operating"),
+    (r"vice[ -]president", "EXECUTIVE_OF", "vice president"),
     (r"\bpresident\b", "EXECUTIVE_OF", "president"),
     (r"\bchair(man|woman|person)?\b", "EXECUTIVE_OF", "chair"),
     (r"executive officers?|\bexecutives\b|\bofficers?\b|management team", "EXECUTIVE_OF", None),
@@ -59,8 +60,13 @@ ENTITY_PATTERNS = [
     (r"incorporated|incorporation", "INCORPORATED_IN", None),
     (r"stock exchange|\blisted\b|\bexchange\b", "LISTED_ON", None),
 ]
-MAX_RE = r"\b(largest|highest|biggest|greatest|most|top|higher|larger|greater|maximum)\b"
-MIN_RE = r"\b(lowest|smallest|least|fewest|lower|smaller|minimum|bottom)\b"
+MAX_RE = r"\b(largest|highest|biggest|greatest|most|more|top|higher|larger|greater|maximum)\b"
+MIN_RE = r"\b(lowest|smallest|least|less|fewest|lower|smaller|minimum|bottom)\b"
+CMP_RE = MAX_RE[:-3] + "|" + MIN_RE[3:-3] + "|which)\\b"
+SUM_RE = r"\bsum\b|\bcombined\b|\btogether\b|add up|\baggregate\b|cumulative|\baverage\b|\bmean\b"
+# a metric phrase next to one of these is a different metric (D-083): 'total current assets', 'cash dividends', ...
+BAD_BEFORE = r"(current|dividends?|return on|pre ?tax|pre tax|cost of)\s*$"
+BAD_AFTER = r"^\s*(dividends?)\b"
 OCF_RE = r"operating cash flow|cash flow from operations|cash from operations|cash provided by operating"
 NUM_WORDS = {"two": 2, "three": 3, "four": 4, "five": 5, "ten": 10}
 NOT_COMPANY = {"Fiscal", "Item", "What", "Which", "Who", "How", "When", "Where", "The", "List", "Compare", "Rank", "Does",
@@ -112,7 +118,7 @@ def default_lexicon():
     return _LEX
 
 
-def _find(text, aliases, case_text=None):
+def _find(text, aliases, case_text=None, spans=None):
     """Longest-first alias spans in normalised text; returns [(start, canonical)] and the text with spans blanked."""
     found = []
     for alias in sorted(aliases, key=len, reverse=True):
@@ -120,6 +126,8 @@ def _find(text, aliases, case_text=None):
             continue
         for m in re.finditer(rf"(?<![a-z0-9&]){re.escape(alias)}(?:s|es)?(?![a-z0-9&])", text):
             found.append((m.start(), aliases[alias]))
+            if spans is not None:
+                spans.append((alias, m.start(), m.end()))
             text = text[:m.start()] + "#" * (m.end() - m.start()) + text[m.end():]
     return sorted(found), text
 
@@ -148,7 +156,13 @@ def rule_plan(q, lex):
             companies.append(t)
     if re.search(r"\bcash flow\b", n) and not re.search(OCF_RE, n):  # e.g. 'free cash flow yield' has no metric
         return None, ("unsupported_metric", "cash flow here is not operating cash flow; only 'operating cash flow' is in the graph")
-    ms, n3 = _find(n2, lex.metric_alias)
+    spans = []
+    ms, n3 = _find(n2, lex.metric_alias, spans=spans)
+    for alias, a, b in spans:  # never answer with a different metric than the one asked
+        before = re.sub(r"\btotal\s*$", "", n2[:a]).rstrip() + " "
+        bad = re.search(BAD_BEFORE, before) or re.search(BAD_AFTER, n2[b:])
+        if bad and bad.group(1).rstrip("s") not in alias:
+            return None, ("unsupported_metric", f"'{alias}' next to '{bad.group(1)}' is a different metric; not in the graph")
     metrics = []
     for _, m in ms:
         if m not in metrics:
@@ -178,7 +192,8 @@ def rule_plan(q, lex):
     if plan["entity_rel"]:
         plan["intent"] = "entity"
         plan["op"] = sup if (sup and metrics and len(companies) != 1) else None
-    elif re.search(r"\bsum\b|\bcombined\b|\btogether\b|\baggregate\b|\btotal\b|cumulative|\baverage\b|\bmean\b", low + (" total " if re.search(r"total (revenue|sales)", n) else "")) and (
+    elif (re.search(SUM_RE, low) or (re.search(r"\btotal\b", low + (" total " if re.search(r"total (revenue|sales)", n) else ""))
+                                     and not re.search(CMP_RE, low))) and (
             len(companies) >= 2 or sector or two_years):
         plan.update(intent="aggregate", op="avg" if re.search(r"\baverage\b|\bmean\b", low) else "sum")
         if two_years and re.search(r"\bthrough\b|\bto\b", low):

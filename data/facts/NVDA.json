@@ -1,5 +1,71 @@
 [
  {
+  "id": "NVDA|CapEx|FY2026",
+  "ticker": "NVDA",
+  "metric": "CapEx",
+  "value": 6042000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Purchases related to property and equipment and intangible assets",
+  "period": {
+   "fiscal_year": 2026,
+   "period_end": "2026-01-25"
+  },
+  "doc": "data/pdfs/NVDA.pdf",
+  "page": 75,
+  "snippet": "Purchases related to property and equipment and intangible assets -6,042 -3,236 -1,069",
+  "method": "pdf_table",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
+  "id": "NVDA|CapEx|FY2025",
+  "ticker": "NVDA",
+  "metric": "CapEx",
+  "value": 3236000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Purchases related to property and equipment and intangible assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": null
+  },
+  "doc": "data/pdfs/NVDA.pdf",
+  "page": 75,
+  "snippet": "Purchases related to property and equipment and intangible assets -6,042 -3,236 -1,069",
+  "method": "pdf_table",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
+  "id": "NVDA|CapEx|FY2024",
+  "ticker": "NVDA",
+  "metric": "CapEx",
+  "value": 1069000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Purchases related to property and equipment and intangible assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": null
+  },
+  "doc": "data/pdfs/NVDA.pdf",
+  "page": 75,
+  "snippet": "Purchases related to property and equipment and intangible assets -6,042 -3,236 -1,069",
+  "method": "pdf_table",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
   "id": "NVDA|Cash|FY2026",
   "ticker": "NVDA",
   "metric": "Cash",
@@ -50,14 +116,14 @@
   "value": 4.9,
   "unit": "USD/share",
   "scale": 1,
-  "as_reported_label": "Diluted",
+  "as_reported_label": "Net income per share Diluted",
   "period": {
    "fiscal_year": 2026,
    "period_end": "2026-01-25"
   },
   "doc": "data/pdfs/NVDA.pdf",
   "page": 71,
-  "snippet": "Diluted 4.9 2.94 1.19",
+  "snippet": "Net income per share Diluted 4.9 2.94 1.19",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
@@ -72,14 +138,14 @@
   "value": 2.94,
   "unit": "USD/share",
   "scale": 1,
-  "as_reported_label": "Diluted",
+  "as_reported_label": "Net income per share Diluted",
   "period": {
    "fiscal_year": 2025,
    "period_end": "2025-01-26"
   },
   "doc": "data/pdfs/NVDA.pdf",
   "page": 71,
-  "snippet": "Diluted 4.9 2.94 1.19",
+  "snippet": "Net income per share Diluted 4.9 2.94 1.19",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",
@@ -94,14 +160,14 @@
   "value": 1.19,
   "unit": "USD/share",
   "scale": 1,
-  "as_reported_label": "Diluted",
+  "as_reported_label": "Net income per share Diluted",
   "period": {
    "fiscal_year": 2024,
    "period_end": "2024-01-28"
   },
   "doc": "data/pdfs/NVDA.pdf",
   "page": 71,
-  "snippet": "Diluted 4.9 2.94 1.19",
+  "snippet": "Net income per share Diluted 4.9 2.94 1.19",
   "method": "pdf_table",
   "validated": true,
   "xbrl_status": "match",

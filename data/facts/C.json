@@ -1,5 +1,71 @@
 [
  {
+  "id": "C|EPS|FY2025",
+  "ticker": "C",
+  "metric": "EPS",
+  "value": 6.99,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings per share(4) Net income",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/C.pdf",
+  "page": 160,
+  "snippet": "Diluted earnings per share(4) Net income 6.99 5.94 4.04",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
+  "xbrl_value": 6.99,
+  "sanity_ok": true
+ },
+ {
+  "id": "C|EPS|FY2024",
+  "ticker": "C",
+  "metric": "EPS",
+  "value": 5.94,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings per share(4) Net income",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/C.pdf",
+  "page": 160,
+  "snippet": "Diluted earnings per share(4) Net income 6.99 5.94 4.04",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
+  "xbrl_value": 5.94,
+  "sanity_ok": true
+ },
+ {
+  "id": "C|EPS|FY2023",
+  "ticker": "C",
+  "metric": "EPS",
+  "value": 4.04,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted earnings per share(4) Net income",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/C.pdf",
+  "page": 160,
+  "snippet": "Diluted earnings per share(4) Net income 6.99 5.94 4.04",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "EarningsPerShareDiluted",
+  "xbrl_value": 4.04,
+  "sanity_ok": true
+ },
+ {
   "id": "C|Equity|FY2025",
   "ticker": "C",
   "metric": "Equity",

@@ -50,12 +50,18 @@ def _cache_read(key: str) -> str | None:
     path = _cache_path(key)
     if not path.exists():
         return None
-    return json.loads(path.read_text(encoding="utf-8"))["text"]
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))["text"]
+    except (OSError, ValueError, KeyError, TypeError):  # half-written/corrupt file: treat as a miss (D-083)
+        return None
 
 
 def _cache_write(key: str, text: str, provider: str) -> None:
     LLM_CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    _cache_path(key).write_text(json.dumps({"provider": provider, "text": text}, indent=2), encoding="utf-8")
+    path = _cache_path(key)
+    tmp = path.with_suffix(f".{os.getpid()}.tmp")
+    tmp.write_text(json.dumps({"provider": provider, "text": text}, indent=2), encoding="utf-8")
+    os.replace(tmp, path)  # atomic: readers never see a half-written file
 
 
 def _retry_wait(resp, attempt: int) -> float:

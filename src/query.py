@@ -144,6 +144,12 @@ def numeric_answer(G, plan):
         v = sum(vals) if op == "sum" else sum(vals) / len(vals)
         return dict(value=v, unit=next(iter(rows.values()))["unit"], rows={f"{t} FY{y}": r for y, r in rows.items()},
                     lead=f"{op} of {plan['metric']} for {t}, FY{min(plan['years'])}-FY{max(plan['years'])}", fmt_value=True)
+    if i == "lookup" and len(plan["companies"]) == 1 and len(plan.get("years") or []) >= 2 and not plan.get("growth"):
+        t = plan["companies"][0]  # one company, several named years: answer every year (D-083)
+        rows = {f"{t} FY{y}": company_value(G, t, plan, inputs, kind, y) for y in plan["years"]}
+        label = plan["metric"] if kind != "x" else "/".join(plan["metrics"])
+        return dict(rows=rows, unit=next(iter(rows.values()))["unit"], missing={}, lead=label, fmt_value=False,
+                    value={k: r["value"] for k, r in rows.items()})
     ts, strict = scope(G, plan)
     rows, missing = gather(G, plan, inputs, kind, ts, strict or i in ("aggregate", "compare"))
     unit = next(iter(rows.values()))["unit"]
@@ -173,6 +179,14 @@ def numeric_answer(G, plan):
     return {**res, "value": {t: res["rows"][t]["value"] for t in res["rows"]}, "lead": f"{label}", "fmt_value": False}
 
 
+def role_ok(role, title):
+    """Word-boundary title match on the part before the first comma; 'vice president' is not 'president' (D-083)."""
+    t = (title or "").lower().split(",")[0]
+    if role in ("president", "chair"):
+        t = re.sub(r"vice[\s-]*(president|chair)\w*", " ", t)
+    return bool(re.search(rf"\b{re.escape(role)}" + (r"\b" if "president" in role else ""), t))
+
+
 def entity_answer(G, plan, sel):
     rel, role, parts, ids, cites = plan["entity_rel"], plan.get("role"), [], [], []
     targets = [sel["winner"]] if sel else plan["companies"]
@@ -180,7 +194,7 @@ def entity_answer(G, plan, sel):
     for t in targets:
         if rel == "EXECUTIVE_OF":
             hits = [(u, d) for u, _, d in G.in_edges(t, data=True) if d["rel"] == rel]
-            hits = [(u, d) for u, d in hits if not role or role in (d.get("title") or G.nodes[u].get("role") or "").lower().split(",")[0]]  # "CEO, Commercial Business" is not the CEO
+            hits = [(u, d) for u, d in hits if not role or role_ok(role, d.get("title") or G.nodes[u].get("role"))]  # "CEO, Commercial Business" is not the CEO
         else:
             hits = [(v, d) for _, v, d in G.out_edges(t, data=True) if d["rel"] == rel]
         if not hits:
@@ -226,13 +240,15 @@ def finish(G, plan, res):
     if res.get("fmt_value"):
         text = f"{res['lead']}: {fmt(res['value'], unit)} ({where})"
     else:
-        text = f"{res['lead']} ({where}): " + "; ".join(f"{t} FY{r['fy']} {fmt(r['value'], unit)}" for t, r in rows.items())
+        text = f"{res['lead']} ({where}): " + "; ".join(f"{t if ' FY' in t else f'{t} FY{r['fy']}'} {fmt(r['value'], unit)}" for t, r in rows.items())
     if res.get("winner") and len(rows) > 1:
         text += " | " + "; ".join(f"{t} FY{r['fy']} {fmt(r['value'], unit)}" for t, r in rows.items())
     out = dict(abstained=False, answer=text, value=res["value"], unit=unit, fact_ids=ids,
                citations=[cite(G, f) for f in ids], plan=plan,
                validated=all(G.nodes[f].get("validated") is not False for f in ids))
-    if len(fyl) > 1:
+    if res.get("winner"):
+        out["winner"] = res["winner"]  # lets the scorer credit only the winning entity (D-083)
+    if len(fyl) > 1 and not all(" FY" in t for t in rows):
         out["mixed_years"] = True
     if res.get("missing"):
         out["incomplete"] = True

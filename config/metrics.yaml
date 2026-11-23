@@ -14,6 +14,7 @@ metrics:
     synonyms: [total net sales, total revenues, total revenue, total net revenue, total net revenues, net sales, net revenues, net revenue, net operating revenues, sales to customers, net sales and revenue, revenues, revenue, sales]
     label_regex: ['^total [a-z ]*revenues?$']
     exclude: [cost, other income, non]
+    identity: {plus: [NetInterestIncome, TotalNonInterestIncome], banks_only: true}  # no printed total-revenue row (COF)
     xbrl_tags: [Revenues, RevenuesNetOfInterestExpense, RevenueFromContractWithCustomerExcludingAssessedTax, RevenueFromContractWithCustomerIncludingAssessedTax, SalesRevenueNet]
 
   - name: NetIncome
@@ -35,6 +36,7 @@ metrics:
     synonyms: [diluted earnings per share, diluted net income per share, diluted earnings per common share, earnings per common share assuming dilution]
     label_regex: ['^diluted earnings$', '\bper (common )?(diluted|dilution)|(diluted|dilution).*\bper (common )?share|\bper (common )?share.*(diluted|dilution)']
     exclude: [basic]
+    prefer_exclude: [continuing, discontinued]
     fallback_labels: [diluted, basic]
     xbrl_tags: [EarningsPerShareDiluted]
     basic_xbrl_tags: [EarningsPerShareBasic]  # rows labelled 'Basic' (fallback)
@@ -100,7 +102,7 @@ metrics:
     unit: USD
     absolute: true  # reported as a negative outflow; stored positive (D-057)
     synonyms: [payments for acquisition of property plant and equipment, payments for property and equipment, purchases of property and equipment, capital expenditures, additions to property and equipment, payments to acquire property plant and equipment, property and equipment additions, capital spending]
-    label_regex: ['^(purchases?|payments?|additions?|expenditures|acquisitions) (of |for |to )?(property|capital)', '^capital (expenditures|spending)']
+    label_regex: ['^(purchases?|payments?|additions?|expenditures|acquisitions) (of |for |to |related to )?(property|capital)', '^capital (expenditures|spending)']
     xbrl_tags: [PaymentsToAcquirePropertyPlantAndEquipment]
 
   - name: R&D
@@ -128,6 +130,14 @@ count_metrics:
 
 # Helper rows used only as identity inputs (not admitted as facts).
 helper_metrics:
+  - name: NetInterestIncome
+    statement: income_statement
+    synonyms: [net interest income]
+
+  - name: TotalNonInterestIncome
+    statement: income_statement
+    synonyms: [total non interest income, total noninterest income, total other revenue, total non interest revenue]
+
   - name: TotalLiabilitiesAndEquity
     statement: balance_sheet
     synonyms: [total liabilities and equity, total liabilities and stockholders equity, total liabilities and shareholders equity]

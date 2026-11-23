@@ -176,6 +176,50 @@
   "sanity_ok": true
  },
  {
+  "id": "ABT|Equity|FY2025",
+  "ticker": "ABT",
+  "metric": "Equity",
+  "value": 52130000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total Abbott Shareholders\u2019 Investment",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/ABT.pdf",
+  "page": 60,
+  "snippet": "Total Abbott Shareholders\u2019 Investment 52,130 47,664",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 52130000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "ABT|Equity|FY2024",
+  "ticker": "ABT",
+  "metric": "Equity",
+  "value": 47664000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total Abbott Shareholders\u2019 Investment",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/ABT.pdf",
+  "page": 60,
+  "snippet": "Total Abbott Shareholders\u2019 Investment 52,130 47,664",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "StockholdersEquity",
+  "xbrl_value": 47664000000.0,
+  "sanity_ok": true
+ },
+ {
   "id": "ABT|NetIncome|FY2025",
   "ticker": "ABT",
   "metric": "NetIncome",
@@ -503,6 +547,94 @@
   "xbrl_status": "match",
   "xbrl_tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
   "xbrl_value": 40109000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "ABT|TotalAssets|FY2025",
+  "ticker": "ABT",
+  "metric": "TotalAssets",
+  "value": 86713000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/ABT.pdf",
+  "page": 59,
+  "snippet": "Total assets 86,713 81,414",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "Assets",
+  "xbrl_value": 86713000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "ABT|TotalAssets|FY2024",
+  "ticker": "ABT",
+  "metric": "TotalAssets",
+  "value": 81414000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/ABT.pdf",
+  "page": 59,
+  "snippet": "Total assets 86,713 81,414",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "Assets",
+  "xbrl_value": 81414000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "ABT|TotalLiabilities|FY2025",
+  "ticker": "ABT",
+  "metric": "TotalLiabilities",
+  "value": 33942000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities and equity - Total Shareholders\u2019 Investment",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/ABT.pdf",
+  "page": 60,
+  "snippet": "Total liabilities and equity 86,713 | Total Shareholders\u2019 Investment 52,771",
+  "method": "identity",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
+  "id": "ABT|TotalLiabilities|FY2024",
+  "ticker": "ABT",
+  "metric": "TotalLiabilities",
+  "value": 33513000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities and equity - Total Shareholders\u2019 Investment",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": null
+  },
+  "doc": "data/pdfs/ABT.pdf",
+  "page": 60,
+  "snippet": "Total liabilities and equity 81,414 | Total Shareholders\u2019 Investment 47,901",
+  "method": "identity",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
   "sanity_ok": true
  }
 ]

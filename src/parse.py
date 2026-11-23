@@ -17,7 +17,7 @@ import pdfplumber
 from src.config import PARSED_DIR, PDF_DIR, load_companies
 from src.tables import (
     extract_years, find_scale, header_text, is_header_row, merge_split_tables,
-    parse_text_lines, pick_year_column, rows_from_table,
+    label_unlabeled_totals, parse_text_lines, pick_year_column, rows_from_table,
 )
 
 # Titles are matched anywhere in one of the first 8 cleaned lines. Lines ending in a page number (table of
@@ -123,6 +123,14 @@ def is_continuation(text):
     return len(rows) >= 3 and len(rows) / max(len(nonempty), 1) >= 0.3
 
 
+def is_repeated_title(text, kind, titles):
+    """ABT-style continuation: the next page repeats the statement title without '(continued)' and carries more
+    rows of the same statement. Only checked for the page right after the statement."""
+    if re.search(r"comprehensive", " ".join(_title_lines(text)[:4]), re.I):
+        return False  # 'Comprehensive Income Statements' is another statement (MSFT)
+    return kind in titles and is_statement_layout(text) and len(parse_text_lines(text)) >= 3
+
+
 def find_statements(page_texts):
     """{kind: [1-based pages]}: the first page with a key row whose title is on that page, or on the page
     before (statement starts after its title, e.g. GS cash flows), then up to MAX_CONTINUATION pages."""
@@ -141,7 +149,8 @@ def find_statements(page_texts):
                 continue
             pages = [start]
             j = start + 1
-            while j < len(page_texts) and len(pages) <= MAX_CONTINUATION and is_continuation(page_texts[j]):
+            while j < len(page_texts) and len(pages) <= MAX_CONTINUATION and (
+                    is_continuation(page_texts[j]) or is_repeated_title(page_texts[j], kind, titles[j])):
                 pages.append(j)
                 j += 1
             found[kind] = [p + 1 for p in pages]
@@ -149,9 +158,9 @@ def find_statements(page_texts):
     return found
 
 
-def _page_rows(pdf, page_no, text):
+def _page_rows(pdf, page_no, text, keep_unlabeled=False):
     """Text-line rows for one page; pdfplumber table rows only when text parsing finds too few."""
-    rows = parse_text_lines(text)
+    rows = parse_text_lines(text, keep_unlabeled)
     if len(rows) < TABLE_FALLBACK_BELOW and pdf is not None:
         rows = []
         for table in pdf.pages[page_no - 1].extract_tables() or []:
@@ -159,7 +168,7 @@ def _page_rows(pdf, page_no, text):
     return rows
 
 
-def build_statement(pdf, page_texts, pages):
+def build_statement(pdf, page_texts, pages, kind=None):
     # The title page often has no unit or year line; the units and years sit on the page after it.
     head = "\n".join(header_text(page_texts[p - 1]) for p in pages)
     scale, snippet = find_scale(head)
@@ -170,8 +179,12 @@ def build_statement(pdf, page_texts, pages):
     newest = pick_year_column(head)
     width = len(columns)
     merged, page_rows = [], []
+    seen_assets = False
     for p in pages:
-        page_rows.append((p, [r for r in _page_rows(pdf, p, page_texts[p - 1]) if not is_header_row(r)]))
+        rows = _page_rows(pdf, p, page_texts[p - 1], keep_unlabeled=kind == "balance_sheet")
+        if kind == "balance_sheet":
+            rows, seen_assets = label_unlabeled_totals(rows, seen_assets)
+        page_rows.append((p, [r for r in rows if not is_header_row(r)]))
     # A leading note-reference column (width+1 values, small integer) is dropped only when most value rows have it.
     value_rows = [r for _, rows in page_rows for r in rows if len(r["values"]) >= 2]
     note_col = bool(width) and bool(value_rows) and 2 * sum(
@@ -200,7 +213,7 @@ def parse_pdf(ticker, cached=None):
         statements = {}
         for kind in KINDS:
             if kind in found:
-                statements[kind] = build_statement(pdf, page_texts, found[kind])
+                statements[kind] = build_statement(pdf, page_texts, found[kind], kind)
             else:
                 statements[kind] = {"pages": [], "scale": None, "scale_source_text": None,
                                     "columns": [], "newest_col": None, "rows": []}

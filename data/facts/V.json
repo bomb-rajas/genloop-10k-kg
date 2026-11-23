@@ -110,6 +110,72 @@
   "sanity_ok": true
  },
  {
+  "id": "V|EPS|FY2026",
+  "ticker": "V",
+  "metric": "EPS",
+  "value": 12.32,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted Earnings Per Share Class A common stock",
+  "period": {
+   "fiscal_year": 2026,
+   "period_end": "2026-09-30"
+  },
+  "doc": "data/pdfs/V.pdf",
+  "page": 97,
+  "snippet": "Diluted Earnings Per Share Class A common stock 12.32 10.2 9.73",
+  "method": "pdf_table",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
+  "id": "V|EPS|FY2025",
+  "ticker": "V",
+  "metric": "EPS",
+  "value": 10.2,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted Earnings Per Share Class A common stock",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": null
+  },
+  "doc": "data/pdfs/V.pdf",
+  "page": 97,
+  "snippet": "Diluted Earnings Per Share Class A common stock 12.32 10.2 9.73",
+  "method": "pdf_table",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
+  "id": "V|EPS|FY2024",
+  "ticker": "V",
+  "metric": "EPS",
+  "value": 9.73,
+  "unit": "USD/share",
+  "scale": 1,
+  "as_reported_label": "Diluted Earnings Per Share Class A common stock",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": null
+  },
+  "doc": "data/pdfs/V.pdf",
+  "page": 97,
+  "snippet": "Diluted Earnings Per Share Class A common stock 12.32 10.2 9.73",
+  "method": "pdf_table",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
   "id": "V|Equity|FY2026",
   "ticker": "V",
   "metric": "Equity",

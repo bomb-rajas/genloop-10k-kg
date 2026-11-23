@@ -65,6 +65,9 @@ def parse_line(line):
     toks = s.split()
     while toks and re.fullmatch(r"\([a-z]\)|[*†‡]+", toks[-1]):  # trailing footnote after the numbers
         toks.pop()
+    # '(1)' after two plain values is a footnote marker, not -1. shortcut: a true third value of (1) is lost.
+    if len(toks) >= 3 and re.fullmatch(r"\(\d\)", toks[-1]) and all(_is_value_token(t) and not t.startswith("(") for t in toks[-3:-1]):
+        toks.pop()
     vals = []
     i = len(toks)
     while i > 0:
@@ -94,22 +97,73 @@ def is_header_row(row):
             or all(v.is_integer() and 1990 <= v <= 2100 for v in vals))
 
 
-def parse_text_lines(text):
+EPS_HEADING = re.compile(r"per\s+(common\s+|ordinary\s+)?share", re.I)
+EPS_SUBHEAD = re.compile(r"basic|diluted", re.I)
+EPS_RESET = re.compile(r"weighted|average|outstanding|dividend", re.I)
+
+
+def parse_text_lines(text, keep_unlabeled=False):
     """Rows from page text. A label-only line is joined to the next line when that line starts lowercase
-    (labels wrapped by the PDF, e.g. 'Common stock ... respectively' + 'authorized; ... 104,815 93,568')."""
-    rows, pending = [], None
+    (labels wrapped by the PDF, e.g. 'Common stock ... respectively' + 'authorized; ... 104,815 93,568').
+    A numberless EPS heading ('Diluted earnings per share:', 'Basic') is prefixed to the labels of the rows
+    after it until the next numberless line or a weighted-average/shares row.
+    keep_unlabeled: rows with no label come back with label '' (unlabelled totals)."""
+    rows, pending, heading = [], None, None
     for line in (text or "").splitlines():
         parsed = parse_line(line)
         if parsed is None:
             pending = line.strip() or None
+            s = (pending or "").rstrip(":").strip()
+            if not s or s.startswith("(") or len(s) > 90 or EPS_RESET.search(s):
+                heading = None
+            elif EPS_HEADING.search(s):
+                heading = s
+            elif EPS_SUBHEAD.fullmatch(s):
+                heading = f"{heading} {s}" if heading and EPS_HEADING.search(heading) else s
+            else:
+                heading = None
             continue
         label, vals = parsed
         if pending and label[:1].islower():
             label = f"{pending} {label}"
         pending = None
-        if label:
+        if label and heading:
+            if EPS_RESET.search(label) or re.search(r"\bshares\b", label, re.I):
+                heading = None
+            else:
+                label = f"{heading} {label}"
+        if label or keep_unlabeled:
             rows.append({"label": label, "values": vals})
     return rows
+
+
+def label_unlabeled_totals(rows, seen_assets=False):
+    """Balance-sheet rows without a label: a bare total right after the equity block is 'Total liabilities and
+    equity'; before any liabilities/equity row it is 'Total assets'. Other unlabelled rows are dropped.
+    A total must be at least as large as every earlier row (a subtotal such as Merck's 115,605 is not).
+    Returns (rows, seen_assets)."""
+    out, cand = [], None  # cand: index in out of the latest bare row that could be total assets
+    for r in rows:
+        if r["label"]:
+            seen_assets = seen_assets or bool(re.match(r"total assets", r["label"], re.I))
+            out.append(r)
+            continue
+        if len(r["values"]) < 2 or len(out) < 3 or any(len(o["values"]) == len(r["values"]) and o["values"][0] > r["values"][0] for o in out):
+            continue
+        prev = out[-1]["label"] if out else ""
+        past_liab = any(re.search(r"liabilit|equity|stockholders|shareholders", o["label"], re.I) for o in out)
+        if re.search(r"equity|investment|deficit", prev, re.I):
+            out.append({**r, "label": "Total liabilities and equity"})
+        elif not past_liab and not seen_assets:
+            if cand is not None:
+                out[cand]["label"] = ""  # a later bare row supersedes (Merck: a gross-PP&E subtotal precedes the total)
+            out.append({**r, "label": "?"})
+            cand = len(out) - 1
+    if cand is not None:
+        out[cand]["label"] = "Total assets"
+        seen_assets = True
+    out = [o for o in out if o["label"] not in ("", "?")]
+    return out, seen_assets
 
 
 def rows_from_table(table):

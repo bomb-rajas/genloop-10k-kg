@@ -66,7 +66,11 @@ def find_metric_row(stmt, spec):
     ncols = len(stmt["columns"])
     cand = [(i, norm(r["label"])) for i, r in enumerate(stmt["rows"])
             if r["label"] and len(r["values"]) == ncols]
-    hit = match_row(cand, spec)
+    pref = [norm(w) for w in spec.get("prefer_exclude", [])]  # e.g. EPS: net-income row over continuing-ops row
+    hit = None
+    if pref:
+        hit = match_row([c for c in cand if _rem_ok(c[1], pref)], spec)
+    hit = hit or match_row(cand, spec)
     if hit is None:
         return None, None
     return stmt["rows"][hit[0]], hit[1]
@@ -126,7 +130,8 @@ def extract_company(company, filing, metrics, helpers):
 
     # Identity fallbacks (method 'identity'): value = sum(plus) - sum(minus), same statement and year.
     for m in metrics:
-        if m["name"] in rows_by_metric or "identity" not in m or not applies(m, company["is_bank"]):
+        if m["name"] in rows_by_metric or "identity" not in m or not applies(m, company["is_bank"]) \
+                or (m["identity"].get("banks_only") and not company["is_bank"]):
             continue
         ident = m["identity"]
         parts = []

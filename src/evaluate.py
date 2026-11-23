@@ -45,6 +45,8 @@ def numeric_ok(pred, unit, gold):
 def text_has_number(text, gold):
     """True if any number in the answer text matches gold (x% for '%' answers, USD scales otherwise)."""
     for m in re.finditer(r"\d[\d,]*(?:\.\d+)?(%?)", str(text)):
+        if re.fullmatch(r"(?:19|20)\d\d", m.group(0)):  # a bare year (FY2025) is not a value (D-083)
+            continue
         if numeric_ok(float(m.group(0).rstrip("%").replace(",", "")), "%" if m.group(1) else "USD", gold):
             return True
     return False
@@ -83,6 +85,9 @@ def score(item, res, G):
     else:
         pred_names = {norm(G.nodes[t].get("name", "")) for t in predicted_tickers(G, res) if t in G.nodes}
         text_n = " " + norm(pred_text) + " "
+        if res.get("winner") in G.nodes:  # which-is-higher style: only the winning entity counts (D-083)
+            pred_names = {norm(G.nodes[res["winner"]].get("name", ""))}
+            text_n = " " + norm(pred_text.split(" | ")[0]) + " "
         term_ok = all((" " + norm(t) + " ") in text_n or norm(t) in pred_names for t in terms)
         # structured value may be a dict/str (e.g. HQ city); also accept returned fact values and numbers in the text
         # fallbacks only when the structured value is not a number: a numeric answer is judged on its own (no credit for a fact node)

@@ -482,5 +482,93 @@
   "xbrl_tag": "Revenues",
   "xbrl_value": 60115000000.0,
   "sanity_ok": true
+ },
+ {
+  "id": "MRK|TotalAssets|FY2025",
+  "ticker": "MRK",
+  "metric": "TotalAssets",
+  "value": 136866000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MRK.pdf",
+  "page": 114,
+  "snippet": "Total assets 136,866 117,106",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "Assets",
+  "xbrl_value": 136866000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MRK|TotalAssets|FY2024",
+  "ticker": "MRK",
+  "metric": "TotalAssets",
+  "value": 117106000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total assets",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/MRK.pdf",
+  "page": 114,
+  "snippet": "Total assets 136,866 117,106",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "Assets",
+  "xbrl_value": 117106000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "MRK|TotalLiabilities|FY2025",
+  "ticker": "MRK",
+  "metric": "TotalLiabilities",
+  "value": 84204000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities and equity - Total equity",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/MRK.pdf",
+  "page": 114,
+  "snippet": "Total liabilities and equity 136,866 | Total equity 52,662",
+  "method": "identity",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
+ },
+ {
+  "id": "MRK|TotalLiabilities|FY2024",
+  "ticker": "MRK",
+  "metric": "TotalLiabilities",
+  "value": 70734000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Total liabilities and equity - Total equity",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": null
+  },
+  "doc": "data/pdfs/MRK.pdf",
+  "page": 114,
+  "snippet": "Total liabilities and equity 117,106 | Total equity 46,372",
+  "method": "identity",
+  "validated": false,
+  "xbrl_status": "no_xbrl",
+  "xbrl_tag": null,
+  "xbrl_value": null,
+  "sanity_ok": true
  }
 ]
