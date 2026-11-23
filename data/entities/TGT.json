@@ -1,0 +1,151 @@
+{
+  "ticker": "TGT",
+  "entities": [
+    {
+      "id": "LOC|minnesota",
+      "type": "Location",
+      "name": "Minnesota",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 1,
+      "snippet": "tion (exact name of registrant as specified in its charter) minnesota (state or other jurisdiction of incorporation or organizati",
+      "grounded": true
+    },
+    {
+      "id": "LOC|minneapolis-minnesota",
+      "type": "Location",
+      "name": "Minneapolis, Minnesota",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 1,
+      "snippet": "ction of incorporation or organization) 1000 nicollet mall, minneapolis, minnesota (address of principal executive offices) 41-0215170 (i.r.s.",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 1,
+      "snippet": "ch registered common stock, par value $0.0833 per share tgt new york stock exchange securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "TGT|Employees|FY2026",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 400000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 20,
+      "snippet": "esults of operations could be adversely affected. with over 400,000 team members, our workforce costs represent our largest ope",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 44,
+      "snippet": " our consolidated financial statements have been audited by ernst & young llp, independent registered public accounting firm, whose repor",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|TGT|michael-j-fiddelke",
+      "type": "Person",
+      "name": "Michael J. Fiddelke",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Executive Officer",
+      "category": "officers",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 11,
+      "snippet": "s an officer. name title and recent business experience age michael j. fiddelke chief executive officer since february 2026. executive vice",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|TGT|lisa-r-roath",
+      "type": "Person",
+      "name": "Lisa R. Roath",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Operating Officer",
+      "category": "officers",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 11,
+      "snippet": "chief financial officer from november 2019 to october 2024. lisa r. roath executive vice president and chief operating officer since ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|TGT|melissa-k-kremer",
+      "type": "Person",
+      "name": "Melissa K. Kremer",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Human Resources Officer",
+      "category": "officers",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 11,
+      "snippet": "erchandising - food & beverage from july 2020 to july 2023. melissa k. kremer executive vice president and chief human resources officer ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|TGT|jim-lee",
+      "type": "Person",
+      "name": "Jim Lee",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Financial Officer",
+      "category": "officers",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 11,
+      "snippet": "nt and chief human resources officer since january 2019. 48 jim lee executive vice president and chief financial officer since ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|TGT|cara-a-sylvester",
+      "type": "Person",
+      "name": "Cara A. Sylvester",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Merchandising Officer",
+      "category": "officers",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 11,
+      "snippet": "everages north america, from february 2019 to october 2022. cara a. sylvester executive vice president and chief merchandising officer si",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|TGT|prat-vemana",
+      "type": "Person",
+      "name": "Prat Vemana",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Information and Product Officer",
+      "category": "officers",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 11,
+      "snippet": "nior vice president, home from march 2019 to february 2021. prat vemana executive vice president and chief information and product ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|TGT|brian-c-cornell",
+      "type": "Person",
+      "name": "Brian C. Cornell",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Chair",
+      "category": "officers",
+      "doc": "data/pdfs/TGT.pdf",
+      "page": 11,
+      "snippet": "t and chief digital officer from july 2019 to october 2022. brian c. cornell executive chair since february 2026. chair of the board and",
+      "grounded": true
+    }
+  ]
+}

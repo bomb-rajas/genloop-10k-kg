@@ -1,0 +1,4 @@
+{
+  "provider": "gemini",
+  "text": "{\n  \"executive_officers\": [\n    {\n      \"name\": \"Brian Niccol\",\n      \"title\": \"chairman and chief executive officer\"\n    },\n    {\n      \"name\": \"Cathy R. Smith\",\n      \"title\": \"executive vice president, chief financial officer\"\n    },\n    {\n      \"name\": \"Mike Grams\",\n      \"title\": \"executive vice president, chief operating officer\"\n    },\n    {\n      \"name\": \"Brady Brewer\",\n      \"title\": \"chief executive officer, Starbucks International\"\n    },\n    {\n      \"name\": \"Sara Kelly\",\n      \"title\": \"executive vice president, chief partner officer\"\n    }\n  ]\n}"
+}

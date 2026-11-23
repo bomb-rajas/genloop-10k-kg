@@ -1,0 +1,77 @@
+{
+  "ticker": "INTC",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 1,
+      "snippet": "tion (exact name of registrant as specified in its charter) delaware 94-1672743 (state or other jurisdiction of incorporation or",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "Nasdaq Global Select Market",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 1,
+      "snippet": "nge on which registered common stock, $0.001 par value intc nasdaq global select market securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|INTC|lip-bu-tan",
+      "type": "Person",
+      "name": "Lip-Bu Tan",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Executive Officer",
+      "category": "officers",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 88,
+      "snippet": "name current title age experience lip-bu tan 66 lip-bu tan has been our chief executive officer since ma",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|INTC|nagasubramaniyan",
+      "type": "Person",
+      "name": "Nagasubramaniyan",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Chief Technology and Operations Officer",
+      "category": "officers",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 88,
+      "snippet": "siness administration from the university of san francisco. nagasubramaniyan 51 naga chandrasekaran has been our executive vice presiden",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|INTC|april-miller-boise",
+      "type": "Person",
+      "name": "April Miller Boise",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Legal Officer",
+      "category": "officers",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 88,
+      "snippet": "a member of the board of directors of mobileye global, inc. april miller boise 57 ms. miller boise has been our executive vice president a",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|INTC|david-zinsner",
+      "type": "Person",
+      "name": "David Zinsner",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Financial Officer",
+      "category": "officers",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 88,
+      "snippet": "of business administration from the university of michigan. david zinsner 57 david zinsner has been our executive vice president and ",
+      "grounded": true
+    }
+  ]
+}

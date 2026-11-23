@@ -1,0 +1,103 @@
+{
+  "ticker": "BAC",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 1,
+      "snippet": "ate or other jurisdiction of incorporation or organization: delaware irs employer identification no.: 56-0906609 address of prin",
+      "grounded": true
+    },
+    {
+      "id": "LOC|charlotte-north-carolina",
+      "type": "Location",
+      "name": "Charlotte, North Carolina",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 1,
+      "snippet": "fices: bank of america corporate center 100 n. tryon street charlotte, north carolina 28255 registrant's telephone number, including area code: (",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 1,
+      "snippet": "hich registered common stock, par value $0.01 per share bac new york stock exchange depositary shares, each representing a 1/1,000th interest i",
+      "grounded": true
+    },
+    {
+      "id": "SEG|BAC|consumer-banking",
+      "type": "Segment",
+      "name": "Consumer Banking",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 234,
+      "snippet": "billion and $1.1 billion at december 31, 2025 and 2024. the consumer banking $ 30,137 $ 30,137 corporation's unfunded commitments that a",
+      "grounded": true
+    },
+    {
+      "id": "SEG|BAC|global-wealth-investment-management",
+      "type": "Segment",
+      "name": "Global Wealth & Investment Management",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 234,
+      "snippet": "oration's unfunded commitments that are not included in the global wealth & investment management 9,677 9,677 carrying value of its tax-related equity invest",
+      "grounded": true
+    },
+    {
+      "id": "SEG|BAC|global-banking",
+      "type": "Segment",
+      "name": "Global Banking",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 234,
+      "snippet": "ing value of its tax-related equity investment vies totaled global banking 24,026 24,026 $2.6 billion and $2.7 billion at december 31,",
+      "grounded": true
+    },
+    {
+      "id": "SEG|BAC|global-markets",
+      "type": "Segment",
+      "name": "Global Markets",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 234,
+      "snippet": "2.6 billion and $2.7 billion at december 31, 2025 and 2024, global markets 5,181 5,181 which are contingent on various conditions prec",
+      "grounded": true
+    },
+    {
+      "id": "BAC|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 213000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/BAC.pdf",
+      "page": 9,
+      "snippet": "ecognizing and rewarding performance employed approximately 213,000 employees, of which 77 percent our compensation philosophy ",
+      "grounded": true,
+      "reason": null
+    }
+  ]
+}

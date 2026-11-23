@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"executive_officers\":[{\"name\":\"John F.W. Rogers\",\"title\":\"Executive Vice President\"},{\"name\":\"Denis P. Coleman III\",\"title\":\"Chief Financial Officer\"},{\"name\":\"Kathryn H. Ruemmler\",\"title\":\"Chief Legal Officer, General Counsel and Secretary\"},{\"name\":\"Sheara J. Fredman\",\"title\":\"Controller and Chief Accounting Officer\"},{\"name\":\"David Solomon\",\"title\":\"Chairman of the Board; Chief Executive Officer\"},{\"name\":\"Alex Golten\",\"title\":\"Chief Risk Officer\"},{\"name\":\"John E. Waldron\",\"title\":\"President and Chief Operating Officer\"},{\"name\":\"Carey Halio\",\"title\":\"Global Treasurer\"}]}"
+}

@@ -1,0 +1,91 @@
+{
+  "ticker": "C",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/C.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 52-1568099 (state or other jurisdiction of incorporation or",
+      "grounded": true
+    },
+    {
+      "id": "SEG|C|services",
+      "type": "Segment",
+      "name": "Services",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/C.pdf",
+      "page": 4,
+      "snippet": "nce sheet overview 14 segment revenues and income (loss) 16 services 17 markets 20 banking 23 wealth 26 u.s. personal banking 29",
+      "grounded": true
+    },
+    {
+      "id": "SEG|C|markets",
+      "type": "Segment",
+      "name": "Markets",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/C.pdf",
+      "page": 4,
+      "snippet": "erview 14 segment revenues and income (loss) 16 services 17 markets 20 banking 23 wealth 26 u.s. personal banking 29 all other\u2014",
+      "grounded": true
+    },
+    {
+      "id": "SEG|C|banking",
+      "type": "Segment",
+      "name": "Banking",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/C.pdf",
+      "page": 4,
+      "snippet": "egment revenues and income (loss) 16 services 17 markets 20 banking 23 wealth 26 u.s. personal banking 29 all other\u2014managed bas",
+      "grounded": true
+    },
+    {
+      "id": "SEG|C|wealth",
+      "type": "Segment",
+      "name": "Wealth",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/C.pdf",
+      "page": 4,
+      "snippet": "nues and income (loss) 16 services 17 markets 20 banking 23 wealth 26 u.s. personal banking 29 all other\u2014managed basis 32 all ",
+      "grounded": true
+    },
+    {
+      "id": "SEG|C|u-s-personal-banking",
+      "type": "Segment",
+      "name": "U.S. Personal Banking",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/C.pdf",
+      "page": 4,
+      "snippet": "ncome (loss) 16 services 17 markets 20 banking 23 wealth 26 u.s. personal banking 29 all other\u2014managed basis 32 all other\u2014divestiture-related",
+      "grounded": true
+    },
+    {
+      "id": "C|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 226000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/C.pdf",
+      "page": 76,
+      "snippet": "and management at december 31, 2025, citi had approximately 226,000 full-time employees, compared to approximately 229,000 at d",
+      "grounded": true,
+      "reason": null
+    }
+  ]
+}

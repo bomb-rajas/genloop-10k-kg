@@ -1,0 +1,31 @@
+{
+  "ticker": "JPM",
+  "entities": [
+    {
+      "id": "LOC|new-york-new-york",
+      "type": "Location",
+      "name": "New York, New York",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/JPM.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    },
+    {
+      "id": "SEG|JPM|consumer-community-banking",
+      "type": "Segment",
+      "name": "Consumer & Community Banking",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/JPM.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

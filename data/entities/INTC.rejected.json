@@ -1,0 +1,18 @@
+{
+  "ticker": "INTC",
+  "entities": [
+    {
+      "id": "LOC|santa-clara-california",
+      "type": "Location",
+      "name": "Santa Clara, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

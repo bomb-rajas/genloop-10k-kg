@@ -1,0 +1,4 @@
+{
+  "provider": "gemini",
+  "text": "{\n  \"executive_officers\": [\n    {\n      \"name\": \"Stephen Hemsley\",\n      \"title\": \"Chair and Chief Executive Officer\"\n    },\n    {\n      \"name\": \"Wayne DeVeydt\",\n      \"title\": \"Chief Financial Officer\"\n    },\n    {\n      \"name\": \"Dr. Patrick Conway\",\n      \"title\": \"Chief Executive Officer, Optum\"\n    },\n    {\n      \"name\": \"Erin McSweeney\",\n      \"title\": \"Executive Vice President and Chief People Officer\"\n    },\n    {\n      \"name\": \"Timothy Noel\",\n      \"title\": \"Chief Executive Officer, UnitedHealthcare\"\n    },\n    {\n      \"name\": \"Thomas Roos\",\n      \"title\": \"Senior Vice President and Chief Accounting Officer\"\n    },\n    {\n      \"name\": \"Christopher Zaetta\",\n      \"title\": \"Executive Vice President and Chief Legal Officer and Corporate Secretary\"\n    }\n  ]\n}"
+}

@@ -1,0 +1,55 @@
+{
+  "ticker": "PYPL",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/PYPL.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 47-2989869 (state or other jurisdiction of (i.r.s. employer",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-jose-california",
+      "type": "Location",
+      "name": "San Jose, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/PYPL.pdf",
+      "page": 1,
+      "snippet": "r organization) identification no.) 2211 north first street san jose, california 95131 (address of principal executive offices) (zip code) (",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "Nasdaq Global Select Market",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/PYPL.pdf",
+      "page": 1,
+      "snippet": "h registered common stock, $0.0001 par value per share pypl nasdaq global select market securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "PYPL|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 23800,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/PYPL.pdf",
+      "page": 19,
+      "snippet": "usiness. as of december 31, 2025, we employed approximately 23,800 people globally, with 46% in the americas, 42% in asia-paci",
+      "grounded": true,
+      "reason": null
+    }
+  ]
+}

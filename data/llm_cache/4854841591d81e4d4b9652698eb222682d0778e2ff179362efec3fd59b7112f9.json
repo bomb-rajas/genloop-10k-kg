@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"state_of_incorporation\":\"Delaware\",\"hq_city\":\"Mountain View\",\"hq_state\":\"CA\",\"stock_exchange\":\"Nasdaq Stock Market LLC (Nasdaq Global Select Market)\"}"
+}

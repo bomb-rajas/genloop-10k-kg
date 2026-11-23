@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"auditor_name\":null,\"auditor_city\":null}"
+}

@@ -1,0 +1,127 @@
+{
+  "ticker": "SBUX",
+  "entities": [
+    {
+      "id": "LOC|washington",
+      "type": "Location",
+      "name": "Washington",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 1,
+      "snippet": "f contents united states securities and exchange commission washington, dc 20549 form 10-k \u2612\uf020annual report pursuant to section 13 ",
+      "grounded": true
+    },
+    {
+      "id": "LOC|seattle-washington",
+      "type": "Location",
+      "name": "Seattle, Washington",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 1,
+      "snippet": "of incorporation) (irs employer id) 2401 utah avenue south, seattle, washington 98134 (206) 447-1575 (address of principal executive office",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "Nasdaq Global Select Market",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 1,
+      "snippet": "ch registered common stock, $0.001 par value per share sbux nasdaq global select market securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "SEG|SBUX|north-america",
+      "type": "Segment",
+      "name": "North America",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 5,
+      "snippet": "s; \u2022 our heavy reliance on the financial performance of our north america operating segment and our dependence on the performance and",
+      "grounded": true
+    },
+    {
+      "id": "SBUX|Employees|FY2026",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 306000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 11,
+      "snippet": " as of september 27, 2026, starbucks employed approximately 306,000 people worldwide. in the u.s., starbucks employed approxima",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "PERSON|SBUX|brian-niccol",
+      "type": "Person",
+      "name": "Brian Niccol",
+      "relation": "EXECUTIVE_OF",
+      "role": "chairman and chief executive officer",
+      "category": "officers",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 11,
+      "snippet": " information about our executive officers name age position brian niccol 52 chairman and chief executive officer cathy r. smith 63 e",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|SBUX|cathy-r-smith",
+      "type": "Person",
+      "name": "Cathy R. Smith",
+      "relation": "EXECUTIVE_OF",
+      "role": "executive vice president, chief financial officer",
+      "category": "officers",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 11,
+      "snippet": "sition brian niccol 52 chairman and chief executive officer cathy r. smith 63 executive vice president, chief financial officer mike g",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|SBUX|mike-grams",
+      "type": "Person",
+      "name": "Mike Grams",
+      "relation": "EXECUTIVE_OF",
+      "role": "executive vice president, chief operating officer",
+      "category": "officers",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 11,
+      "snippet": " smith 63 executive vice president, chief financial officer mike grams 56 executive vice president, chief operating officer brady ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|SBUX|brady-brewer",
+      "type": "Person",
+      "name": "Brady Brewer",
+      "relation": "EXECUTIVE_OF",
+      "role": "chief executive officer, Starbucks International",
+      "category": "officers",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 11,
+      "snippet": " grams 56 executive vice president, chief operating officer brady brewer 53 chief executive officer, starbucks international sara ke",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|SBUX|sara-kelly",
+      "type": "Person",
+      "name": "Sara Kelly",
+      "relation": "EXECUTIVE_OF",
+      "role": "executive vice president, chief partner officer",
+      "category": "officers",
+      "doc": "data/pdfs/SBUX.pdf",
+      "page": 11,
+      "snippet": " brewer 53 chief executive officer, starbucks international sara kelly 47 executive vice president, chief partner officer brian ni",
+      "grounded": true
+    }
+  ]
+}

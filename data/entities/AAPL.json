@@ -1,0 +1,139 @@
+{
+  "ticker": "AAPL",
+  "entities": [
+    {
+      "id": "LOC|california",
+      "type": "Location",
+      "name": "California",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) california 94-2404110 (state or other jurisdiction (i.r.s. employer id",
+      "grounded": true
+    },
+    {
+      "id": "LOC|cupertino-california",
+      "type": "Location",
+      "name": "Cupertino, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 1,
+      "snippet": "ncorporation or organization) one apple park way ms 927-4gc cupertino, california 95014 (address of principal executive offices) (zip code) (",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "The Nasdaq Stock Market LLC",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 1,
+      "snippet": " registered common stock, $0.00001 par value per share aapl the nasdaq stock market llc 1.625% notes due 2026 \u2014 the nasdaq stock market llc 2.000% ",
+      "grounded": true
+    },
+    {
+      "id": "SEG|AAPL|americas",
+      "type": "Segment",
+      "name": "Americas",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 5,
+      "snippet": "hic basis. the company's reportable segments consist of the americas, europe, greater china, japan and rest of asia pacific. ame",
+      "grounded": true
+    },
+    {
+      "id": "SEG|AAPL|europe",
+      "type": "Segment",
+      "name": "Europe",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 5,
+      "snippet": " the company's reportable segments consist of the americas, europe, greater china, japan and rest of asia pacific. americas in",
+      "grounded": true
+    },
+    {
+      "id": "SEG|AAPL|greater-china",
+      "type": "Segment",
+      "name": "Greater China",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 5,
+      "snippet": "pany's reportable segments consist of the americas, europe, greater china, japan and rest of asia pacific. americas includes both nor",
+      "grounded": true
+    },
+    {
+      "id": "SEG|AAPL|japan",
+      "type": "Segment",
+      "name": "Japan",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 5,
+      "snippet": "le segments consist of the americas, europe, greater china, japan and rest of asia pacific. americas includes both north and ",
+      "grounded": true
+    },
+    {
+      "id": "SEG|AAPL|rest-of-asia-pacific",
+      "type": "Segment",
+      "name": "Rest of Asia Pacific",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 5,
+      "snippet": "s consist of the americas, europe, greater china, japan and rest of asia pacific. americas includes both north and south america. europe inc",
+      "grounded": true
+    },
+    {
+      "id": "AAPL|Employees|FY2026",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 167000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 8,
+      "snippet": "on. as of september 26, 2026, the company had approximately 167,000 full-time equivalent employees. the company believes that c",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 79,
+      "snippet": "matters included in note 8 to the financial statements. /s/ ernst & young llp we have served as the company's auditor since 2009. san jos",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-jose-california",
+      "type": "Location",
+      "name": "San Jose, California",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/AAPL.pdf",
+      "page": 79,
+      "snippet": "ung llp we have served as the company's auditor since 2009. san jose, california november 3, 2026 apple inc. | 2026 form 10-k | 55",
+      "grounded": true
+    }
+  ]
+}

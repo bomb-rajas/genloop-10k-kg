@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"segments\":[\"U.S. Consumer Services (USCS)\",\"Commercial Services (CS)\",\"International Card Services (ICS)\",\"Global Merchant and Network Services (GMNS)\"]}"
+}

@@ -1,0 +1,18 @@
+{
+  "ticker": "V",
+  "entities": [
+    {
+      "id": "LOC|san-francisco-california",
+      "type": "Location",
+      "name": "San Francisco, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/V.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

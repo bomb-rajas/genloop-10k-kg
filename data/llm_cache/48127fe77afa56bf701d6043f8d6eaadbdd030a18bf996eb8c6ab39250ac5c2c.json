@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"employee_count\":47400,\"as_written\":\"47,400\",\"as_of\":\"December 2025\"}"
+}

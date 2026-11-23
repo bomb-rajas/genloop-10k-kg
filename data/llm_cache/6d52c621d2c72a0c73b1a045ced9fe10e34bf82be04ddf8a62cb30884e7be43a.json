@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"auditor_name\":\"Deloitte & Touche LLP\",\"auditor_city\":\"New York, New York\"}"
+}

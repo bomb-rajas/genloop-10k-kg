@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"auditor_name\":\"KPMG LLP\",\"auditor_city\":\"Seattle, Washington\"}"
+}

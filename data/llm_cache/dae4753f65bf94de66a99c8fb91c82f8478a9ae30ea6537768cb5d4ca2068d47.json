@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"executive_officers\":[{\"name\":\"Mark Parker\",\"title\":\"Executive Chairman\"},{\"name\":\"Elliott Hill\",\"title\":\"President and Chief Executive Officer\"},{\"name\":\"Venkatesh Alagirisamy\",\"title\":\"Executive Vice President, Chief Operating Officer\"},{\"name\":\"Matthew Friend\",\"title\":\"Executive Vice President and Chief Financial Officer\"},{\"name\":\"Treasure Heinle\",\"title\":\"Executive Vice President, Chief People Officer\"},{\"name\":\"Rob Leinwand\",\"title\":\"Executive Vice President, Chief Legal Officer\"},{\"name\":\"Phil McCartney\",\"title\":\"Executive Vice President, Chief Innovation, Design & Product Officer\"},{\"name\":\"Amy Montagne\",\"title\":\"President, Nike\"}]}"
+}

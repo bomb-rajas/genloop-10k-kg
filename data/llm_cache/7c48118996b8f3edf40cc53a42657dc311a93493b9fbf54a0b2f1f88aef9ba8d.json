@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"state_of_incorporation\":\"WASHINGTON\",\"hq_city\":\"REDMOND\",\"hq_state\":\"WASHINGTON\",\"stock_exchange\":\"NASDAQ\"}"
+}

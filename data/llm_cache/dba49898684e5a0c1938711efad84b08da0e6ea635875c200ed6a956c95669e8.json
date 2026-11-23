@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"segments\":[\"cloud and software\",\"hardware\",\"services\"]}"
+}

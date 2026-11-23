@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"state_of_incorporation\":\"Washington\",\"hq_city\":\"Seattle\",\"hq_state\":\"Washington\",\"stock_exchange\":\"Nasdaq Global Select Market\"}"
+}

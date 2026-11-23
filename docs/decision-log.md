@@ -74,6 +74,16 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 | D-066 | M4 | Sanity blocks admission | validate.gate rejects a fact that fails sanity_ok (reason 'sanity: ...'); the count is in stats['rejected'] | A value that fails sanity is wrong by definition and should not reach the graph; logged-only would let it in |
 | D-067 | M4 | Identity fallback details | identity_check skips identity-derived TotalAssets as well as TotalLiabilities; identity values are rounded to int like direct facts; identity TotalLiabilities is gated against the XBRL Liabilities tag like any fact (no_xbrl when absent) | Identity inputs are circular and cannot validate each other; rounding keeps the value type consistent |
 | D-068 | M4 | JNJ R&D concept | R&D xbrl_tags adds ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost (JNJ prints R&D excluding IPR&D impairments) | Same concept for JNJ's presentation; primary ResearchAndDevelopmentExpense holds a different value (109 for FY2025) |
+| D-069 | M4 | Groq rate limit | Sliding 60 s token budget (GROQ_TPM, default 6000) checked before each attempt; 429 waits the server hint (cap 60 s), 4 retries, then Gemini | Free-tier 429s during entity runs; chars/4 estimate needs no tokenizer |
+| D-070 | M4 | Groq reasoning effort | reasoning_effort 'low' for openai/gpt-oss-120b | Fewer reasoning tokens per call; API accepted it (HTTP 200) |
+| D-071 | M4 | Gemini fallback model | gemini-3.1-flash-lite, serial with 6 s gap, 3 retries on 429/5xx | gemini-flash-latest 503s; concurrent calls hit 429 (supersedes model id in D-028) |
+| D-072 | M7 | Benchmark design | 29 questions, gold from PDF page text only; 3 abstain items; facts/graph not opened | Independent gold; system output never used to choose or tune items |
+| D-073 | M5 | Graph schema | MultiDiGraph in graph/kg.json: Company, Sector, Metric, Filing, Period, Fact, entity nodes; Fact ids TICKER\|Metric\|FYyyyy; derived metrics as COMPUTED_FROM edges, no stored values | Traceable provenance (doc, page, snippet) on every Fact; derived values computed at query time (M6) |
+| D-074 | M5 | Module name | src/graph.py holds the code; src/build_graph.py is a 3-line shim | User asked for src/graph.py; GOAL.md Done-when says python -m src.build_graph |
+| D-075 | M6 | Query planner/executor | Rule planner first, LLM only on rule failure (validated); strict abstain; newest-FY default | Cheap, deterministic, no hallucinated ids; wrong answers cost more than abstains |
+| D-076 | M6 | Verifier fixes (planner/query) | Bare 'cash flow' alias dropped; cash-flow text without 'operating' abstains unsupported_metric; growth regex `grow\w*`; rank rows print each company's FY | Verifier found 'free cash flow yield' answered OperatingCashFlow, 'grew' read as level; mixed FYs flagged but unnamed in text |
+| D-077 | M4b | Entity extraction design | Literal grounding: name or employee number must appear on a cited page of data/parsed/{T}.json (case/space-normalised); ids PERSON\|T\|slug, SEG\|T\|slug, LOC\|slug, ORG\|slug; Employees Fact {T}\|Employees\|FY{year} unvalidated; one LLM call per category on located pages | Entities auditable against page text, no outside knowledge; Employees have no XBRL tag to check against |
+| D-078 | M4b | Gate fixes and regate | Boundary-aware literal match ("166,000" not in "1,166,000"); Employees as_written must give employee_count; snippet on every grounded path; exchange org ids merged (ORG\|nasdaq); --regate replays cache only | Verifier findings; regate re-applies gate with no LLM calls and prompt/cache keys unchanged |
 
 ## Full entries
 
@@ -883,3 +893,63 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Evidence: JNJ R&D FY2025 14665000000, FY2024 17232000000, FY2023 15085000000 all match the ExcludingAcquiredInProcessCost concept.
 - Outcome: R&D 48/48 matched, 3 no_xbrl (04:25 run).
 - Status: active
+
+### D-069
+- Stage/Trigger: Groq 429s on uncached calls while `python -m src.entities` runs (free tier 6000 TPM).
+- Decision (chosen): Sliding 60 s window of estimated tokens (chars/4 of system+prompt, plus 1500 reasoning allowance) per Groq attempt, limit GROQ_TPM (default 6000, env-overridable). Each attempt waits until it fits, under a module lock shared by threads. On 429, sleep the 'try again in Xs' or retry-after hint (cap 60 s), up to 4 retries, then Gemini.
+- Why / rejected: chars/4 needs no tokenizer; a fixed call-count gap ignores prompt size; plain exponential backoff ignores the server's own wait hint. A single call larger than the budget runs when the window is empty, so it cannot block forever.
+- Evidence / outcome / status: tests/test_llm.py (limiter, 429 parse, Groq-exhausted to Gemini). Active.
+
+### D-070
+- Stage/Trigger: Reducing Groq reasoning tokens per uncached call (TPM budget, D-069).
+- Decision (chosen): reasoning_effort 'low' on openai/gpt-oss-120b.
+- Why / rejected: Fewer reasoning tokens per call. Default effort rejected for TPM use.
+- Evidence / outcome / status: One tiny real call returned HTTP 200 with 'pong'; kept. Active.
+
+### D-071
+- Stage/Trigger: gemini-flash-latest returned 503 on the fallback path (see D-028, D-013).
+- Decision (chosen): GEMINI_MODEL = gemini-3.1-flash-lite. Calls are serial with a 6 s minimum gap (10 req/min), and 429/5xx retry up to 3 times with backoff.
+- Why / rejected: Concurrent Gemini calls rejected: 2 of 5 hit 429. Supersedes the model id in D-028.
+- Evidence / outcome / status: 10/10 serial calls succeeded in a manual check; 2 of 5 concurrent hit 429. Active.
+
+### D-072
+- Stage/Trigger: M7 benchmark draft (no benchmark file existed; PROGRESS M7 pending).
+- Decision (chosen): benchmark/benchmark.json with 29 items: 10 single_fact, 10 multi_hop, 9 cross_filing, across Tech, Banks & Payments, Consumer & Retail, Healthcare. Gold typed from data/parsed page text with per-figure page and key quotes. Three abstain items (Q06 BAC FY2026, Q10 Visa R&D, Q20 JPM gross profit), each marked answerable_by_graph unknown. All items verified false.
+- Why / rejected: Gold from PDF text keeps it independent of the system. Rejected: gold from data/facts (circular) and gold taken from system gaps. Q09 (Pfizer EPS) and Q08 (MRK total assets) are answerable from the PDF despite PROGRESS gaps, so they stay answerable, with notes.
+- Evidence / outcome / status: tests/test_benchmark.py 6 pass. Human review pending (verified false). Active.
+
+### D-073
+- Stage/Trigger: M5 build graph (task: src/graph.py builds graph/kg.json from data/facts and data/entities).
+- Decision (chosen): NetworkX MultiDiGraph, saved as node_link_data (edges="edges") at graph/kg.json, 1.11 MB. Node types: Company (ticker), Sector (SEC|name), Metric (M|name, derived flag), Filing (FIL|accession), Period (PD|TICKER|FYyyyy|period_end), Fact (TICKER|Metric|FYyyyy), Location, Organization, Segment, Person (keep entity ids). Edges (attr rel): IN_SECTOR, FILED, HAS_FACT, OF_METRIC, FOR_PERIOD, REPORTS (Filing->Fact), COMPUTED_FROM (Metric->Metric, attr formula), INCORPORATED_IN, HEADQUARTERED_IN, AUDITOR_BASED_IN, LISTED_ON, HAS_SEGMENT, AUDITED_BY, EXECUTIVE_OF (Person->Company, attr title). Fact attrs: value, unit, scale, period, doc, page, snippet, method, validated, xbrl_status, xbrl_value, xbrl_tag, as_reported_label. Entity Employees facts use method "entity", validated False.
+- Why / rejected: Derived values (NetMargin, GrossMargin) are not stored as facts so provenance stays traceable from input facts; query time computes them. Period keyed by (ticker, FY, period_end) because 27 of 120 (ticker, FY) pairs have two period ends. Rejected: graph built from rejected facts or ungrounded entities (excluded by spec). build_graph asserts doc, page, value, unit, period, validated present on every Fact and fails loudly.
+- Evidence / outcome / status: Run 1 (05:42 IST): 1033 facts, 947/947 XBRL matched (100%), 57 no_xbrl, 0 rejected. Entity files still changing (another process re-runs M4b), so the later run gave 1035 facts (Employees missing 9 tickers instead of 11). Open: 27 Period nodes have period_end None (entity Employees facts whose FY is not the report year). tests/test_graph.py 12 pass. Active. [Superseded by D-078: the 27 None periods are statement facts (prior-year comparatives, src/extract.py:225 sets period_end None for non-newest years), not Employees; 32 facts on 27 Period ids, 21 pdf_table and 11 identity; 1039 facts = 1004 statement + 35 Employees after the regate.]
+
+### D-074
+- Stage/Trigger: M5 naming conflict between user request (src/graph.py) and GOAL.md Done-when (python -m src.build_graph).
+- Decision (chosen): implementation in src/graph.py (python -m src.graph); src/build_graph.py is a 3-line alias that imports main from src.graph, so both commands work.
+- Why / rejected: Satisfies both sources without duplicated code. Rejected: renaming the module (would break the GOAL.md command) and a second implementation.
+- Evidence / outcome / status: Both commands run and print the same report. Active.
+
+### D-075
+- Stage/Trigger: M6 query design (src/planner.py, src/query.py); graph-only answers, Gemini quota ~10 req/min.
+- Decision (chosen): rule planner (companies/aliases, sector, metric synonyms plus explicit aliases, FY mentions, intent keywords) -> plan {intent lookup|compare|rank|derived|growth|aggregate|entity, companies, sector, metric(s), years, op, growth, entity_rel, role, topn}. LLM planner (json_mode, cached) only if check(plan) fails; its plan is validated against tickers/metrics/sectors/ops/rels (unknown ticker -> unknown_company, else plan_failed; LLM error -> plan_failed). Bare 'income'/'margin' -> ambiguous, unknown capitalised name -> unknown_company, both without LLM. Executor reads Fact nodes only; derived (NetMargin, GrossMargin from graph formula, OperatingMargin in code) and growth (pct, pp for margins; needs FY-1) computed from inputs, all input fact ids returned; entity multi-hop = rank to pick winner, then follow HQ/AUDITED_BY/EXECUTIVE_OF/HAS_SEGMENT. Year omitted -> newest FY per company (mixed_years flag if they differ); named year missing -> unsupported_period (no filing) or no_fact. Named company sets are strict; sector/whole-universe rank is lenient with incomplete+missing flags. validated=false facts answered with flag.
+- Why / rejected: Rules are free and deterministic; LLM is the fallback only. Rejected: LLM-first planning (quota, hallucination), fuzzy/embedding company matching, XBRL fallback, silently skipping missing companies in named comparisons.
+- Evidence / outcome / status: tests/test_query.py (synthetic graph, stubbed llm) passes; dev questions on real graph run. Active.
+
+### D-076
+- Stage/Trigger: M6 verifier findings on src/planner.py and src/query.py.
+- Decision (chosen): remove bare 'cash flow' from OperatingCashFlow aliases; if 'cash flow' appears without an operating qualifier (OCF_RE), abstain unsupported_metric. Growth cue regex `grow\w*` (was 'growth'). rank/compare rows print each company's FY (e.g. 'CCC FY2025 $50.00 billion'); mixed_years flag kept.
+- Why / rejected: no FCF metric exists in the graph, so substituting OCF is wrong; abstaining is the strict-abstain rule (D-075). Rejected: keeping the bare alias with a qualifier blacklist (fragile). Rejected: dropping the mixed_years flag (flag still useful to the reader).
+- Evidence / outcome / status: tests/test_query.py 17 pass (new: test_cash_flow_qualifiers, test_growth_verb, test_rank_mixed_fiscal_years_named_in_text); full suite 178 pass. Active.
+
+### D-077
+- Stage/Trigger: M4b entity extraction (src/entities.py, data/entities); verifier review of M4b, no LLM calls in this step.
+- Decision (chosen): An entity is admitted only if its name (or employee number) appears literally on a cited page of data/parsed/{T}.json (case and whitespace normalised). Ids: PERSON|T|slug(name), SEG|T|slug(name), LOC|slug(name), ORG|slug(name) (exchange names via D-078), Employees Fact `{T}|Employees|FY{year}` with year from the filing report_date, value int, unit count, relation EMPLOYS_COUNT, validated False. One LLM call per category (cover, segments, employees, auditor, officers) on pages from find_windows, excerpt capped at MAX_CHARS 6000; one retry with RETRY_NOTE on bad JSON. Provider mix: 194 cache files, 144 Groq and 50 Gemini (counted from the cache provider field); entity records do not store the provider.
+- Why / rejected: Literal grounding makes every entity checkable against the page text, with no outside knowledge. Employees stay unvalidated because no XBRL tag exists to check them. Rejected: admitting ungrounded names with a flag (the graph would still have to exclude them).
+- Evidence / outcome / status: 504 candidates, 488 admitted (96.8%): Location 78, Organization 51, Segment 75, Fact 35, Person 249. 16 rejected ("not found in cited page text"): Location 12, Person 3, Segment 1. Gaps: auditor missing for BAC, C, GS, V, MA, AXP, PYPL (27 of 40 companies have no admitted auditor); officers missing for BAC, C, COF, V, PYPL; segments missing for MS, PYPL; Employees missing for INTC, MS, AXP, PFE, AMGN. Active.
+
+### D-078
+- Stage/Trigger: M4b verifier findings and regate of data/entities (src/entities.py, tests/test_entities.py).
+- Decision (chosen): (1) ground() uses _literal_rx: a letter edge may not touch a letter, a digit edge may not touch a digit or a ",d"/".d" continuation, so "166,000" does not match "1,166,000". Footnote digits glued to a name ("Delaware1") still match, deliberately. (2) Employees: as_written must yield the same integer as employee_count (NUM_TOKEN_RE, _count_value); otherwise the candidate is rejected with reason "as_written ... does not give employee_count N". The matched number token is grounded; with no as_written, f"{n:,}" is grounded. snippet is set on every grounded path. (3) exchange_slug() drops the, llc, global, select, market, stock and repeated tokens for names containing exchange or market: ORG|nasdaq and ORG|new-york-exchange. (4) `python -m src.entities --regate` swaps complete for cache_only (no network); a missing cached reply raises CacheMiss (RuntimeError), counted as a failed category, and the run prints "cache misses N". src/llm.py and the prompt/schema constants are unchanged.
+- Why / rejected: Unchanged prompts keep cache keys valid, so the regate needs no LLM calls. Rejected: requiring the employee number to be on a fixed page. Rejected: dropping "exchange" from ids (keeps the id readable). Shortcut: NYSE and New York Stock Exchange still differ (ORG|nyse vs ORG|new-york-exchange), upgrade with an explicit alias table if a query needs it.
+- Evidence / outcome / status: Baseline replay with the old gate reproduced data/entities byte for byte (488/16/35). New rules: 0 cache misses, admitted 488, rejected 16, Employees 35 unchanged, no entity changed admitted/rejected status. Organization ids: 12 distinct before, 7 after (35 company files re-keyed to ORG|nasdaq or ORG|new-york-exchange). Spot-checks against data/parsed page text: JPM PERSON|JPM|james-dimon p70; AAPL SEG|AAPL|americas p5; WMT Employees FY2026 2100000 p7 "approximately 2.1 million associates"; KO LOC|delaware p1; MSFT ORG|nasdaq p1. tests/test_entities.py 13 pass (5 new); full suite 175 pass. Active.

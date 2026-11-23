@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"executive_officers\":[{\"name\":\"Lip-Bu Tan\",\"title\":\"Chief Executive Officer\"},{\"name\":\"Nagasubramaniyan\",\"title\":\"Executive Vice President, Chief Technology and Operations Officer\"},{\"name\":\"April Miller Boise\",\"title\":\"Executive Vice President and Chief Legal Officer\"},{\"name\":\"David Zinsner\",\"title\":\"Executive Vice President and Chief Financial Officer\"}]}"
+}

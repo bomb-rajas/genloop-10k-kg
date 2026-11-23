@@ -1,0 +1,18 @@
+{
+  "ticker": "MS",
+  "entities": [
+    {
+      "id": "LOC|new-york-ny",
+      "type": "Location",
+      "name": "New York, NY",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/MS.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

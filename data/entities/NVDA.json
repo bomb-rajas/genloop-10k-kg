@@ -1,0 +1,115 @@
+{
+  "ticker": "NVDA",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 1,
+      "snippet": "tion (exact name of registrant as specified in its charter) delaware 94-3177549 (state or other jurisdiction of (i.r.s. employer",
+      "grounded": true
+    },
+    {
+      "id": "LOC|santa-clara-california",
+      "type": "Location",
+      "name": "Santa Clara, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 1,
+      "snippet": "rganization) identification no.) 2788 san tomas expressway, santa clara, california 95051 (address of principal executive offices) (zip code) r",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "The Nasdaq Global Select Market",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 1,
+      "snippet": "ch registered common stock, $0.001 par value per share nvda the nasdaq global select market securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "NVDA|Employees|FY2026",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 42000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 15,
+      "snippet": "ent as of the end of fiscal year 2026, we had approximately 42,000 employees in 38 countries; 31,000 were engaged in research ",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "PERSON|NVDA|jen-hsun-huang",
+      "type": "Person",
+      "name": "Jen-Hsun Huang",
+      "relation": "EXECUTIVE_OF",
+      "role": "President and Chief Executive Officer",
+      "category": "officers",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 15,
+      "snippet": "s, and positions as of february 20, 2026: name age position jen-hsun huang 63 president and chief executive officer colette m. kress 5",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|NVDA|colette-m-kress",
+      "type": "Person",
+      "name": "Colette M. Kress",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Financial Officer",
+      "category": "officers",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 15,
+      "snippet": "ion jen-hsun huang 63 president and chief executive officer colette m. kress 58 executive vice president and chief financial officer aja",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|NVDA|ajay-k-puri",
+      "type": "Person",
+      "name": "Ajay K. Puri",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Worldwide Field Operations",
+      "category": "officers",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 15,
+      "snippet": "ess 58 executive vice president and chief financial officer ajay k. puri 71 executive vice president, worldwide field operations deb",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|NVDA|debora-shoquist",
+      "type": "Person",
+      "name": "Debora Shoquist",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Operations",
+      "category": "officers",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 15,
+      "snippet": "uri 71 executive vice president, worldwide field operations debora shoquist 71 executive vice president, operations timothy s. teter 59",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|NVDA|timothy-s-teter",
+      "type": "Person",
+      "name": "Timothy S. Teter",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and General Counsel",
+      "category": "officers",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 15,
+      "snippet": "ons debora shoquist 71 executive vice president, operations timothy s. teter 59 executive vice president and general counsel jen-hsun hu",
+      "grounded": true
+    }
+  ]
+}

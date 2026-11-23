@@ -1,0 +1,55 @@
+{
+  "ticker": "HD",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/HD.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 95-3261426 (state or other jurisdiction of incorporation or",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/HD.pdf",
+      "page": 1,
+      "snippet": "which registered common stock, $0.05 par value per share hd new york stock exchange securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "SEG|HD|primary-segment",
+      "type": "Segment",
+      "name": "Primary segment",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/HD.pdf",
+      "page": 6,
+      "snippet": "and mexico are aggregated into one reportable segment (the \u201cprimary segment\u201d). in fiscal 2024, we acquired srs, a leading residential s",
+      "grounded": true
+    },
+    {
+      "id": "HD|Employees|FY2026",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 472400,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/HD.pdf",
+      "page": 18,
+      "snippet": "force. at the end of fiscal 2025, we employed approximately 472,400 associates, of whom approximately 53,400 were salaried, wit",
+      "grounded": true,
+      "reason": null
+    }
+  ]
+}

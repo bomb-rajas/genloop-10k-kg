@@ -1,0 +1,18 @@
+{
+  "ticker": "MRK",
+  "entities": [
+    {
+      "id": "LOC|rahway-new-jersey",
+      "type": "Location",
+      "name": "Rahway, New Jersey",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/MRK.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

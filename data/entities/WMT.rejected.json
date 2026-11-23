@@ -1,0 +1,18 @@
+{
+  "ticker": "WMT",
+  "entities": [
+    {
+      "id": "LOC|bentonville-ar",
+      "type": "Location",
+      "name": "Bentonville, AR",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/WMT.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

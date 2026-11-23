@@ -1,0 +1,55 @@
+{
+  "ticker": "V",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/V.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 26-0267673 (state or other jurisdiction (irs employer of in",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/V.pdf",
+      "page": 1,
+      "snippet": "istered class a common stock, par value $0.0001 per share v new york stock exchange 2.250% senior notes due 2028 v28 new york stock exchange 2.",
+      "grounded": true
+    },
+    {
+      "id": "SEG|V|payment-services",
+      "type": "Segment",
+      "name": "Payment Services",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/V.pdf",
+      "page": 145,
+      "snippet": "le global business. the company has one reportable segment, payment services. the company's chief operating decision maker (codm) is the",
+      "grounded": true
+    },
+    {
+      "id": "V|Employees|FY2026",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 34800,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/V.pdf",
+      "page": 26,
+      "snippet": "ued success. as of september 30, 2026, we had approximately 34,800 employees located in 90 countries and territories, with app",
+      "grounded": true,
+      "reason": null
+    }
+  ]
+}

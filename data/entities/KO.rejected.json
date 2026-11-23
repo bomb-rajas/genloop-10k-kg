@@ -1,0 +1,18 @@
+{
+  "ticker": "KO",
+  "entities": [
+    {
+      "id": "LOC|atlanta-georgia",
+      "type": "Location",
+      "name": "Atlanta, Georgia",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/KO.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

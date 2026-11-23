@@ -1,0 +1,44 @@
+{
+  "ticker": "PFE",
+  "entities": [
+    {
+      "id": "PERSON|PFE|albert-bourla-dvm-ph-d",
+      "type": "Person",
+      "name": "Albert Bourla, DVM, Ph.D.",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chairman of the Board since January 2020 and Chief Executive Officer since January 2019",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    },
+    {
+      "id": "PERSON|PFE|andrew-baum-ma-bm-chb",
+      "type": "Person",
+      "name": "Andrew Baum, MA, BM ChB",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Strategy and Innovation Officer and Executive Vice President since 2024",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    },
+    {
+      "id": "PERSON|PFE|chris-boshoff-md-frcp-fmedsci-ph-d",
+      "type": "Person",
+      "name": "Chris Boshoff, MD, FRCP, FMedSci, Ph.D.",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Scientific Officer and President, Research & Development, since January 2025",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    }
+  ]
+}

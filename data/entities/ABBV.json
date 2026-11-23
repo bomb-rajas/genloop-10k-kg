@@ -1,0 +1,163 @@
+{
+  "ticker": "ABBV",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 32-0375147 (state or other jurisdiction of (i.r.s. employer",
+      "grounded": true
+    },
+    {
+      "id": "LOC|north-chicago-illinois",
+      "type": "Location",
+      "name": "North Chicago, Illinois",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 1,
+      "snippet": " organization) identification number) 1 north waukegan road north chicago, illinois 60064-6400 (847) 932-7900 (address, including zip code, and",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 1,
+      "snippet": "(s) registered common stock, par value $0.01 per share abbv new york stock exchange nyse texas 0.750% senior notes due 2027 abbv27 new york sto",
+      "grounded": true
+    },
+    {
+      "id": "ABBV|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 57000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 26,
+      "snippet": "ults of operations. employees abbvie employed approximately 57,000 employees in over 70 countries as of december 31, 2025. out",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "PERSON|ABBV|robert-a-michael",
+      "type": "Person",
+      "name": "Robert A. Michael",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chairman of the Board and Chief Executive Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": "information about our executive officers name age position robert a. michael 55 chairman of the board and chief executive officer scott ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|scott-t-reents",
+      "type": "Person",
+      "name": "Scott T. Reents",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Chief Financial Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": "ichael 55 chairman of the board and chief executive officer scott t. reents 58 executive vice president, chief financial officer demetr",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|demetris-d-crum",
+      "type": "Person",
+      "name": "Demetris D. Crum",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Chief Human Resources Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": "reents 58 executive vice president, chief financial officer demetris d. crum 45 executive vice president, chief human resources officer ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|nicholas-j-donoghoe-m-d",
+      "type": "Person",
+      "name": "Nicholas J. Donoghoe, M.D.",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Chief Business and Strategy Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": " 45 executive vice president, chief human resources officer nicholas j. donoghoe, m.d. 45 executive vice president, chief business and strategy of",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|azita-saleki-gerhardt-ph-d",
+      "type": "Person",
+      "name": "Azita Saleki-Gerhardt, Ph.D.",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Chief Operations Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": "ecutive vice president, chief business and strategy officer azita saleki-gerhardt, ph.d. 62 executive vice president, chief operations officer perry",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|perry-c-siatis",
+      "type": "Person",
+      "name": "Perry C. Siatis",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, General Counsel and Secretary",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": "ph.d. 62 executive vice president, chief operations officer perry c. siatis 51 executive vice president, general counsel and secretary ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|jeffrey-r-stewart",
+      "type": "Person",
+      "name": "Jeffrey R. Stewart",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Chief Commercial Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": " 51 executive vice president, general counsel and secretary jeffrey r. stewart 57 executive vice president, chief commercial officer execu",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|roopal-thakkar-m-d",
+      "type": "Person",
+      "name": "Roopal Thakkar, M.D.",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Research & Development and Chief Scientific Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": "vice president, research & development and chief scientific roopal thakkar, m.d. 54 officer david r. purdue 48 senior vice president, contro",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ABBV|david-r-purdue",
+      "type": "Person",
+      "name": "David R. Purdue",
+      "relation": "EXECUTIVE_OF",
+      "role": "Senior Vice President, Controller",
+      "category": "officers",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 57,
+      "snippet": "opment and chief scientific roopal thakkar, m.d. 54 officer david r. purdue 48 senior vice president, controller ______________________",
+      "grounded": true
+    }
+  ]
+}

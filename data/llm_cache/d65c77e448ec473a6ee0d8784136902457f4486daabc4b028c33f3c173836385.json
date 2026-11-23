@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"state_of_incorporation\":\"Oregon\",\"hq_city\":\"Beaverton\",\"hq_state\":\"Oregon\",\"stock_exchange\":\"New York Stock Exchange\"}"
+}

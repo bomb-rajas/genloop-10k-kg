@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"executive_officers\":[{\"name\":\"Jen-Hsun Huang\",\"title\":\"President and Chief Executive Officer\"},{\"name\":\"Colette M. Kress\",\"title\":\"Executive Vice President and Chief Financial Officer\"},{\"name\":\"Ajay K. Puri\",\"title\":\"Executive Vice President, Worldwide Field Operations\"},{\"name\":\"Debora Shoquist\",\"title\":\"Executive Vice President, Operations\"},{\"name\":\"Timothy S. Teter\",\"title\":\"Executive Vice President and General Counsel\"}]}"
+}

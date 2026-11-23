@@ -1,0 +1,55 @@
+{
+  "ticker": "CRM",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/CRM.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 94-3320693 (state or other jurisdiction of (irs employer in",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-francisco-california",
+      "type": "Location",
+      "name": "San Francisco, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/CRM.pdf",
+      "page": 1,
+      "snippet": "tification no.) salesforce tower 415 mission street, 3rd fl san francisco, california 94105 (address of principal executive offices) telephone nu",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/CRM.pdf",
+      "page": 1,
+      "snippet": "ich registered common stock, par value $0.001 per share crm new york stock exchange securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "CRM|Employees|FY2026",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 83334,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/CRM.pdf",
+      "page": 18,
+      "snippet": "ous awards across the globe. as of january 31, 2026, we had 83,334 employees. none of our employees in the united states are r",
+      "grounded": true,
+      "reason": null
+    }
+  ]
+}

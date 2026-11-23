@@ -1,0 +1,4 @@
+{
+  "provider": "gemini",
+  "text": "{\n  \"segments\": [\n    \"Health Care Benefits\",\n    \"Health Services\",\n    \"Pharmacy & Consumer Wellness\",\n    \"Corporate/Other\"\n  ]\n}"
+}

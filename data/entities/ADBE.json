@@ -1,0 +1,127 @@
+{
+  "ticker": "ADBE",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 1,
+      "snippet": " as specified in its charter) _____________________________ delaware 77-0019522 (state or other jurisdiction of (i.r.s. employer",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-jose-california",
+      "type": "Location",
+      "name": "San Jose, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 1,
+      "snippet": "ation or organization) identification no.) 345 park avenue, san jose, california 95110-2704 (address of principal executive offices) (408) 5",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "NASDAQ",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 1,
+      "snippet": "h registered common stock, $0.0001 par value per share adbe nasdaq securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "SEG|ADBE|digital-media",
+      "type": "Segment",
+      "name": "Digital Media",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 18,
+      "snippet": " 2025, our business consisted of three reportable segments: digital media, digital experience and publishing and advertising. spannin",
+      "grounded": true
+    },
+    {
+      "id": "SEG|ADBE|digital-experience",
+      "type": "Segment",
+      "name": "Digital Experience",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 18,
+      "snippet": "ness consisted of three reportable segments: digital media, digital experience and publishing and advertising. spanning both our digital m",
+      "grounded": true
+    },
+    {
+      "id": "SEG|ADBE|publishing-and-advertising",
+      "type": "Segment",
+      "name": "Publishing and Advertising",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 18,
+      "snippet": " reportable segments: digital media, digital experience and publishing and advertising. spanning both our digital media and digital experience seg",
+      "grounded": true
+    },
+    {
+      "id": "ADBE|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 31360,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 23,
+      "snippet": "rowth and development. as of november 28, 2025, we employed 31,360 people, of which 50% were in the united states and 50% were",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "PERSON|ADBE|shantanu-narayen",
+      "type": "Person",
+      "name": "Shantanu Narayen",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chair of the Board of Directors and Chief Executive Officer",
+      "category": "officers",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 25,
+      "snippet": "s as of january 15, 2026 are as follows: name age positions shantanu narayen 62 chair of the board of directors and chief executive offi",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ADBE|daniel-durn",
+      "type": "Person",
+      "name": "Daniel Durn",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Financial Officer and Executive Vice President, Finance, Technology, Security and Operations",
+      "category": "officers",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 25,
+      "snippet": "aas school of business, university of california, berkeley. daniel durn 59 chief financial officer and executive vice president, fi",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|ADBE|anil-chakravarthy",
+      "type": "Person",
+      "name": "Anil Chakravarthy",
+      "relation": "EXECUTIVE_OF",
+      "role": "President, Customer Experience Orchestration Business",
+      "category": "officers",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 26,
+      "snippet": "table of contents name age positions anil chakravarthy 58 president, customer experience orchestration business mr",
+      "grounded": true
+    }
+  ]
+}

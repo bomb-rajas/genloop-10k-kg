@@ -1,0 +1,79 @@
+{
+  "ticker": "LLY",
+  "entities": [
+    {
+      "id": "LOC|indiana",
+      "type": "Location",
+      "name": "Indiana",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/LLY.pdf",
+      "page": 1,
+      "snippet": "pany (exact name of registrant as specified in its charter) indiana 35-0470950 (state or other jurisdiction of (i.r.s. employer",
+      "grounded": true
+    },
+    {
+      "id": "LOC|indianapolis-indiana",
+      "type": "Location",
+      "name": "Indianapolis, Indiana",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/LLY.pdf",
+      "page": 1,
+      "snippet": "r organization) identification no.) lilly corporate center, indianapolis, indiana 46285 (address and zip code of principal executive offices)",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/LLY.pdf",
+      "page": 1,
+      "snippet": "xchange on which registered common stock (no par value) lly new york stock exchange 1.625% notes due 2026 lly26 new york stock exchange 2.125% ",
+      "grounded": true
+    },
+    {
+      "id": "LLY|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 50000,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/LLY.pdf",
+      "page": 33,
+      "snippet": "ve workforce. at the end of 2025, we employed approximately 50,000 people, including approximately 27,000 employees outside th",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "PERSON|LLY|david-ricks",
+      "type": "Person",
+      "name": "David Ricks",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chair, President, and Chief Executive Officer (CEO)",
+      "category": "officers",
+      "doc": "data/pdfs/LLY.pdf",
+      "page": 31,
+      "snippet": "(since 2017). previously, mr. ricks held various leadership david ricks 58 roles with lilly, including senior vice president and pr",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|LLY|adrienne-brown",
+      "type": "Person",
+      "name": "Adrienne Brown",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and President, Lilly Immunology",
+      "category": "officers",
+      "doc": "data/pdfs/LLY.pdf",
+      "page": 31,
+      "snippet": " of corporate business development from 2023 to 2025, group adrienne brown 46 vice president, u.s. diabetes and obesity from 2020 to 2",
+      "grounded": true
+    }
+  ]
+}

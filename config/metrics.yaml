@@ -119,6 +119,13 @@ metrics:
     synonyms: [cash and cash equivalents, cash and equivalents, cash and due from banks, cash and cash equivalents at end of period, cash and short-term investments]
     xbrl_tags: [CashAndCashEquivalentsAtCarryingValue]
 
+# count_metrics: non-financial counts taken from text by src/entities.py (M4b). Not statement rows; no synonyms.
+count_metrics:
+  - name: Employees
+    category: count
+    applies_to: all
+    unit: count
+
 # Helper rows used only as identity inputs (not admitted as facts).
 helper_metrics:
   - name: TotalLiabilitiesAndEquity

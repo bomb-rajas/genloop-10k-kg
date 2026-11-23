@@ -1,0 +1,149 @@
+{
+  "ticker": "MS",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 1,
+      "snippet": ".jpg (exact name of registrant as specified in its charter) delaware 1585 broadway 36-3145972 (212)761-4000 (state or other juri",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 1,
+      "snippet": "symbol(s) which registered common stock, $0.01 par value ms new york stock exchange depositary shares, each representing 1/1,000th interest in ",
+      "grounded": true
+    },
+    {
+      "id": "ORG|deloitte-touche-llp",
+      "type": "Organization",
+      "name": "Deloitte & Touche LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 359,
+      "snippet": "rstanding of internal control over financial reporting, /s/ deloitte & touche llp new york, new york february 19, 2026 153 december 2025 form",
+      "grounded": true
+    },
+    {
+      "id": "LOC|new-york-new-york",
+      "type": "Location",
+      "name": "New York, New York",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 359,
+      "snippet": "control over financial reporting, /s/ deloitte & touche llp new york, new york february 19, 2026 153 december 2025 form 10-k",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|michael-a-pizzi-51",
+      "type": "Person",
+      "name": "Michael A. Pizzi (51)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Head of Technology and Operations (since January 2025), and Head of Technology of Morgan Stanley (from January 2023 to January 2025)",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": "loyee representation u.s. ethnic % ethnically diverse3 36 % michael a. pizzi (51). executive vice president and head of diversity % ethnicall",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|andrew-m-saperstein-59",
+      "type": "Person",
+      "name": "Andrew M. Saperstein (59)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Co-President of Morgan Stanley (since January 2024)",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": "n benefits expense in and benefits 2025 (millions) $ 29,216 andrew m. saperstein (59). co-president of morgan stanley 1. the percentage disclosed",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|daniel-a-simkowitz-60",
+      "type": "Person",
+      "name": "Daniel A. Simkowitz (60)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Co-President of Morgan Stanley (since January 2024)",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": "12 to march 2015). information about our executive officers daniel a. simkowitz (60). co-president of morgan stanley (since january 2024). head ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|mandell-l-crawley-50",
+      "type": "Person",
+      "name": "Mandell L. Crawley (50)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President (since February 2021) and Chief Client Officer of Morgan Stanley Managing Director in Global Capital Markets (since January 2025)",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": "capital markets (march 2013 to september 2015). chairman of mandell l. crawley (50). executive vice president (since global capital markets (no",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|charles-a-smith-59",
+      "type": "Person",
+      "name": "Charles A. Smith (59)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Risk Officer of Morgan Stanley (since May 2023)",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": "9). (february 2021 to january 2025). head of private wealth charles a. smith (59). executive vice president and chief management (june 2017 t",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|sharon-yeshaya-46",
+      "type": "Person",
+      "name": "Sharon Yeshaya (46)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": "(april 2004 to february (december 2005 to may 2008). 2008). sharon yeshaya (46). executive vice president and chief eric f. grossman (59). ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|eric-f-grossman-59",
+      "type": "Person",
+      "name": "Eric F. Grossman (59)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Financial Officer of Morgan Stanley (since June 2021)",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": "8). sharon yeshaya (46). executive vice president and chief eric f. grossman (59). executive vice president and chief financial officer of mo",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|MS|edward-pick-57",
+      "type": "Person",
+      "name": "Edward Pick (57)",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chairman of the Board of Directors of Morgan Stanley (since January 2025) and Chief Executive",
+      "category": "officers",
+      "doc": "data/pdfs/MS.pdf",
+      "page": 28,
+      "snippet": " of davis polk & wardwell llp (june 2001 to december 2005). edward pick (57). chairman of the board of directors of morgan stanley (sinc",
+      "grounded": true
+    }
+  ]
+}

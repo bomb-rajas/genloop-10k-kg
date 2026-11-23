@@ -1,0 +1,115 @@
+{
+  "ticker": "COF",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 1,
+      "snippet": "cified in its charter) ____________________________________ delaware 54-1719854 (state or other jurisdiction of incorporation or",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 1,
+      "snippet": "hich registered common stock (par value $.01 per share) cof new york stock exchange depositary shares, each representing a 1/40th interest in a",
+      "grounded": true
+    },
+    {
+      "id": "SEG|COF|credit-card",
+      "type": "Segment",
+      "name": "Credit Card",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 88,
+      "snippet": "ocated to the reporting unit. we have four reporting units: credit card, auto finance, other consumer banking and commercial bankin",
+      "grounded": true
+    },
+    {
+      "id": "SEG|COF|auto-finance",
+      "type": "Segment",
+      "name": "Auto Finance",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 88,
+      "snippet": " reporting unit. we have four reporting units: credit card, auto finance, other consumer banking and commercial banking. for the pur",
+      "grounded": true
+    },
+    {
+      "id": "SEG|COF|other-consumer-banking",
+      "type": "Segment",
+      "name": "Other Consumer Banking",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 88,
+      "snippet": "t. we have four reporting units: credit card, auto finance, other consumer banking and commercial banking. for the purpose of our goodwill imp",
+      "grounded": true
+    },
+    {
+      "id": "SEG|COF|commercial-banking",
+      "type": "Segment",
+      "name": "Commercial Banking",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 88,
+      "snippet": " not unconditionally cancellable which are generally in our commercial banking business. the factors impacting our assessment generally al",
+      "grounded": true
+    },
+    {
+      "id": "COF|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 76300,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 20,
+      "snippet": "ion. as of december 31, 2025, capital one had approximately 76,300 employees worldwide, whom we refer to as \u201cassociates.\u201d the ",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 142,
+      "snippet": "liance with the policies or procedures may deteriorate. /s/ ernst & young llp tysons, virginia february 19, 2026 141 capital one financia",
+      "grounded": true
+    },
+    {
+      "id": "LOC|tysons-virginia",
+      "type": "Location",
+      "name": "Tysons, Virginia",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/COF.pdf",
+      "page": 142,
+      "snippet": "licies or procedures may deteriorate. /s/ ernst & young llp tysons, virginia february 19, 2026 141 capital one financial corporation (co",
+      "grounded": true
+    }
+  ]
+}

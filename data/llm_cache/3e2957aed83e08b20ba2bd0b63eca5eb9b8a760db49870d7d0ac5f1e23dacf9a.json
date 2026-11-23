@@ -1,0 +1,4 @@
+{
+  "provider": "gemini",
+  "text": "{\n  \"executive_officers\": [\n    {\n      \"name\": \"David Ricks\",\n      \"title\": \"Chair, President, and Chief Executive Officer (CEO)\"\n    },\n    {\n      \"name\": \"Adrienne Brown\",\n      \"title\": \"Executive Vice President and President, Lilly Immunology\"\n    }\n  ]\n}"
+}

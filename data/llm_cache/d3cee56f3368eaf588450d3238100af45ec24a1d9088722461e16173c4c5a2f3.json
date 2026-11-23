@@ -1,0 +1,4 @@
+{
+  "provider": "gemini",
+  "text": "{\n  \"employee_count\": 32500,\n  \"as_written\": \"32,500\",\n  \"as_of\": \"December 31, 2025\"\n}"
+}

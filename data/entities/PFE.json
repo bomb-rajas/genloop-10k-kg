@@ -1,0 +1,113 @@
+{
+  "ticker": "PFE",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 13-5315170 (state or other jurisdiction of incorporation or",
+      "grounded": true
+    },
+    {
+      "id": "LOC|new-york-new-york",
+      "type": "Location",
+      "name": "New York, New York",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 1,
+      "snippet": ". employer identification number) 66 hudson boulevard east, new york, new york 10001-2192 (address of principal executive offices) (zip co",
+      "grounded": true
+    },
+    {
+      "id": "ORG|new-york-exchange",
+      "type": "Organization",
+      "name": "New York Stock Exchange",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 1,
+      "snippet": "hange on which registered common stock, $0.05 par value pfe new york stock exchange 1.000% notes due 2027 pfe/27 new york stock exchange 2.875%",
+      "grounded": true
+    },
+    {
+      "id": "SEG|PFE|biopharma",
+      "type": "Segment",
+      "name": "Biopharma",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 20,
+      "snippet": " of three operating segments, each led by a single manager: biopharma, pc1 and pfizer ignite. biopharma, our innovative science-b",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|PFE|david-m-denton",
+      "type": "Person",
+      "name": "David M. Denton",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Financial Officer, Executive Vice President since May 2022",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 65,
+      "snippet": "023; senior vice president, oncology, from 2017 until 2023. david m. denton 60 chief financial officer, executive vice president since ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|PFE|alexandre-de-germay",
+      "type": "Person",
+      "name": "Alexandre de Germay",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief International Commercial Officer, Executive Vice President since December 2023",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 65,
+      "snippet": "as director of haleon plc from march 2023 to december 2024. alexandre de germay 58 chief international commercial officer, executive vice p",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|PFE|lidia-fonseca",
+      "type": "Person",
+      "name": "Lidia Fonseca",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Digital and Technology Officer, Executive Vice President since January 2019",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 65,
+      "snippet": "sident of asia-pacific of pfizer inc. from 2013 until 2016. lidia fonseca 57 chief digital and technology officer, executive vice pre",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|PFE|douglas-m-lankler",
+      "type": "Person",
+      "name": "Douglas M. Lankler",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief Legal Officer, Executive Vice President since January 2025",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 65,
+      "snippet": "ings from 2008 until march 2013. director of medtronic plc. douglas m. lankler 60 chief legal officer, executive vice president since janu",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|PFE|aamir-malik",
+      "type": "Person",
+      "name": "Aamir Malik",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chief U.S. Commercial Officer, Executive Vice President since December 2023",
+      "category": "officers",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 65,
+      "snippet": "ce and risk officer from february 2011 until december 2013. aamir malik 50 chief u.s. commercial officer, executive vice president ",
+      "grounded": true
+    }
+  ]
+}

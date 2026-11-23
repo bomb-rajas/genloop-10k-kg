@@ -1,0 +1,55 @@
+{
+  "ticker": "META",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/META.pdf",
+      "page": 1,
+      "snippet": "ant as specified in its charter) __________________________ delaware 20-1665019 (state or other jurisdiction of incorporation or",
+      "grounded": true
+    },
+    {
+      "id": "LOC|menlo-park-california",
+      "type": "Location",
+      "name": "Menlo Park, California",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/META.pdf",
+      "page": 1,
+      "snippet": "zation) (i.r.s. employer identification number) 1 meta way, menlo park, california 94025 (address of principal executive offices and zip code)",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "The Nasdaq Stock Market LLC",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/META.pdf",
+      "page": 1,
+      "snippet": "h registered class a common stock, $0.000006 par value meta the nasdaq stock market llc securities registered pursuant to section 12(g) of the act:",
+      "grounded": true
+    },
+    {
+      "id": "META|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 78865,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/META.pdf",
+      "page": 15,
+      "snippet": "of our unique company culture. we had a global workforce of 78,865 employees as of december 31, 2025, and we have offices in m",
+      "grounded": true,
+      "reason": null
+    }
+  ]
+}

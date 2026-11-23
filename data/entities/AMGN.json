@@ -1,0 +1,173 @@
+{
+  "ticker": "AMGN",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 1,
+      "snippet": "inc. (exact name of registrant as specified in its charter) delaware 95-3540776 (state or other jurisdiction of (i.r.s. employer",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "The Nasdaq Global Select Market",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 1,
+      "snippet": "ge on which registered common stock, $0.0001 par value amgn the nasdaq global select market 2.00% senior notes due 2026 amgn26 the nasdaq global select",
+      "grounded": true
+    },
+    {
+      "id": "SEG|AMGN|human-therapeutics",
+      "type": "Segment",
+      "name": "human therapeutics",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 8,
+      "snippet": "rporation in 1987. amgen operates in one operating segment: human therapeutics. significant developments following is a summary of signifi",
+      "grounded": true
+    },
+    {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 124,
+      "snippet": "liance with the policies or procedures may deteriorate. /s/ ernst & young llp los angeles, california february 13, 2026 84",
+      "grounded": true
+    },
+    {
+      "id": "LOC|los-angeles",
+      "type": "Location",
+      "name": "Los Angeles",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 124,
+      "snippet": "licies or procedures may deteriorate. /s/ ernst & young llp los angeles, california february 13, 2026 84",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|mr-robert-a-bradway",
+      "type": "Person",
+      "name": "Mr. Robert A. Bradway",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chairman of the Board of Directors, President and Chief Executive Officer",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": "f the company as of february 13, 2026, are set forth below. mr. robert a. bradway, age 63, has served as a director of the company since 2011",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|dr-james-e-bradner",
+      "type": "Person",
+      "name": "Dr. James E. Bradner",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Research and Development",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": "ustees of the university of southern california since 2014. dr. james e. bradner, age 53, became executive vice president, research and deve",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|mr-murdo-gordon",
+      "type": "Person",
+      "name": "Mr. Murdo Gordon",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President, Global Commercial Operations",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": "previously served on the faculty at harvard medical school. mr. murdo gordon, age 59, became executive vice president, global commercial",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|mr-jonathan-p-graham",
+      "type": "Person",
+      "name": "Mr. Jonathan P. Graham",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and General Counsel and Secretary",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": " variety of leadership roles at bms for more than 25 years. mr. jonathan p. graham, age 65, became executive vice president and general counse",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|mr-peter-h-griffith",
+      "type": "Person",
+      "name": "Mr. Peter H. Griffith",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Financial Officer",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": "to ge, mr. graham was a partner at williams & connolly llp. mr. peter h. griffith, age 67, became executive vice president and chief financia",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|ms-nancy-a-grygiel",
+      "type": "Person",
+      "name": "Ms. Nancy A. Grygiel",
+      "relation": "EXECUTIVE_OF",
+      "role": "Senior Vice President and Chief Compliance Officer",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": " the investment banking division of wedbush securities inc. ms. nancy a. grygiel, age 58, became senior vice president and chief compliance ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|ms-rachna-khosla",
+      "type": "Person",
+      "name": "Ms. Rachna Khosla",
+      "relation": "EXECUTIVE_OF",
+      "role": "Senior Vice President, Business Development",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": "several management positions at mylan pharmaceuticals, inc. ms. rachna khosla, age 53, became senior vice president, business development",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|mr-derek-miller",
+      "type": "Person",
+      "name": "Mr. Derek Miller",
+      "relation": "EXECUTIVE_OF",
+      "role": "Senior Vice President, Human Resources",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 45,
+      "snippet": "apital, j.p. morgan chase & co., and salomon brothers, inc. mr. derek miller, age 53, became senior vice president, human resources, in ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|AMGN|dr-david-m-reese",
+      "type": "Person",
+      "name": "Dr. David M. Reese",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Technology Officer",
+      "category": "officers",
+      "doc": "data/pdfs/AMGN.pdf",
+      "page": 46,
+      "snippet": "dr. david m. reese, age 63, became the company's inaugural executive vice pres",
+      "grounded": true
+    }
+  ]
+}

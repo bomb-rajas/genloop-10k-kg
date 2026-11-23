@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"segments\":[\"Consumer Banking\",\"Global Wealth & Investment Management\",\"Global Banking\",\"Global Markets\"]}"
+}

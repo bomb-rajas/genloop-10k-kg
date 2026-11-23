@@ -27,11 +27,11 @@
 | Numeric facts from statement rows (PDF only) | src/extract.py: python -m src.extract [--tickers]; output data/facts/{T}.json (admitted), {T}.rejected.json | M4a done (D-054 to D-063); 976 of 976 XBRL compared matched, 0 rejected |
 | XBRL validation gate (validator only, never a value source) | src/validate.py | M4a done (D-060, D-064, D-066, D-067); 947/947 compared matched, 0 rejected, 57 no_xbrl; tests/test_extract.py, tests/test_validate.py (126 pytest total) |
 | LLM disk cache (committed, read before key check) | data/llm_cache/ | M1 done |
-| Graph build | src/build_graph.py, output graph/kg.json | M5 planned |
-| Query planner, traversal, abstain | src/query.py | M6 planned |
+| Graph build | src/graph.py (`python -m src.graph`; alias src/build_graph.py), output graph/kg.json, loader load_graph, helpers facts_of/neighbors/sector_members | M5 done (D-073, D-074, D-078); 1039 facts, 947/947 XBRL match |
+| Query planner, traversal, abstain | src/planner.py, src/query.py | M6 done (`python -m src.query "q" [--json]`) |
 | Benchmark questions | benchmark/benchmark.json | M7 planned |
 | Scoring and metrics | src/evaluate.py, output results/metrics.json, results/predictions.jsonl | M8 planned |
-| Unit tests (pytest) | tests/ (test_config.py, test_download.py, test_tables.py, test_parse.py, test_extract.py, test_validate.py) | M3 done; M4a adds extract and validate (126 total) |
+| Unit tests (pytest) | tests/ (test_config.py, test_download.py, test_tables.py, test_parse.py, test_extract.py, test_validate.py, test_graph.py, test_query.py) | M3 done; M4a adds extract and validate; M5 adds graph; M6 adds query (171 total) |
 | README | README.md | M9 planned |
 | Results PDF | report/results.pdf | M9 planned |
 | Pipeline doc | docs/flow.md | M10 planned |
@@ -48,3 +48,5 @@
 
 ## 4. Decision-log rule
 Every meaningful design or build choice gets an entry in docs/decision-log.md in the same change, before moving on. That covers architecture, schema, fact-ID format, metric mapping, libraries, parsing rules, extraction approach, LLM prompts and output schemas, validation thresholds, benchmark design, scoring rules, and company swaps. Failures are logged only when they forced a decision. If you chose between options, log it, including choices made by subagents.
+
+Compact format (from D-069 on; user-approved to save tokens): each full entry is `### D-nnn` then four lines: `Stage/Trigger:`, `Decision (chosen):`, `Why / rejected:`, `Evidence / outcome / status:`. No timestamps. Keep the at-a-glance row. Older entries stay as written.

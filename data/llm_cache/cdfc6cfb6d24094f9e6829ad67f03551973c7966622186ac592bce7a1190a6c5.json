@@ -1,0 +1,4 @@
+{
+  "provider": "gemini",
+  "text": "{\n  \"state_of_incorporation\": \"New York\",\n  \"hq_city\": \"New York\",\n  \"hq_state\": \"New York\",\n  \"stock_exchange\": \"New York Stock Exchange\"\n}"
+}

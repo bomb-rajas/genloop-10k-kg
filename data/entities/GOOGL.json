@@ -1,0 +1,79 @@
+{
+  "ticker": "GOOGL",
+  "entities": [
+    {
+      "id": "LOC|delaware",
+      "type": "Location",
+      "name": "Delaware",
+      "relation": "INCORPORATED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/GOOGL.pdf",
+      "page": 1,
+      "snippet": "in its charter) ___________________________________________ delaware 61-1767919 (state or other jurisdiction of incorporation or",
+      "grounded": true
+    },
+    {
+      "id": "LOC|mountain-view-ca",
+      "type": "Location",
+      "name": "Mountain View, CA",
+      "relation": "HEADQUARTERED_IN",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/GOOGL.pdf",
+      "page": 1,
+      "snippet": "r.s. employer identification no.) 1600 amphitheatre parkway mountain view, ca 94043 (address of principal executive offices, including zi",
+      "grounded": true
+    },
+    {
+      "id": "ORG|nasdaq",
+      "type": "Organization",
+      "name": "Nasdaq Stock Market LLC (Nasdaq Global Select Market)",
+      "relation": "LISTED_ON",
+      "role": null,
+      "category": "cover",
+      "doc": "data/pdfs/GOOGL.pdf",
+      "page": 1,
+      "snippet": "ich registered class a common stock, $0.001 par value googl nasdaq stock market llc (nasdaq global select market) class c capital stock, $0.001 par value goog nasdaq stock m",
+      "grounded": true
+    },
+    {
+      "id": "GOOGL|Employees|FY2025",
+      "type": "Fact",
+      "name": "Employees",
+      "relation": "EMPLOYS_COUNT",
+      "value": 190820,
+      "unit": "count",
+      "category": "employees",
+      "doc": "data/pdfs/GOOGL.pdf",
+      "page": 13,
+      "snippet": "d individual support. as of december 31, 2025, alphabet had 190,820 employees. we have work councils and statutory employee rep",
+      "grounded": true,
+      "reason": null
+    },
+    {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/GOOGL.pdf",
+      "page": 81,
+      "snippet": "the company's disclosures in relation to these matters. /s/ ernst & young llp we have served as the company's auditor since 1999. san jos",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-jose-california",
+      "type": "Location",
+      "name": "San Jose, California",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/GOOGL.pdf",
+      "page": 81,
+      "snippet": "ung llp we have served as the company's auditor since 1999. san jose, california february 4, 2026 46.",
+      "grounded": true
+    }
+  ]
+}

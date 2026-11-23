@@ -1,0 +1,4 @@
+{
+  "provider": "groq",
+  "text": "{\"state_of_incorporation\":\"Delaware\",\"hq_city\":\"Santa Clara\",\"hq_state\":\"California\",\"stock_exchange\":\"The Nasdaq Global Select Market\"}"
+}
