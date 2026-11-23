@@ -18,6 +18,14 @@ facts = [n for n in kg["nodes"] if n["node_type"] == "Fact"]
 xb = Counter(f["xbrl_status"] for f in facts)
 cnt = lambda rej: sum(len(json.load(open(f))["entities"]) for f in (R / "data/entities").glob("*.json") if ("rejected" in f.name) == rej)
 n_ok, n_rej = cnt(False), cnt(True)
+def _L(h): return h.replace("<td>", "<td style='text-align:left'>")
+npg = sum(json.load(open(f))["n_pages"] for f in (R / "data/parsed").glob("*.json"))
+xm = xb.get("match", 0)
+extra = _L("<table style='margin-top:6px'><tr><th colspan=4>Scale and quality</th></tr>"
+  f"<tr><td>10-K PDFs parsed</td><td>{len(companies)} ({npg:,} pages)</td><td>Graph size</td><td>{len(kg['nodes']):,} nodes, {len(kg['edges']):,} edges</td></tr>"
+  f"<tr><td>Facts, each with doc, page, snippet</td><td>{len(facts):,}</td><td>Facts matching XBRL</td><td>{xm} of {xm + xb.get('mismatch', 0)} compared (0 rejected)</td></tr>"
+  f"<tr><td>Cited document correct</td><td>{m['overall']['doc_hit_rate']:.0%}</td><td>Cited page matches gold</td><td>{m['overall']['page_strict_rate']:.0%}</td></tr>"
+  f"<tr><td>Entities passing grounding gate</td><td>{n_ok / (n_ok + n_rej):.1%}</td><td>Unanswerable questions abstained</td><td>{m['overall']['abstain_correct']} of {m['overall']['abstain_expected']}</td></tr></table>")
 src = lambda rel, i: {e[i] for e in kg["edges"] if e["rel"] == rel}
 aud, hq, execs = len(src("AUDITED_BY", "source")), len(src("HEADQUARTERED_IN", "source")), len(src("EXECUTIVE_OF", "target"))
 o = m["overall"]
@@ -75,7 +83,7 @@ table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px so
 <h1>GenLoop: Financial Knowledge Graph QA, Results</h1>
 <p class="s">40 companies, latest 10-K each, answered by graph traversal; {o['n']}-question benchmark. Gold is AI-drafted and AI-reviewed, pending hand verification by the author.</p>
 <h2>Results</h2>
-<div class="row"><table><tr><th>Slice</th><th>n</th><th>Scored</th><th>Correct</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>Abstained (correct/expected)</th></tr>{table}</table><div style="flex:none;width:330px">{chart1}</div></div>
+<div class="row"><div><table><tr><th>Slice</th><th>n</th><th>Scored</th><th>Correct</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>Abstained (correct/expected)</th></tr>{table}</table>{extra}</div><div style="flex:none;width:330px">{chart1}</div></div>
 <p class="s">Accuracy is correct/scored; over all {o['n']} it is {o['correct']}/{o['n']} = {o['accuracy_over_all']:.1%}. Q15 is unscored (no checkable gold). Questions were chosen after seeing the extractor's known gaps, so results are likely optimistic.</p>
 <h2>Methodology</h2>
 <p class="pipe">10-K HTML &rarr; Chrome PDF &rarr; pdfplumber facts &rarr; XBRL check &rarr; NetworkX graph &rarr; rule planner (LLM fallback) &rarr; cited answer or abstain</p>
