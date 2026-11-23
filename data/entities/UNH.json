@@ -100,6 +100,30 @@
       "reason": null
     },
     {
+      "id": "ORG|deloitte-touche-llp",
+      "type": "Organization",
+      "name": "DELOITTE & TOUCHE LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/UNH.pdf",
+      "page": 68,
+      "snippet": "ocessed in 2025 with dates of service in 2024 or prior. /s/ deloitte & touche llp minneapolis, minnesota march 2, 2026 we have served as the ",
+      "grounded": true
+    },
+    {
+      "id": "LOC|minneapolis-minnesota",
+      "type": "Location",
+      "name": "Minneapolis, Minnesota",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/UNH.pdf",
+      "page": 68,
+      "snippet": "ates of service in 2024 or prior. /s/ deloitte & touche llp minneapolis, minnesota march 2, 2026 we have served as the company's auditor since",
+      "grounded": true
+    },
+    {
       "id": "PERSON|UNH|stephen-hemsley",
       "type": "Person",
       "name": "Stephen Hemsley",

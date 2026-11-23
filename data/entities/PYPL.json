@@ -38,6 +38,18 @@
       "grounded": true
     },
     {
+      "id": "SEG|PYPL|one-reportable-segment",
+      "type": "Segment",
+      "name": "one reportable segment",
+      "relation": "HAS_SEGMENT",
+      "role": null,
+      "category": "segments",
+      "doc": "data/pdfs/PYPL.pdf",
+      "page": 177,
+      "snippet": "t versus actual results. we operate as one segment and have one reportable segment that constitutes consolidated results. the following table ",
+      "grounded": true
+    },
+    {
       "id": "PYPL|Employees|FY2025",
       "type": "Fact",
       "name": "Employees",
@@ -50,6 +62,18 @@
       "snippet": "usiness. as of december 31, 2025, we employed approximately 23,800 people globally, with 46% in the americas, 42% in asia-paci",
       "grounded": true,
       "reason": null
+    },
+    {
+      "id": "ORG|pricewaterhousecoopers-llp",
+      "type": "Organization",
+      "name": "PricewaterhouseCoopers LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/PYPL.pdf",
+      "page": 98,
+      "snippet": "ed to the forecasted trends in average weekly earnings. /s/ pricewaterhousecoopers llp san jose, california february 3, 2026 we have served as the",
+      "grounded": true
     }
   ]
 }

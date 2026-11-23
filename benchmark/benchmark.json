@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "description": "Genloop 10-K benchmark, Q01-Q59. Gold from PDF page text only. Verified false until human review.",
+  "description": "Genloop 10-K benchmark, Q01-Q29. Gold from PDF page text only. Verified false until the author checks it by hand.",
   "items": [
     {
       "id": "Q01",

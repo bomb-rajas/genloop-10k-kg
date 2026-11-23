@@ -86,6 +86,30 @@
       "snippet": "and management at december 31, 2025, citi had approximately 226,000 full-time employees, compared to approximately 229,000 at d",
       "grounded": true,
       "reason": null
+    },
+    {
+      "id": "ORG|kpmg-llp",
+      "type": "Organization",
+      "name": "KPMG LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/C.pdf",
+      "page": 157,
+      "snippet": "r the: \u2022 approval of the collective acll methodologies, /s/ kpmg llp including the pd, lgd, and ead we have served as the compan",
+      "grounded": true
+    },
+    {
+      "id": "LOC|new-york",
+      "type": "Location",
+      "name": "New York",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/C.pdf",
+      "page": 157,
+      "snippet": "s used to estimate the quantitative and certain qualitative new york, new york components of the collective acll february 20, 20",
+      "grounded": true
     }
   ]
 }

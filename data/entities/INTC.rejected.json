@@ -13,6 +13,19 @@
       "snippet": null,
       "grounded": false,
       "reason": "not found in cited page text"
+    },
+    {
+      "id": "PERSON|INTC|nagasubramaniyan-chandrasekaran",
+      "type": "Person",
+      "name": "Nagasubramaniyan Chandrasekaran",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Chief Technology and Operations Officer, Foundry",
+      "category": "officers",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
     }
   ]
 }

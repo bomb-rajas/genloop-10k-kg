@@ -86,23 +86,23 @@ Plus `python scripts/render_kg.py` to regenerate the explorer.
 
 ## Results
 
-29 questions, `report/metrics.json`: **26 correct of 28 scored** (1 has no checkable gold).
+29 questions, `report/metrics.json`: **27 correct of 28 scored** (1 has no checkable gold).
 
 | | n | correct | accuracy (scored) | accuracy (all 29) |
 |---|---|---|---|---|
-| Overall | 29 | 26/28 | 92.9% | 89.7% |
+| Overall | 29 | 27/28 | 96.4% | 93.1% |
 | Single fact | 10 | 10/10 | 100% | 100% |
-| Multi-hop | 10 | 7/9 | 77.8% | 70.0% |
+| Multi-hop | 10 | 8/9 | 88.9% | 80.0% |
 | Cross-filing | 9 | 9/9 | 100% | 100% |
 
 Precision 1.00, recall 1.00. 3 of 3 expected abstentions were correct.
 
-Honest note: I chose questions after seeing the extractor's known gaps, so results are likely optimistic; n=29 is small (one question is 3.4 points). Gold is AI-drafted and AI-reviewed (`verified: false`); a human should verify it.
+Honest note: questions were chosen after seeing the extractor's known gaps, so results are likely optimistic; n=29 is small (one question is 3.4 points). Gold is AI-drafted and AI-reviewed (`verified: false`); the author verifies it by hand.
 
 ## Known gaps
 
 - Metrics such as GrossProfit, R&D and OperatingIncome are missing for companies that do not report them as a line item.
-- Multi-hop questions are the weakest type (75% over all).
+- Multi-hop questions are the weakest type (80% over all; the miss is Q13, segment values are not stored).
 - Fiscal-year labels can shift for retailers with 52/53-week years.
 - Only the latest 10-K per company, so no long time series.
 
@@ -110,16 +110,14 @@ Honest note: I chose questions after seeing the extractor's known gaps, so resul
 
 XBRL is the SEC's machine-readable copy of a filing's numbers. The task asks for PDF-only parsing, so XBRL is used only to check the PDF-extracted facts: a fact is flagged validated when it matches XBRL for the same period (983/983 compared match). XBRL never supplies an answer.
 
-## AI tools and where I made the decisions
+## AI tools and where the author made the decisions
 
-I decided what to build and the rules it had to follow; AI wrote the code.
+The author decided what to build and the rules it had to follow; AI wrote the code.
 
-- I wrote the project spec: the schema (Company, Sector, Filing, Fact, Metric, Period, Segment, Person, Org, Location), the fact ID format `TICKER|Metric|FY`, the 40 companies across 4 sectors, the folder layout and the timebox plan.
-- I set the hard rules: parse PDFs only (EDGAR HTML converted to PDF with headless Chrome, never parsed for facts); XBRL only to validate, never to supply answers; answer by graph traversal, not vector search; free LLM tiers only; gold is never edited to fit output.
-- I supplied the Groq and Gemini keys and chose Groq as primary with Gemini as fallback after testing which models worked.
-- I set the process: AI works as Implementer and Verifier, review and test after each milestone, honest failure analysis, question selection disclosed.
-- I asked for the blind second-model gold review and approved the planner and parser fixes after seeing the failure diagnosis.
-- I asked for the interactive KG explorer and the minimal results PDF, and published the repo.
-- I will hand-verify the gold.
-
-Tools: Claude Code (Claude Sonnet 5.5 orchestrating, Claude Haiku and Sonnet sub-agents writing code, Claude Opus for read-only audits and the blind gold review) wrote the code, tests and drafts of benchmark questions under those instructions. Groq gpt-oss-120b and Gemini flash-lite run inside the pipeline for entity extraction and the fallback planner.
+- The author wrote the project spec: the schema (Company, Sector, Filing, Fact, Metric, Period, Segment, Person, Org, Location), the fact ID format `TICKER|Metric|FY`, the 40 companies across 4 sectors, the folder layout and the timebox plan.
+- The author set the hard rules: parse PDFs only (EDGAR HTML converted to PDF with headless Chrome, never parsed for facts); XBRL only to validate, never to supply answers; answer by graph traversal, not vector search; free LLM tiers only; gold is never edited to fit output.
+- The author supplied the Groq and Gemini keys and chose Groq as primary with Gemini as fallback after testing which models worked.
+- The author set the process: AI works as Implementer and Verifier, review and test after each milestone, honest failure analysis, question selection disclosed.
+- The author asked for the blind second-model gold review and approved the planner and parser fixes after seeing the failure diagnosis.
+- The author asked for the interactive KG explorer and the minimal results PDF, and published the repo.
+- The author verifies the gold by hand.

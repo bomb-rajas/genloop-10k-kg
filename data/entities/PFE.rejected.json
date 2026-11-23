@@ -2,6 +2,19 @@
   "ticker": "PFE",
   "entities": [
     {
+      "id": "ORG|kpmg-llp",
+      "type": "Organization",
+      "name": "KPMG LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
+    },
+    {
       "id": "PERSON|PFE|albert-bourla-dvm-ph-d",
       "type": "Person",
       "name": "Albert Bourla, DVM, Ph.D.",

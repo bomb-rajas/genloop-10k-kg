@@ -52,6 +52,30 @@
       "reason": null
     },
     {
+      "id": "ORG|deloitte-touche-llp",
+      "type": "Organization",
+      "name": "DELOITTE & TOUCHE LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/BMY.pdf",
+      "page": 199,
+      "snippet": "nce to assist us in performing our auditing procedures. /s/ deloitte & touche llp morristown, new jersey february 11, 2026 we have served as ",
+      "grounded": true
+    },
+    {
+      "id": "LOC|morristown",
+      "type": "Location",
+      "name": "Morristown",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/BMY.pdf",
+      "page": 199,
+      "snippet": "rforming our auditing procedures. /s/ deloitte & touche llp morristown, new jersey february 11, 2026 we have served as the company",
+      "grounded": true
+    },
+    {
       "id": "PERSON|BMY|christopher-boerner-ph-d",
       "type": "Person",
       "name": "Christopher Boerner, Ph.D.",
@@ -188,7 +212,7 @@
       "type": "Person",
       "name": "Karin Shanahan",
       "relation": "EXECUTIVE_OF",
-      "role": "Executive Vice President, Chief Supply Chain & Operations",
+      "role": "Executive Vice President, Chief Supply Chain & Operations Officer",
       "category": "officers",
       "doc": "data/pdfs/BMY.pdf",
       "page": 66,

@@ -76,6 +76,30 @@
       "reason": null
     },
     {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/WMT.pdf",
+      "page": 73,
+      "snippet": " also assessed the adequacy of the related disclosures. /s/ ernst & young llp we have served as the company's auditor since 1969. rogers,",
+      "grounded": true
+    },
+    {
+      "id": "LOC|rogers-arkansas",
+      "type": "Location",
+      "name": "Rogers, Arkansas",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/WMT.pdf",
+      "page": 73,
+      "snippet": "ung llp we have served as the company's auditor since 1969. rogers, arkansas march 13, 2026 50",
+      "grounded": true
+    },
+    {
       "id": "PERSON|WMT|daniel-j-bartlett",
       "type": "Person",
       "name": "Daniel J. Bartlett",

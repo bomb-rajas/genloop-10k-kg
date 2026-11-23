@@ -168,6 +168,6 @@ def test_rank_mixed_fiscal_years_named_in_text(env):
 
 def test_entity_partial_answer_names_missing_company():
     from src import query
-    r = query.answer("Who audits Apple and Amazon?")
-    assert not r["abstained"] and "AAPL:" in r["answer"] and "AMZN: not in the graph" in r["answer"]
-    assert query.answer("Who audits Amazon?")["abstained"]
+    r = query.answer("Who audits Apple and Bank of America?")
+    assert not r["abstained"] and "AAPL:" in r["answer"] and "BAC: not in the graph" in r["answer"]
+    assert query.answer("Who audits Bank of America?")["abstained"]

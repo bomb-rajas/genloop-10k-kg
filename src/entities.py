@@ -77,8 +77,9 @@ def find_windows(pages: dict[int, str]) -> dict[str, list[int]]:
     eng = _first(pages, r"engaged\s+[^.]{0,60}?independent registered public accounting firm")
     off = _first(pages, r"executive officers of (the )?(registrant|company)(?!\s+\d)|information about (our )?executive officers",
                  start=4, skip_toc=True)
+    sig = _first(pages, r"served as (the|our) company.s auditor since|/s/\s*[A-Z][\w&.,' -]{2,60}(LLP|LLC)")  # signature page of the audit report
     wins = {"cover": [cover], "segments": [seg], "employees": [emp, emp and emp + 1],
-            "auditor": [eng, aud] if eng else [aud, aud and aud + 1], "officers": [off, off and off + 1]}
+            "auditor": [sig] if sig else [eng, aud] if eng else [aud, aud and aud + 1], "officers": [off, off and off + 1]}
     # shortcut: window = located page (+1); a segment or officer list longer than that is cut off, upgrade if gaps show.
     return {k: [p for p in v if p and p in pages] for k, v in wins.items() if v[0]}
 

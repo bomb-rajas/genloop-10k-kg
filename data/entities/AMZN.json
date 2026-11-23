@@ -88,6 +88,18 @@
       "reason": null
     },
     {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/AMZN.pdf",
+      "page": 56,
+      "snippet": "'s income tax disclosures in relation to these matters. /s/ ernst & young llp we have served as the company's auditor since 1996. seattle",
+      "grounded": true
+    },
+    {
       "id": "PERSON|AMZN|jeffrey-p-bezos",
       "type": "Person",
       "name": "Jeffrey P. Bezos",

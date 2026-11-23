@@ -52,11 +52,35 @@
       "reason": null
     },
     {
+      "id": "ORG|pricewaterhousecoopers-llp",
+      "type": "Organization",
+      "name": "PricewaterhouseCoopers LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/GS.pdf",
+      "page": 262,
+      "snippet": "le, and we are not, by communicating the critical audit /s/ pricewaterhousecoopers llp matter below, providing a separate opinion on the critical ",
+      "grounded": true
+    },
+    {
+      "id": "LOC|new-york",
+      "type": "Location",
+      "name": "New York",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/GS.pdf",
+      "page": 262,
+      "snippet": "tter or on the accounts or disclosures to which it relates. new york, new york february 25, 2026 we have served as the company's",
+      "grounded": true
+    },
+    {
       "id": "PERSON|GS|john-f-w-rogers",
       "type": "Person",
       "name": "John F.W. Rogers",
       "relation": "EXECUTIVE_OF",
-      "role": "Executive Vice President",
+      "role": "Executive Vice President and Secretary to the Board",
       "category": "officers",
       "doc": "data/pdfs/GS.pdf",
       "page": 60,
@@ -100,18 +124,6 @@
       "grounded": true
     },
     {
-      "id": "PERSON|GS|david-solomon",
-      "type": "Person",
-      "name": "David Solomon",
-      "relation": "EXECUTIVE_OF",
-      "role": "Chairman of the Board; Chief Executive Officer",
-      "category": "officers",
-      "doc": "data/pdfs/GS.pdf",
-      "page": 60,
-      "snippet": "an, 50 ms. fredman has been controller and chief accounting david solomon, 64 officer since november 2019. she had previously served ",
-      "grounded": true
-    },
-    {
       "id": "PERSON|GS|alex-golten",
       "type": "Person",
       "name": "Alex Golten",
@@ -124,18 +136,6 @@
       "grounded": true
     },
     {
-      "id": "PERSON|GS|john-e-waldron",
-      "type": "Person",
-      "name": "John E. Waldron",
-      "relation": "EXECUTIVE_OF",
-      "role": "President and Chief Operating Officer",
-      "category": "officers",
-      "doc": "data/pdfs/GS.pdf",
-      "page": 60,
-      "snippet": "to december 2024, as head of enterprise risk from june 2022 john e. waldron, 56 to july 2024 and as chief market risk officer from nove",
-      "grounded": true
-    },
-    {
       "id": "PERSON|GS|carey-halio",
       "type": "Person",
       "name": "Carey Halio",
@@ -145,6 +145,30 @@
       "doc": "data/pdfs/GS.pdf",
       "page": 60,
       "snippet": "ng division from december 2014. prior to that he was global carey halio, 52 head of investment banking services/client coverage for",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|GS|david-solomon",
+      "type": "Person",
+      "name": "David Solomon",
+      "relation": "EXECUTIVE_OF",
+      "role": "Chairman of the Board, Chief Executive Officer and a director",
+      "category": "officers",
+      "doc": "data/pdfs/GS.pdf",
+      "page": 60,
+      "snippet": "an, 50 ms. fredman has been controller and chief accounting david solomon, 64 officer since november 2019. she had previously served ",
+      "grounded": true
+    },
+    {
+      "id": "PERSON|GS|john-e-waldron",
+      "type": "Person",
+      "name": "John E. Waldron",
+      "relation": "EXECUTIVE_OF",
+      "role": "director, President and Chief Operating Officer",
+      "category": "officers",
+      "doc": "data/pdfs/GS.pdf",
+      "page": 60,
+      "snippet": "to december 2024, as head of enterprise risk from june 2022 john e. waldron, 56 to july 2024 and as chief market risk officer from nove",
       "grounded": true
     }
   ]

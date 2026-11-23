@@ -52,6 +52,30 @@
       "reason": null
     },
     {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 169,
+      "snippet": "gies with applicable government regulations and policy. /s/ ernst & young llp we have served as the company's auditor since 2013. chicago",
+      "grounded": true
+    },
+    {
+      "id": "LOC|chicago-illinois",
+      "type": "Location",
+      "name": "Chicago, Illinois",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/ABBV.pdf",
+      "page": 169,
+      "snippet": "ung llp we have served as the company's auditor since 2013. chicago, illinois february 20, 2026 101 image3.gif | 2025 form 10-k",
+      "grounded": true
+    },
+    {
       "id": "PERSON|ABBV|robert-a-michael",
       "type": "Person",
       "name": "Robert A. Michael",

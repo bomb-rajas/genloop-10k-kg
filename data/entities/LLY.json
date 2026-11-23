@@ -52,6 +52,18 @@
       "reason": null
     },
     {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/LLY.pdf",
+      "page": 121,
+      "snippet": " with the applicable government regulations and policy. /s/ ernst & young llp we have served as the company's auditor since 1940. indiana",
+      "grounded": true
+    },
+    {
       "id": "PERSON|LLY|david-ricks",
       "type": "Person",
       "name": "David Ricks",

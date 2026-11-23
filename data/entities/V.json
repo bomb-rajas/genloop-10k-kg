@@ -50,6 +50,30 @@
       "snippet": "ued success. as of september 30, 2026, we had approximately 34,800 employees located in 90 countries and territories, with app",
       "grounded": true,
       "reason": null
+    },
+    {
+      "id": "ORG|kpmg-llp",
+      "type": "Organization",
+      "name": "KPMG LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/V.pdf",
+      "page": 93,
+      "snippet": "lso considered relevant publicly available information. /s/ kpmg llp we have served as the company's auditor since 2007. san fra",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-francisco",
+      "type": "Location",
+      "name": "San Francisco",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/V.pdf",
+      "page": 93,
+      "snippet": "pmg llp we have served as the company's auditor since 2007. san francisco, california november 5, 2026 57",
+      "grounded": true
     }
   ]
 }

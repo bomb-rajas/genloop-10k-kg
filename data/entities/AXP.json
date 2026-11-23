@@ -86,6 +86,18 @@
       "grounded": true
     },
     {
+      "id": "ORG|pricewaterhousecoopers-llp",
+      "type": "Organization",
+      "name": "PricewaterhouseCoopers LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/AXP.pdf",
+      "page": 132,
+      "snippet": " membership rewards liability to management's estimate. /s/ pricewaterhousecoopers llp new york, new york february 6, 2026 we have served as the c",
+      "grounded": true
+    },
+    {
       "id": "PERSON|AXP|douglas-e-buckminster",
       "type": "Person",
       "name": "DOUGLAS E. BUCKMINSTER",

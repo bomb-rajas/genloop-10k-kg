@@ -73,7 +73,7 @@ table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px so
 .grid{{display:flex;gap:6px}}.co{{font-size:7.4pt;margin:2px 0;flex:1}}.co td,.co th{{padding:0 3px;text-align:left;border:0;border-bottom:.5px solid #ddd}}.co th{{background:none;border-bottom:1px solid #999;color:{ACC}}}
 .pipe{{color:{ACC};font-size:8pt}}b.a{{color:{ACC}}}</style></head><body>
 <h1>GenLoop: Financial Knowledge Graph QA, Results</h1>
-<p class="s">40 companies, latest 10-K each, answered by graph traversal; {o['n']}-question benchmark. Gold is AI-drafted and AI-reviewed, not human-verified.</p>
+<p class="s">40 companies, latest 10-K each, answered by graph traversal; {o['n']}-question benchmark. Gold is AI-drafted and AI-reviewed, pending hand verification by the author.</p>
 <h2>Results</h2>
 <div class="row"><table><tr><th>Slice</th><th>n</th><th>Scored</th><th>Correct</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>Abstained (correct/expected)</th></tr>{table}</table><div style="flex:none;width:330px">{chart1}</div></div>
 <p class="s">Accuracy is correct/scored; over all {o['n']} it is {o['correct']}/{o['n']} = {o['accuracy_over_all']:.1%}. Q15 is unscored (no checkable gold). Questions were chosen after seeing the extractor's known gaps, so results are likely optimistic.</p>
@@ -90,15 +90,14 @@ table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px so
 <h2>Gaps, with examples</h2>
 <ul>
 <li><b>Q13</b> largest Apple geographic segment: segment values are not stored, so it lists all five names instead of Americas ($198,083M).</li>
-<li><b>Q14</b> largest of four tech firms and its auditor: Amazon's auditor (Ernst &amp; Young) is not in the graph, so the answer abstains wrongly.</li>
 <li><b>Q15</b> is unscored (no checkable gold). Other known limits (found outside the benchmark): the sum of two different metrics is unsupported (Meta capex plus R&amp;D returns capex only); fiscal-year label is the year the period ends, so "fiscal 2025" for Home Depot or Target returns the prior-year column.</li>
 <li>Thin entities: auditor for {aud}/40, headquarters {hq}/40, executives missing for {40 - execs} companies.</li>
-<li>Gold is not human-verified; the scorer was amended once after the first run; n is small (one question is about {100/o['n']:.1f} points).</li></ul>
+<li>The scorer was amended once after the first run; n is small (one question is about {100/o['n']:.1f} points).</li></ul>
 <div class="row"><div style="flex:none;width:260px">{chart2}</div><p class="s" style="align-self:center">Current failures by category (unanswerable-by-design abstentions excluded).</p></div>
 <h2>Improvements</h2>
-<ul><li> store segment values; fix the fiscal-year label; plan multi-metric sums; read the auditor from the signature page; log the LLM provider per entity.</li></ul>
+<ul><li> store segment values; fix the fiscal-year label; plan multi-metric sums; fill remaining auditor, headquarters and executive gaps; log the LLM provider per entity.</li></ul>
 <h2>With more time</h2>
-<ul><li>Human-verified gold and a larger benchmark written before inspecting system output; confidence intervals.</li></ul>
+<ul><li>Hand-verified gold and a larger benchmark written before inspecting system output; confidence intervals.</li></ul>
 </body></html>"""
 tmp = Path(tempfile.mkdtemp()) / "results.html"; tmp.write_text(html)
 chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

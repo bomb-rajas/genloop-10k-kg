@@ -38,15 +38,15 @@
       "grounded": true
     },
     {
-      "id": "SEG|NKE|nike-direct-operations",
+      "id": "SEG|NKE|nike-brand",
       "type": "Segment",
-      "name": "NIKE Direct operations",
+      "name": "NIKE Brand",
       "relation": "HAS_SEGMENT",
       "role": null,
       "category": "segments",
       "doc": "data/pdfs/NKE.pdf",
       "page": 6,
-      "snippet": "wear and apparel in the world. we sell our products through nike direct operations, which are comprised of both nike-owned retail stores and s",
+      "snippet": "d sales through our digital platforms (also referred to as \"nike brand digital\") and to wholesale accounts, which include a mix of",
       "grounded": true
     },
     {
@@ -74,6 +74,30 @@
       "snippet": "ble. employee base as of may 31, 2026, we had approximately 73,000 employees worldwide, including retail and part-time employe",
       "grounded": true,
       "reason": null
+    },
+    {
+      "id": "ORG|pricewaterhousecoopers-llp",
+      "type": "Organization",
+      "name": "PricewaterhouseCoopers LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/NKE.pdf",
+      "page": 78,
+      "snippet": " positions are more likely than not of being sustained. /s/ pricewaterhousecoopers llp portland, oregon july 15, 2026 we have served as the compan",
+      "grounded": true
+    },
+    {
+      "id": "LOC|portland-oregon",
+      "type": "Location",
+      "name": "Portland, Oregon",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/NKE.pdf",
+      "page": 78,
+      "snippet": "than not of being sustained. /s/ pricewaterhousecoopers llp portland, oregon july 15, 2026 we have served as the company's auditor since",
+      "grounded": true
     },
     {
       "id": "PERSON|NKE|mark-parker",

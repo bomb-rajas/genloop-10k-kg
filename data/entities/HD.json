@@ -50,6 +50,30 @@
       "snippet": "force. at the end of fiscal 2025, we employed approximately 472,400 associates, of whom approximately 53,400 were salaried, wit",
       "grounded": true,
       "reason": null
+    },
+    {
+      "id": "ORG|kpmg-llp",
+      "type": "Organization",
+      "name": "KPMG LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/HD.pdf",
+      "page": 66,
+      "snippet": "ropriateness of the nature and extent of such evidence. /s/ kpmg llp we have served as the company's auditor since 1979. atlanta",
+      "grounded": true
+    },
+    {
+      "id": "LOC|atlanta-georgia",
+      "type": "Location",
+      "name": "Atlanta, Georgia",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/HD.pdf",
+      "page": 66,
+      "snippet": "pmg llp we have served as the company's auditor since 1979. atlanta, georgia march 18, 2026 fiscal 2025 form 10-k 38 thd",
+      "grounded": true
     }
   ]
 }

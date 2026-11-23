@@ -50,6 +50,30 @@
       "snippet": "of our unique company culture. we had a global workforce of 78,865 employees as of december 31, 2025, and we have offices in m",
       "grounded": true,
       "reason": null
+    },
+    {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/META.pdf",
+      "page": 140,
+      "snippet": "ts. we have served as the company's auditor since 2007. /s/ ernst & young llp san jose, california january 28, 2026 86",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-jose",
+      "type": "Location",
+      "name": "San Jose",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/META.pdf",
+      "page": 140,
+      "snippet": " as the company's auditor since 2007. /s/ ernst & young llp san jose, california january 28, 2026 86",
+      "grounded": true
     }
   ]
 }

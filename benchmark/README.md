@@ -1,6 +1,6 @@
 # Benchmark
 
-`benchmark.json`: 29 questions (Q01-Q29) over Tech, Banks & Payments, Consumer & Retail and Healthcare filers: 10 single_fact, 10 multi_hop, 9 cross_filing (3 are unanswerable by design). Every item is `verified: false`: gold was AI-drafted and AI-reviewed, not checked by a human.
+`benchmark.json`: 29 questions (Q01-Q29) over Tech, Banks & Payments, Consumer & Retail and Healthcare filers: 10 single_fact, 10 multi_hop, 9 cross_filing (3 are unanswerable by design). Every item is `verified: false`: gold was AI-drafted and AI-reviewed, not yet checked by hand.
 
 How gold was made
 - Read only from `data/parsed/{TICKER}.json` page text (1-based keys) and the statement tables printed there. Gold was not taken from `data/facts`, `data/entities`, `graph/` or any system output.

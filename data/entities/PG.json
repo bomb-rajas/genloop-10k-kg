@@ -52,6 +52,18 @@
       "reason": null
     },
     {
+      "id": "ORG|deloitte-touche-llp",
+      "type": "Organization",
+      "name": "Deloitte & Touche LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/PG.pdf",
+      "page": 67,
+      "snippet": "the discount rate selected by management to that range. /s/ deloitte & touche llp cincinnati, ohio august 4, 2026 we have served as the compa",
+      "grounded": true
+    },
+    {
       "id": "PERSON|PG|shailesh-g-jejurikar",
       "type": "Person",
       "name": "Shailesh G. Jejurikar",

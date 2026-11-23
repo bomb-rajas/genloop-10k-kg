@@ -76,6 +76,30 @@
       "reason": null
     },
     {
+      "id": "ORG|pricewaterhousecoopers-llp",
+      "type": "Organization",
+      "name": "PricewaterhouseCoopers LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/JNJ.pdf",
+      "page": 118,
+      "snippet": " of the company's litigation contingencies disclosures. /s/ pricewaterhousecoopers llp florham park, new jersey february 11, 2026 we have served a",
+      "grounded": true
+    },
+    {
+      "id": "LOC|florham-park-new-jersey",
+      "type": "Location",
+      "name": "Florham Park, New Jersey",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/JNJ.pdf",
+      "page": 118,
+      "snippet": "n contingencies disclosures. /s/ pricewaterhousecoopers llp florham park, new jersey february 11, 2026 we have served as the company's auditor s",
+      "grounded": true
+    },
+    {
       "id": "PERSON|JNJ|vanessa-broadhurst",
       "type": "Person",
       "name": "Vanessa Broadhurst",

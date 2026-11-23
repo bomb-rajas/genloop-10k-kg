@@ -50,6 +50,18 @@
       "snippet": "ous awards across the globe. as of january 31, 2026, we had 83,334 employees. none of our employees in the united states are r",
       "grounded": true,
       "reason": null
+    },
+    {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/CRM.pdf",
+      "page": 79,
+      "snippet": "ficant assumptions underlying the fair value estimates. /s/ ernst & young llp we have served as the company's auditor since 2002.",
+      "grounded": true
     }
   ]
 }

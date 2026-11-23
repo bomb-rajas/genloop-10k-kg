@@ -50,6 +50,18 @@
       "grounded": true
     },
     {
+      "id": "LOC|new-york",
+      "type": "Location",
+      "name": "New York",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/PFE.pdf",
+      "page": 107,
+      "snippet": "s have served as the company's auditor since at least 1942. new york, new york february 26, 2026 pfizer inc. 2025 form 10-k 51",
+      "grounded": true
+    },
+    {
       "id": "PERSON|PFE|david-m-denton",
       "type": "Person",
       "name": "David M. Denton",

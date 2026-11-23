@@ -88,6 +88,30 @@
       "reason": null
     },
     {
+      "id": "ORG|kpmg-llp",
+      "type": "Organization",
+      "name": "KPMG LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 134,
+      "snippet": "venue by assessing the results of procedures performed. /s/ kpmg llp we have served as the company's auditor since 1983. santa c",
+      "grounded": true
+    },
+    {
+      "id": "LOC|santa-clara-california",
+      "type": "Location",
+      "name": "Santa Clara, California",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/ADBE.pdf",
+      "page": 134,
+      "snippet": "pmg llp we have served as the company's auditor since 1983. santa clara, california january 15, 2026 86",
+      "grounded": true
+    },
+    {
       "id": "PERSON|ADBE|shantanu-narayen",
       "type": "Person",
       "name": "Shantanu Narayen",

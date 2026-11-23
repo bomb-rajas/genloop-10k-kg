@@ -52,6 +52,30 @@
       "reason": null
     },
     {
+      "id": "ORG|pricewaterhousecoopers-llp",
+      "type": "Organization",
+      "name": "PricewaterhouseCoopers LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 70,
+      "snippet": "rket and industry data, and (iii) changes in technology. /s/pricewaterhousecoopers llp san jose, california february 25, 2026 we have served as th",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-jose-california",
+      "type": "Location",
+      "name": "San Jose, California",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/NVDA.pdf",
+      "page": 70,
+      "snippet": " (iii) changes in technology. /s/pricewaterhousecoopers llp san jose, california february 25, 2026 we have served as the company's auditor s",
+      "grounded": true
+    },
+    {
       "id": "PERSON|NVDA|jen-hsun-huang",
       "type": "Person",
       "name": "Jen-Hsun Huang",

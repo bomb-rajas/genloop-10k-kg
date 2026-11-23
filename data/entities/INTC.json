@@ -26,6 +26,30 @@
       "grounded": true
     },
     {
+      "id": "ORG|ernst-young-llp",
+      "type": "Organization",
+      "name": "Ernst & Young LLP",
+      "relation": "AUDITED_BY",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 98,
+      "snippet": "/s/ ernst & young llp we have served as the company's auditor since 1968. san jos",
+      "grounded": true
+    },
+    {
+      "id": "LOC|san-jose-california",
+      "type": "Location",
+      "name": "San Jose, California",
+      "relation": "AUDITOR_BASED_IN",
+      "role": null,
+      "category": "auditor",
+      "doc": "data/pdfs/INTC.pdf",
+      "page": 98,
+      "snippet": "ung llp we have served as the company's auditor since 1968. san jose, california january 22, 2026 inte auditor's reports 58",
+      "grounded": true
+    },
+    {
       "id": "PERSON|INTC|lip-bu-tan",
       "type": "Person",
       "name": "Lip-Bu Tan",
@@ -35,18 +59,6 @@
       "doc": "data/pdfs/INTC.pdf",
       "page": 88,
       "snippet": "name current title age experience lip-bu tan 66 lip-bu tan has been our chief executive officer since ma",
-      "grounded": true
-    },
-    {
-      "id": "PERSON|INTC|nagasubramaniyan",
-      "type": "Person",
-      "name": "Nagasubramaniyan",
-      "relation": "EXECUTIVE_OF",
-      "role": "Executive Vice President, Chief Technology and Operations Officer",
-      "category": "officers",
-      "doc": "data/pdfs/INTC.pdf",
-      "page": 88,
-      "snippet": "siness administration from the university of san francisco. nagasubramaniyan 51 naga chandrasekaran has been our executive vice presiden",
       "grounded": true
     },
     {

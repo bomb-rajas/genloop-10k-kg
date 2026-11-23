@@ -13,6 +13,19 @@
       "snippet": null,
       "grounded": false,
       "reason": "not found in cited page text"
+    },
+    {
+      "id": "PERSON|KO|monica-howard-douglas",
+      "type": "Person",
+      "name": "Monica Howard Douglas",
+      "relation": "EXECUTIVE_OF",
+      "role": "Executive Vice President and Global General Counsel",
+      "category": "officers",
+      "doc": "data/pdfs/KO.pdf",
+      "page": null,
+      "snippet": null,
+      "grounded": false,
+      "reason": "not found in cited page text"
     }
   ]
 }
