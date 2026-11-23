@@ -89,15 +89,18 @@ table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px so
 <div class="grid">{blocks}</div>
 <h2>Gaps, with examples</h2>
 <ul>
-<li><b>Q13</b> largest Apple geographic segment: segment values are not stored, so it lists all five names instead of Americas ($198,083M).</li>
-<li><b>Q15</b> is unscored (no checkable gold). Other known limits (found outside the benchmark): the sum of two different metrics is unsupported (Meta capex plus R&amp;D returns capex only); fiscal-year label is the year the period ends, so "fiscal 2025" for Home Depot or Target returns the prior-year column.</li>
-<li>Thin entities: auditor for {aud}/40, headquarters {hq}/40, executives missing for {40 - execs} companies.</li>
-<li>The scorer was amended once after the first run; n is small (one question is about {100/o['n']:.1f} points).</li></ul>
-<div class="row"><div style="flex:none;width:260px">{chart2}</div><p class="s" style="align-self:center">Current failures by category (unanswerable-by-design abstentions excluded).</p></div>
+<li><b>Dimensional (segment) facts.</b> The graph keeps segment names but not their values, so a question that must rank segments has nothing to compare and falls back to listing them. Example: <b>Q13</b>, largest Apple geographic segment, lists all five names instead of Americas ($198,083M).</li>
+<li><b>Entity coverage.</b> The LLM reads only the pages the locator finds, and an entity is kept only if its text matches the page exactly, so formatting differences ("Atlanta,Georgia") are rejected. Result: auditor for {aud}/40, headquarters {hq}/40, executives missing for {40 - execs} companies. Example: asking who audits Bank of America abstains; <b>Q15</b> is unscored because its entity gold could not be checked.</li>
+<li><b>Fiscal-year labelling.</b> A fact's year is the year its period ends, but retailers with 52/53-week or January year-ends name the year differently, so "fiscal 2025" returns the neighbouring column. Example (found outside the benchmark): Home Depot and Target operating margin and cash flow.</li>
+<li><b>Multi-metric arithmetic.</b> The planner derives margins and growth from one metric but cannot add two different metrics. Example (outside the benchmark): Meta capex plus R&amp;D returns capex only.</li>
+<li><b>Absent line items.</b> GrossProfit, R&amp;D and OperatingIncome exist only for companies that print them, so those questions abstain by design (Q10 Visa R&amp;D and Q20 JPM gross profit test this and abstain correctly).</li>
+<li><b>Validation coverage.</b> XBRL cannot check every fact: 67 facts have no XBRL counterpart (22 are derived TotalLiabilities), so they are admitted unvalidated.</li>
+<li><b>Provenance.</b> Entity extraction mixed two LLM providers (Groq, Gemini) and the provider is not stored per entity.</li>
+<li><b>Evaluation.</b> The scorer was amended once after the first run; questions were chosen after seeing known extractor gaps; n is small (one question is about {100/o['n']:.1f} points).</li></ul>
 <h2>Improvements</h2>
-<ul><li> store segment values; fix the fiscal-year label; plan multi-metric sums; fill remaining auditor, headquarters and executive gaps; log the LLM provider per entity.</li></ul>
+<ul><li>Store per-segment values so segments can be ranked and compared.</li><li>Label fiscal years by each company's own convention, not by period-end year.</li><li>Let the planner compose several metrics (sum, ratio, difference) with their input facts cited.</li><li>Locate entity pages by search instead of a fixed window, and normalise punctuation before the exact-match check.</li><li>Store the LLM provider and model on every entity and plan call.</li><li>Tighten the XBRL tolerance and add a second independent source for the unvalidated facts.</li></ul>
 <h2>With more time</h2>
-<ul><li>Hand-verified gold and a larger benchmark written before inspecting system output; confidence intervals.</li></ul>
+<ul><li>Hand-verified gold and a larger benchmark written before inspecting system output; confidence intervals; a paid or larger model to compare against the rule planner.</li></ul>
 </body></html>"""
 tmp = Path(tempfile.mkdtemp()) / "results.html"; tmp.write_text(html)
 chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
