@@ -2,7 +2,7 @@
 
 A knowledge graph built from the latest 10-K filing of 40 US public companies (4 sectors x 10). Questions are answered by traversing the graph, not by vector search over chunks. Every answer cites its document and PDF page, or abstains when the needed fact is not in the graph.
 
-Scope: 40 companies, the latest 10-K of each (see `docs/decision-log.md` D-001 and D-043 for the fiscal-year rule; year labels follow each company's report period). Evaluated on a self-made 29-question benchmark plus a 15-question held-out benchmark. Honest results and failures are reported below. Repo: https://github.com/bomb-rajas/genloop-10k-kg
+Scope: 40 companies, the latest 10-K of each (see `docs/decision-log.md` D-001 and D-043 for the fiscal-year rule; year labels follow each company's report period). Evaluated on a self-made 29-question benchmark plus a 15-question held-out benchmark (benchmark/heldout.json; baseline 9/15 before fixes, then used as a dev set after the D-086 planner fixes, 15/15, not independent) and a 15-question fresh test (benchmark/fresh.json, written from PDFs after the fixes without reading planner output, scored once: 12/15 = 80%; failures F09 sum of two metrics, F10/F11 Home Depot/Target fiscal-year label shift, F15 cited a different page). Gold in all sets is AI-drafted, not human verified. Honest results and failures are reported below. Repo: https://github.com/bomb-rajas/genloop-10k-kg
 
 **What is XBRL and why it is here (validation only, not in task brief).** XBRL is the SEC's machine-readable copy of the numbers in a filing. The task brief asks for PDF-only parsing and does not mention it. We added it only as an independent check on our PDF parsing: an extracted fact is admitted only if it matches the XBRL value for the same concept. XBRL never supplies an answer value; 962 of 962 compared facts match.
 
@@ -52,7 +52,7 @@ Each command is run from the repo root with the venv active.
 2. **Parse**: `python -m src.parse` (add `--reuse-pages` to rebuild statements from the page text already in `data/parsed/`, which needs no PDFs). Writes `data/parsed/{TICKER}.json`.
 3. **Extract + validate**: `python -m src.extract` (add `--verbose` to print every fact). Needs `data/xbrl/` from step 1. Writes `data/facts/{TICKER}.json` (admitted) and `{TICKER}.rejected.json`, and prints the XBRL match rate.
 4. **Entities** (LLM, cached): `python -m src.entities`. Writes `data/entities/`. Use `python -m src.entities --regate` to re-apply the grounding gate to cached LLM replies with no network and no key.
-5. **Graph**: `python -m src.graph` (alias: `python -m src.build_graph`). Writes `graph/kg.json` and prints the XBRL match rate (962/962 compared at the last build; 1,029 statement facts admitted; graph: 1,684 nodes, 4,793 edges, 1,064 Fact nodes).
+5. **Graph**: `python -m src.graph` (alias: `python -m src.build_graph`). Writes `graph/kg.json` and prints the XBRL match rate (983/983 compared at the last build; 1,050 statement facts admitted; graph: 1,705 nodes, 4,877 edges, 1,064 Fact nodes).
 6. **Query example**: `python -m src.query "What was Apple's revenue in fiscal 2025?"` (add `--json` for the structured answer). Expected output:
    ```
    Revenue (FY2025): AAPL FY2025 $416.16 billion
@@ -62,7 +62,7 @@ Each command is run from the repo root with the venv active.
    ```
    Questions the rules cannot plan go to the LLM planner. An abstain is printed as `Cannot answer (<reason>)`.
 7. **Evaluate**: `python -m src.evaluate` writes `results/metrics.json` and `results/per_question.csv`. Held-out: `python -m src.evaluate --bench heldout.json --out results/heldout_after`.
-8. **Tests**: `pytest` (249 tests).
+8. **Tests**: `pytest` (272 tests).
 
 ### Rerunnable offline (no key, no network)
 
@@ -79,7 +79,7 @@ These read only committed data (`data/parsed`, `data/facts`, `data/entities`, `d
 
 ### Fresh clone
 
-A fresh clone plus the steps above reproduces the evaluation with no `.env`. The clean-clone check was run before the D-083/D-084 fixes and the held-out set. It was checked in a clean clone in a scratch directory: `pytest` gave 196 passed at that time (249 now), `python -m src.evaluate` produced `results/metrics.json` and `results/per_question.csv` byte-identical to the committed files (md5 match), and `python -m src.graph` reproduced `graph/kg.json` byte-identical. `src.extract` reproduced the committed `data/facts` after copying `data/xbrl` in.
+A fresh clone plus the steps above reproduces the evaluation with no `.env` (checked on a GitHub clone at v1.1: 249 tests passed, `src.evaluate` gave the same 26/28; re-checked after D-086 only locally, 272 tests).
 
 ## Benchmark
 
@@ -118,7 +118,7 @@ Accuracy is reported two ways. The task-defined number is correct / total: **26/
 - Accuracy is value- or term-based. The strict page hit is reported separately.
 - Failures (2 incorrect rows): Q13 (largest Apple geographic segment: the system lists all segments, segment values are not in the graph) and Q14 (Amazon auditor missing from the graph, so it abstains).
 
-**Held-out benchmark.** `benchmark/heldout.json` has 15 questions (H01 to H15) written from PDF page text before the planner and parser fixes (D-082), `verified: false`. Baseline on the pre-fix system: `results/heldout_baseline` **9/15 (60.0%)**. After the fixes: `results/heldout_after` **8/15 (53.3%)**, precision 0.800, recall 0.833 (excluding abstain-expected rows: 0.846 / 0.808). The main benchmark improved from 20/28 to 26/28, but part of that gain came from fixing failures found by inspecting it, so it is optimistic. **The held-out set did not improve** (9/15 to 8/15: Amazon is now recognised, but H13 "generated more" is read as growth). Remaining held-out failures: difference, share and growth intents are not planned (H06, H07, H08, H10), "generated more" is read as growth (H13), Amex operating cash flow is missing from the graph (H11), and an unknown company (Netflix) is not abstained on (H15). The held-out number is the more honest estimate of generalisation.
+**Held-out benchmark.** `benchmark/heldout.json` has 15 questions (H01 to H15) written from PDF page text before the planner and parser fixes (D-082), `verified: false`. Baseline on the pre-fix system: `results/heldout_baseline` **9/15 (60.0%)**; after the first fixes (D-083/D-084) 8/15. The D-086 intent fixes were then made using this set's failure categories, so `results/heldout_after` **15/15** is a dev score, not independent. The main benchmark improved from 20/28 to 26/28, partly from fixing failures found by inspecting it, so it is optimistic. The honest generalisation estimate is the fresh set (12/15, above).
 
 Caveats, stated plainly:
 
@@ -160,7 +160,7 @@ Caveats, stated plainly:
 | `config/companies.yaml` | 40 companies, CIK, sector, bank flag | yes |
 | `config/metrics.yaml` | canonical metrics, synonyms, derived metrics | yes |
 | `src/` | pipeline code (`download`, `parse`, `tables`, `extract`, `validate`, `entities`, `graph`, `build_graph` shim, `planner`, `query`, `evaluate`, `llm`, `config`) | yes |
-| `tests/` | pytest suite (249 tests) | yes |
+| `tests/` | pytest suite (272 tests) | yes |
 | `data/pdfs/` | 10-K PDFs (EDGAR HTML converted with Chrome) | no (re-downloaded) |
 | `data/raw_html/` | raw EDGAR HTML | no |
 | `data/xbrl/` | XBRL companyfacts JSON (about 175 MB) | no (re-downloaded) |

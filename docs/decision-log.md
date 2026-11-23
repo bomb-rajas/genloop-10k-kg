@@ -1012,3 +1012,9 @@ Times are IST. Seeded entries (D-001 to D-021) were recorded in M0 at 2026-11-23
 - Why / rejected: AXP is_bank excluded nonbank-only OCF. Rejected: LLM for these (deterministic cues suffice); signing the headline difference (magnitude reported, sign in signed_value).
 - Evidence / outcome / status: extract candidates 1029 -> 1050, XBRL 962/962 -> 983/983, 0 rejected; tests/test_planner_intents.py, pytest 268 passed. Limits: lower-case unknown names unseen; unknown name before a suffix reports first word only. 'percent of' no longer means ratio. Active.
 
+
+### D-087
+Stage/Trigger: generalisation check after D-086 fixes (the held-out set became a dev set).
+Decision: wrote benchmark/fresh.json (F01-F15) from PDFs without reading planner code or outputs; scored once; no code changed afterwards.
+Why/rejected: tuning on heldout.json makes 15/15 non-independent; a fresh set gives an honest number.
+Evidence/outcome/status: 12/15 (80%), P 1.0, R 0.967. Failures: F09 two-metric sum, F10/F11 HD/TGT fiscal-year label shift (D-043), F15 right answer, other page. Open.

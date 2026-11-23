@@ -1,0 +1,504 @@
+{
+ "version": "1.0",
+ "description": "Fresh unseen benchmark F01-F15. Gold from PDF page text only, written after the planner fixes but without reading planner code or outputs. Verified false until human review.",
+ "items": [
+  {
+   "id": "F01",
+   "type": "single_fact",
+   "question": "What was Amazon's total assets at the end of 2025?",
+   "gold_answer": "$818,042 million (Total assets, Dec 31 2025)",
+   "gold_value": 818042000000,
+   "gold_fact_ids": [
+    "AMZN|TotalAssets|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/AMZN.pdf"
+   ],
+   "pages": [
+    60
+   ],
+   "evidence": [
+    {
+     "page": 60,
+     "doc": "data/pdfs/AMZN.pdf",
+     "key": "818,042",
+     "quote": "Total assets $ 624,894 $ 818,042"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Balance sheet columns ascend (2024, 2025); FY2025 is the second."
+  },
+  {
+   "id": "F02",
+   "type": "single_fact",
+   "question": "What did Starbucks report as diluted EPS for fiscal 2026?",
+   "gold_answer": "$2.21 per diluted share (fiscal year ended Sep 27 2026)",
+   "gold_value": 2.21,
+   "gold_fact_ids": [
+    "SBUX|EPS|FY2026"
+   ],
+   "docs": [
+    "data/pdfs/SBUX.pdf"
+   ],
+   "pages": [
+    71
+   ],
+   "evidence": [
+    {
+     "page": 71,
+     "doc": "data/pdfs/SBUX.pdf",
+     "key": "2.21",
+     "quote": "Earnings per share — diluted $ 2.21 $ 1.63 $ 3.31"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Basic EPS is $2.22 on the line above; diluted asked."
+  },
+  {
+   "id": "F03",
+   "type": "single_fact",
+   "question": "How much did Intel spend on R&D in 2025?",
+   "gold_answer": "$13,774 million (Research and development, year ended Dec 27 2025)",
+   "gold_value": 13774000000,
+   "gold_fact_ids": [
+    "INTC|R&D|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/INTC.pdf"
+   ],
+   "pages": [
+    100
+   ],
+   "evidence": [
+    {
+     "page": 100,
+     "doc": "data/pdfs/INTC.pdf",
+     "key": "13,774",
+     "quote": "Research and development 13,774 16,546 16,046"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Fiscal year ends Dec 27 2025, labelled FY2025 (D-043)."
+  },
+  {
+   "id": "F04",
+   "type": "single_fact",
+   "question": "What was Alphabet's net income in 2025?",
+   "gold_answer": "$132,170 million (Net income, year ended Dec 31 2025)",
+   "gold_value": 132170000000,
+   "gold_fact_ids": [
+    "GOOGL|NetIncome|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/GOOGL.pdf"
+   ],
+   "pages": [
+    84
+   ],
+   "evidence": [
+    {
+     "page": 84,
+     "doc": "data/pdfs/GOOGL.pdf",
+     "key": "132,170",
+     "quote": "Net income $ 73,795 $ 100,118 $ 132,170"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Income statement columns ascend (2023, 2024, 2025); FY2025 is the last."
+  },
+  {
+   "id": "F05",
+   "type": "single_fact",
+   "question": "What revenue did Pfizer report for 2026?",
+   "gold_answer": "Not answerable: the Pfizer filing in the corpus covers FY2025 (total revenues $62,579 million). No 2026 results exist.",
+   "gold_value": null,
+   "gold_fact_ids": [
+    "PFE|Revenue|FY2026"
+   ],
+   "docs": [
+    "data/pdfs/PFE.pdf"
+   ],
+   "pages": [
+    108
+   ],
+   "evidence": [
+    {
+     "page": 108,
+     "doc": "data/pdfs/PFE.pdf",
+     "key": "62,579",
+     "quote": "Total revenues 62,579 63,627 59,553"
+    }
+   ],
+   "verified": false,
+   "answerable": false,
+   "expected_behaviour": "abstain",
+   "notes": "Honest-failure test: period outside the filing. p108 cited only as the FY2025 value a system may wrongly substitute.",
+   "answerable_by_graph": "unknown"
+  },
+  {
+   "id": "F06",
+   "type": "multi_hop",
+   "question": "By how much did Microsoft's operating cash flow exceed its additions to property and equipment in fiscal 2026?",
+   "gold_answer": "$66,987 million = 182,935 - 115,948 (FY ended Jun 30 2026)",
+   "gold_value": 66987000000,
+   "gold_fact_ids": [
+    "MSFT|OperatingCashFlow|FY2026",
+    "MSFT|CapEx|FY2026"
+   ],
+   "docs": [
+    "data/pdfs/MSFT.pdf"
+   ],
+   "pages": [
+    76
+   ],
+   "evidence": [
+    {
+     "page": 76,
+     "doc": "data/pdfs/MSFT.pdf",
+     "key": "182,935",
+     "quote": "Net cash from operations 182,935 136,162 118,548"
+    },
+    {
+     "page": 76,
+     "doc": "data/pdfs/MSFT.pdf",
+     "key": "115,948",
+     "quote": "Additions to property and equipment (115,948) (64,551) (44,477)"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Capex printed negative in parentheses; answer is a positive difference."
+  },
+  {
+   "id": "F07",
+   "type": "multi_hop",
+   "question": "What percentage of Johnson & Johnson's sales to customers went to R&D in fiscal 2025?",
+   "gold_answer": "15.57% = 14,665 / 94,193 (filing prints 15.6%)",
+   "gold_value": 0.1556909749132101,
+   "gold_fact_ids": [
+    "JNJ|R&D|FY2025",
+    "JNJ|Revenue|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/JNJ.pdf"
+   ],
+   "pages": [
+    52
+   ],
+   "evidence": [
+    {
+     "page": 52,
+     "doc": "data/pdfs/JNJ.pdf",
+     "key": "14,665",
+     "quote": "Research and development expense 14,665 17,232 15,085"
+    },
+    {
+     "page": 52,
+     "doc": "data/pdfs/JNJ.pdf",
+     "key": "94,193",
+     "quote": "Sales to customers $94,193 88,821 85,159"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Gold is a fraction. JNJ calls revenue 'Sales to customers'."
+  },
+  {
+   "id": "F08",
+   "type": "multi_hop",
+   "question": "How much did Nike's revenue grow in fiscal 2026 compared with fiscal 2025, in percent?",
+   "gold_answer": "0.19% = 46,398 / 46,309 - 1 (FY ended May 31 2026)",
+   "gold_value": 0.0019218726381480256,
+   "gold_fact_ids": [
+    "NKE|Revenue|FY2026",
+    "NKE|Revenue|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/NKE.pdf"
+   ],
+   "pages": [
+    79
+   ],
+   "evidence": [
+    {
+     "page": 79,
+     "doc": "data/pdfs/NKE.pdf",
+     "key": "46,398",
+     "quote": "Revenues $ 46,398 $ 46,309 $ 51,362"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Gold is a fraction (0.0019); near-flat growth, p51 prints 0%."
+  },
+  {
+   "id": "F09",
+   "type": "multi_hop",
+   "question": "What were Meta's purchases of property and equipment and R&D expenses added together in 2025?",
+   "gold_answer": "$127,063 million = 69,691 + 57,372 (year ended Dec 31 2025)",
+   "gold_value": 127063000000,
+   "gold_fact_ids": [
+    "META|CapEx|FY2025",
+    "META|R&D|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/META.pdf"
+   ],
+   "pages": [
+    121,
+    130
+   ],
+   "evidence": [
+    {
+     "page": 130,
+     "doc": "data/pdfs/META.pdf",
+     "key": "69,691",
+     "quote": "Purchases of property and equipment (69,691) (37,256) (27,045)"
+    },
+    {
+     "page": 121,
+     "doc": "data/pdfs/META.pdf",
+     "key": "57,372",
+     "quote": "Research and development 57,372 43,873 38,483"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Two pages. Capex is the purchases line, not the $72.22bn that adds finance-lease principal payments."
+  },
+  {
+   "id": "F10",
+   "type": "multi_hop",
+   "question": "What was Home Depot's operating margin in fiscal 2025 (operating income as a share of net sales)?",
+   "gold_answer": "12.69% = 20,890 / 164,683 (filing prints 12.7%)",
+   "gold_value": 0.12684976591390731,
+   "gold_fact_ids": [
+    "HD|OperatingIncome|FY2025",
+    "HD|Revenue|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/HD.pdf"
+   ],
+   "pages": [
+    68
+   ],
+   "evidence": [
+    {
+     "page": 68,
+     "doc": "data/pdfs/HD.pdf",
+     "key": "20,890",
+     "quote": "Operating income 20,890 21,526 21,689"
+    },
+    {
+     "page": 68,
+     "doc": "data/pdfs/HD.pdf",
+     "key": "164,683",
+     "quote": "Net sales $ 164,683 $ 159,514 $ 152,669"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Gold is a fraction. HD fiscal 2025 ends Feb 1 2026."
+  },
+  {
+   "id": "F11",
+   "type": "cross_filing",
+   "question": "Which generated more operating cash flow in fiscal 2025, Home Depot or Target?",
+   "gold_answer": "Home Depot: $16,325 million vs Target $6,562 million",
+   "gold_value": 16325000000,
+   "gold_fact_ids": [
+    "HD|OperatingCashFlow|FY2025",
+    "TGT|OperatingCashFlow|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/HD.pdf",
+    "data/pdfs/TGT.pdf"
+   ],
+   "pages": [
+    71,
+    50
+   ],
+   "evidence": [
+    {
+     "page": 71,
+     "doc": "data/pdfs/HD.pdf",
+     "key": "16,325",
+     "quote": "Net cash provided by operating activities 16,325 19,810 21,172"
+    },
+    {
+     "page": 50,
+     "doc": "data/pdfs/TGT.pdf",
+     "key": "6,562",
+     "quote": "Cash provided by operating activities 6,562 7,367 8,621"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Winner Home Depot. Target labels the line 'Cash provided by operating activities'."
+  },
+  {
+   "id": "F12",
+   "type": "cross_filing",
+   "question": "Which spent more on capital expenditures in fiscal 2026, Walmart or Costco?",
+   "gold_answer": "Walmart: $26,642 million vs Costco $6,435 million",
+   "gold_value": 26642000000,
+   "gold_fact_ids": [
+    "WMT|CapEx|FY2026",
+    "COST|CapEx|FY2026"
+   ],
+   "docs": [
+    "data/pdfs/COST.pdf",
+    "data/pdfs/WMT.pdf"
+   ],
+   "pages": [
+    55,
+    49
+   ],
+   "evidence": [
+    {
+     "page": 55,
+     "doc": "data/pdfs/WMT.pdf",
+     "key": "26,642",
+     "quote": "Payments for property and equipment (26,642) (23,783) (20,606)"
+    },
+    {
+     "page": 49,
+     "doc": "data/pdfs/COST.pdf",
+     "key": "6,435",
+     "quote": "Additions to property and equipment (6,435) (5,498) (4,710)"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Winner Walmart. Costco FY2026 ends Aug 30 2026; Walmart FY2026 ends Jan 31 2026."
+  },
+  {
+   "id": "F13",
+   "type": "cross_filing",
+   "question": "Which had higher revenue in 2025, Pfizer or Gilead Sciences?",
+   "gold_answer": "Not answerable as a comparison: Gilead Sciences is not in the 40-company corpus (Pfizer total revenues 2025 were $62,579 million).",
+   "gold_value": null,
+   "gold_fact_ids": [
+    "GILD|Revenue|FY2025",
+    "PFE|Revenue|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/PFE.pdf"
+   ],
+   "pages": [
+    108
+   ],
+   "evidence": [
+    {
+     "page": 108,
+     "doc": "data/pdfs/PFE.pdf",
+     "key": "62,579",
+     "quote": "Total revenues 62,579 63,627 59,553"
+    }
+   ],
+   "verified": false,
+   "answerable": false,
+   "expected_behaviour": "abstain",
+   "notes": "Honest-failure test: one company outside the corpus, so a system should abstain rather than name Pfizer.",
+   "answerable_by_graph": "unknown"
+  },
+  {
+   "id": "F14",
+   "type": "cross_filing",
+   "question": "Among Nike, Starbucks and McDonald's, which earned the most net income in its latest fiscal year?",
+   "gold_answer": "McDonald's: $8,563 million (2025) vs Nike $3,108 million (FY2026) and Starbucks $2,526.7 million (FY2026)",
+   "gold_value": 8563000000,
+   "gold_fact_ids": [
+    "MCD|NetIncome|FY2025",
+    "NKE|NetIncome|FY2026",
+    "SBUX|NetIncome|FY2026"
+   ],
+   "docs": [
+    "data/pdfs/MCD.pdf",
+    "data/pdfs/NKE.pdf",
+    "data/pdfs/SBUX.pdf"
+   ],
+   "pages": [
+    16,
+    49,
+    71
+   ],
+   "evidence": [
+    {
+     "page": 16,
+     "doc": "data/pdfs/MCD.pdf",
+     "key": "8,563",
+     "quote": "Net income $ 8,563 4 % $ 8,223 (3)% $ 8,469"
+    },
+    {
+     "page": 49,
+     "doc": "data/pdfs/NKE.pdf",
+     "key": "3,108",
+     "quote": "Net income $ 3,108 $ 3,219 $ 5,700"
+    },
+    {
+     "page": 71,
+     "doc": "data/pdfs/SBUX.pdf",
+     "key": "2,526.7",
+     "quote": "Net earnings attributable to Starbucks $ 2,526.7 $ 1,856.4 $ 3,760.9"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Winner McDonald's. Starbucks figure is net earnings attributable to Starbucks. Fiscal year labels differ across the three."
+  },
+  {
+   "id": "F15",
+   "type": "cross_filing",
+   "question": "Which had greater total liabilities at year-end 2025, Bank of America or Citi?",
+   "gold_answer": "Bank of America: $3,108,495 million vs Citigroup $2,443,380 million (Dec 31 2025)",
+   "gold_value": 3108495000000,
+   "gold_fact_ids": [
+    "BAC|TotalLiabilities|FY2025",
+    "C|TotalLiabilities|FY2025"
+   ],
+   "docs": [
+    "data/pdfs/BAC.pdf",
+    "data/pdfs/C.pdf"
+   ],
+   "pages": [
+    65,
+    16
+   ],
+   "evidence": [
+    {
+     "page": 65,
+     "doc": "data/pdfs/BAC.pdf",
+     "key": "3,108,495",
+     "quote": "Total liabilities 3,108,495 2,967,336 141,159 5"
+    },
+    {
+     "page": 16,
+     "doc": "data/pdfs/C.pdf",
+     "key": "2,443,380",
+     "quote": "Total liabilities $ 2,443,380 $ 2,143,579 $ 299,801 14 %"
+    }
+   ],
+   "verified": false,
+   "answerable": true,
+   "expected_behaviour": "answer",
+   "notes": "Winner Bank of America. 'Citi' is the short name for Citigroup. Citi p125 shows other liabilities totals that are averages, not year-end."
+  }
+ ]
+}
