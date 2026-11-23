@@ -58,6 +58,20 @@ for i, k in enumerate(ks): ax.text(fc[k] + .05, i, fc[k], va="center", fontsize=
 ax.set_xticks([]); [ax.spines[s].set_visible(False) for s in ("top", "right", "bottom")]
 chart2 = svg(fig)
 
+def hbar(items, title, fs=(2.5, 1.9), color=ACC):
+    fig, ax = plt.subplots(figsize=fs); ks = [k for k, _ in items]; vs = [v for _, v in items]
+    ax.barh(ks, vs, color=color, height=.65); ax.invert_yaxis(); ax.set_title(title, fontsize=7, loc="left")
+    for i, v in enumerate(vs): ax.text(v + max(vs) * .02, i, str(v), va="center", fontsize=5.5)
+    ax.set_xticks([]); ax.tick_params(labelsize=5.5, length=0); [ax.spines[x].set_visible(False) for x in ("top", "right", "bottom")]
+    return svg(fig)
+mc = Counter(f["metric"] for f in facts if f["metric"] != "Employees")
+sec = {c["ticker"]: c["sector"] for c in companies}
+secs = list(dict.fromkeys(sec.values()))
+sc_ = Counter(sec[f["ticker"]] for f in facts)
+chart_m = hbar(mc.most_common(), "Facts per metric")
+chart_s = hbar([(k, sc_[k]) for k in secs], "Facts per sector")
+chart_e = hbar([("Auditor (of 40)", aud), ("Headquarters (of 40)", hq), ("Executives (cos. of 40)", execs)], "Companies with entity data (of 40)")
+
 def tr(name, d, ab=True):
     abst = f"{d['abstain_correct']}/{d['abstain_expected']}"
     return f"<tr><td>{name}</td><td>{d['n']}</td><td>{d['scored']}</td><td>{d['correct']}</td><td>{d['accuracy']:.1%}</td><td>{d['precision']:.3f}</td><td>{d['recall']:.3f}</td><td>{abst}</td></tr>"
@@ -93,6 +107,8 @@ table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px so
 <li><b>Grounded LLM entity extraction.</b> An entity is admitted only if its name appears literally on the cited page: {n_ok} of {n_ok + n_rej}.</li>
 <li><b>Graph and query.</b> NetworkX graph of {len(kg['nodes'])} nodes; a rule planner builds the query, an LLM planner runs only if rules fail; no supporting fact means abstain.</li>
 <li><b>Benchmark.</b> Written from PDF page text, not from the graph, to avoid circularity.</li></ul>
+<h2>Graph at a glance</h2>
+<div class="row">{chart_m}{chart_s}{chart_e}</div>
 <h2>Companies used (ticker, name, period end of the 10-K)</h2>
 <div class="grid">{blocks}</div>
 <h2>Gaps, with examples</h2>
