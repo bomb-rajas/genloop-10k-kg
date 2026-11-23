@@ -7,3 +7,4 @@ __pycache__/
 !report/*.pdf
 data/xbrl/*.json
 .DS_Store
+.cache/

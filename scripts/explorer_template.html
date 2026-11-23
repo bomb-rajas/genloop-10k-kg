@@ -1,0 +1,120 @@
+<!doctype html><html><head><meta charset="utf-8"><title>GenLoop KG explorer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--bg:#fff;--fg:#1b1b1b;--panel:#f6f7f9;--line:#d0d4da;--mut:#667}
+@media(prefers-color-scheme:dark){:root{--bg:#14161a;--fg:#e8e8e8;--panel:#1e2128;--line:#383d47;--mut:#9aa}}
+*{box-sizing:border-box}body{margin:0;font:13px system-ui,sans-serif;background:var(--bg);color:var(--fg);display:flex;height:100vh}
+#left{width:250px;padding:8px 10px;background:var(--panel);border-right:1px solid var(--line);overflow:auto;flex:none}
+#net{flex:1;min-width:0}#side{width:340px;padding:8px 10px;background:var(--panel);border-left:1px solid var(--line);overflow:auto;flex:none}
+button,input{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:3px 7px}
+button{cursor:pointer;margin:2px 2px 2px 0}input[type=text]{width:100%;margin:4px 0}
+label.t{display:flex;align-items:center;gap:5px;margin:2px 0}.sw{width:12px;height:12px;border-radius:50%;border:1px solid var(--mut);flex:none}
+table{border-collapse:collapse;width:100%}td{border-top:1px solid var(--line);padding:2px 4px;vertical-align:top;word-break:break-word}td:first-child{color:var(--mut);white-space:nowrap}
+.nb{display:block;cursor:pointer;padding:1px 0;color:#56a0e0}.nb:hover{text-decoration:underline}.nb small{color:var(--mut)}
+h4{margin:10px 0 3px}#msg{color:var(--mut);margin:4px 0}.vis-tooltip{white-space:pre-wrap!important;max-width:380px}
+@media(max-width:800px){#side{display:none}}
+</style></head><body>
+<div id="left"><b>GenLoop KG explorer</b><div id="msg"></div>
+<input type="text" id="q" placeholder="search: AAPL, Apple, Revenue, AAPL|Revenue|FY2025">
+<div><button id="bExp">Expand all</button><button id="bReset">Reset</button><button id="bFreeze">Freeze</button><button id="bFit">Fit</button></div>
+<h4>Node types</h4><div id="legend"></div>
+<small style="color:var(--mut)">Click a node: select and expand/collapse its neighbours. Drag to move, wheel to zoom, drag background to pan. Hover an edge for its relation.</small></div>
+<div id="net"></div><div id="side"><i>Select a node.</i></div>
+<script>__LIB__</script>
+<script>
+const errs=[];window.onerror=(m,u,l)=>{errs.push(m+' @'+l);document.title='JSERR '+m};
+const D=__DATA__,C=D.colors,SC=D.sectorColors;
+const dark=matchMedia('(prefers-color-scheme:dark)').matches,FG=dark?'#e8e8e8':'#1b1b1b',BG=dark?'#14161a':'#fff';
+const N=new Map(D.nodes.map(n=>[n.id,n])),adj=new Map(D.nodes.map(n=>[n.id,[]]));
+const deg=new Map();
+D.edges.forEach(([s,t,r])=>{adj.get(s).push({o:t,rel:r,out:1});adj.get(t).push({o:s,rel:r,out:0})});
+adj.forEach((a,k)=>deg.set(k,a.length));
+const label=n=>{const t=n.node_type;return t=='Fact'?n.metric+' FY'+n.fiscal_year:t=='Company'?n.ticker:t=='Period'?n.ticker+' FY'+n.fiscal_year:t=='Filing'?n.ticker||('10-K '+n.fiscal_year):t=='Sector'?n.name:n.name};
+const HIDEABLE=['Fact','Person','Segment','Location','Organization','Metric','Period','Filing'];
+const on=new Set(HIDEABLE);const BASE=t=>t=='Sector'||t=='Company';
+const nodes=new vis.DataSet(),edges=new vis.DataSet();
+const owners=new Map(),expanded=new Set(),added=new Map(); // owners: id->Set(expander); added: expander->Set(ids)
+function vnode(id,near){const n=N.get(id),t=n.node_type,col=t=='Sector'?SC[id]:C[t];
+ const v={id,label:label(n),color:{background:col,border:dark?'#ddd':'#555'},size:t=='Sector'?30:t=='Company'?10+1.3*Math.sqrt(deg.get(id)):4+1.6*Math.sqrt(deg.get(id)),
+  shape:t=='Sector'?'box':t=='Metric'?'diamond':t=='Period'||t=='Filing'?'square':'dot',
+  title:t+': '+label(n),font:{color:FG,size:t=='Fact'?10:t=='Sector'?20:13,strokeWidth:3,strokeColor:BG}};
+ if(t=='Sector')v.font={color:'#fff',size:20,strokeWidth:0};
+ if(t=='Sector'&&SC[id]=='#F0E442')v.font.color='#000';
+ if(!near&&t!='Sector'&&t=='Company'){const s=adj.get(id).find(a=>N.get(a.o).node_type=='Sector');const k=[...N.keys()].filter(x=>N.get(x).node_type=='Sector').indexOf(s.o),a=k*Math.PI/2;v.x=550*Math.cos(a)+(Math.random()-.5)*250;v.y=550*Math.sin(a)+(Math.random()-.5)*250}
+ if(!near&&t=='Sector'){const a=[...N.keys()].filter(x=>N.get(x).node_type=='Sector').indexOf(id)*Math.PI/2;v.x=380*Math.cos(a);v.y=380*Math.sin(a)}
+ if(near){const p=net.getPositions([near])[near];if(p){v.x=p.x+(Math.random()-.5)*60;v.y=p.y+(Math.random()-.5)*60}}
+ return v}
+let eid=0;const ekeys=new Set();
+function vedge(s,t,r){const k=s+'\u0001'+t+'\u0001'+r;if(ekeys.has(k))return;ekeys.add(k);
+ edges.add({id:k,from:s,to:t,rel:r,title:r+'\n'+label(N.get(s))+' -> '+label(N.get(t)),arrows:{to:{scaleFactor:.4}}})}
+function link(id){adj.get(id).forEach(a=>{if(nodes.get(a.o))a.out?vedge(id,a.o,a.rel):vedge(a.o,id,a.rel)})}
+function addNode(id,owner){let o=owners.get(id);if(!o)owners.set(id,o=new Set());if(owner)o.add(owner);
+ if(!nodes.get(id)){nodes.add(vnode(id,owner));link(id)}
+ if(owner){if(!added.has(owner))added.set(owner,new Set());added.get(owner).add(id)}}
+function expand(id){expanded.add(id);adj.get(id).forEach(a=>{if(on.has(N.get(a.o).node_type)||BASE(N.get(a.o).node_type))addNode(a.o,id)});status()}
+function drop(id){if(!nodes.get(id))return;nodes.remove(id);owners.delete(id);
+ edges.remove(edges.getIds({filter:e=>e.from==id||e.to==id}));[...ekeys].forEach(k=>{if(!edges.get(k))ekeys.delete(k)})}
+function collapse(id){expanded.delete(id);const ch=added.get(id)||new Set();added.delete(id);
+ ch.forEach(c=>{const o=owners.get(c);if(o)o.delete(id);
+  if(!BASE(N.get(c).node_type)&&(!o||o.size==0)){collapse(c);drop(c)}});status()}
+function reveal(id){ // add only the path from the nearest visible node
+ if(nodes.get(id))return;const prev=new Map([[id,null]]),q=[id];let hit=null;
+ while(q.length&&!hit){const x=q.shift();for(const a of adj.get(x)){if(prev.has(a.o))continue;prev.set(a.o,x);if(nodes.get(a.o)){hit=a.o;break}q.push(a.o)}}
+ if(hit===null)return;let cur=hit;while(prev.get(cur)!==null){const nx=prev.get(cur);addNode(nx,cur);cur=nx}}
+function toggle(id){expanded.has(id)?collapse(id):expand(id)}
+function status(){document.getElementById('msg').textContent=nodes.length+' nodes, '+edges.length+' edges shown of '+N.size+' / '+D.edges.length;
+ document.body.dataset.shown=nodes.length+'/'+edges.length}
+function initial(){nodes.clear();edges.clear();ekeys.clear();owners.clear();expanded.clear();added.clear();
+ N.forEach((n,id)=>{if(BASE(n.node_type))nodes.add(vnode(id))});N.forEach((n,id)=>{if(BASE(n.node_type))link(id)});status()}
+function applyTypes(){nodes.update(nodes.get().map(n=>({id:n.id,hidden:!(on.has(N.get(n.id).node_type)||BASE(N.get(n.id).node_type))})));
+ [...expanded].forEach(expand)}
+// ---- network
+const net=new vis.Network(document.getElementById('net'),{nodes,edges},{
+ nodes:{borderWidth:1},edges:{color:{color:dark?'#7a828f':'#9aa3ad',highlight:'#E69F00',hover:'#E69F00'},width:.7,smooth:false,
+  font:{size:10,color:FG,strokeWidth:3,strokeColor:BG,align:'middle'}},
+ physics:{solver:'barnesHut',barnesHut:{gravitationalConstant:-4500,centralGravity:.15,springLength:120,springConstant:.03,damping:.5,avoidOverlap:.4},
+  maxVelocity:30,minVelocity:.75,stabilization:{iterations:250,updateInterval:50}},
+ interaction:{hover:true,tooltipDelay:150,hideEdgesOnDrag:false,multiselect:false}});
+let frozen=false;
+net.on('stabilized',()=>net.setOptions({physics:{enabled:false}}));
+net.on('dragStart',p=>{if(p.nodes.length&&!frozen)net.setOptions({physics:{enabled:true}})});
+net.on('hoverEdge',e=>edges.update({id:e.edge,label:edges.get(e.edge).rel}));
+net.on('blurEdge',e=>edges.update({id:e.edge,label:undefined}));
+net.on('click',p=>{if(p.nodes.length){const id=p.nodes[0];select(id);toggle(id);if(!frozen)kick()}});
+function kick(){net.setOptions({physics:{enabled:true}});net.startSimulation&&0;setTimeout(()=>{if(!frozen)net.stabilize(300)},0)}
+function go(id){reveal(id);select(id,true);if(!expanded.has(id))expand(id);if(!frozen)kick();setTimeout(()=>net.focus(id,{scale:1,animation:false}),400)}
+// ---- panel
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function select(id,sel){const n=N.get(id);if(sel)net.selectNodes([id]);
+ const order=['value','unit','metric','fiscal_year','period','period_end','doc','page','snippet','validated','xbrl_status','method'];
+ const keys=[...order.filter(k=>k in n),...Object.keys(n).filter(k=>!order.includes(k)&&k!='id'&&k!='node_type')];
+ let h='<b>'+esc(n.node_type)+': '+esc(label(n))+'</b><div style="color:var(--mut)">'+esc(id)+'</div><table>';
+ keys.forEach(k=>{let v=n[k];if(v&&typeof v=='object')v=JSON.stringify(v);if(k=='value'&&typeof v=='number')v=v.toLocaleString();h+='<tr><td>'+esc(k)+'</td><td>'+esc(v)+'</td></tr>'});
+ h+='</table><h4>Neighbours ('+adj.get(id).length+')</h4>';
+ const g={};adj.get(id).forEach(a=>(g[(a.out?'':'<- ')+a.rel+(a.out?' ->':'')]=g[(a.out?'':'<- ')+a.rel+(a.out?' ->':'')]||[]).push(a.o));
+ for(const k in g){h+='<div style="color:var(--mut);margin-top:5px">'+esc(k)+' ('+g[k].length+')</div>';
+  g[k].slice(0,200).forEach(o=>h+='<a class="nb" data-id="'+esc(o)+'">'+esc(label(N.get(o)))+' <small>'+esc(N.get(o).node_type)+'</small></a>')}
+ document.getElementById('side').innerHTML=h}
+document.getElementById('side').addEventListener('click',e=>{const a=e.target.closest('.nb');if(a)go(a.dataset.id)});
+// ---- controls
+const lg=document.getElementById('legend'),cnt={};N.forEach(n=>cnt[n.node_type]=(cnt[n.node_type]||0)+1);
+['Sector','Company',...HIDEABLE].forEach(t=>{const b=BASE(t);lg.insertAdjacentHTML('beforeend','<label class="t"><input type="checkbox" data-t="'+t+'"'+(on.has(t)||b?' checked':'')+(b?' disabled':'')+'><span class="sw" style="background:'+(t=='Sector'?'#000':C[t])+'"></span>'+t+' <small style="color:var(--mut)">'+cnt[t]+'</small></label>')});
+lg.addEventListener('change',e=>{const t=e.target.dataset.t;e.target.checked?on.add(t):on.delete(t);applyTypes();status()});
+bExp.onclick=()=>{N.forEach((n,id)=>{if(on.has(n.node_type)||BASE(n.node_type))addNode(id,null);});
+ N.forEach((n,id)=>{if(nodes.get(id)){link(id)}});N.forEach((n,id)=>{if(nodes.get(id))expanded.add(id)});status();if(!frozen)kick()};
+bReset.onclick=()=>{initial();select&&0;document.getElementById('side').innerHTML='<i>Select a node.</i>';if(!frozen)kick();setTimeout(()=>net.fit(),300)};
+bFreeze.onclick=()=>{frozen=!frozen;bFreeze.textContent=frozen?'Unfreeze':'Freeze';net.setOptions({physics:{enabled:!frozen}})};
+bFit.onclick=()=>net.fit();
+function norm(s){return s.toLowerCase().trim()}
+function search(q){q=norm(q);if(!q)return;let m=null;const all=[...N.keys()];
+ m=all.find(id=>norm(id)==q)||all.find(id=>{const n=N.get(id);return norm(n.ticker||'')==q||norm(n.name||'')==q})
+  ||all.find(id=>{const n=N.get(id);return norm(id).includes(q)||norm(n.name||'').includes(q)||norm(label(n)).includes(q)});
+ document.getElementById('msg').textContent=m?'match: '+m:'no match for "'+q+'"';if(m)go(m)}
+q.addEventListener('keydown',e=>{if(e.key=='Enter')search(q.value)});
+// ---- boot (+ test hooks: #expand=AAPL  #search=AAPL|Revenue|FY2025  #all=1)
+initial();net.stabilize(200);net.fit();
+(function(){const h=new URLSearchParams(location.hash.slice(1));
+ if(h.get('expand'))go(h.get('expand'));if(h.get('search')){q.value=h.get('search');search(q.value)}
+ if(h.get('collapse'))toggle(h.get('collapse'));if(h.get('all'))bExp.click();
+ setTimeout(()=>{status();document.body.dataset.errs=errs.length;document.body.dataset.done=1},50)})();
+</script></body></html>
