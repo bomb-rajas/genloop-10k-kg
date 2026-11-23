@@ -229,10 +229,15 @@ def write(report, out_dir=RESULTS_DIR):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--bench", default="benchmark.json", help="file in benchmark/ (e.g. heldout.json)")
+    ap.add_argument("--out", default=None, help="output dir (default results/)")
+    a = ap.parse_args()
     G = g.load_graph()
-    items = json.loads((BENCHMARK_DIR / "benchmark.json").read_text(encoding="utf-8"))["items"]
+    items = json.loads((BENCHMARK_DIR / a.bench).read_text(encoding="utf-8"))["items"]
     report = build_report(run(items, G))
-    write(report)
+    write(report, Path(a.out)) if a.out else write(report)
     print(table(report))
 
 
