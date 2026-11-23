@@ -75,11 +75,21 @@ def _retry_wait(resp, attempt: int) -> float:
     return min(wait, MAX_RETRY_WAIT)
 
 
+class DailyLimit(requests.RequestException):
+    """Provider's per-day token quota is exhausted."""
+
+
+_GROQ_OFF_UNTIL = 0.0  # monotonic time before which Groq is skipped after a daily-limit 429
+GROQ_OFF_SECONDS = 600
+
+
 def _post(url: str, headers: dict, body: dict, retries: int, reserve) -> dict:
     """POST; reserve() runs before every attempt; retries RETRY_STATUS up to `retries` times. Returns parsed JSON."""
     for attempt in range(retries + 1):
         reserve()
         resp = requests.post(url, headers=headers, json=body, timeout=TIMEOUT)
+        if resp.status_code == 429 and "per day" in (resp.text or ""):
+            raise DailyLimit(resp.text[:200])  # daily quota: waiting is pointless, let complete() use the next provider
         if resp.status_code not in RETRY_STATUS or attempt == retries:
             resp.raise_for_status()
             return resp.json()
@@ -160,10 +170,16 @@ def complete(prompt: str, system: str | None = None, json_mode: bool = False) ->
         if not api_key:
             errors.append(f"{name}: {env_var} not set")
             continue
+        global _GROQ_OFF_UNTIL
+        if name == "groq" and not forced and time.monotonic() < _GROQ_OFF_UNTIL:
+            errors.append("groq: skipped (daily limit)")
+            continue
         tried = True
         try:
             text = call(prompt, system, json_mode, api_key)
         except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
+            if name == "groq" and isinstance(exc, DailyLimit):
+                _GROQ_OFF_UNTIL = time.monotonic() + GROQ_OFF_SECONDS
             errors.append(f"{name}: {exc!r}")
             continue
         _cache_write(key, text, name)
