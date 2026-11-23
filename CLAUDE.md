@@ -30,7 +30,7 @@
 | Graph build | src/graph.py (`python -m src.graph`; alias src/build_graph.py), output graph/kg.json, loader load_graph, helpers facts_of/neighbors/sector_members | M5 done (D-073, D-074, D-078); 1039 facts, 947/947 XBRL match |
 | Query planner, traversal, abstain | src/planner.py, src/query.py | M6 done (`python -m src.query "q" [--json]`) |
 | Benchmark questions | benchmark/benchmark.json | M7 planned |
-| Scoring and metrics | src/evaluate.py, output results/metrics.json, results/predictions.jsonl | M8 planned |
+| Scoring and metrics | src/evaluate.py: python -m src.evaluate; outputs results/metrics.json, results/per_question.csv; tests/test_evaluate.py | M8 done (D-079) |
 | Unit tests (pytest) | tests/ (test_config.py, test_download.py, test_tables.py, test_parse.py, test_extract.py, test_validate.py, test_graph.py, test_query.py) | M3 done; M4a adds extract and validate; M5 adds graph; M6 adds query (171 total) |
 | README | README.md | M9 planned |
 | Results PDF | report/results.pdf | M9 planned |
