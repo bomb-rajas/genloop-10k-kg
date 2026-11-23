@@ -16,6 +16,46 @@ cp .env.example .env        # optional: GROQ_API_KEY, GEMINI_API_KEY (only neede
 .venv/bin/python -m pytest -q        # 266 tests
 ```
 
+## Run it step by step
+
+**1. Set up and build the knowledge graph** (uses the committed `data/` files, no keys or downloads needed):
+
+```bash
+git clone https://github.com/bomb-rajas/genloop-10k-kg.git && cd genloop-10k-kg
+python -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python -m src.build_graph      # data/facts + data/entities -> graph/kg.json
+```
+
+**2. Ask a question** (answer, fact IDs, document and page):
+
+```bash
+.venv/bin/python -m src.query "What was Apple's net income in fiscal 2025?"
+.venv/bin/python -m src.query "Which of Apple, Microsoft and Alphabet had the highest net income in fiscal 2025?"
+.venv/bin/python -m src.query "Who audits Microsoft?"
+.venv/bin/python -m src.query "What was Visa's gross profit in fiscal 2026?"   # not in the graph: abstains with a reason
+.venv/bin/python -m src.query --json "What was Apple's net income in fiscal 2025?"   # full plan + citations as JSON
+```
+
+**3. Query the graph directly** (traverse nodes and edges, no search index):
+
+```bash
+.venv/bin/python - <<'PY'
+from src import graph
+G = graph.load_graph()                                  # NetworkX MultiDiGraph
+print(G.nodes["AAPL"])                                  # Company node
+for _, fact, e in G.out_edges("AAPL", data=True):       # Company -HAS_FACT-> Fact
+    if e["rel"] == "HAS_FACT" and "NetIncome" in fact:
+        n = G.nodes[fact]
+        print(fact, n["value"], n["doc"], "p.", n["page"], "validated:", n["validated"])
+PY
+```
+
+**4. Score the benchmark** (29 questions, writes `report/metrics.json` and `report/per_question.csv`):
+
+```bash
+.venv/bin/python -m src.evaluate
+```
+
 ## Pipeline
 
 | Step | Command | Output |
