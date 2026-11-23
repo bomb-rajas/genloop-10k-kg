@@ -149,6 +149,6 @@ def test_corrupt_cache_is_a_miss_and_rewritten(tmp_path, monkeypatch, junk):
     key = llm._cache_key("p", None, False)
     (tmp_path / f"{key}.json").write_text(junk, encoding="utf-8")
     assert llm._cache_read(key) is None
-    llm._cache_write(key, "fresh", "groq")
-    assert llm._cache_read(key) == "fresh"
+    llm._cache_write(key, "cached", "groq")
+    assert llm._cache_read(key) == "cached"
     assert [p.name for p in tmp_path.iterdir()] == [f"{key}.json"]  # no tmp leftovers

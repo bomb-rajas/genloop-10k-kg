@@ -1,4 +1,0 @@
-{
-  "provider": "groq",
-  "text": "{\"state_of_incorporation\":\"Delaware\",\"hq_city\":\"Purchase\",\"hq_state\":\"NY\",\"stock_exchange\":\"New York Stock Exchange\"}"
-}

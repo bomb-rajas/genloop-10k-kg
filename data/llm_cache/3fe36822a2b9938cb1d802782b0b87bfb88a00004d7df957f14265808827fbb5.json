@@ -1,4 +1,0 @@
-{
-  "provider": "gemini",
-  "text": "{\n  \"state_of_incorporation\": \"Delaware\",\n  \"hq_city\": \"Thousand Oaks\",\n  \"hq_state\": \"California\",\n  \"stock_exchange\": \"The Nasdaq Global Select Market\"\n}"
-}

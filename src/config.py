@@ -16,7 +16,7 @@ LLM_CACHE_DIR = DATA_DIR / "llm_cache"
 ENTITIES_DIR = DATA_DIR / "entities"
 GRAPH_DIR = ROOT / "graph"
 BENCHMARK_DIR = ROOT / "benchmark"
-RESULTS_DIR = ROOT / "results"
+REPORT_DIR = ROOT / "report"  # metrics.json and per_question.csv; the PDF lives in results/
 
 
 def load_env() -> None:

@@ -1,4 +1,4 @@
-# 40 companies, 10 per sector (handoff.md). CIKs from SEC company_tickers.json (2026-11-23).
+# 40 companies, 10 per sector. CIKs from SEC company_tickers.json (2026-11-23).
 # fiscal_year_end is omitted for 52/53-week fiscal years (AAPL, NVDA, ADBE, INTC, COST, TGT, HD, SBUX, JNJ, PEP).
 # Payments (V, MA, PYPL) are is_bank: false.
 companies:

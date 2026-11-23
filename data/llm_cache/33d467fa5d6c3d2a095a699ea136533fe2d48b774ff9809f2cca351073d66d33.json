@@ -1,4 +1,0 @@
-{
-  "provider": "groq",
-  "text": "{\"auditor_name\":\"Ernst & Young LLP\",\"auditor_city\":null}"
-}

@@ -1,4 +1,0 @@
-{
-  "provider": "groq",
-  "text": "{\"executive_officers\":[{\"name\":\"Lawrence J. Ellison\",\"title\":\"Executive Chair of the Board of Directors and Chief Technology Officer\"},{\"name\":\"Clayton M. Magouyrk\",\"title\":\"Chief Executive Officer and Director\"},{\"name\":\"Michael D. Sicilia\",\"title\":\"Chief Executive Officer and Director\"},{\"name\":\"Mark Hura\",\"title\":\"President, Global Field Operations\"},{\"name\":\"Hilary Maxson\",\"title\":\"Chief Financial Officer\"},{\"name\":\"Safra A. Catz\",\"title\":\"Executive Vice Chair of the Board of Directors\"},{\"name\":\"Jeffrey O. Henley\",\"title\":\"Executive Vice Chair of the Board of Directors\"},{\"name\":\"Stuart Levey\",\"title\":\"Executive Vice President, Chief Legal Officer\"},{\"name\":\"Maria Smith\",\"title\":\"Executive Vice President, Chief Accounting Officer\"}]}"
-}

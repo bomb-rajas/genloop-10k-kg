@@ -1,4 +1,0 @@
-{
-  "provider": "gemini",
-  "text": "{\n  \"state_of_incorporation\": \"Delaware\",\n  \"hq_city\": \"North Chicago\",\n  \"hq_state\": \"Illinois\",\n  \"stock_exchange\": \"New York Stock Exchange\"\n}"
-}

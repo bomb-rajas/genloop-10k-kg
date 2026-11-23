@@ -1,4 +1,0 @@
-{
-  "provider": "groq",
-  "text": "{\"state_of_incorporation\":\"New Jersey\",\"hq_city\":\"New Brunswick\",\"hq_state\":\"New Jersey\",\"stock_exchange\":\"New York Stock Exchange\"}"
-}

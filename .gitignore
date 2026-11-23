@@ -4,7 +4,8 @@ data/pdfs/
 __pycache__/
 .venv/
 *.pdf
-!report/*.pdf
+!results/*.pdf
 data/xbrl/*.json
 .DS_Store
 .cache/
+data/llm_cache/

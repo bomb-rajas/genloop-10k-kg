@@ -25,8 +25,9 @@ def parsed_pages(ticker):
 
 
 def test_count_and_ids(items):
-    assert 28 <= len(items) <= 30
+    assert len(items) == 59
     ids = [i["id"] for i in items]
+    assert ids == [f"Q{n:02d}" for n in range(1, 60)]
     assert len(ids) == len(set(ids))
     assert all(re.fullmatch(r"Q\d{2}", i) for i in ids)
 
@@ -35,6 +36,7 @@ def test_types_present(items):
     counts = {t: sum(i["type"] == t for i in items) for t in TYPES}
     assert set(t for t in TYPES if counts[t]) == TYPES, counts
     assert set(i["type"] for i in items) <= TYPES
+    assert counts == {"single_fact": 20, "multi_hop": 20, "cross_filing": 19}
 
 
 def test_required_fields_and_verified_false(items):
@@ -44,6 +46,7 @@ def test_required_fields_and_verified_false(items):
         assert isinstance(i["answerable"], bool), i["id"]
         assert i["expected_behaviour"] == ("answer" if i["answerable"] else "abstain"), i["id"]
         assert i["pages"] and len(i["gold_fact_ids"]) >= 1 and i["docs"], i["id"]
+        assert i["answerable"] or i["gold_value"] is None, i["id"]
 
 
 def test_fact_id_format(items):
@@ -55,7 +58,7 @@ def test_fact_id_format(items):
 
 def test_unanswerable_items_marked(items):
     unans = [i for i in items if not i["answerable"]]
-    assert 3 <= len(unans) <= 4
+    assert len(unans) == 7
     for i in unans:
         assert i["gold_value"] is None and i["answerable_by_graph"] == "unknown", i["id"]
 
@@ -69,3 +72,4 @@ def test_evidence_pages_exist_and_contain_key(items):
             assert e["doc"] in i["docs"], (i["id"], e["doc"])
             txt = parsed_pages(Path(e["doc"]).stem).get(str(e["page"]), "")
             assert e["key"] in txt, (i["id"], e["page"], e["key"])
+            assert e["quote"].replace(" ", "")[:12] in txt.replace(" ", ""), (i["id"], e)

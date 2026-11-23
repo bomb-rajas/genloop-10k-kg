@@ -1,4 +1,0 @@
-{
-  "provider": "gemini",
-  "text": "{\n  \"executive_officers\": [\n    {\n      \"name\": \"Robert B. Ford\",\n      \"title\": \"Chairman of the Board and Chief Executive Officer, and Director\"\n    },\n    {\n      \"name\": \"Philip P. Boudreau\",\n      \"title\": \"Executive Vice President, Finance and Chief Financial Officer\"\n    },\n    {\n      \"name\": \"Elizabeth C. Cushman\",\n      \"title\": \"Executive Vice President, General Counsel and Secretary\"\n    },\n    {\n      \"name\": \"Lisa D. Earnhardt\",\n      \"title\": \"Executive Vice President and Group President, Medical Devices\"\n    },\n    {\n      \"name\": \"Mary K. Moreland\",\n      \"title\": \"Executive Vice President, Human Resources\"\n    },\n    {\n      \"name\": \"Louis H. Morrone\",\n      \"title\": \"Executive Vice President, Core Diagnostics\"\n    }\n  ]\n}"
-}

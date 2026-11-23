@@ -1,5 +1,5 @@
-"""Render graph/kg.json to docs/kg/ (interactive HTML via vis-network, static PNGs via matplotlib).
-Run: .venv/bin/python scripts/render_kg.py   (deps: requirements-viz.txt)"""
+"""Render graph/kg.json to kg-visualization/ (explorer.html via vis-network, overview.png and schema.png via matplotlib).
+Run: .venv/bin/python scripts/render_kg.py   (deps: requirements.txt)"""
 import json
 import math
 import sys
@@ -10,8 +10,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from src.graph import load_graph  # noqa: E402
 
-OUT = ROOT / "docs" / "kg"
-EGO = ["AAPL", "JPM", "WMT", "JNJ", "MSFT"]
+OUT = ROOT / "kg-visualization"
 # Okabe-Ito colourblind-safe
 TYPE_COL = {"Sector": "#000000", "Company": "#0072B2", "Segment": "#009E73", "Location": "#E69F00",
             "Organization": "#CC79A7", "Person": "#56B4E9", "Fact": "#999999", "Metric": "#D55E00",
@@ -43,123 +42,10 @@ def label(n):
     return d["name"]
 
 
-def tip(n):
-    d = G.nodes[n]
-    t = d["node_type"]
-    lines = [f"{t}: {label(n)}"]
-    if t == "Fact":
-        lines += [f"value: {d['value']:,} {d['unit']}", f"period end: {d['period_end']}"]
-    if t == "Company":
-        lines += [d["name"], f"sector: {d['sector']}", f"facts: {fact_count[n]}"]
-    if d.get("role"):
-        lines.append(f"role: {d['role']}")
-    if d.get("doc"):
-        lines.append(f"doc: {d['doc']}  page: {d.get('page')}")
-    if d.get("snippet"):
-        lines.append(f"“{d['snippet'][:160]}”")
-    return "\n".join(lines)
-
-
-def node_size(n):
-    return 28 if nt(n) == "Company" and False else None
-
-
-def vis_node(n, collapsed=False):
-    t = nt(n)
-    col = sec_col[company_sector[n]] if t == "Company" and collapsed else TYPE_COL[t]
-    if t == "Sector":
-        col = sec_col[n]
-    v = {"id": n, "label": label(n), "title": tip(n), "color": col, "group": t}
-    if t == "Sector":
-        v.update(size=45, shape="box", font={"size": 22, "color": "#ffffff"}, widthConstraint=False)
-    elif t == "Company":
-        c = fact_count[n]
-        v.update(size=12 + c * 0.45, label=f"{n} ({c} facts)" if collapsed else n, shape="dot")
-    elif t == "Fact":
-        v.update(size=7, shape="dot", font={"size": 0 if False else 11})
-    elif t in ("Metric", "Period", "Filing"):
-        v.update(size=14, shape="diamond" if t == "Metric" else "square")
-        if t == "Period":
-            v["font"] = {"color": "#333"}
-    else:
-        v.update(size=8 if t == "Person" else 12, shape="dot")
-    return v
-
-
-PAGE = """<!doctype html><html><head><meta charset="utf-8"><title>%(title)s</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<script src="%(cdn)s"></script>
-<style>body{margin:0;font-family:system-ui,sans-serif}#net{height:100vh}
-#ui{position:fixed;top:8px;left:8px;background:#fffffff0;padding:8px 10px;border-radius:6px;box-shadow:0 1px 4px #0004;font-size:13px;max-width:260px}
-#ui input{width:100%%;box-sizing:border-box;margin:4px 0}.sw{display:inline-block;width:11px;height:11px;border-radius:50%%;margin-right:5px}
-.vis-tooltip{white-space:pre-wrap!important;max-width:420px}</style></head><body>
-<div id="ui"><b>%(title)s</b><br>%(stats)s<input id="q" placeholder="search node (Enter)"><div id="leg">%(legend)s</div>
-<small>%(note)s</small></div><div id="net"></div>
-<script>
-const nodes=new vis.DataSet(%(nodes)s),edges=new vis.DataSet(%(edges)s);
-const net=new vis.Network(document.getElementById('net'),{nodes,edges},{
- nodes:{borderWidth:1,font:{size:13}},
- edges:{arrows:{to:{scaleFactor:.4}},color:{color:'#9aa',opacity:.7},font:{size:9,align:'middle',strokeWidth:3},smooth:false,width:.8},
- physics:{solver:'forceAtlas2Based',forceAtlas2Based:{gravitationalConstant:-%(grav)d,springLength:%(spring)d,springConstant:.06,avoidOverlap:.8},
-  stabilization:{iterations:600,fit:true}},interaction:{hover:true,tooltipDelay:100}});
-net.once('stabilizationIterationsDone',()=>{net.setOptions({physics:false});net.fit()});
-document.getElementById('q').addEventListener('keydown',e=>{if(e.key!=='Enter')return;
- const s=e.target.value.toLowerCase();const m=nodes.get().find(n=>n.label.toLowerCase().includes(s));
- if(m){net.selectNodes([m.id]);net.focus(m.id,{scale:1.2,animation:true})}});
-</script></body></html>"""
-
-
-def legend(types):
-    return "".join(f'<div><span class="sw" style="background:{TYPE_COL[t]}"></span>{t}</div>' for t in types)
-
-
-def write_html(name, title, nodes, edges, note, grav=60, spring=110):
-    tc = Counter(n["group"] for n in nodes)
-    stats = f"{len(nodes)} nodes, {len(edges)} edges"
-    html = PAGE % dict(title=title, cdn=CDN, stats=stats, legend=legend(tc), note=note,
-                       nodes=json.dumps(nodes), edges=json.dumps(edges), grav=grav, spring=spring)
-    (OUT / name).write_text(html)
-
-
-def ve(u, v, rel):
-    return {"from": u, "to": v, "label": rel}
-
-
 def overview_sub():
     keep = {n for n in G if nt(n) in ("Sector", "Company", "Segment", "Location", "Organization", "Person")}
     H = G.subgraph(keep)
     return H
-
-
-def build_overview():
-    H = overview_sub()
-    nodes = [vis_node(n, True) for n in H]
-    edges = [ve(u, v, d["rel"]) for u, v, d in H.edges(data=True)]
-    write_html("overview.html", "GenLoop KG overview", nodes, edges,
-               "Facts collapsed: company size = fact count. Colour: company = sector, entities = type. Hover for doc/page/snippet.",
-               grav=70, spring=90)
-    return H
-
-
-def ego(t, include_filing=False):
-    keep = {t}
-    for u, v, d in G.edges(data=True):
-        if t in (u, v):
-            keep |= {u, v}
-    facts = [n for n in keep if nt(n) == "Fact"]
-    for f in facts:
-        keep |= set(G.successors(f))
-    keep = {n for n in keep if nt(n) != "Filing"}
-    return G.subgraph(keep)
-
-
-def build_ego_html(t):
-    H = ego(t)
-    nodes = [vis_node(n) for n in H]
-    edges = [ve(u, v, d["rel"]) for u, v, d in H.edges(data=True)]
-    write_html(f"company_{t}.html", f"{t} ego graph", nodes, edges,
-               "Company -> Fact -> Metric / Period provenance chain. Hover a Fact for value, page and snippet.",
-               grav=40, spring=70)
 
 
 EXPLORER = (Path(__file__).parent / "explorer_template.html").read_text()
@@ -264,45 +150,6 @@ def png(overview_H):
     ax.set_title(f"GenLoop KG schema: {G.number_of_nodes():,} nodes, {G.number_of_edges():,} edges", fontsize=16)
     ax.axis("off")
     fig.savefig(OUT / "schema.png", dpi=150, bbox_inches="tight")
-    plt.close(fig)
-    # ego AAPL: columns company+entities | facts | metrics | periods
-    t = "AAPL"
-    H = ego(t)
-    facts = sorted((n for n in H if nt(n) == "Fact"), key=lambda n: (H.nodes[n]["metric"], -H.nodes[n]["fiscal_year"]))
-    ents = sorted(n for n in H if nt(n) not in ("Fact", "Metric", "Period", "Company"))
-    mets = sorted({m for f in facts for m in H.successors(f) if nt(m) == "Metric"}, key=lambda m: label(m))
-    pers = sorted(n for n in H if nt(n) == "Period")
-    pos = {t: (-4.5, 0)}
-    def col(items, x):
-        for i, n in enumerate(items):
-            pos[n] = (x, (len(items) - 1) / 2 - i)
-    col(ents, -9); col(facts, 4); col(mets, 8)
-    for i, p in enumerate(pers):
-        pos[p] = (12, (len(pers) - 1) / 2 - i)
-    h = max(len(facts), len(ents), len(mets), len(pers))
-    fig, ax = plt.subplots(figsize=(20, max(8, h * 0.42)))
-    for u, v, d in H.edges(data=True):
-        if u in pos and v in pos:
-            ax.annotate("", pos[v], pos[u], arrowprops=dict(arrowstyle="-", color="#cccccc" if d["rel"] == "HAS_FACT" else "#888", lw=0.7), zorder=1)
-    for n in H:
-        tt = nt(n)
-        x, y = pos[n]
-        ax.scatter(x, y, s=500 if tt == "Company" else 60, c=TYPE_COL[tt], edgecolors="k", linewidths=0.5, zorder=3)
-        if tt == "Fact":
-            d = H.nodes[n]
-            v = f"{d['value']:,.0f}" if abs(d['value']) >= 1000 else f"{d['value']:g}"
-            txt = f"{d['metric']} FY{d['fiscal_year']}: {v} {d['unit']} (p.{d['page']})"
-            ax.text(x - 0.12, y, txt, ha="right", va="center", fontsize=7)
-        elif tt == "Company":
-            ax.text(x, y + 0.5, f"{n}  ({len(facts)} facts)", ha="center", fontsize=13, fontweight="bold")
-        elif tt in ("Metric", "Period"):
-            ax.text(x + 0.12, y, label(n) if tt == "Metric" else label(n) + " " + H.nodes[n]["period_end"], ha="left", va="center", fontsize=8)
-        else:
-            ax.text(x - 0.12, y, f"{label(n)} [{G.edges[(t, n, 0)]['rel'] if G.has_edge(t, n) else 'EXECUTIVE_OF'}]", ha="right", va="center", fontsize=7)
-    ax.set_xlim(-13, 15)
-    ax.set_title("AAPL ego graph: Company -> Fact -> Metric / Period (entities on the left)", fontsize=14)
-    finish(fig, ax, "ego_AAPL.png", ["Company", "Fact", "Metric", "Period", "Person", "Segment", "Location", "Organization"])
-
 
 def build_explorer():
     """Single-file interactive explorer: whole kg.json + vis-network inlined (works on file://, offline)."""
@@ -323,10 +170,7 @@ def build_explorer():
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     build_explorer()
-    H = build_overview()
-    for t in EGO:
-        build_ego_html(t)
-    png(H)
+    png(overview_sub())
     print({p.name: p.stat().st_size for p in sorted(OUT.iterdir())})
 
 

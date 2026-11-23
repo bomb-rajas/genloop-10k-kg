@@ -1,4 +1,0 @@
-{
-  "provider": "groq",
-  "text": "{\"state_of_incorporation\":\"Delaware\",\"hq_city\":\"Bentonville\",\"hq_state\":\"AR\",\"stock_exchange\":\"The Nasdaq Stock Market LLC\"}"
-}

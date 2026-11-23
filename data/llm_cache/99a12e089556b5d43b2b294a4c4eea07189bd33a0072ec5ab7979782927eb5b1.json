@@ -1,4 +1,0 @@
-{
-  "provider": "groq",
-  "text": "{\"executive_officers\":[{\"name\":\"Ling Hai\",\"title\":\"Co-President, International Markets\"},{\"name\":\"Jon M. Huntsman, Jr.\",\"title\":\"Vice Chair, Policy, Ford Motor Company\"},{\"name\":\"Linda Kirkpatrick\",\"title\":\"President, North America\"},{\"name\":\"Jill Kramer\",\"title\":\"Accenture PLC: Chief Marketing and Chief Marketing and Communications Officer\"},{\"name\":\"Jorn Lambert\",\"title\":\"Chief Digital Officer\"},{\"name\":\"Edward McLaughlin\",\"title\":\"Chief Information Officer\"},{\"name\":\"Sachin Mehra\",\"title\":\"Chief Financial Officer\"},{\"name\":\"Michael Miebach\",\"title\":\"President\"},{\"name\":\"Susan Muigai\",\"title\":\"Executive Vice President, Chief Human Resources Officer\"},{\"name\":\"Raj Seshadri\",\"title\":\"President, Data and Services\"}]}"
-}

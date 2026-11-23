@@ -1,5 +1,5 @@
-"""Build report/results.html (+ results.pdf via headless Chrome) from results/ and data/facts/. Needs matplotlib."""
-import csv, glob, io, json, subprocess, sys
+"""Build results/results.pdf (2 pages, A4) from report/ and graph/. HTML goes to the system temp dir. Needs matplotlib, pyyaml."""
+import base64, csv, io, json, re, subprocess, tempfile
 from collections import Counter
 from pathlib import Path
 import matplotlib
@@ -8,135 +8,102 @@ import matplotlib.pyplot as plt
 import yaml
 
 R = Path(__file__).resolve().parent.parent
-m = json.load(open(R / "results/metrics.json"))
-rows = list(csv.DictReader(open(R / "results/per_question.csv")))
-hm = json.load(open(R / "results/heldout_after/metrics.json"))["overall"]
-hrows = list(csv.DictReader(open(R / "results/heldout_after/per_question.csv")))
-fm = json.load(open(R / "results/fresh/metrics.json"))["overall"]
-frows = list(csv.DictReader(open(R / "results/fresh/per_question.csv")))
-HB = json.load(open(R / "results/heldout_baseline/metrics.json"))["overall"]["correct"]  # before any fix
-INK, MUT, C1, C2, C3 = "#1f2933", "#6b7280", "#2b6cb0", "#dd8a1a", "#2f855a"
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7.5, "axes.edgecolor": "#aaa", "axes.spines.top": False, "axes.spines.right": False, "svg.fonttype": "none"})
-
-def svg(fig):
-    b = io.StringIO(); fig.savefig(b, format="svg", bbox_inches="tight"); plt.close(fig)
-    s = b.getvalue(); return s[s.index("<svg"):]
-
-# 1 accuracy/precision/recall by type
-names = ["overall", "single_fact", "multi_hop", "cross_filing"]
-src = [m["overall"]] + [m["per_type"][t] for t in names[1:]]
-fig, ax = plt.subplots(figsize=(3.6, 2.0))
-w = .26
-for i, (k, c) in enumerate([("accuracy_over_all", C1), ("precision", C2), ("recall", C3)]):
-    xs = [j + (i - 1) * w for j in range(4)]; v = [s[k] for s in src]
-    ax.bar(xs, v, w, color=c, label=k.replace("_over_all", " (of all n)"))
-    for x, y in zip(xs, v): ax.text(x, y + .015, f"{y:.2f}".lstrip("0") if y < 1 else "1.0", ha="center", fontsize=5.8, color=INK)
-ax.set_xticks(range(4)); ax.set_xticklabels([f"{n.replace('_', ' ')}\n({s['correct']}/{s['n']})" for n, s in zip(names, src)])
-ax.set_ylim(0, 1.12); ax.legend(ncol=3, frameon=False, loc="upper center", bbox_to_anchor=(.5, 1.18), fontsize=7)
-chart_metrics = svg(fig)
-
-# 2 failure causes: main benchmark vs held-out (current results)
-labels = {"missing_fact_in_graph": "Fact missing from graph", "wrong_value": "Wrong value (planner)", "abstained_wrongly": "Wrongly abstained (fact missing)", "answered_unanswerable": "Unknown company not refused"}
-cm_ = Counter(r["failure_category"] for r in rows); ch_ = Counter(r["failure_category"] for r in hrows); cf_ = Counter(r["failure_category"] for r in frows)
-fig, ax = plt.subplots(figsize=(3.6, 1.7))
-ks = list(labels); y = range(len(ks))
-ax.barh([i - .27 for i in y], [cm_[k] for k in ks], .27, color=C1, label="main (Q01-Q29)")
-ax.barh([i for i in y], [ch_[k] for k in ks], .27, color=C2, label="dev (H01-H15)")
-ax.barh([i + .27 for i in y], [cf_[k] for k in ks], .27, color=C3, label="fresh (F01-F15)")
-ax.set_yticks(list(y)); ax.set_yticklabels(labels.values()); ax.invert_yaxis(); ax.set_xticks(range(0, 6)); ax.legend(frameon=False, fontsize=6.5, loc="lower right")
-for i, k in enumerate(ks):
-    for d, c in ((-.27, cm_[k]), (0, ch_[k]), (.27, cf_[k])): ax.text(c + .05, i + d, str(c), va="center", fontsize=7)
-chart_fail = svg(fig)
-
-# 3 coverage heatmap: company x metric
-metrics = [x for x in ["Revenue", "GrossProfit", "OperatingIncome", "NetIncome", "EPS", "TotalAssets", "TotalLiabilities", "Equity", "OperatingCashFlow", "CapEx", "R&D", "Cash"]]
-cfg = yaml.safe_load(open(R / "config/companies.yaml"))
-cos = cfg["companies"] if isinstance(cfg, dict) else cfg
-order = [c["ticker"] for c in cos]
-have = {}
-for f in glob.glob(str(R / "data/facts/*.json")):
-    if f.endswith(".rejected.json"): continue
-    for x in json.load(open(f)): have.setdefault(x["ticker"], {})[x["metric"]] = 1 if x.get("validated") else 0.5
-mk = {t: [m_ for m_ in metrics] for t in order}
-import numpy as np
-M = np.array([[have.get(t, {}).get(k, np.nan) for t in order] for k in metrics])
-fig, ax = plt.subplots(figsize=(7.4, 1.9))
-cm = matplotlib.colors.ListedColormap(["#e8c27a", "#2f855a"]); cm.set_bad("#eef0f3")
-ax.imshow(np.where(np.isnan(M), np.nan, M), cmap=cm, vmin=.5, vmax=1, aspect="auto")
-ax.set_xticks(range(len(order))); ax.set_xticklabels(order, rotation=90, fontsize=5.5)
-ax.set_yticks(range(len(metrics))); ax.set_yticklabels(metrics, fontsize=6.2)
-ax.set_xticks(np.arange(-.5, len(order)), minor=True); ax.set_yticks(np.arange(-.5, len(metrics)), minor=True)
-ax.grid(which="minor", color="white", lw=.8); ax.tick_params(which="both", length=0)
-for s in ax.spines.values(): s.set_visible(False)
-chart_heat = svg(fig)
-n_have = int(np.sum(~np.isnan(M)))
-
+m = json.load(open(R / "report/metrics.json"))
+rows = list(csv.DictReader(open(R / "report/per_question.csv")))
+by = {r["id"]: r for r in rows}
+filings = json.load(open(R / "data/filings.json"))
+companies = yaml.safe_load(open(R / "config/companies.yaml"))["companies"]
+kg = json.load(open(R / "graph/kg.json"))
+facts = [n for n in kg["nodes"] if n["node_type"] == "Fact"]
+xb = Counter(f["xbrl_status"] for f in facts)
+cnt = lambda rej: sum(len(json.load(open(f))["entities"]) for f in (R / "data/entities").glob("*.json") if ("rejected" in f.name) == rej)
+n_ok, n_rej = cnt(False), cnt(True)
+src = lambda rel, i: {e[i] for e in kg["edges"] if e["rel"] == rel}
+aud, hq, execs = len(src("AUDITED_BY", "source")), len(src("HEADQUARTERED_IN", "source")), len(src("EXECUTIVE_OF", "target"))
 o = m["overall"]
-ho = hm
-hb = json.load(open(R / "results/heldout_baseline/metrics.json"))["overall"]
-tiles = [(f"{o['accuracy_over_all']*100:.1f}%", f"accuracy over all 29 ({o['correct']}/29); {o['accuracy']*100:.1f}% over 28 scored (26/28)"), (f"{o['precision']:.2f} / {o['recall']:.2f}", "precision / recall"),
-         (f"{fm['correct']}/{fm['n']}", f"fresh unseen test (dev set {ho['correct']}/15, baseline {HB}/15)"), ("962 / 962", "PDF facts matching XBRL"), (f"{o['page_strict_rate']*100:.0f}%", "citations on a valid page"), ("1,705 / 4,877", "graph nodes / edges")]
-tiles_html = "".join(f'<div class="tile"><b>{a}</b><span>{b}</span></div>' for a, b in tiles)
-pipe = ["10-K HTML<br>(EDGAR)", "PDF<br>(Chrome)", "Parse tables<br>(pdfplumber)", "Extract facts<br>PDF values only", "XBRL check<br>validate, never answer", "Knowledge graph<br>NetworkX", "Planner +<br>traversal", "Answer +<br>doc + page"]
-pipe_html = '<span class="ar">&rarr;</span>'.join(f'<div class="st{" hl" if i in (4,) else ""}">{p}</div>' for i, p in enumerate(pipe))
-rows_tab = "".join(f"<tr><td>{n.replace('_',' ')}</td><td>{s['n']}</td><td>{s['correct']}/{s['n']}</td><td>{s['accuracy_over_all']*100:.1f}%</td><td>{s['accuracy']*100:.1f}%</td><td>{s['precision']:.3f}</td><td>{s['recall']:.3f}</td><td>{s['abstained']} ({s['abstain_correct']}/{s['abstain_expected']})</td></tr>" for n, s in zip(names, src))
-rows_tab += f"<tr><td>baseline (15)</td><td>{hb['n']}</td><td>{hb['correct']}/{hb['n']}</td><td>{hb['correct']/hb['n']*100:.1f}%</td><td>{hb['accuracy']*100:.1f}%</td><td>{hb['precision']:.3f}</td><td>{hb['recall']:.3f}</td><td>{hb['abstained']} ({hb['abstain_correct']}/{hb['abstain_expected']})</td></tr>"
-rows_tab += f"<tr><td>dev (15)</td><td>{ho['n']}</td><td>{ho['correct']}/{ho['n']}</td><td>{ho['accuracy_over_all']*100:.1f}%</td><td>{ho['accuracy']*100:.1f}%</td><td>{ho['precision']:.3f}</td><td>{ho['recall']:.3f}</td><td>{ho['abstained']} ({ho['abstain_correct']}/{ho['abstain_expected']})</td></tr>"
-rows_tab += f"<tr><td><b>fresh (15)</b></td><td>{fm['n']}</td><td>{fm['correct']}/{fm['n']}</td><td>{fm['accuracy_over_all']*100:.1f}%</td><td>{fm['accuracy']*100:.1f}%</td><td>{fm['precision']:.3f}</td><td>{fm['recall']:.3f}</td><td>{fm['abstained']} ({fm['abstain_correct']}/{fm['abstain_expected']})</td></tr>"
+ids = lambda a, b: [f"Q{i:02d}" for i in range(a, b + 1)]
+sc = lambda L: [by[i] for i in L if by[i]["failure_category"] != "unscored"]
+cor = lambda L: sum(r["correct"] == "True" for r in sc(L))
+a, b = cor(ids(1, 29)), len(sc(ids(1, 29)))
+c45, n45 = cor(ids(45, 59)), len(sc(ids(45, 59)))
 
+ACC, G = "#1f4e79", ["#bdbdbd", "#7a7a7a"]
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7, "svg.fonttype": "none"})
+def svg(fig):
+    s = io.StringIO(); fig.savefig(s, format="svg", bbox_inches="tight"); plt.close(fig)
+    t = s.getvalue(); return t[t.index("<svg"):]
+
+names = ["single_fact", "multi_hop", "cross_filing"]
+fig, ax = plt.subplots(figsize=(3.6, 1.8)); w = .26
+for i, (k, c) in enumerate([("accuracy_over_all", ACC), ("precision", G[0]), ("recall", G[1])]):
+    xs = [j + (i - 1) * w for j in range(3)]; v = [m["per_type"][t][k] for t in names]
+    ax.bar(xs, v, w, color=c, label=k.replace("_over_all", " (of all)"))
+    for x, y in zip(xs, v): ax.text(x, y + .02, f"{y:.2f}", ha="center", fontsize=5.5)
+ax.set_xticks(range(3)); ax.set_xticklabels([n.replace("_", " ") for n in names]); ax.set_ylim(0, 1.15); ax.set_yticks([])
+for s in ("top", "right", "left"): ax.spines[s].set_visible(False)
+ax.legend(ncol=3, frameon=False, loc="upper center", bbox_to_anchor=(.5, 1.2), fontsize=6.5)
+chart1 = svg(fig)
+
+fc = Counter(r["failure_category"] for r in rows if r["failure_category"] and r["failure_category"] not in ("unscored",) and not r["failure_category"].startswith("abstained_unans"))
+fig, ax = plt.subplots(figsize=(3.2, 1.3))
+ks = list(fc); ax.barh(ks, [fc[k] for k in ks], color=ACC, height=.55); ax.invert_yaxis()
+for i, k in enumerate(ks): ax.text(fc[k] + .05, i, fc[k], va="center", fontsize=6)
+ax.set_xticks([]); [ax.spines[s].set_visible(False) for s in ("top", "right", "bottom")]
+chart2 = svg(fig)
+
+def tr(name, d, ab=True):
+    abst = f"{d['abstain_correct']}/{d['abstain_expected']}"
+    return f"<tr><td>{name}</td><td>{d['n']}</td><td>{d['scored']}</td><td>{d['correct']}</td><td>{d['accuracy']:.1%}</td><td>{d['precision']:.3f}</td><td>{d['recall']:.3f}</td><td>{abst}</td></tr>"
+table = tr("Overall", o) + "".join(tr(t, m["per_type"][t]) for t in names)
+
+def short(n): return re.sub(r",? (Inc\.?|Corp\.?|Co\.?|Corporation|Group Inc\.|& Co\.|Company)$", "", n).replace(" Inc.", "")
+sectors = list(dict.fromkeys(c["sector"] for c in companies))
+blocks = ""
+for s in sectors:
+    cs = [c for c in companies if c["sector"] == s]
+    blocks += f"<table class='co'><tr><th colspan=3>{s}</th></tr>" + "".join(
+        f"<tr><td><b>{c['ticker']}</b></td><td>{short(c['name'])}</td><td>{filings[c['ticker']]['report_date']}</td></tr>" for c in cs) + "</table>"
+
+q = lambda i: by[i]
 html = f"""<!doctype html><html><head><meta charset="utf-8"><title>GenLoop Results</title><style>
-@page{{size:A4;margin:11mm 12mm}}*{{box-sizing:border-box}}
-body{{font:8.8pt/1.34 Helvetica,Arial,sans-serif;color:{INK};margin:0}}
-header{{border-left:5px solid {C1};padding:1px 0 1px 9px;margin-bottom:6px}}
-h1{{font-size:16pt;margin:0;letter-spacing:-.2px}}.sub{{color:{MUT};font-size:8.3pt}}
-h2{{font-size:10.2pt;margin:9px 0 3px;color:{C1};border-bottom:1.5px solid #dbe4ee;padding-bottom:1px}}
-p,ul{{margin:2px 0}}ul{{padding-left:14px}}li{{margin:1.5px 0}}
-.tiles{{display:flex;gap:6px;margin:5px 0}}.tile{{flex:1;background:#f3f6fa;border-radius:5px;padding:5px 7px;text-align:center}}
-.tile b{{display:block;font-size:12.5pt;color:{C1}}}.tile span{{font-size:7pt;color:{MUT}}}
-.pipe{{display:flex;align-items:center;gap:2px;margin:5px 0}}.st{{flex:1;border:1px solid #c7d3e0;border-radius:4px;padding:4px 2px;text-align:center;font-size:6.9pt;background:#fff}}
-.st.hl{{background:#fff6e5;border-color:{C2}}}.ar{{color:{MUT};font-size:9pt}}
-.two{{display:flex;gap:12px;align-items:flex-start}}.two>div{{flex:1}}
-table{{border-collapse:collapse;width:100%;font-size:7.8pt;margin:3px 0}}td,th{{border-bottom:1px solid #dde3ea;padding:2px 4px;text-align:right}}th{{color:{MUT};font-weight:600}}td:first-child,th:first-child{{text-align:left}}
-.cap{{color:{MUT};font-size:7.3pt}}svg{{max-width:100%;height:auto}}.pb{{break-before:page}}
-</style></head><body>
-<header><h1>GenLoop: Financial Knowledge Graph QA</h1>
-<div class="sub">Latest 10-K for 40 companies in 4 sectors, answered by graph traversal with document and page citations. 29-question benchmark. Numbers from results/metrics.json. Gold is AI-drafted and AI-reviewed, not human verified (verified: false).</div></header>
-<div class="tiles">{tiles_html}</div>
-<div class="pipe">{pipe_html}</div>
-<p class="cap">Facts are read from the PDFs only. XBRL is an independent check applied before a fact is admitted. It never supplies an answer value.</p>
+@page{{size:A4;margin:11mm}}body{{font:9.6pt/1.35 Helvetica,Arial,sans-serif;color:#111;margin:0}}
+h1{{font-size:15pt;margin:0 0 2px}}h2{{font-size:10.5pt;margin:8px 0 2px;border-bottom:1px solid #999}}
+p,ul{{margin:2px 0}}ul{{padding-left:15px}}li{{margin:1px 0}}
+table{{border-collapse:collapse;margin:3px 0;font-size:9pt}}td,th{{border:1px solid #999;padding:1px 6px;text-align:right}}th:first-child,td:first-child{{text-align:left}}th{{background:#eee}}
+.s{{color:#555;font-size:8pt}}.row{{display:flex;gap:14px;align-items:flex-start}}svg{{max-width:100%;height:auto}}
+.grid{{display:flex;gap:6px}}.co{{font-size:7.4pt;margin:2px 0;flex:1}}.co td,.co th{{padding:0 3px;text-align:left;border:0;border-bottom:.5px solid #ddd}}.co th{{background:none;border-bottom:1px solid #999;color:{ACC}}}
+.pipe{{color:{ACC};font-size:8pt}}b.a{{color:{ACC}}}</style></head><body>
+<h1>GenLoop: Financial Knowledge Graph QA, Results</h1>
+<p class="s">40 companies, latest 10-K each, answered by graph traversal; {o['n']}-question benchmark. Gold is AI-drafted and AI-reviewed, not human-verified.</p>
 <h2>Results</h2>
-<div class="two"><div>{chart_metrics}</div><div>
-<table><tr><th>Slice</th><th>n</th><th>Correct</th><th>Acc. /n</th><th>Acc. /scored</th><th>Prec.</th><th>Rec.</th><th>Abstain</th></tr>{rows_tab}</table>
-<p class="cap">Three sets. <b>Main</b> (Q01-Q29) was seen throughout development, so 26/29 is optimistic: accuracy over all 29 is the task-defined number (26/29), over the 28 scored 26/28 (Q15 has no checkable gold). <b>Held-out</b> (H01-H15) was written before any fix: baseline 9/15 is the independent score; the planner was then fixed using its failure categories, so the later {ho['correct']}/15 is now a <b>dev</b> score, not independent. <b>Fresh</b> (F01-F15) was written from PDF text after those fixes, without reading planner code or outputs, scored once, and no code was changed after it: {fm['correct']}/15 is the honest estimate. Abstain = abstentions (correct / expected). Strict page hit {o['page_strict_rate']:.3f}. One question moves accuracy 3.5 points (6.7 on 15); no confidence intervals.</p></div></div>
+<div class="row"><table><tr><th>Slice</th><th>n</th><th>Scored</th><th>Correct</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>Abstained (correct/expected)</th></tr>{table}</table><div style="flex:none;width:330px">{chart1}</div></div>
+<p class="s">Accuracy is correct/scored; over all {o['n']} it is {o['correct']}/{o['n']} = {o['accuracy_over_all']:.1%}. Q15 is unscored (no checkable gold). Q30-Q59 were written after earlier planner fixes, so Q01-Q29 ({a}/{b}) is optimistic; Q45-Q59 is the cleanest estimate: {c45}/{n45}.</p>
 <h2>Methodology</h2>
+<p class="pipe">10-K HTML &rarr; Chrome PDF &rarr; pdfplumber facts &rarr; XBRL check &rarr; NetworkX graph &rarr; rule planner (LLM fallback) &rarr; cited answer or abstain</p>
 <ul>
-<li><b>PDF-only parsing.</b> EDGAR 10-K HTML is printed to PDF with headless Chrome and parsed with pdfplumber (tables, parentheses negatives, scale from the table header, multi-page tables, correct year column). Each fact stores doc, page and snippet; ID format TICKER|Metric|FY.</li>
-<li><b>XBRL as a validation gate only.</b> XBRL (the SEC's machine-readable copy of the filing numbers) was not in the task brief; it was added as a check on our parsing. 983/983 compared facts match; 67 have no XBRL counterpart; 0 rejected; 1,050 statement facts admitted.</li>
-<li><b>Grounded LLM entity extraction.</b> Officers, auditor, HQ, segments, employees come from cited pages; an entity is admitted only if its name appears literally on the cited page (488 of 504). Providers were mixed (Groq then Gemini after a daily quota hit).</li>
-<li><b>Query.</b> A rule-based planner builds a plan over the graph (company, metric, period, compare/rank/sum/growth); an LLM planner runs only if rules fail. No supporting fact means abstain with a reason.</li>
-<li><b>Benchmark.</b> 10 single-fact, 10 multi-hop, 9 cross-filing (3 unanswerable by design). Gold was written from PDF page text, not from the graph. Gold is AI-drafted and AI-reviewed (blind re-derivation by a second model), not human verified. Two 15-question sets test generalisation: a held-out set written before the fixes (now dev) and a fresh set written after them.</li></ul>
-<h2>Graph schema</h2><div style="text-align:center"><img src="../docs/kg/schema.png" style="max-width:70%;max-height:140px"></div><p class="cap">Fact-centric schema: each Fact node holds value, unit, period, doc, page, snippet and validated flag. Interactive explorer of all 1,705 nodes: docs/kg/explorer.html.</p><div class="pb"></div>
-<h2>Where it fails</h2>
-<div class="two"><div>{chart_fail}<p class="cap">Current failures: main 2 incorrect of 29 (one unscored); dev 0 of 15 (fixed, not independent); fresh 3 of 15 (F15 is a wrong cited page, still correct).</p></div><div><ul>
-<li><b>Main (26/29):</b> Q13 largest Apple geographic segment: segment values are not in the graph, so it lists all segments (wrong value). Q14 Amazon auditor is missing from the graph, so it abstains wrongly. Q15 is unscored.</li>
-<li><b>Dev (15/15; baseline 9/15, 8/15 after the first fixes):</b> before the D-086 intent fixes it failed on difference, share, growth, ranking wording, Amex operating cash flow and an unknown company (Netflix). Those fixes were made from this set's failure categories, so 15/15 is not independent. Scored on the current files; planner fixes since then are not reflected unless re-run.</li>
-<li><b>Fresh (12/15):</b> F09 Meta capex plus R&amp;D returns capex only (the sum of two different metrics is not planned). F10 Home Depot operating margin returns 13.49%, the prior-year column (gold 12.69%). F11 Home Depot vs Target operating cash flow returns the prior-year values ($19.81bn, $7.37bn), the right winner but wrong numbers. F10 and F11 are the fiscal-year label shift (HD and TGT "fiscal 2025" stored as FY2026). F15 right answer, cited page 65 is not the gold page. Not fixed: no code changed after this run.</li></ul>
-<p class="cap">Strict page hit is 95.8% after the gold review (D-081). Main is 89.7%, fresh 80%: the gap is the cost of tuning on inspected failures.</p></div></div>
-<h2>Fact coverage: what the graph holds</h2>
-{chart_heat}
-<p class="cap">{n_have} of {len(order)*len(metrics)} company-metric cells are filled (green = matches XBRL, amber = no XBRL tag to check). Grey cells are mostly metrics a company does not report (gross profit for banks, R&amp;D for retailers). Amex operating cash flow now fixed, D-086 (earlier misses for Merck/Abbott, Citi/Visa/Pfizer EPS and NVIDIA CapEx were fixed in D-084).</p>
-<h2>Other gaps</h2>
+<li><b>PDF-only parsing.</b> EDGAR 10-Ks printed to PDF with headless Chrome, parsed with pdfplumber; each fact keeps doc, page and snippet.</li>
+<li><b>XBRL as a validation gate only.</b> {xb['match']}/{xb['match']} compared facts match; {xb['no_xbrl']} have no XBRL counterpart. It never supplies an answer.</li>
+<li><b>Grounded LLM entity extraction.</b> An entity is admitted only if its name appears literally on the cited page: {n_ok} of {n_ok + n_rej}.</li>
+<li><b>Graph and query.</b> NetworkX graph of {len(kg['nodes'])} nodes; a rule planner builds the query, an LLM planner runs only if rules fail; no supporting fact means abstain.</li>
+<li><b>Benchmark.</b> Written from PDF page text, not from the graph, to avoid circularity.</li></ul>
+<h2>Companies used (ticker, name, period end of the 10-K)</h2>
+<div class="grid">{blocks}</div>
+<h2>Gaps, with examples</h2>
 <ul>
-<li><b>Entities are thin.</b> Auditor found for 13 of 40 (extraction window ends before the signature page), HQ for 28 (PDF text like "Atlanta,Georgia" fails the literal grounding check), no executives for 10 companies. Segments hold names only, not values.</li>
-<li><b>Scope.</b> One 10-K per company: three income-statement years, no quarters, no restatements. Fiscal-year label is the year the period ends, so Home Depot "fiscal 2025" is stored as FY2026.</li>
-<li><b>Evaluation honesty.</b> The scorer was amended after the first run (D-080: 19/28 became 20/28). Question selection was informed by the extractor's known gap list (D-072), so abstain results are likely optimistic. Held-out 9/15 baseline, 15/15 dev after D-086 fixes, fresh 12/15; all reported, n is small.</li></ul>
-<h2>Concrete improvements</h2>
-<ul>
-<li>Planner: add difference, share-of-total and growth intents; stop reading \"generated more\" as growth; refuse questions naming a company outside the corpus. Query/graph: store segment values so \"largest segment\" can rank; extract the Amazon auditor and Amex operating cash flow. Fix the fiscal-year label shift for HD/TGT and multi-metric sums, then write a new unseen set (fresh has now been scored).</li>
-<li>Entities: use the signature page for the auditor, normalise comma spacing before grounding, add per-entity provider logging, parse the segment note into segment facts.</li>
-<li>Grow the benchmark beyond 29, write questions before inspecting system output, and have a human verify the gold (it is AI-drafted and AI-reviewed only).</li></ul>
+<li><b>Q13</b> largest Apple geographic segment: segment values are not stored, so it lists all five names instead of Americas ($198,083M).</li>
+<li><b>Q14</b> largest of four tech firms and its auditor: Amazon's auditor (Ernst &amp; Young) is not in the graph, so the answer abstains wrongly.</li>
+<li><b>Q53</b> Meta capex plus R&amp;D: sum of two different metrics is unsupported; returns capex $69.69B only (gold $127,063M).</li>
+<li><b>Q54, Q55</b> Home Depot and Target: fiscal-year label is the year the period ends, so "fiscal 2025" returns the prior year (HD margin 13.49% vs gold 12.69%; HD cash flow $19.81B vs $16.325B).</li>
+<li><b>Q59</b> BAC vs Citi liabilities: values correct, cited page not in gold (wrong_page). <b>Q15</b> is unscored (no checkable gold).</li>
+<li>Thin entities: auditor for {aud}/40, headquarters {hq}/40, executives missing for {40 - execs} companies.</li>
+<li>Gold is not human-verified; the scorer was amended once after the first run; n is small (one question is about {100/o['n']:.1f} points).</li></ul>
+<div class="row"><div style="flex:none;width:260px">{chart2}</div><p class="s" style="align-self:center">Current failures by category (unanswerable-by-design abstentions excluded).</p></div>
+<h2>Improvements</h2>
+<ul><li> store segment values; fix the fiscal-year label; plan multi-metric sums; read the auditor from the signature page; log the LLM provider per entity.</li></ul>
+<h2>With more time</h2>
+<ul><li>Human-verified gold and a larger benchmark written before inspecting system output; confidence intervals.</li></ul>
 </body></html>"""
-(R / "report/results.html").write_text(html)
+tmp = Path(tempfile.mkdtemp()) / "results.html"; tmp.write_text(html)
 chrome = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-subprocess.run([chrome, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={R/'report/results.pdf'}", f"file://{R/'report/results.html'}"], check=True, capture_output=True)
-print("ok")
+subprocess.run([chrome, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", f"--print-to-pdf={R/'results/results.pdf'}", f"file://{tmp}"], check=True, capture_output=True)
+print("ok", fc, a, b, c45, n45, aud, hq, execs)

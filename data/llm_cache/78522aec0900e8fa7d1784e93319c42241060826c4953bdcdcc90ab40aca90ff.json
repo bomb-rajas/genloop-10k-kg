@@ -1,4 +1,0 @@
-{
-  "provider": "groq",
-  "text": "{\"segments\":[\"Walmart U.S.\",\"Walmart International\",\"Sam's Club U.S.\"]}"
-}

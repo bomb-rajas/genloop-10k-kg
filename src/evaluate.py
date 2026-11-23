@@ -1,4 +1,4 @@
-"""Benchmark evaluation: python -m src.evaluate. Scores query.answer() on benchmark/benchmark.json; writes results/metrics.json and results/per_question.csv.
+"""Benchmark evaluation: python -m src.evaluate. Scores query.answer() on benchmark/benchmark.json; writes report/metrics.json and report/per_question.csv.
 
 Scoring rules (D-079, amended by D-080): numeric gold_value matches if |pred - gold| <= 0.5% of |gold|; pred in USD may be
 quoted in thousands/millions/billions (x1e3..1e9); '%' answers are divided by 100 to compare with fraction gold. The number
@@ -19,7 +19,7 @@ from pathlib import Path
 
 from src import graph as g
 from src import query
-from src.config import BENCHMARK_DIR, RESULTS_DIR
+from src.config import BENCHMARK_DIR, REPORT_DIR
 
 TOL = 0.005
 SCALES = (1, 1e3, 1e6, 1e9)
@@ -227,7 +227,7 @@ def table(report):
     return "\n".join(lines)
 
 
-def write(report, out_dir=RESULTS_DIR):
+def write(report, out_dir=REPORT_DIR):
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "metrics.json").write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
@@ -239,15 +239,10 @@ def write(report, out_dir=RESULTS_DIR):
 
 
 def main():
-    import argparse
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--bench", default="benchmark.json", help="file in benchmark/ (e.g. heldout.json)")
-    ap.add_argument("--out", default=None, help="output dir (default results/)")
-    a = ap.parse_args()
     G = g.load_graph()
-    items = json.loads((BENCHMARK_DIR / a.bench).read_text(encoding="utf-8"))["items"]
+    items = json.loads((BENCHMARK_DIR / "benchmark.json").read_text(encoding="utf-8"))["items"]
     report = build_report(run(items, G))
-    write(report, Path(a.out)) if a.out else write(report)
+    write(report)
     print(table(report))
 
 
