@@ -7,7 +7,7 @@ from src import llm
 from src.config import load_companies, load_metrics
 
 BANKS = {"JPM", "BAC", "C", "COF", "GS", "MS", "AXP"}
-BANK_METRICS = {"Revenue", "NetIncome", "EPS", "TotalAssets", "TotalLiabilities", "Equity"}
+BANK_METRICS = {"Revenue", "NetIncome", "EPS", "TotalAssets", "TotalLiabilities", "Equity", "OperatingCashFlow"}
 
 
 def test_companies_count_and_sectors():

@@ -178,6 +178,72 @@
   "sanity_ok": true
  },
  {
+  "id": "AXP|OperatingCashFlow|FY2025",
+  "ticker": "AXP",
+  "metric": "OperatingCashFlow",
+  "value": 18428000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash provided by operating activities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 137,
+  "snippet": "Net cash provided by operating activities 18,428 14,050 18,559",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": 18428000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|OperatingCashFlow|FY2024",
+  "ticker": "AXP",
+  "metric": "OperatingCashFlow",
+  "value": 14050000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash provided by operating activities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 137,
+  "snippet": "Net cash provided by operating activities 18,428 14,050 18,559",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": 14050000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "AXP|OperatingCashFlow|FY2023",
+  "ticker": "AXP",
+  "metric": "OperatingCashFlow",
+  "value": 18559000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash provided by operating activities",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/AXP.pdf",
+  "page": 137,
+  "snippet": "Net cash provided by operating activities 18,428 14,050 18,559",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": 18559000000.0,
+  "sanity_ok": true
+ },
+ {
   "id": "AXP|Revenue|FY2025",
   "ticker": "AXP",
   "metric": "Revenue",

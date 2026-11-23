@@ -24,6 +24,8 @@ def spec_of(G, plan, metric=None):
     m = metric or plan["metric"]
     if plan.get("op") == "ratio" and not metric:
         return list(plan["metrics"]), "x"
+    if plan.get("op") == "share" and not metric:
+        return list(plan["metrics"]), "pct"  # metrics[0] / metrics[1] * 100 (D-086)
     f = DERIVED_EXTRA.get(m) or (G.nodes[g.metric_id(m)].get("formula") if G.has_node(g.metric_id(m)) else None)
     if isinstance(f, str) and "/" in f and m not in ("Revenue",):
         a, b = [s.strip() for s in f.split("/")]
@@ -134,7 +136,33 @@ def gather(G, plan, inputs, kind, ts, strict):
     return out, missing
 
 
+def difference_answer(G, plan):
+    """A - B (reported as the magnitude, with who is larger): two metrics of one company/year, or one metric of two companies."""
+    ms, cos = plan["metrics"], plan["companies"]
+    if len(cos) == 1 and len(ms) == 2:
+        t = cos[0]
+        specs = [spec_of(G, plan, m) for m in ms]
+        fy = resolve_fy(G, t, sorted({x for inp, _ in specs for x in inp}), (plan.get("years") or [None])[0])
+        rows = {f"{t} {m}": dict(zip(("value", "unit", "ids"), measure(G, t, inp, k, fy)), fy=fy)
+                for m, (inp, k) in zip(ms, specs)}
+    elif len(cos) == 2 and len(ms) == 1:
+        inp, k = spec_of(G, plan, ms[0])
+        rows, _ = gather(G, {**plan, "growth": None}, inp, k, cos, True)
+        rows = {f"{t} {ms[0]}": r for t, r in rows.items()}
+    else:
+        raise Abstain("unsupported", "difference needs two companies with one metric or one company with two metrics")
+    (a, ra), (b, rb) = list(rows.items())[:2]
+    if ra["unit"] != rb["unit"]:
+        raise Abstain("unsupported", f"cannot subtract {ra['unit']} from {rb['unit']}")
+    d = ra["value"] - rb["value"]
+    verb = "exceeds" if d > 0 else "is below" if d < 0 else "equals"
+    return dict(rows=rows, unit=ra["unit"], missing={}, value=abs(d), signed=d, fmt_value=True,
+                lead=f"{a} {verb} {b} by (A - B = {fmt(d, ra['unit'])})")
+
+
 def numeric_answer(G, plan):
+    if plan["intent"] == "difference":
+        return difference_answer(G, plan)
     inputs, kind = spec_of(G, plan)
     i, op = plan["intent"], plan.get("op")
     if i == "aggregate" and len(plan.get("years") or []) >= 2 and len(plan["companies"]) == 1:
@@ -147,13 +175,13 @@ def numeric_answer(G, plan):
     if i == "lookup" and len(plan["companies"]) == 1 and len(plan.get("years") or []) >= 2 and not plan.get("growth"):
         t = plan["companies"][0]  # one company, several named years: answer every year (D-083)
         rows = {f"{t} FY{y}": company_value(G, t, plan, inputs, kind, y) for y in plan["years"]}
-        label = plan["metric"] if kind != "x" else "/".join(plan["metrics"])
+        label = plan["metric"] if kind != "x" and op != "share" else (" as % of " if op == "share" else "/").join(plan["metrics"])
         return dict(rows=rows, unit=next(iter(rows.values()))["unit"], missing={}, lead=label, fmt_value=False,
                     value={k: r["value"] for k, r in rows.items()})
     ts, strict = scope(G, plan)
     rows, missing = gather(G, plan, inputs, kind, ts, strict or i in ("aggregate", "compare"))
     unit = next(iter(rows.values()))["unit"]
-    label = plan["metric"] if kind != "x" else "/".join(plan["metrics"])
+    label = plan["metric"] if kind != "x" and op != "share" else (" as % of " if op == "share" else "/").join(plan["metrics"])
     if plan.get("growth"):
         label += f" {'growth' if plan['growth'] == 'pct' else 'change'}"
     res = dict(rows=rows, unit=unit, missing=missing)
@@ -246,6 +274,8 @@ def finish(G, plan, res):
     out = dict(abstained=False, answer=text, value=res["value"], unit=unit, fact_ids=ids,
                citations=[cite(G, f) for f in ids], plan=plan,
                validated=all(G.nodes[f].get("validated") is not False for f in ids))
+    if "signed" in res:
+        out["signed_value"] = res["signed"]
     if res.get("winner"):
         out["winner"] = res["winner"]  # lets the scorer credit only the winning entity (D-083)
     if len(fyl) > 1 and not all(" FY" in t for t in rows):

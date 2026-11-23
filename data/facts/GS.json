@@ -178,6 +178,72 @@
   "sanity_ok": true
  },
  {
+  "id": "GS|OperatingCashFlow|FY2025",
+  "ticker": "GS",
+  "metric": "OperatingCashFlow",
+  "value": -45154000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash used for operating activities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 270,
+  "snippet": "Net cash used for operating activities -45,154 -13,212 -12,587",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": -45154000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|OperatingCashFlow|FY2024",
+  "ticker": "GS",
+  "metric": "OperatingCashFlow",
+  "value": -13212000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash used for operating activities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 270,
+  "snippet": "Net cash used for operating activities -45,154 -13,212 -12,587",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": -13212000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "GS|OperatingCashFlow|FY2023",
+  "ticker": "GS",
+  "metric": "OperatingCashFlow",
+  "value": -12587000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash used for operating activities",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/GS.pdf",
+  "page": 270,
+  "snippet": "Net cash used for operating activities -45,154 -13,212 -12,587",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": -12587000000.0,
+  "sanity_ok": true
+ },
+ {
   "id": "GS|Revenue|FY2025",
   "ticker": "GS",
   "metric": "Revenue",

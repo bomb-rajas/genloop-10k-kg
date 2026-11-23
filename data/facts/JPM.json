@@ -178,6 +178,72 @@
   "sanity_ok": true
  },
  {
+  "id": "JPM|OperatingCashFlow|FY2025",
+  "ticker": "JPM",
+  "metric": "OperatingCashFlow",
+  "value": -147782000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash (used in)/provided by operating activities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 248,
+  "snippet": "Net cash (used in)/provided by operating activities -147,782 -42,012 12,974",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": -147782000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|OperatingCashFlow|FY2024",
+  "ticker": "JPM",
+  "metric": "OperatingCashFlow",
+  "value": -42012000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash (used in)/provided by operating activities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 248,
+  "snippet": "Net cash (used in)/provided by operating activities -147,782 -42,012 12,974",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": -42012000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "JPM|OperatingCashFlow|FY2023",
+  "ticker": "JPM",
+  "metric": "OperatingCashFlow",
+  "value": 12974000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash (used in)/provided by operating activities",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/JPM.pdf",
+  "page": 248,
+  "snippet": "Net cash (used in)/provided by operating activities -147,782 -42,012 12,974",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": 12974000000.0,
+  "sanity_ok": true
+ },
+ {
   "id": "JPM|Revenue|FY2025",
   "ticker": "JPM",
   "metric": "Revenue",

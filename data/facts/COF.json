@@ -178,6 +178,72 @@
   "sanity_ok": true
  },
  {
+  "id": "COF|OperatingCashFlow|FY2025",
+  "ticker": "COF",
+  "metric": "OperatingCashFlow",
+  "value": 27718000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash from operating activities",
+  "period": {
+   "fiscal_year": 2025,
+   "period_end": "2025-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 150,
+  "snippet": "Net cash from operating activities 27,718 18,159 20,575",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": 27718000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|OperatingCashFlow|FY2024",
+  "ticker": "COF",
+  "metric": "OperatingCashFlow",
+  "value": 18159000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash from operating activities",
+  "period": {
+   "fiscal_year": 2024,
+   "period_end": "2024-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 150,
+  "snippet": "Net cash from operating activities 27,718 18,159 20,575",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": 18159000000.0,
+  "sanity_ok": true
+ },
+ {
+  "id": "COF|OperatingCashFlow|FY2023",
+  "ticker": "COF",
+  "metric": "OperatingCashFlow",
+  "value": 20575000000,
+  "unit": "USD",
+  "scale": 1000000,
+  "as_reported_label": "Net cash from operating activities",
+  "period": {
+   "fiscal_year": 2023,
+   "period_end": "2023-12-31"
+  },
+  "doc": "data/pdfs/COF.pdf",
+  "page": 150,
+  "snippet": "Net cash from operating activities 27,718 18,159 20,575",
+  "method": "pdf_table",
+  "validated": true,
+  "xbrl_status": "match",
+  "xbrl_tag": "NetCashProvidedByUsedInOperatingActivities",
+  "xbrl_value": 20575000000.0,
+  "sanity_ok": true
+ },
+ {
   "id": "COF|Revenue|FY2025",
   "ticker": "COF",
   "metric": "Revenue",
