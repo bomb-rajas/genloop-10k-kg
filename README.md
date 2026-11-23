@@ -18,13 +18,14 @@ cp .env.example .env        # optional: GROQ_API_KEY, GEMINI_API_KEY (only neede
 
 ## Run it step by step
 
-**1. Set up and build the knowledge graph** (uses the committed `data/` files, no keys or downloads needed):
+**1. Set up** (the built graph `graph/kg.json` is already in the repo; no keys, downloads or build step needed):
 
 ```bash
 git clone https://github.com/bomb-rajas/genloop-10k-kg.git && cd genloop-10k-kg
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python -m src.build_graph      # data/facts + data/entities -> graph/kg.json
 ```
+
+Optional, only if you change `data/facts` or `data/entities`: rebuild the graph with `.venv/bin/python -m src.build_graph`.
 
 **2. Ask a question** (answer, fact IDs, document and page):
 
